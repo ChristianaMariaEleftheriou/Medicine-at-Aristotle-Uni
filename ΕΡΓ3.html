@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3ο Εργαστήριο — Οξεία/Χρόνια Φλεγμονή & Κοκκιωματώδεις Φλεγμονές (Study Board)</title>
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --shadow: 0 10px 25px rgba(31,41,55,.07);
+      --radius:18px;
+
+      --hl-yellow: rgba(255, 235, 59, 0.55);
+      --hl-green:  rgba(16, 185, 129, 0.30);
+      --hl-pink:   rgba(236, 72, 153, 0.25);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, #e9f0ff 0%, transparent 60%),
+        radial-gradient(1200px 700px at 80% 0%, #e9fff5 0%, transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.35;
+    }
+    header{
+      padding:26px 18px 10px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    h1{ margin:0 0 6px; font-size: clamp(20px, 3vw, 32px); letter-spacing:-.02em; }
+    .sub{ margin:0; color:var(--muted); font-size:14px; }
+
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 18px 90px; /* κάτω “αέρας” για να μην κρύβεται από modal/toolbar */
+    }
+
+    /* ===== Toolbar (fixed, stays during scroll/zoom) ===== */
+    .hl-toolbar{
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 9999;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 16px;
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      user-select: none;
+    }
+    .hl-btn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:8px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .hl-btn.active{ outline: 2px solid rgba(37,99,235,.25); }
+    .hl-divider{ width:1px; height:22px; background:#e5e7eb; display:inline-block; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:7px 10px; border-radius:999px;
+      border:1px solid var(--border); background:#f9fafb; color:var(--muted); font-weight:800;
+    }
+    .pill b{ color:var(--ink); }
+
+    /* ===== 4-column grid ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:14px;
+    }
+    @media (max-width: 1100px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 700px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,1));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:14px 14px 12px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb; color:var(--muted); font-weight:800;
+    }
+    .title{ margin:10px 0 8px; font-size:16px; letter-spacing:-.01em; }
+    .muted{ margin:0 0 10px; color:var(--muted); font-size: 13px; }
+    ul{ margin:8px 0 0 18px; padding:0; }
+    li{ margin:6px 0; }
+    .mini{ font-size:12px; color:var(--muted); margin:10px 0 0; }
+
+    /* ===== Highlight spans ===== */
+    .hl-yellow { background: var(--hl-yellow); border-radius: 6px; padding: 0 2px; }
+    .hl-green  { background: var(--hl-green);  border-radius: 6px; padding: 0 2px; }
+    .hl-pink   { background: var(--hl-pink);   border-radius: 6px; padding: 0 2px; }
+
+    /* ===== Image slots ===== */
+    .img-slot{
+      border:1px dashed #cbd5e1;
+      border-radius: 16px;
+      background:#fbfdff;
+      padding:10px;
+    }
+    .img-row{
+      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .img-row input[type="file"]{ font-size:12px; }
+    .img-hint{
+      font-size:12px; color:var(--muted);
+      background:#fff; border:1px solid var(--border);
+      border-radius:999px; padding:6px 10px; font-weight:800;
+    }
+    .img{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      display:none;
+      cursor: zoom-in;
+    }
+    .img-note{
+      margin:10px 0 0;
+      font-size:13px;
+    }
+
+    /* ===== Modal for image zoom ===== */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 9990; /* κάτω από toolbar (9999) */
+      padding: 20px;
+    }
+    .modal-inner{
+      max-width: min(1100px, 96vw);
+      max-height: 92vh;
+      background: rgba(255,255,255,.98);
+      border:1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.25);
+      overflow:hidden;
+      position:relative;
+    }
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--border);
+      background:#fff;
+    }
+    .modal-top .t{ font-weight:900; font-size:13px; color:var(--muted); }
+    .modal-top button{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:8px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:900;
+      font-size: 12px;
+    }
+    .modal-img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height: calc(92vh - 52px);
+      object-fit: contain;
+      background:#0b1020;
+    }
+
+    /* small section divider card */
+    .section{
+      grid-column: 1 / -1;
+      background: rgba(255,255,255,.6);
+      border:1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+    }
+    .section h2{ margin:0 0 4px; font-size:16px; }
+    .section p{ margin:0; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed toolbar -->
+  <div class="hl-toolbar">
+    <button class="hl-btn" data-color="hl-yellow">🟨</button>
+    <button class="hl-btn" data-color="hl-green">🟩</button>
+    <button class="hl-btn" data-color="hl-pink">🩷</button>
+    <span class="hl-divider"></span>
+    <button class="hl-btn" id="hl-erase" title="Αφαίρεση highlight από επιλογή">🧽</button>
+    <button class="hl-btn" id="hl-clear" title="Καθαρισμός όλων">🗑</button>
+    <span class="hl-divider"></span>
+    <span class="pill"><b>Save:</b> auto</span>
+  </div>
+
+  <!-- Modal for zoom -->
+  <div class="modal" id="modal">
+    <div class="modal-inner">
+      <div class="modal-top">
+        <div class="t" id="modalTitle">Zoom εικόνας</div>
+        <button id="modalClose">✖ Κλείσιμο</button>
+      </div>
+      <img class="modal-img" id="modalImg" alt="zoomed image" />
+    </div>
+  </div>
+
+  <header>
+    <h1>3ο Εργαστήριο — Οξεία & Χρόνια Φλεγμονή · Κοκκιωματώδεις Φλεγμονές</h1>
+    <p class="sub">
+      Study-board με κουτάκια (4 στήλες), θέσεις για εικόνες (upload), επεξηγήσεις + highlighter 3 χρωμάτων.
+    </p>
+  </header>
+
+  <div class="wrap">
+    <!-- IMPORTANT: highlights are applied INSIDE #content -->
+    <div id="content">
+
+      <div class="section">
+        <h2>Πώς το χρησιμοποιείς</h2>
+        <p>
+          1) Διάλεξε χρώμα στο toolbar → 2) κάνε επιλογή σε κείμενο για highlight.
+          Για εικόνες: πάτα “Choose file” στο αντίστοιχο κουτάκι (βάλε τη φωτογραφία από τη σωστή σελίδα).
+          Click στην εικόνα → zoom.
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <!-- ====================== ΕΝΟΤΗΤΑ: ΟΡΙΣΜΟΣ & ΣΗΜΑΣΙΑ ====================== -->
+        <div class="section">
+          <h2>Τι είναι η φλεγμονή;</h2>
+          <p>Ορισμός, σκοποί και κλασικά σημεία.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ορισμός (σελ. 2)</span>
+          <div class="title">Φλεγμονή = μηχανισμός άμυνας</div>
+          <div class="muted">Η βλάβη ιστών ενεργοποιεί τοπικές διεργασίες για προστασία και αποκατάσταση.</div>
+          <ul>
+            <li><b>Απομόνωση</b> βλαπτικού παράγοντα</li>
+            <li><b>Εξουδετέρωση</b> δράσης του</li>
+            <li><b>Περιορισμός</b> διασποράς</li>
+            <li><b>Εκρίζωση</b> (όπου γίνεται)</li>
+            <li><b>Επούλωση/αποκατάσταση</b> του τραυματισμένου ιστού</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Η φλεγμονή είναι “ωφέλιμη” όταν είναι ελεγχόμενη· όταν είναι υπερβολική/παρατεταμένη → ιστική βλάβη/ίνωση.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Βλαπτικοί παράγοντες (σελ. 2)</span>
+          <div class="title">Τι μπορεί να την προκαλέσει;</div>
+          <ul>
+            <li><b>Λοιμώδεις</b> (βακτήρια, ιοί, μύκητες, παράσιτα)</li>
+            <li><b>Φυσικοί</b> (θερμότητα/ψύχος, ακτινοβολία)</li>
+            <li><b>Μηχανικοί</b> (τραύμα)</li>
+            <li><b>Χημικοί</b> (τοξίνες, καυστικά)</li>
+            <li><b>Διαιτητικοί</b> (έλλειψη/υπερβολή)</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Στην πράξη συνυπάρχουν συχνά πολλοί παράγοντες (π.χ. λοίμωξη + ισχαιμία + τραύμα).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Κλασικά σημεία (σελ. 3)</span>
+          <div class="title">5 κλασικά σημεία φλεγμονής</div>
+          <ul>
+            <li><b>Θερμότητα</b> (calor) — ↑ ροή αίματος</li>
+            <li><b>Ερυθρότητα</b> (rubor) — αγγειοδιαστολή</li>
+            <li><b>Οίδημα</b> (tumor) — ↑ διαπερατότητα → εξίδρωμα</li>
+            <li><b>Πόνος</b> (dolor) — μεσολαβητές + τάση ιστών</li>
+            <li><b>Απώλεια λειτουργίας</b> (functio laesa) — από πόνο/οίδημα/βλάβη</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 3)</span>
+          <div class="title">Microcirculation & μετανάστευση λευκοκυττάρων</div>
+          <div class="img-slot" data-slot="img_p3">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 3 (διάγραμμα μικροκυκλοφορίας)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p3" />
+            <p class="img-note">
+              <b>Τι να “βλέπεις”:</b> (1) αγγειοδιαστολή → ερυθρότητα/θερμότητα, (2) ↑ διαπερατότητα → οίδημα,
+              (3) προσκόλληση/διαπίδυση λευκοκυττάρων → είσοδος στην εστία βλάβης.
+              <br><b>Extra:</b> πρώτα “κυλάνε” (rolling), μετά “κολλάνε” (adhesion), μετά “περνούν” (diapedesis).
+            </p>
+          </div>
+        </div>
+
+        <!-- ====================== ΕΝΟΤΗΤΑ: ΟΞΕΙΑ ΦΛΕΓΜΟΝΗ ====================== -->
+        <div class="section">
+          <h2>Οξεία φλεγμονή</h2>
+          <p>Αγγειακές αλλαγές, εξίδρωμα, ουδετερόφιλα, μεσολαβητές, κατάληξη.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Οξεία (σελ. 3)</span>
+          <div class="title">Βασικά βήματα οξείας φλεγμονής</div>
+          <ul>
+            <li><b>Διάταση αγγείων</b> → τοπική ↑ ροή αίματος</li>
+            <li><b>↑ Διαπερατότητα</b> τριχοειδών → πρωτεΐνες πλάσματος βγαίνουν → <b>εξίδρωμα</b></li>
+            <li><b>Μετανάστευση λευκοκυττάρων</b> προς την εστία βλάβης</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Ουδετερόφιλα = “πρώτοι ανταποκριτές” (ώρες–1-2 ημέρες), μετά έρχονται μακροφάγα.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Μεσολαβητές (σελ. 4)</span>
+          <div class="title">“Σημεία-κλειδιά” μεσολαβητών</div>
+          <ul>
+            <li><b>Προέρχονται</b> από κύτταρα (μαστοκύτταρα, μακροφάγα, ενδοθήλιο, ουδετερόφιλα)</li>
+            <li><b>Ή</b> από το πλάσμα (συμπλήρωμα, κινίνες, παράγοντες πήξης)</li>
+            <li><b>Δράσεις:</b> αγγειοδιαστολή, ↑ διαπερατότητα, χημειοταξία, πόνος, ενεργοποίηση λευκοκυττάρων</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Ισταμίνη → άμεση ↑ διαπερατότητα. TNF/IL-1 → ενδοθηλιακή ενεργοποίηση (adhesion molecules).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 4)</span>
+          <div class="title">Δίκτυο μεσολαβητών/κυττάρων</div>
+          <div class="img-slot" data-slot="img_p4">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 4 (διάγραμμα “οξεία φλεγμονή”)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p4" />
+            <p class="img-note">
+              <b>Τι να θυμάσαι:</b> “κύτταρα φλεγμονής ↔ μεσολαβητές ↔ αγγεία” = κύκλος ενίσχυσης.
+              <br><b>Extra:</b> IL-8/χημειοκίνες = κατεύθυνση ουδετερόφιλων (χημειοταξία).
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Συστηματικά (σελ. 5)</span>
+          <div class="title">Συστηματικές επιπτώσεις (οξεία φάση)</div>
+          <ul>
+            <li>↑ παραγωγή λευκοκυττάρων</li>
+            <li>πυρετός, ρίγη</li>
+            <li>ταχυκαρδία, πτώση πίεσης (σε βαριά φλεγμονή/σήψη)</li>
+            <li>ανορεξία, έμετοι</li>
+            <li>αδυναμία, πόνος</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Κυτοκίνες (IL-1, TNF) → πυρετός/οξεία φάση στο ήπαρ (CRP κ.ά.).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Κατάληξη (σελ. 5)</span>
+          <div class="title">Κατάληξη οξείας φλεγμονής</div>
+          <ul>
+            <li><b>Πλήρης λύση</b> (επιστροφή σε φυσιολογικό)</li>
+            <li><b>Ουλοποίηση/Ίνωση</b> (όταν δεν αναγεννάται ή υπάρχει μεγάλη βλάβη)</li>
+            <li><b>Αποστηματοποίηση</b></li>
+            <li><b>Εξέλιξη σε χρόνια</b> φλεγμονή</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Απόστημα = συλλογή πύου (ουδετερόφιλα + νεκρωτικός ιστός + υγρό).</p>
+        </div>
+
+        <!-- ====================== ΕΝΟΤΗΤΑ: ΟΞΕΙΑ ΣΚΩΛΗΚΟΕΙΔΙΤΙΔΑ (ΕΙΚΟΝΕΣ) ====================== -->
+        <div class="section">
+          <h2>Παράδειγμα οξείας φλεγμονής: Οξεία σκωληκοειδίτιδα</h2>
+          <p>Κοίτα “τι κυριαρχεί” (ουδετερόφιλα), ποια στιβάδα έχει διήθηση, υπεραιμία, εξίδρωμα.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 7)</span>
+          <div class="title">Εγκάρσια διατομή — αυλός</div>
+          <div class="img-slot" data-slot="img_p7">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 7 (αυλός)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p7" />
+            <p class="img-note">
+              <b>Τι δείχνει:</b> όργανο σε εγκάρσια διατομή με κεντρικό <b>αυλό</b>.
+              <br><b>Extra:</b> Στην οξεία σκωληκοειδίτιδα το “must” είναι ουδετερόφιλα που φτάνουν μέχρι/μέσα στον μυϊκό χιτώνα.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 8)</span>
+          <div class="title">Στιβάδες: βλεννογόνος → υποβλεννογόνιος → μυϊκός → λίπος</div>
+          <div class="img-slot" data-slot="img_p8">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 8 (στιβάδες)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p8" />
+            <p class="img-note">
+              <b>Σημείο SOS:</b> στην οξεία φλεγμονή περιμένεις <b>ουδετερόφιλα</b> και αγγειακή συμφόρηση/οίδημα.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 9–10)</span>
+          <div class="title">Ουδετερόφιλα & πολυμορφοπύρηνο εξίδρωμα</div>
+          <div class="img-slot" data-slot="img_p9_10">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 9 ή/και 10 (εξίδρωμα/ουδετερόφιλα)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p9_10" />
+            <p class="img-note">
+              <b>Πώς τα αναγνωρίζεις:</b> ουδετερόφιλα = πολυλοβωτός πυρήνας, “κόκκοι” στο κυτταρόπλασμα.
+              <br><b>Τι σημαίνει:</b> οξεία φλεγμονή, συχνά βακτηριακή.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 11–12)</span>
+          <div class="title">Υπεραιμικά τριχοειδή, ορογόνος</div>
+          <div class="img-slot" data-slot="img_p11_12">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 11 ή 12 (υπεραιμία/ορογόνος)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p11_12" />
+            <p class="img-note">
+              <b>Υπεραιμία:</b> “γεμάτα” αγγεία με ερυθρά → αγγειοδιαστολή.
+              <br><b>Extra:</b> Ο ορογόνος συχνά “συμμετέχει” → εξηγεί πόνο/ευαισθησία περιτοναίου.
+            </p>
+          </div>
+        </div>
+
+        <!-- ====================== ΕΝΟΤΗΤΑ: ΧΡΟΝΙΑ ΦΛΕΓΜΟΝΗ ====================== -->
+        <div class="section">
+          <h2>Χρόνια φλεγμονή</h2>
+          <p>Μονοπύρηνα κύτταρα, ιστική καταστροφή, επανόρθωση (αγγειογένεση/ίνωση).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ορισμός (σελ. 6, 13)</span>
+          <div class="title">Τι τη χαρακτηρίζει;</div>
+          <ul>
+            <li><b>Μεγάλη διάρκεια</b> (μήνες/χρόνια)</li>
+            <li><b>Διήθηση από μονοπύρηνα</b>: μακροφάγα, λεμφοκύτταρα, πλασματοκύτταρα (± ηωσινόφιλα)</li>
+            <li><b>Ιστική καταστροφή</b></li>
+            <li><b>Επανόρθωση</b>: αγγειογένεση + ίνωση</li>
+          </ul>
+          <p class="mini"><b>Απάντηση σε ερώτηση (σελ. 13):</b> “Επανόρθωση” = repair: νεοαγγείωση για θρέψη + παραγωγή κολλαγόνου/ουλή (ίνωση).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Οξεία vs Χρόνια (σελ. 6)</span>
+          <div class="title">Κύρια διαφορά (SOS)</div>
+          <ul>
+            <li><b>Οξεία:</b> σύντομη, <b>ουδετερόφιλα</b> κυριαρχούν</li>
+            <li><b>Χρόνια:</b> παρατεταμένη, <b>λεμφοκύτταρα/πλασματοκύτταρα/μακροφάγα</b></li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Η χρόνια φλεγμονή “τρέχει παράλληλα” με προσπάθεια επούλωσης → συχνά καταλήγει σε ίνωση.</p>
+        </div>
+
+        <!-- ====================== ΧΡΟΝΙΑ ΓΑΣΤΡΙΤΙΔΑ (ΕΙΚΟΝΕΣ + ΕΡΩΤΗΣΕΙΣ) ====================== -->
+        <div class="section">
+          <h2>Παράδειγμα χρόνιας φλεγμονής: Χρόνια γαστρίτιδα</h2>
+          <p>Λεμφοζίδια/βλαστικά κέντρα, μεταπλασία, πλασματοκύτταρα, οίδημα.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 14)</span>
+          <div class="title">Χρόνια επιφανειακή γαστρίτιδα & λεμφοζίδιο</div>
+          <div class="img-slot" data-slot="img_p14">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 14 (λεμφοζίδιο με βλαστικό κέντρο)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p14" />
+            <p class="img-note">
+              <b>Τι σημαίνει λεμφοζίδιο/βλαστικό κέντρο;</b> Οργάνωση χρόνιας ανοσολογικής απάντησης (κυρίως Β-κύτταρα).
+              Συχνά σχετίζεται με χρόνιο αντιγονικό ερέθισμα (κλασικά: <b>H. pylori</b>).
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 15–17)</span>
+          <div class="title">Εντερική μεταπλασία & βλαστικό κέντρο (Απαντήσεις)</div>
+          <div class="muted"><b>Σελίδες 15–17</b> έχουν ερωτήσεις μέσα στις εικόνες — εδώ οι απαντήσεις.</div>
+          <ul>
+            <li><b>Εντερική μεταπλασία</b> = αντικατάσταση γαστρικού επιθηλίου από “εντερικού τύπου” (με καλυκοειδή κύτταρα) λόγω χρόνιας βλάβης.</li>
+            <li><b>Βλαστικό κέντρο</b> = περιοχή έντονης <b>πολλαπλασιαστικής δραστηριότητας Β-λεμφοκυττάρων</b> (αντιγονική διέγερση).</li>
+            <li><b>Λεμφοκυτταρικός μανδύας</b> = περιφερικό “δαχτυλίδι” πιο ώριμων/μικρών λεμφοκυττάρων γύρω από το βλαστικό κέντρο.</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Χρόνια γαστρίτιδα με λεμφοζίδια μπορεί να συνδέεται και με MALT αλλαγές (κλινική ιδέα).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 20)</span>
+          <div class="title">Πλασματοκύτταρα — πώς τα βρίσκω;</div>
+          <div class="img-slot" data-slot="img_p20">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 20 (πλασματοκύτταρα)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p20" />
+            <p class="img-note">
+              <b>Απάντηση ερώτησης (σελ. 20):</b> Πλασματοκύτταρο = <b>έκκεντρος πυρήνας</b> με “ροδανθές/clock-face” χρωματίνη
+              + <b>περιπυρηνικό halo</b> (Golgi) + βασόφιλο κυτταρόπλασμα. Παράγει <b>ανοσοσφαιρίνες (Ig)</b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 21)</span>
+          <div class="title">Ηωσινόφιλα — ρόλος & αναγνώριση</div>
+          <div class="img-slot" data-slot="img_p21">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 21 (ηωσινόφιλα)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p21" />
+            <p class="img-note">
+              <b>Απάντηση ερώτησης (σελ. 21):</b> Ηωσινόφιλα: συμμετέχουν σε <b>αλλεργικές αντιδράσεις</b> και <b>παρασιτώσεις</b>,
+              εκκρίνουν τοξικές πρωτεΐνες (π.χ. Major Basic Protein). Ιστολογικά: <b>διλοβωτός πυρήνας</b> + έντονα <b>ηωσινόφιλα (ροζ/πορτοκαλί) κοκκία</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- ====================== ΧΡΟΝΙΑ ΔΕΡΜΑΤΙΤΙΔΑ ====================== -->
+        <div class="section">
+          <h2>Χρόνια δερματίτιδα</h2>
+          <p>Διήθηση μονοπύρηνων στο χόριο + αλλαγές επιδερμίδας/εξαρτημάτων.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 22–23)</span>
+          <div class="title">Πώς την αναγνωρίζω ιστολογικά;</div>
+          <div class="img-slot" data-slot="img_p22_23">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 22 ή 23 (δερματίτιδα)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p22_23" />
+            <p class="img-note">
+              <b>Απάντηση ερώτησης (σελ. 23):</b> Σε σχέση με φυσιολογικό δέρμα: βλέπεις <b>φλεγμονώδη διήθηση στο χόριο</b>
+              (κυρίως λεμφοκύτταρα/ιστιοκύτταρα ± πλασματοκύτταρα) + συχνά <b>πάχυνση/υπερπλασία επιδερμίδας</b> (χρόνιος ερεθισμός).
+              Τα <b>εξαρτήματα</b> (τριχοθυλάκια/αδένες) “κάθονται” μέσα στο χόριο.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Κύτταρα (σελ. 24–26)</span>
+          <div class="title">Ποια κύτταρα περιμένω στη χρόνια δερματίτιδα;</div>
+          <ul>
+            <li><b>Λεμφοκύτταρα</b> (κυριαρχούν)</li>
+            <li><b>Πλασματοκύτταρα</b> (όταν υπάρχει έντονο/παρατεταμένο ερέθισμα)</li>
+            <li><b>Ιστιοκύτταρα/μακροφάγα</b></li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Η εικόνα “χρόνια” = μονοπύρηνα + ίνωση/αναδόμηση.</p>
+        </div>
+
+        <!-- ====================== ΦΛΕΓΜΟΝΩΔΗΣ ΚΟΚΚΙΩΔΗΣ ΙΣΤΟΣ (GRANULATION TISSUE) ====================== -->
+        <div class="section">
+          <h2>Φλεγμονώδης κοκκιώδης ιστός (Granulation tissue)</h2>
+          <p>Repair “μέσα στο χάσμα”: νεόπλαστα αγγεία + ινοβλάστες + κύτταρα φλεγμονής.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ορισμός (σελ. 27)</span>
+          <div class="title">Τι είναι;</div>
+          <div class="muted">Σε μεγάλη ιστική βλάβη/χάσμα → αναπτύσσεται κοκκιώδης ιστός (μακροσκοπικά “κοκκιώδης”).</div>
+          <ul>
+            <li><b>Νεόπλαστα τριχοειδή αγγεία</b></li>
+            <li><b>Πολλαπλασιαζόμενοι ινοβλάστες</b> (+ μυοϊνοβλάστες)</li>
+            <li><b>Ποικίλος αριθμός λευκοκυττάρων</b></li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Είναι “στάδιο γέφυρας” προς ουλή: πρώτα αγγεία/κύτταρα → μετά κολλαγόνο/ίνωση.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνες (σελ. 29–32)</span>
+          <div class="title">Χάσμα γεμάτο κοκκιώδη ιστό</div>
+          <div class="img-slot" data-slot="img_p29_32">
+            <div class="img-row">
+              <span class="img-hint">Βάλε 1 εικόνα από PDF σελ. 29–32 (ανάπτυξη/αγγεία/κύτταρα)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p29_32" />
+            <p class="img-note">
+              <b>Τι να “σκανάρεις”:</b> πολλά μικρά τριχοειδή (νεόπλαστα), οίδημα/χαλαρό στρώμα,
+              και κύτταρα φλεγμονής ανάμεσα σε ινοβλάστες.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ξένο σώμα (σελ. 33)</span>
+          <div class="title">Τριχοφωλεακό συρίγγιο: “hair shafts” + giant cells</div>
+          <div class="img-slot" data-slot="img_p33">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 33 (τρίχες + γιγαντοκύτταρα ξένου σώματος)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p33" />
+            <p class="img-note">
+              <b>Ερμηνεία:</b> Υλικά δύσκολα να αποδομηθούν (π.χ. τρίχες) → μακροφάγα “συνενώνονται” → <b>πολυπύρηνα γιγαντοκύτταρα τύπου ξένου σώματος</b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ίνωση (σελ. 34)</span>
+          <div class="title">Αργότερα: κολλαγονοποίηση → ίνωση</div>
+          <ul>
+            <li>Μπορεί να δεις <b>αιμοσιδηρίνη</b> (παλιές αιμορραγίες)</li>
+            <li>Με τον χρόνο: ↑ <b>κολλαγόνο</b> → <b>ουλή/ίνωση</b></li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Μυοϊνοβλάστες βοηθούν στη “σύσπαση” του τραύματος (wound contraction).</p>
+        </div>
+
+        <!-- ====================== ΚΟΚΚΙΩΜΑΤΩΔΗΣ ΦΛΕΓΜΟΝΗ ====================== -->
+        <div class="section">
+          <h2>Χρόνια κοκκιωματώδης φλεγμονή</h2>
+          <p>Απάντηση σε “επίμονους/δύσκολους” παράγοντες → σχηματισμός κοκκιώματος.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Αίτια (σελ. 36)</span>
+          <div class="title">Τι την προκαλεί;</div>
+          <ul>
+            <li><b>Μικρόβια:</b> Φυματίωση, λέπρα, σύφιλη, νόσος από νύγματα γαλής</li>
+            <li><b>Μύκητες:</b> π.χ. κρυπτοκόκκωση</li>
+            <li><b>Παράσιτα:</b> τοξοπλάσμωση, σχιστοσωμίαση</li>
+            <li><b>Ανόργανα υλικά:</b> σιλίκωση, βηρυλίωση</li>
+            <li><b>Ξένα υλικά</b></li>
+            <li><b>Αυτοανοσία/άγνωστα:</b> πρωτοπαθής χολική κίρρωση, σαρκοείδωση, Crohn</li>
+          </ul>
+          <p class="mini"><b>Ιδέα:</b> κοκκίωμα = “τείχος” γύρω από κάτι που δεν καθαρίζει εύκολα.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ορισμός κοκκιώματος (σελ. 37)</span>
+          <div class="title">Κοκκίωμα = οζοειδής άθροιση</div>
+          <ul>
+            <li><b>Επιθηλιοειδή κύτταρα</b> (ενεργοποιημένα μακροφάγα)</li>
+            <li><b>Λεμφοκύτταρα</b></li>
+            <li><b>Γιγαντοκύτταρα τύπου Langhans</b> (συχνά)</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> “Επιθηλιοειδή” λέγονται γιατί μοιάζουν μορφολογικά με επιθήλιο (άφθονο κυτταρόπλασμα) αλλά είναι μακροφάγα.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Μηχανισμός (σελ. 37)</span>
+          <div class="title">Πώς “στήνεται” (Th1)</div>
+          <ul>
+            <li>Μακροφάγο επεξεργάζεται αντιγόνο → παρουσίαση σε <b>MHC II</b></li>
+            <li>Ενεργοποίηση <b>CD4+</b> (Th1)</li>
+            <li>Th1 κυτοκίνες: <b>IL-2</b>, <b>IFN-γ</b> → έλξη/ενεργοποίηση μακροφάγων</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> IFN-γ = “κλειδί” για ενεργοποίηση μακροφάγων → επιθηλιοειδής μετατροπή/κοκκίωμα.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Langhans (σελ. 39)</span>
+          <div class="title">Γιγαντοκύτταρο τύπου Langhans</div>
+          <div class="muted">Πολυπύρηνο κύτταρο ~40–50 μm, με πυρήνες συχνά “περιφερικά/πεταλοειδώς”.</div>
+          <p class="mini"><b>Tip:</b> Langhans ≠ παθογνωμονικό για φυματίωση· εμφανίζεται και σε άλλες κοκκιωματώδεις.</p>
+        </div>
+
+        <!-- ====================== ΦΥΜΑΤΙΩΣΗ ====================== -->
+        <div class="section">
+          <h2>Κοκκιωματώδης φλεγμονή στη φυματίωση</h2>
+          <p>Τυροειδής νέκρωση + Ziehl-Neelsen (οξεάντοχη) + Mantoux.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Χρονισμός (σελ. 40)</span>
+          <div class="title">10–14 ημέρες μετά την είσοδο αντιγόνου</div>
+          <ul>
+            <li>Ευαισθητοποιημένα Τ-λεμφοκύτταρα</li>
+            <li>Κυτοκίνες</li>
+            <li>“Παγίδευση” μακροφάγων</li>
+            <li>Επιθηλιοειδή κύτταρα</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Αυτό αντιστοιχεί σε κυτταρική ανοσία (delayed-type hypersensitivity).</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 41–45)</span>
+          <div class="title">Τυροειδοποιούμενο κοκκίωμα</div>
+          <div class="img-slot" data-slot="img_p41_45">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 42 ή 44 (τυροειδής νέκρωση)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p41_45" />
+            <p class="img-note">
+              <b>Κλασική δομή:</b> κέντρο <b>τυροειδής νέκρωση</b> (άμορφο, “τυρώδες” υλικό) → γύρω <b>επιθηλιοειδή</b> ± <b>Langhans</b> →
+              περιφερικά <b>λεμφοκύτταρα</b>. <br>
+              <b>Ziehl-Neelsen:</b> αναδεικνύει οξεάντοχα μυκοβακτηρίδια (όταν υπάρχουν/εντοπίζονται).
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Mantoux (σελ. 46)</span>
+          <div class="title">Δερμοαντίδραση Mantoux: τι είναι;</div>
+          <ul>
+            <li>Χορήγηση <b>φυματίνης</b> (πρωτεϊνικά συστατικά μυκοβακτηριδίου)</li>
+            <li>Μετρά <b>κυτταρική ανοσία</b> (καθυστερημένη υπερευαισθησία) — όχι “ενεργό μικρόβιο”</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Θετική Mantoux = προηγούμενη έκθεση/εμβολιασμός/λοίμωξη (θέλει κλινικό πλαίσιο).</p>
+        </div>
+
+        <!-- ====================== ΣΑΡΚΟΕΙΔΩΣΗ ====================== -->
+        <div class="section">
+          <h2>Σαρκοείδωση</h2>
+          <p>Μη τυροειδοποιούμενα κοκκιώματα + Schaumann / αστεροειδή σωμάτια + διαφορική.</p>
+        </div>
+
+        <div class="card">
+          <span class="tag">Ορισμός (σελ. 47)</span>
+          <div class="title">Βασικά σημεία σαρκοείδωσης</div>
+          <ul>
+            <li>Συστηματική κοκκιωματώδης νόσος <b>άγνωστης αιτιολογίας</b></li>
+            <li><b>Μη τυροειδοποιούμενα</b> κοκκιώματα</li>
+            <li>Σωμάτια <b>Schaumann</b>, <b>Αστεροειδή</b> (όχι παθογνωμονικά)</li>
+            <li>Προσβάλλει: λεμφαδένες, πνεύμονες, ήπαρ, σπλήνα, μυελό, ενδοκρινείς, οφθαλμό</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="tag">Schaumann (σελ. 50)</span>
+          <div class="title">Σωμάτια Schaumann</div>
+          <ul>
+            <li>Μικρές “πεταλειώδεις” επασβεστώσεις</li>
+            <li>Συχνότητα ~70%</li>
+            <li><b>Όχι παθογνωμονικά</b></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="tag">Αστεροειδή (σελ. 51)</span>
+          <div class="title">Αστεροειδή σωμάτια</div>
+          <ul>
+            <li>Κρύσταλλοι αστεροειδούς σχήματος / δεσμίδες ινών κολλαγόνου</li>
+            <li>Συχνότητα ~2–9%</li>
+            <li><b>Όχι παθογνωμονικά</b></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="tag">Εικόνα (σελ. 52–54)</span>
+          <div class="title">Ίνωση γύρω από κοκκιώματα & κατανομή</div>
+          <div class="img-slot" data-slot="img_p52_54">
+            <div class="img-row">
+              <span class="img-hint">Βάλε εικόνα από PDF σελ. 52 ή 54 (δαχτυλίδια ίνωσης/κατανομή)</span>
+              <input type="file" accept="image/*" />
+            </div>
+            <img class="img" alt="p52_54" />
+            <p class="img-note">
+              <b>Σημείο:</b> μπορεί να δεις <b>συγκεντρικές στιβάδες κολλαγόνου</b> γύρω από κοκκίωμα.
+              <br><b>Σε βρόγχους:</b> διάταξη κατά μήκος αγγειακού/βρογχικού δέντρου → “πιάνει” στη βρογχοσκόπηση.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="tag">Διαφορική (σελ. 55)</span>
+          <div class="title">Διαφορική διάγνωση κοκκιωμάτων</div>
+          <ul>
+            <li>Μυκοβακτηρίδια: <b>φυματίωση</b>, <b>Mycobacterium avium intracellulare</b></li>
+            <li><b>Μύκητες</b> (π.χ. Cryptococcus)</li>
+            <li><b>Βηρυλίωση</b> (ιστορικό έκθεσης)</li>
+            <li><b>Κοκκιωμάτωση Wegener</b> (ANCA+, νεκρωτική αγγειίτιδα — ιστολογικά μπορεί να μοιάζει)</li>
+            <li>Νεκρωτική σαρκοειδόμορφη κοκκιωμάτωση</li>
+          </ul>
+          <p class="mini"><b>Extra:</b> Όταν βλέπεις κοκκίωμα, ΠΑΝΤΑ σκέψου: “είναι μολυσματικό; έχει νέκρωση; υπάρχει έκθεση;”</p>
+        </div>
+
+      </div><!-- /grid -->
+    </div><!-- /content -->
+  </div><!-- /wrap -->
+
+<script>
+  // ======================
+  // 1) Image slots: upload + save to localStorage
+  // ======================
+  function initImageSlots(){
+    document.querySelectorAll(".img-slot").forEach(slot => {
+      const id = slot.getAttribute("data-slot");
+      const input = slot.querySelector('input[type="file"]');
+      const img = slot.querySelector("img.img");
+      const storageKey = "img_" + id;
+
+      // restore image
+      const saved = localStorage.getItem(storageKey);
+      if(saved){
+        img.src = saved;
+        img.style.display = "block";
+      }
+
+      input.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          img.src = dataUrl;
+          img.style.display = "block";
+          localStorage.setItem(storageKey, dataUrl);
+          saveContent(); // keep highlights + any structure
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // click to zoom
+      img.addEventListener("click", () => openModal(img.src, id));
+    });
+  }
+
+  // ======================
+  // 2) Modal zoom (toolbar stays fixed)
+  // ======================
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modalImg");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalClose = document.getElementById("modalClose");
+
+  function openModal(src, id){
+    modalImg.src = src;
+    modalTitle.textContent = "Zoom εικόνας — " + id;
+    modal.style.display = "flex";
+  }
+  function closeModal(){
+    modal.style.display = "none";
+    modalImg.src = "";
+  }
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+  // ======================
+  // 3) Highlighter (3 colors) inside #content only
+  //    Saves #content.innerHTML to localStorage
+  // ======================
+  const contentEl = document.getElementById("content");
+  let currentClass = null;
+
+  const colorButtons = document.querySelectorAll(".hl-btn[data-color]");
+  const eraseBtn = document.getElementById("hl-erase");
+  const clearBtn = document.getElementById("hl-clear");
+
+  function setActive(btn){
+    colorButtons.forEach(b => b.classList.remove("active"));
+    if(btn) btn.classList.add("active");
+  }
+
+  colorButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentClass = btn.dataset.color;
+      setActive(btn);
+    });
+  });
+
+  function highlightSelection(cls){
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount === 0) return;
+
+    const range = sel.getRangeAt(0);
+    if(range.collapsed) return;
+
+    // Only allow highlight if selection is inside content
+    const containerNode = range.commonAncestorContainer.nodeType === 1
+      ? range.commonAncestorContainer
+      : range.commonAncestorContainer.parentElement;
+
+    if(!contentEl.contains(containerNode)) return;
+
+    const span = document.createElement("span");
+    span.className = cls;
+    span.setAttribute("data-hl", "1");
+
+    try{
+      range.surroundContents(span);
+      sel.removeAllRanges();
+      saveContent();
+    }catch(e){
+      // fallback when selection spans multiple nodes
+      const frag = range.extractContents();
+      span.appendChild(frag);
+      range.insertNode(span);
+      sel.removeAllRanges();
+      saveContent();
+    }
+  }
+
+  function removeHighlightFromSelection(){
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    if(range.collapsed) return;
+
+    const container = range.commonAncestorContainer.nodeType === 1
+      ? range.commonAncestorContainer
+      : range.commonAncestorContainer.parentElement;
+
+    if(!contentEl.contains(container)) return;
+
+    const spans = contentEl.querySelectorAll('span[data-hl="1"]');
+    spans.forEach(sp => {
+      const spRange = document.createRange();
+      spRange.selectNodeContents(sp);
+      const intersects =
+        range.compareBoundaryPoints(Range.END_TO_START, spRange) < 0 &&
+        range.compareBoundaryPoints(Range.START_TO_END, spRange) > 0;
+
+      if(intersects){
+        const parent = sp.parentNode;
+        while(sp.firstChild) parent.insertBefore(sp.firstChild, sp);
+        parent.removeChild(sp);
+      }
+    });
+
+    sel.removeAllRanges();
+    saveContent();
+  }
+
+  function clearAllHighlights(){
+    const spans = contentEl.querySelectorAll('span[data-hl="1"]');
+    spans.forEach(sp => {
+      const parent = sp.parentNode;
+      while(sp.firstChild) parent.insertBefore(sp.firstChild, sp);
+      parent.removeChild(sp);
+    });
+    saveContent();
+  }
+
+  // Save/restore only content HTML (keeps toolbar stable and clickable)
+  const CONTENT_KEY = "inflammation_board_content_v1";
+
+  function saveContent(){
+    localStorage.setItem(CONTENT_KEY, contentEl.innerHTML);
+  }
+
+  function restoreContent(){
+    const saved = localStorage.getItem(CONTENT_KEY);
+    if(saved){
+      contentEl.innerHTML = saved;
+    }
+    // after restore, need to rebind slots and modal clicks
+    initImageSlots();
+    rebindImagesToModal();
+  }
+
+  // Rebind images after restore (because elements are recreated)
+  function rebindImagesToModal(){
+    document.querySelectorAll(".img-slot img.img").forEach(img => {
+      img.addEventListener("click", () => {
+        const slot = img.closest(".img-slot");
+        const id = slot ? slot.getAttribute("data-slot") : "image";
+        openModal(img.src, id);
+      });
+    });
+  }
+
+  // Apply highlight on mouseup (only when color selected)
+  document.addEventListener("mouseup", () => {
+    if(!currentClass) return;
+    setTimeout(() => highlightSelection(currentClass), 10);
+  });
+
+  eraseBtn.addEventListener("click", removeHighlightFromSelection);
+  clearBtn.addEventListener("click", () => {
+    if(confirm("Να σβηστούν ΟΛΑ τα highlights;")) {
+      clearAllHighlights();
+      // keep images; do not delete img_ keys
+    }
+  });
+
+  // Initial load
+  restoreContent();
+  // If no saved content exists, still init slots
+  initImageSlots();
+
+  // Save when leaving page (extra safety)
+  window.addEventListener("beforeunload", saveContent);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz — 2ο Εργαστήριο Γεν. Παθολογίας & Παθ. Ανατομικής (Τι προκαλεί τη νόσο;)</title>
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --shadow: 0 10px 25px rgba(31,41,55,.07);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 20% 0%, #e9f0ff 0%, transparent 60%),
+                  radial-gradient(1200px 700px at 80% 0%, #e9fff5 0%, transparent 60%),
+                  var(--bg);
+      color:var(--ink);
+      line-height:1.35;
+    }
+    header{
+      padding:26px 18px 10px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    h1{
+      margin:0 0 6px;
+      font-size: clamp(20px, 3vw, 32px);
+      letter-spacing:-.02em;
+    }
+    .sub{ margin:0; color:var(--muted); font-size:14px; }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 18px 40px;
+    }
+
+    .topbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      background: rgba(255,255,255,.85);
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      margin-bottom: 14px;
+    }
+    .controls{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    button{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight:700;
+      font-size: 13px;
+    }
+    button:hover{ filter:brightness(.98); }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .pill b{ color:var(--ink); }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:14px;
+    }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,1));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:14px 14px 12px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .qtitle{
+      margin:10px 0 10px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .desc{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size: 13px;
+    }
+    .options{ display:grid; gap:8px; margin-top:8px; }
+    .opt{
+      width:100%;
+      text-align:left;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight:700;
+      color: var(--ink);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .opt .letter{
+      width:26px;
+      height:26px;
+      border-radius: 10px;
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      background:#f9fafb;
+      flex: 0 0 auto;
+    }
+    .opt.correct{
+      border-color: rgba(16,185,129,.35);
+      background: rgba(16,185,129,.10);
+    }
+    .opt.wrong{
+      border-color: rgba(239,68,68,.35);
+      background: rgba(239,68,68,.10);
+    }
+    .opt.neutral-dim{
+      opacity:.7;
+    }
+
+    .feedback{
+      margin-top:10px;
+      border-radius: 14px;
+      border:1px dashed #d1d5db;
+      background:#fbfdff;
+      padding:10px;
+      display:none;
+    }
+    .feedback .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:6px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .badge.ok{ border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.10); }
+    .badge.no{ border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.10); }
+    .explain{
+      margin:0;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .hr{
+      height:1px;
+      background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+      margin:10px 0;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
+      font-size: 12px;
+      padding:2px 6px;
+      border-radius:6px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Quiz — 2ο Εργαστήριο Γεν. Παθολογίας & Παθ. Ανατομικής</h1>
+  <p class="sub">Θέμα: <b>Τι προκαλεί τη νόσο;</b> — Πολλαπλής επιλογής με αναλυτική επεξήγηση</p>
+</header>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="controls">
+      <button id="btn-shuffle">🔀 Τυχαία σειρά</button>
+      <button id="btn-reset">♻️ Reset</button>
+      <button id="btn-reveal">👀 Δείξε λύσεις</button>
+    </div>
+    <div class="pill"><b>Score:</b> <span id="score">0</span>/<span id="total">0</span></div>
+    <div class="pill"><b>Κατάσταση:</b> <span id="status">Απάντησε σε κάθε ερώτηση 1 φορά.</span></div>
+  </div>
+
+  <div class="grid" id="quiz"></div>
+
+  <p class="mini" style="margin-top:14px;">
+    Tip: Αν κολλήσει κάτι, ξαναδιάβασε στο study-board: ορισμός “αιτίου”, εξωγενές/ενδογενές, πολυπαραγοντικά,
+    μηχανισμός κοιλιοκάκης (HLA-DQ2/DQ8 + γλιαδίνη), και Wilson (ATP7B, χαλκός ούρων 24ώρου, χαλκός ήπατος).
+  </p>
+</div>
+
+<script>
+  // =========================
+  // Quiz data (based on presentation content)
+  // =========================
+  const QUESTIONS = [
+    {
+      id: "q1",
+      tag: "Ορισμοί",
+      q: "Ποια πρόταση περιγράφει καλύτερα το «αίτιο» μιας νόσου σύμφωνα με την παρουσίαση;",
+      desc: "Διάλεξε τη σωστότερη διατύπωση (όχι απλή συσχέτιση).",
+      options: [
+        { t: "Οποιοσδήποτε παράγοντας που εμφανίζεται συχνά μαζί με τη νόσο.", ok: false },
+        { t: "Παράγοντας που ξεκινά αναγνωρίσιμο μηχανισμό και συμβάλλει σημαντικά στην εκδήλωση της νόσου.", ok: true },
+        { t: "Οτιδήποτε προκαλεί συμπτώματα, ανεξάρτητα από μηχανισμό.", ok: false },
+        { t: "Μόνο ένας παράγοντας που από μόνος του αρκεί να προκαλέσει τη νόσο σε όλους.", ok: false }
+      ],
+      explain: "Αίτιο = παράγοντας με σαφή ρόλο στην έναρξη/τροφοδότηση παθολογικού μηχανισμού. Όχι απλώς συσχέτιση και όχι απαραίτητα «αρκεί μόνος του»."
+    },
+
+    {
+      id: "q2",
+      tag: "Κατηγορίες",
+      q: "Ποιο από τα παρακάτω ανήκει στους ΕΞΩΓΕΝΕΙΣ αιτιολογικούς παράγοντες;",
+      desc: "Διάλεξε το «σχέδιο» κατηγοριών όπως δίνεται στη διάλεξη.",
+      options: [
+        { t: "Γενετικοί", ok: false },
+        { t: "Μεταβολικοί", ok: false },
+        { t: "Χημικοί", ok: true },
+        { t: "Εκφυλιστικοί", ok: false }
+      ],
+      explain: "Εξωγενείς: φυσικοί/χημικοί/βιολογικοί/διαιτητικοί. Ενδογενείς: γενετικοί/μεταβολικοί/κυτταρικοί/δομικοί/εκφυλιστικοί."
+    },
+
+    {
+      id: "q3",
+      tag: "Παραδείγματα",
+      q: "Τα κρυοπαγήματα στην παρουσίαση δίνονται ως παράδειγμα ποιας κατηγορίας αιτίου;",
+      desc: "",
+      options: [
+        { t: "Φυσικού (εξωγενούς) αιτίου", ok: true },
+        { t: "Χημικού (εξωγενούς) αιτίου", ok: false },
+        { t: "Γενετικού (ενδογενούς) αιτίου", ok: false },
+        { t: "Μεταβολικού (ενδογενούς) αιτίου", ok: false }
+      ],
+      explain: "Τα κρυοπαγήματα είναι κλασικό παράδειγμα φυσικού εξωγενούς αιτιολογικού παράγοντα."
+    },
+
+    {
+      id: "q4",
+      tag: "Παραδείγματα",
+      q: "H. pylori → χρόνια γαστρίτιδα είναι παράδειγμα:",
+      desc: "",
+      options: [
+        { t: "Βιολογικού εξωγενούς αιτίου", ok: true },
+        { t: "Διαιτητικού εξωγενούς αιτίου", ok: false },
+        { t: "Δομικού ενδογενούς αιτίου", ok: false },
+        { t: "Εκφυλιστικού ενδογενούς αιτίου", ok: false }
+      ],
+      explain: "Λοίμωξη = βιολογικός εξωγενής παράγοντας (μικροοργανισμός) που οδηγεί σε φλεγμονώδη νόσο."
+    },
+
+    {
+      id: "q5",
+      tag: "Γενετική",
+      q: "Ποια αλυσίδα περιγράφει σωστά πώς μια μετάλλαξη μπορεί να οδηγήσει σε νόσο;",
+      desc: "Σκέψου κωδικές ή ρυθμιστικές περιοχές → πρωτεΐνη → λειτουργία.",
+      options: [
+        { t: "Μετάλλαξη → πάντα αυξημένη θερμοκρασία σώματος → νόσος", ok: false },
+        { t: "Μετάλλαξη → αλλαγή δομής/έλλειψη πρωτεΐνης → παθολογική λειτουργία κυττάρων/ιστών → νόσος", ok: true },
+        { t: "Μετάλλαξη → αναπόφευκτη νόσος σε όλους τους φορείς ανεξαρτήτως άλλων παραγόντων", ok: false },
+        { t: "Μετάλλαξη → μόνο αλλαγή στο mRNA χωρίς επίπτωση στην πρωτεΐνη → πάντα νόσος", ok: false }
+      ],
+      explain: "Η παρουσίαση τονίζει ότι αλλαγές σε κωδικές/ρυθμιστικές περιοχές μπορούν να αλλάξουν δομή ή ποσότητα πρωτεΐνης, οδηγώντας σε δυσλειτουργία."
+    },
+
+    {
+      id: "q6",
+      tag: "Mendel",
+      q: "Η δρεπανοκυτταρική αναιμία χρησιμοποιείται ως παράδειγμα:",
+      desc: "",
+      options: [
+        { t: "Πολυπαραγοντικού νοσήματος", ok: false },
+        { t: "Κλασικού Mendelian (μονογονιδιακού) νοσήματος", ok: true },
+        { t: "Καθαρά περιβαλλοντικά προκαλούμενου νοσήματος", ok: false },
+        { t: "Εκφυλιστικού νοσήματος χωρίς γενετική βάση", ok: false }
+      ],
+      explain: "Στην παρουσίαση εμφανίζεται ως παράδειγμα όπου μετάλλαξη οδηγεί σε παθολογική πρωτεΐνη και κλινικές συνέπειες (αγγειακή απόφραξη κ.λπ.)."
+    },
+
+    {
+      id: "q7",
+      tag: "Πολυπαραγοντικά",
+      q: "Ποια δήλωση είναι σωστή για τα πολυπαραγοντικά νοσήματα;",
+      desc: "",
+      options: [
+        { t: "Οφείλονται σε ένα μοναδικό μεταλλαγμένο γονίδιο.", ok: false },
+        { t: "Οφείλονται σε συνδυασμένη δράση περιβαλλοντικών παραγόντων και ≥2 γονιδίων προδιάθεσης.", ok: true },
+        { t: "Δεν επηρεάζονται από το περιβάλλον.", ok: false },
+        { t: "Αφορούν αποκλειστικά σπάνιες παθήσεις.", ok: false }
+      ],
+      explain: "Ο ορισμός στην παρουσίαση: ≥2 γονίδια που δίνουν προδιάθεση + περιβαλλοντικοί παράγοντες."
+    },
+
+    {
+      id: "q8",
+      tag: "Πολυπαραγοντικά",
+      q: "Ποιο σύνολο περιέχει ΜΟΝΟ πολυπαραγοντικά νοσήματα όπως αναφέρονται;",
+      desc: "",
+      options: [
+        { t: "Αθηροσκλήρωση, υπέρταση, παχυσαρκία, σακχαρώδης διαβήτης", ok: true },
+        { t: "Κοιλιοκάκη, Wilson, δρεπανοκυτταρική", ok: false },
+        { t: "H. pylori γαστρίτιδα, κρυοπαγήματα, δηλητηρίαση", ok: false },
+        { t: "Όλα τα Mendelian νοσήματα", ok: false }
+      ],
+      explain: "Στην παρουσίαση: αθηροσκλήρωση, υπέρταση, παχυσαρκία, ΣΔ, κακοήθη νεοπλάσματα = πολυπαραγοντικά (πολύ συχνά)."
+    },
+
+    {
+      id: "q9",
+      tag: "Αθηροσκλήρωση",
+      q: "Ποιο από τα παρακάτω αναφέρεται ως ΠΕΡΙΒΑΛΛΟΝΤΙΚΟΣ παράγοντας για αθηροσκλήρωση;",
+      desc: "",
+      options: [
+        { t: "Μεταλλάξεις σε LDL υποδοχείς", ok: false },
+        { t: "Κάπνισμα", ok: true },
+        { t: "Γονίδια που σχετίζονται με υπέρταση", ok: false },
+        { t: "Κληρονομική προδιάθεση για ΣΔ", ok: false }
+      ],
+      explain: "Περιβάλλον: κάπνισμα, υπερλιπιδαιμία, παχυσαρκία, ΣΔ, έλλειψη άσκησης, στρες, αλκοόλ, φάρμακα κ.ά."
+    },
+
+    {
+      id: "q10",
+      tag: "Κοιλιοκάκη",
+      q: "Ποια είναι η βασική παθοφυσιολογική συνέπεια της βλάβης στις λάχνες;",
+      desc: "",
+      options: [
+        { t: "Υπεραπορρόφηση λιπών", ok: false },
+        { t: "Δυσαπορρόφηση θρεπτικών ουσιών και βιταμινών", ok: true },
+        { t: "Αποκλειστικά νευρολογικά συμπτώματα", ok: false },
+        { t: "Αμιγής απόφραξη χοληφόρων", ok: false }
+      ],
+      explain: "Καταστροφή/επιπέδωση λαχνών → μειωμένη επιφάνεια → δυσαπορρόφηση → διάρροια/στεατόρροια, αναιμία, οστεοπόρωση κ.λπ."
+    },
+
+    {
+      id: "q11",
+      tag: "Κοιλιοκάκη",
+      q: "Ποιο HLA προφίλ συνδέεται με κοιλιοκάκη στην παρουσίαση;",
+      desc: "",
+      options: [
+        { t: "HLA-B27", ok: false },
+        { t: "HLA-DQ2/DQ8", ok: true },
+        { t: "HLA-A2 μόνο", ok: false },
+        { t: "HLA-DR4 αποκλειστικά", ok: false }
+      ],
+      explain: "Η παρουσίαση αναφέρει προδιάθεση με HLA-DQ2 και HLA-DQ8."
+    },
+
+    {
+      id: "q12",
+      tag: "Κοιλιοκάκη",
+      q: "Ποια αλληλουχία γεγονότων ταιριάζει καλύτερα στην κοιλιοκάκη;",
+      desc: "Διάλεξε την πιο σωστή σειρά.",
+      options: [
+        { t: "Γλουτένη → γλιαδίνη → (σε HLA-DQ2/DQ8) ανοσολογική ενεργοποίηση → βλάβη λαχνών → δυσαπορρόφηση", ok: true },
+        { t: "Γλουτένη → άμεση απόφραξη χοληφόρων → ίκτερος", ok: false },
+        { t: "Γλουτένη → αιμόλυση → προηπατικός ίκτερος", ok: false },
+        { t: "Γλουτένη → αυξημένη παραγωγή σερουλοπλασμίνης → Wilson", ok: false }
+      ],
+      explain: "Κλειδί: γλιαδίνη + HLA-DQ2/DQ8 → T-κύτταρα/φλεγμονή → ατροφία λαχνών → δυσαπορρόφηση."
+    },
+
+    {
+      id: "q13",
+      tag: "Κοιλιοκάκη",
+      q: "Ποιο σύμπτωμα/εύρημα είναι συμβατό με κοιλιοκάκη όπως περιγράφεται;",
+      desc: "",
+      options: [
+        { t: "Καθυστέρηση ανάπτυξης στα παιδιά", ok: true },
+        { t: "Αποκλειστικά υπέρταση χωρίς ΓΕΣ συμπτώματα", ok: false },
+        { t: "Μόνο αιματουρία χωρίς άλλα", ok: false },
+        { t: "Πάντα υψηλή σερουλοπλασμίνη", ok: false }
+      ],
+      explain: "Παρουσίαση: διάρροια/στεατόρροια, απώλεια βάρους, κόπωση, αναιμία, οστεοπόρωση, καθυστέρηση ανάπτυξης."
+    },
+
+    {
+      id: "q14",
+      tag: "Ίκτερος",
+      q: "Η κιτρινωπή χροιά στους επιπεφυκότες περιγράφεται με τον όρο:",
+      desc: "",
+      options: [
+        { t: "Στεατόρροια", ok: false },
+        { t: "Ίκτερος", ok: true },
+        { t: "Κυάνωση", ok: false },
+        { t: "Ερύθημα", ok: false }
+      ],
+      explain: "Ίκτερος = κιτρίνισμα σκληρών/δέρματος λόγω αυξημένης χολερυθρίνης."
+    },
+
+    {
+      id: "q15",
+      tag: "Εργαστηριακά",
+      q: "Ποιο εργαστηριακό «pattern» φαίνεται στα δεδομένα του Κώστα (χολερυθρίνη↑, AST/ALT↑ και ALP/γGTP↑);",
+      desc: "",
+      options: [
+        { t: "Καθαρά προηπατικό (αιμόλυση)", ok: false },
+        { t: "Καθαρά χολοστατικό χωρίς ηπατοκυτταρική συμμετοχή", ok: false },
+        { t: "Μικτό/συνδυασμένο μοτίβο (ηπατοκυτταρικό + χολόσταση)", ok: true },
+        { t: "Απολύτως φυσιολογικό", ok: false }
+      ],
+      explain: "Η ταυτόχρονη αύξηση τρανσαμινασών και δεικτών χολόστασης δείχνει μικτό μοτίβο ή ηπατική βλάβη με χολόσταση."
+    },
+
+    {
+      id: "q16",
+      tag: "Διαφορική",
+      q: "Γιατί ζητήθηκε σερουλοπλασμίνη στον Κώστα;",
+      desc: "",
+      options: [
+        { t: "Για έλεγχο δυσανεξίας στη λακτόζη", ok: false },
+        { t: "Για έλεγχο Νόσου Wilson (μεταβολισμός χαλκού), ειδικά λόγω ηλικίας", ok: true },
+        { t: "Για έλεγχο αθηροσκλήρωσης", ok: false },
+        { t: "Για έλεγχο H. pylori", ok: false }
+      ],
+      explain: "Σε νέο άτομο με ηπατικά/ίκτερο και αρνητικά συχνά λοιμώδη αίτια, Wilson είναι κρίσιμος αποκλεισμός/έλεγχος."
+    },
+
+    {
+      id: "q17",
+      tag: "Wilson",
+      q: "Νόσος Wilson: τρόπος κληρονόμησης και γονίδιο (όπως στην παρουσίαση).",
+      desc: "",
+      options: [
+        { t: "Αυτοσωματικός επικρατής — CFTR", ok: false },
+        { t: "Αυτοσωματικός υπολειπόμενος — ATP7B", ok: true },
+        { t: "Φυλοσύνδετος — DMD", ok: false },
+        { t: "Μιτοχονδριακός — MT-ND1", ok: false }
+      ],
+      explain: "Η παρουσίαση: AR, ATP7B στο 13q14."
+    },
+
+    {
+      id: "q18",
+      tag: "Wilson",
+      q: "Ποιο εύρημα είναι ισχυρό υπέρ Wilson στην περίπτωση;",
+      desc: "Σκέψου το πιο «ειδικό» τεκμήριο υπερφόρτωσης χαλκού.",
+      options: [
+        { t: "Αρνητικά anti-HCV", ok: false },
+        { t: "Γλυκόζη 78 mg/dl", ok: false },
+        { t: "Χαλκός ήπατος 612 μg/g ξηρού βάρους (φ.τ. <40)", ok: true },
+        { t: "Hb 12 g/dl", ok: false }
+      ],
+      explain: "Ο ποσοτικός χαλκός ήπατος είναι εξαιρετικά ισχυρό στοιχείο. Η σερουλοπλασμίνη μπορεί να είναι χαμηλή και αλλού, αλλά τόσο υψηλός ηπατικός χαλκός είναι καθοριστικός."
+    },
+
+    {
+      id: "q19",
+      tag: "Wilson",
+      q: "Γιατί μπορεί να ζητηθεί MRI εγκεφάλου σε υποψία Wilson;",
+      desc: "",
+      options: [
+        { t: "Για έλεγχο ατροφίας λαχνών λεπτού εντέρου", ok: false },
+        { t: "Για πιθανή συμμετοχή βασικών γαγγλίων/νευρολογική προσβολή", ok: true },
+        { t: "Για έλεγχο λίθων χοληδόχου κύστης", ok: false },
+        { t: "Για έλεγχο H. pylori", ok: false }
+      ],
+      explain: "Wilson μπορεί να προκαλέσει εκφύλιση/βλάβες βασικών γαγγλίων → νευρολογικά συμπτώματα, άρα MRI βοηθά."
+    },
+
+    {
+      id: "q20",
+      tag: "Wilson",
+      q: "Στους συγγενείς 1ου βαθμού ασθενούς με Wilson, ποια είναι η πιο σωστή σύσταση;",
+      desc: "",
+      options: [
+        { t: "Καμία εξέταση, γιατί δεν είναι κληρονομική.", ok: false },
+        { t: "Έλεγχος/Screening συγγενών (ιδίως αδέρφια) + γενετική συμβουλευτική όπου γίνεται.", ok: true },
+        { t: "Μόνο υπερηχογράφημα άνω κοιλίας μια φορά στη ζωή.", ok: false },
+        { t: "Μόνο δίαιτα χωρίς γλουτένη.", ok: false }
+      ],
+      explain: "AR νόσος → αδέρφια έχουν σημαντικό κίνδυνο να είναι ασθενείς ή φορείς. Άρα screening και συχνά γενετικός έλεγχος όπου διαθέσιμος."
+    }
+  ];
+
+  // =========================
+  // State + rendering
+  // =========================
+  const quizEl = document.getElementById("quiz");
+  const scoreEl = document.getElementById("score");
+  const totalEl = document.getElementById("total");
+  const statusEl = document.getElementById("status");
+
+  let state = {
+    order: [...QUESTIONS.map(q => q.id)],
+    answered: {},     // { [qid]: { chosenIndex, correct } }
+    revealAll: false,
+  };
+
+  totalEl.textContent = String(QUESTIONS.length);
+
+  function shuffleArray(arr){
+    for(let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function getQuestionById(id){
+    return QUESTIONS.find(q => q.id === id);
+  }
+
+  function computeScore(){
+    let s = 0;
+    for(const qid of Object.keys(state.answered)){
+      if(state.answered[qid].correct) s++;
+    }
+    return s;
+  }
+
+  function updateTopbar(){
+    const s = computeScore();
+    scoreEl.textContent = String(s);
+    const answeredCount = Object.keys(state.answered).length;
+    if(state.revealAll){
+      statusEl.textContent = "Εμφάνιση λύσεων: ON (μπορείς να κάνεις Reset για νέα προσπάθεια).";
+    }else if(answeredCount === QUESTIONS.length){
+      statusEl.textContent = "Τέλος! Έχεις απαντήσει όλες τις ερωτήσεις.";
+    }else{
+      statusEl.textContent = `Απαντήθηκαν ${answeredCount}/${QUESTIONS.length}.`;
+    }
+  }
+
+  function render(){
+    quizEl.innerHTML = "";
+    updateTopbar();
+
+    for(const qid of state.order){
+      const q = getQuestionById(qid);
+      const card = document.createElement("section");
+      card.className = "card";
+
+      const answered = state.answered[qid];
+      const correctIndex = q.options.findIndex(o => o.ok);
+
+      card.innerHTML = `
+        <span class="tag">${q.tag}</span>
+        <h2 class="qtitle">${q.q}</h2>
+        ${q.desc ? `<p class="desc">${q.desc}</p>` : ``}
+        <div class="options"></div>
+        <div class="feedback" id="fb-${qid}">
+          <div class="row">
+            <span class="badge" id="badge-${qid}"></span>
+            <span class="mini">Σωστή απάντηση: <b>${String.fromCharCode(65 + correctIndex)}</b></span>
+          </div>
+          <p class="explain">${q.explain}</p>
+        </div>
+      `;
+
+      const optionsEl = card.querySelector(".options");
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "opt";
+        btn.type = "button";
+        btn.dataset.qid = qid;
+        btn.dataset.idx = String(idx);
+        btn.innerHTML = `<span class="letter">${String.fromCharCode(65+idx)}</span><span>${opt.t}</span>`;
+
+        const isCorrect = opt.ok;
+
+        // If already answered or revealAll, paint accordingly
+        if(answered || state.revealAll){
+          const chosen = answered ? answered.chosenIndex === idx : false;
+
+          if(state.revealAll){
+            if(isCorrect) btn.classList.add("correct");
+            else btn.classList.add("neutral-dim");
+          }else if(answered){
+            if(isCorrect) btn.classList.add("correct");
+            if(chosen && !isCorrect) btn.classList.add("wrong");
+            if(!chosen && !isCorrect) btn.classList.add("neutral-dim");
+          }
+
+          btn.disabled = true;
+        } else {
+          btn.addEventListener("click", onChoose);
+        }
+
+        optionsEl.appendChild(btn);
+      });
+
+      // Feedback display
+      const fb = card.querySelector(`#fb-${qid}`);
+      const badge = card.querySelector(`#badge-${qid}`);
+      if(state.revealAll || answered){
+        fb.style.display = "block";
+        if(answered){
+          badge.textContent = answered.correct ? "✅ ΣΩΣΤΟ" : "❌ ΛΑΘΟΣ";
+          badge.className = "badge " + (answered.correct ? "ok" : "no");
+        }else{
+          badge.textContent = "👀 ΛΥΣΗ";
+          badge.className = "badge ok";
+        }
+      }
+
+      quizEl.appendChild(card);
+    }
+  }
+
+  function onChoose(e){
+    const btn = e.currentTarget;
+    const qid = btn.dataset.qid;
+    const idx = Number(btn.dataset.idx);
+
+    const q = getQuestionById(qid);
+    const correct = q.options[idx].ok;
+
+    state.answered[qid] = { chosenIndex: idx, correct };
+    render();
+    updateTopbar();
+  }
+
+  // =========================
+  // Controls
+  // =========================
+  document.getElementById("btn-shuffle").addEventListener("click", () => {
+    state.order = shuffleArray([...state.order]);
+    render();
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", () => {
+    state.answered = {};
+    state.revealAll = false;
+    state.order = [...QUESTIONS.map(q => q.id)];
+    render();
+  });
+
+  document.getElementById("btn-reveal").addEventListener("click", () => {
+    state.revealAll = !state.revealAll;
+    render();
+  });
+
+  // initial render
+  render();
+</script>
+
+</body>
+</html>

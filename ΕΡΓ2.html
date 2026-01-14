@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2ο Εργαστήριο Γενικής Παθολογίας & Παθολογικής Ανατομικής — Τι προκαλεί τη νόσο;</title>
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --accent2:#10b981;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --border:#e5e7eb;
+      --shadow: 0 10px 25px rgba(31,41,55,.07);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 20% 0%, #e9f0ff 0%, transparent 60%),
+                  radial-gradient(1200px 700px at 80% 0%, #e9fff5 0%, transparent 60%),
+                  var(--bg);
+      color:var(--ink);
+      line-height:1.35;
+    }
+    header{
+      padding:28px 18px 10px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    h1{
+      margin:0 0 6px;
+      font-size: clamp(20px, 3vw, 34px);
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+    }
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:14px;
+    }
+    @media (max-width: 1050px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,1));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:14px 14px 12px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 140px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:var(--muted);
+    }
+    .tag b{color:var(--ink)}
+    .card h2{
+      margin:10px 0 6px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .card p, .card li{font-size:13px}
+    .muted{color:var(--muted)}
+    ul{margin:8px 0 0 18px; padding:0}
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      margin-right:6px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .pill.blue{border-color:#c7d2fe;background:#eef2ff;color:#1e3a8a}
+    .pill.green{border-color:#bbf7d0;background:#ecfdf5;color:#065f46}
+    .pill.amber{border-color:#fde68a;background:#fffbeb;color:#92400e}
+    .pill.red{border-color:#fecaca;background:#fff1f2;color:#991b1b}
+
+    details{
+      margin-top:10px;
+      border:1px dashed #d1d5db;
+      border-radius: 14px;
+      padding:10px 10px 8px;
+      background:#fbfdff;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:600;
+      font-size:13px;
+      color:#111827;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .qa{
+      margin-top:10px;
+      padding:10px;
+      border-radius: 14px;
+      border:1px solid #dbeafe;
+      background:#eff6ff;
+    }
+    .qa .q{
+      font-weight:700;
+      margin:0 0 6px;
+      font-size:13px;
+    }
+    .qa .a{
+      margin:0;
+      font-size:13px;
+    }
+    .hr{
+      height:1px;
+      background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+      margin:10px 0;
+    }
+    .note{
+      border-left:4px solid #93c5fd;
+      padding:8px 10px;
+      background:#f8fbff;
+      border-radius: 10px;
+      margin-top:8px;
+      font-size:13px;
+    }
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .cols2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 640px){ .cols2{grid-template-columns:1fr;} }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
+      font-size: 12px;
+      padding:2px 6px;
+      border-radius:6px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+    }
+   
+  /* Highlighter styles */
+  .hl-yellow { background: rgba(255, 235, 59, 0.55); border-radius: 6px; padding: 0 2px; }
+  .hl-green  { background: rgba(16, 185, 129, 0.30); border-radius: 6px; padding: 0 2px; }
+  .hl-pink   { background: rgba(236, 72, 153, 0.25); border-radius: 6px; padding: 0 2px; }
+
+  .hl-toolbar{
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 9999;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 25px rgba(31,41,55,.10);
+    border-radius: 14px;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    backdrop-filter: blur(8px);
+  }
+  .hl-btn{
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    padding: 8px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .hl-btn.active{ outline: 2px solid #2563eb33; }
+  .hl-btn.small{ padding: 8px 8px; font-weight: 700; }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>2ο Εργαστήριο Γενικής Παθολογίας & Παθολογικής Ανατομικής</h1>
+  <p class="sub">Θέμα: <b>Τι προκαλεί τη νόσο;</b> — Όλες οι πληροφορίες της παρουσίασης + απαντήσεις/επεξηγήσεις</p>
+</header>
+<div class="hl-toolbar">
+  <button class="hl-btn" data-color="hl-yellow">🟨 Yellow</button>
+  <button class="hl-btn" data-color="hl-green">🟩 Green</button>
+  <button class="hl-btn" data-color="hl-pink">🩷 Pink</button>
+  <span style="width:1px;height:22px;background:#e5e7eb;display:inline-block;"></span>
+  <button class="hl-btn small" id="hl-erase" title="Remove highlight from selection">🧽</button>
+  <button class="hl-btn small" id="hl-clear" title="Clear ALL highlights">🗑</button>
+</div>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- 1 -->
+    <section class="card">
+      <span class="tag"><b>Ορισμός</b> • Αίτιο νόσου</span>
+      <h2>Τι είναι «Αίτιο» μιας νόσου;</h2>
+      <p>
+        <b>Αίτιο</b> = παράγοντας που σχετίζεται σαφώς με την εμφάνιση της νόσου και έχει
+        <b>αναγνωρίσιμο ρόλο</b> στην έναρξη ενός ή περισσότερων μηχανισμών που
+        συμβάλλουν σημαντικά στην εκδήλωση της νόσου.
+      </p>
+      <div class="note">
+        <b>Επεξήγηση:</b> «Αίτιο» δεν σημαίνει απλώς «συσχέτιση». Σημαίνει ότι μπορείς να εξηγήσεις
+        <u>πώς</u> ξεκινά ο παθολογικός μηχανισμός (π.χ. τοξικότητα, λοίμωξη, μετάλλαξη, αυτοανοσία).
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card">
+      <span class="tag"><b>Κατηγορίες</b> • Αιτιολογικοί παράγοντες</span>
+      <h2>Αιτιολογικοί παράγοντες νόσων</h2>
+      <div class="cols2">
+        <div>
+          <span class="pill blue">Εξωγενείς</span>
+          <ul>
+            <li>Φυσικοί</li>
+            <li>Χημικοί</li>
+            <li>Βιολογικοί</li>
+            <li>Διαιτητικοί</li>
+          </ul>
+        </div>
+        <div>
+          <span class="pill green">Ενδογενείς</span>
+          <ul>
+            <li>Γενετικοί</li>
+            <li>Μεταβολικοί</li>
+            <li>Κυτταρικοί</li>
+            <li>Δομικοί</li>
+            <li>Εκφυλιστικοί</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        Συχνά οι παράγοντες είναι <b>πολλαπλοί</b> και συνεργούν (π.χ. γονίδια + κάπνισμα + υπερλιπιδαιμία).
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card">
+      <span class="tag"><b>Παράδειγμα</b> • Φυσικό αίτιο</span>
+      <h2>Φυσικό αίτιο: Κρυοπαγήματα</h2>
+      <p>
+        Παράδειγμα φυσικού αιτίου: <b>κρυοπαγήματα</b>.
+      </p>
+      <details>
+        <summary>Επεξήγηση μηχανισμού (γιατί κάνει βλάβη το κρύο)</summary>
+        <ul>
+          <li>Αγγειοσύσπαση → μειωμένη αιμάτωση → ισχαιμία.</li>
+          <li>Άμεση κυτταρική βλάβη από παγοκρυστάλλους/μεταβολική δυσλειτουργία.</li>
+          <li>Επαναιμάτωση μπορεί να επιδεινώσει τη βλάβη (οξειδωτικό στρες, φλεγμονή).</li>
+        </ul>
+      </details>
+      <p class="mini">Στην παρουσίαση υπάρχει αντίστοιχη εικόνα χεριών με κρυοπαγήματα.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="card">
+      <span class="tag"><b>Παράδειγμα</b> • Βιολογικό αίτιο</span>
+      <h2>Βιολογικό αίτιο: H. pylori → χρόνια γαστρίτιδα</h2>
+      <p>
+        Λοίμωξη από <b>Helicobacter pylori</b> μπορεί να οδηγήσει σε <b>χρόνια γαστρίτιδα</b>.
+      </p>
+      <details>
+        <summary>Επεξήγηση (τι κάνει το H. pylori)</summary>
+        <ul>
+          <li>Αποικίζει τον γαστρικό βλεννογόνο (ουρεάση → επιβίωση σε όξινο pH).</li>
+          <li>Προκαλεί χρόνια φλεγμονή → βλάβη βλεννογόνου.</li>
+          <li>Μακροπρόθεσμα σχετίζεται με έλκη και (σε κάποιους) αυξημένο κίνδυνο νεοπλασίας.</li>
+        </ul>
+      </details>
+      <p class="mini">Στην παρουσίαση φαίνονται ιστολογικές εικόνες/παραδείγματα.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="card">
+      <span class="tag"><b>Γενετική</b> • Mendel</span>
+      <h2>Πώς οι αλλαγές στο DNA οδηγούν σε νόσο;</h2>
+      <p>
+        Αλλαγή στην αλληλουχία μίας ή περισσότερων αζωτούχων βάσεων
+        σε <b>κωδική</b> ή <b>ρυθμιστική</b> περιοχή
+        → αλλαγή στη <b>δομή/λειτουργικότητα</b> της πρωτεΐνης ή <b>έλλειψη</b> πρωτεΐνης
+        → παθολογική λειτουργία κυττάρων/ιστών/οργάνων/οργανισμού → <b>νόσος</b>.
+      </p>
+      <details>
+        <summary>Τι σημαίνει «ρυθμιστική περιοχή»;</summary>
+        <p class="muted">
+          Περιοχές που δεν κωδικοποιούν απαραίτητα πρωτεΐνη, αλλά ρυθμίζουν <b>πόσο</b> και <b>πότε</b>
+          θα εκφραστεί ένα γονίδιο (π.χ. προαγωγοί, ενισχυτές). Μετάλλαξη εκεί μπορεί να κάνει
+          υπερέκφραση/υποέκφραση.
+        </p>
+      </details>
+    </section>
+
+    <!-- 6 -->
+    <section class="card">
+      <span class="tag"><b>Παράδειγμα</b> • Δρεπανοκυτταρική</span>
+      <h2>Δρεπανοκυτταρική αναιμία (παράδειγμα Mendelian νόσου)</h2>
+      <p>
+        Παράδειγμα: <b>δρεπανοκυτταρική αναιμία</b>.
+        Αθροίσεις δρεπανοκυττάρων σε αγγεία της μικροκυκλοφορίας
+        → βλάβες σε διάφορα όργανα (στην παρουσίαση: βιοψία ήπατος).
+      </p>
+      <details>
+        <summary>Γιατί «μπλοκάρουν» τα αγγεία;</summary>
+        <ul>
+          <li>Παθολογική Hb → ερυθρά γίνονται άκαμπτα/δρεπανοειδή σε υποξία.</li>
+          <li>Αυξημένη συγκόλληση/ιξώδες → απόφραξη μικροκυκλοφορίας.</li>
+          <li>Ισχαιμία → πόνος, έμφρακτα, χρόνια οργανική βλάβη.</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- 7 -->
+    <section class="card">
+      <span class="tag"><b>Πολυπαραγοντικά</b> • Ορισμός</span>
+      <h2>Πολυπαραγοντικά νοσήματα</h2>
+      <ul>
+        <li>Οφείλονται σε <b>συνδυασμένη δράση</b> περιβαλλοντικών παραγόντων και
+          <b>≥2 μεταλλαγμένων γονιδίων</b> που δίνουν «προδιάθεση».</li>
+        <li>Πολλά συχνά νοσήματα είναι πολυπαραγοντικά: <b>αθηροσκλήρωση</b>, <b>υπέρταση</b>, <b>παχυσαρκία</b>,
+          <b>σακχαρώδης διαβήτης</b>, <b>κακοήθη νεοπλάσματα</b>.</li>
+      </ul>
+      <div class="note">
+        <b>Κλειδί εξετάσεων:</b> Στα πολυπαραγοντικά δεν υπάρχει «ένα γονίδιο = μία νόσος».
+        Υπάρχει <b>γενετικό φορτίο</b> + <b>έκθεση</b> (lifestyle/περιβάλλον).
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="card">
+      <span class="tag"><b>Παράδειγμα</b> • Αθηροσκλήρωση</span>
+      <h2>Αθηροσκλήρωση = Γονίδια + Περιβάλλον</h2>
+      <div class="cols2">
+        <div>
+          <span class="pill blue">Κληρονομικότητα</span>
+          <ul>
+            <li>Γονίδια που επηρεάζουν χοληστερόλη/λιπίδια μέσω <b>LDL υποδοχέων</b> & άλλων πρωτεϊνών</li>
+            <li>Γονίδια που σχετίζονται με <b>υπέρταση</b></li>
+            <li>Γονίδια που σχετίζονται με <b>σακχαρώδη διαβήτη</b></li>
+          </ul>
+        </div>
+        <div>
+          <span class="pill green">Περιβάλλον</span>
+          <ul>
+            <li>Κάπνισμα</li>
+            <li>Παράγοντες που προάγουν υπέρταση</li>
+            <li>Υπερλιπιδαιμία</li>
+            <li>Παχυσαρκία</li>
+            <li>ΣΔ</li>
+            <li>Αλκοολισμός</li>
+            <li>Φάρμακα</li>
+            <li>Έλλειψη άσκησης</li>
+            <li>Στρες</li>
+          </ul>
+        </div>
+      </div>
+      <details>
+        <summary>Επεξήγηση (πώς «συνεργούν»)</summary>
+        <p class="muted">
+          Π.χ. πολυμορφισμοί σε γονίδια λιπιδίων → υψηλότερη LDL «baseline».
+          Αν προστεθούν κάπνισμα/διατροφή/ακινησία → ενδοθηλιακή βλάβη + φλεγμονή → επιτάχυνση αθηρωμάτωσης.
+        </p>
+      </details>
+    </section>
+
+    <!-- 9 -->
+    <section class="card">
+      <span class="tag"><b>Νόσος</b> • Κοιλιοκάκη</span>
+      <h2>Κοιλιοκάκη — βασική αλληλουχία γεγονότων</h2>
+      <ul>
+        <li>Δυσανεξία στη <b>γλουτένη</b> σε γενετικώς προδιατεθειμένα άτομα</li>
+        <li>Ενεργοποίηση μηχανισμού <b>φλεγμονής</b></li>
+        <li>Καταστροφή επιθηλίου και <b>λαχνών</b> λεπτού εντέρου</li>
+        <li><b>Δυσαπορρόφηση</b> θρεπτικών ουσιών & βιταμινών</li>
+        <li>Ποικιλία συμπτωμάτων/σημείων</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="card">
+      <span class="tag"><b>Συμπτώματα</b> • Κοιλιοκάκη</span>
+      <h2>Κοιλιοκάκη — κλινική εικόνα</h2>
+      <ul>
+        <li>Κοιλιακό άλγος, μετεωρισμός, διάρροια, <b>στεατόρροια</b></li>
+        <li>Απώλεια βάρους, αδυναμία, κόπωση</li>
+        <li>Παιδιά: <b>καθυστέρηση ανάπτυξης</b></li>
+        <li><b>Αναιμία</b> (έλλειψη Fe, B12, φυλλικού)</li>
+        <li><b>Οστεοπόρωση</b> (έλλειψη Ca, βιτ. D)</li>
+      </ul>
+      <details>
+        <summary>Επεξήγηση «στεατόρροια»</summary>
+        <p class="muted">
+          Λιπαρά κόπρανα από δυσαπορρόφηση λίπους (βλάβη λαχνών → μειωμένη επιφάνεια απορρόφησης).
+        </p>
+      </details>
+    </section>
+
+    <!-- 11 -->
+    <section class="card">
+      <span class="tag"><b>Ανοσολογία</b> • HLA-DQ2/DQ8</span>
+      <h2>Κοιλιοκάκη — γενετική προδιάθεση & μηχανισμός</h2>
+      <ul>
+        <li>Γενετική προδιάθεση: συνδυασμός πολυμορφισμών σε γονίδια <b>HLA</b> (DQ2 & DQ8)</li>
+        <li>Περιβάλλον: άλευρα → γλουτένη → <b>γλιαδίνη</b></li>
+        <li>Η γλιαδίνη (με HLA-DQ2/DQ8) παρουσιάζεται από <b>APCs</b> σε <b>CD4+ βοηθητικά Τ</b> σαν «τοξική»</li>
+        <li>Ενεργοποίηση Τ (βοηθητικών & κυτταροτοξικών) και Β → τελικό αποτέλεσμα: <b>βλάβη βλεννογόνου</b></li>
+      </ul>
+      <details>
+        <summary>Γιατί ειδικά HLA;</summary>
+        <p class="muted">
+          Τα HLA καθορίζουν <b>ποια πεπτίδια</b> παρουσιάζονται στα Τ-λεμφοκύτταρα. Σε DQ2/DQ8,
+          κάποια πεπτίδια γλιαδίνης «δένουν» καλύτερα → ισχυρότερη ανοσολογική απάντηση.
+        </p>
+      </details>
+      <p class="mini">Στην παρουσίαση δείχνεται σχηματικό διάγραμμα (Westerberg et al., 2006).</p>
+    </section>
+
+    <!-- 12 -->
+    <section class="card">
+      <span class="tag"><b>Παθολογοανατομία</b> • Κοιλιοκάκη</span>
+      <h2>Κοιλιοκάκη — μορφολογικά ευρήματα</h2>
+      <ul>
+        <li>Βιοψία λεπτού εντέρου: <b>βράχυνση</b> και <b>επιπέδωση</b> λαχνών</li>
+        <li>Ανοσοϊστοχημεία: χρώση για <b>CD8</b> (ενδοεπιθηλιακά λεμφοκύτταρα/κυτταροτοξικά Τ)</li>
+      </ul>
+      <details>
+        <summary>Τι σημαίνει «βράχυνση/επιπέδωση» πρακτικά;</summary>
+        <p class="muted">
+          Οι λάχνες αυξάνουν την επιφάνεια απορρόφησης. Όταν «ισοπεδώνονται», χάνεται επιφάνεια → δυσαπορρόφηση
+          → συμπτώματα/ανεπάρκειες (Fe, B12, φυλλικό, Ca, D).
+        </p>
+      </details>
+    </section>
+
+    <!-- 13: Q&A Celiac -->
+    <section class="card">
+      <span class="tag"><b>Ερωτήσεις</b> • Κοιλιοκάκη</span>
+      <h2>Απαντήσεις: Κοιλιοκάκη</h2>
+
+      <div class="qa">
+        <p class="q">1) Πώς εξηγούνται τα συμπτώματα της κοιλιοκάκης;</p>
+        <p class="a">
+          Από <b>δυσαπορρόφηση</b> λόγω βλάβης/ατροφίας λαχνών (μειωμένη επιφάνεια).
+          → διάρροια/στεατόρροια, απώλεια βάρους/κόπωση, αναιμία (Fe/B12/φυλλικό), οστεοπενία/οστεοπόρωση (Ca/D),
+          στα παιδιά καθυστέρηση ανάπτυξης.
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">2) Γιατί καταστρέφονται οι εντερικές λάχνες;</p>
+        <p class="a">
+          Η <b>γλιαδίνη</b> παρουσιάζεται (σε άτομα με <b>HLA-DQ2/DQ8</b>) στα Τ-λεμφοκύτταρα →
+          ενεργοποίηση ανοσολογικής απάντησης (Τ βοηθητικά/κυτταροτοξικά + Β) →
+          <b>φλεγμονώδης βλάβη</b> του βλεννογόνου και των λαχνών.
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">3) Ποια νοσήματα μπορεί να μιμηθεί η κοιλιοκάκη;</p>
+        <p class="a">
+          Οτιδήποτε προκαλεί χρόνια διάρροια/δυσαπορρόφηση ή αναιμία/απώλεια βάρους, π.χ.
+          <b>σύνδρομο ευερέθιστου εντέρου</b>, λοιμώξεις, <b>ΙΦΝΕ</b> (Crohn/ελκώδης),
+          <b>δυσανεξία στη λακτόζη</b>, χρόνια παγκρεατική ανεπάρκεια, παρασιτώσεις.
+          (Στις εξετάσεις: να δείχνεις ότι σκέφτεσαι “δυσαπορρόφηση vs λειτουργικό”.)
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">4) Πώς γίνεται η διάγνωση της κοιλιοκάκης;</p>
+        <p class="a">
+          Κλινική υποψία + <b>ορολογικοί δείκτες</b> (π.χ. anti-tTG IgA, anti-endomysium, και έλεγχος IgA) +
+          <b>βιοψία λεπτού εντέρου</b> με ατροφία λαχνών/φλεγμονή. (Συχνά βοηθά και ο HLA έλεγχος ως “αποκλεισμός”.)
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">5) Τι θα συστήσετε σε ασθενή με κοιλιοκάκη;</p>
+        <p class="a">
+          <b>Δια βίου αυστηρή δίαιτα χωρίς γλουτένη</b> + διόρθωση ελλείψεων (Fe, B12, φυλλικό, Ca, D) +
+          παρακολούθηση συμπτωμάτων/εργαστηριακών και (αν χρειάζεται) οστικής πυκνότητας.
+        </p>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="card">
+      <span class="tag"><b>Case</b> • Κώστας 17 ετών</span>
+      <h2>Περίπτωση για συζήτηση: Ίκτερος</h2>
+      <p>
+        17χρονος με 3 μήνες κόπωση/αδυναμία. Παρατήρηση: κιτρινωπό «λευκό» ματιών (επιπεφυκότες).
+      </p>
+
+      <div class="qa">
+        <p class="q">Ερώτηση: Ποιος ιατρικός όρος περιγράφει την κιτρινωπή χροιά των επιπεφυκότων;</p>
+        <p class="a"><b>Ίκτερος</b> (κιτρίνισμα δέρματος/σκληρών λόγω αυξημένης χολερυθρίνης).</p>
+      </div>
+
+      <div class="qa">
+        <p class="q">Ερώτηση: Τι προκαλεί τον ίκτερο;</p>
+        <p class="a">
+          <b>Υπερχολερυθριναιμία</b> (αύξηση χολερυθρίνης στο αίμα).
+          Προκύπτει από:
+          <ul>
+            <li><b>Προηπατικά</b>: αυξημένη παραγωγή (π.χ. αιμόλυση) → κυρίως μη συζευγμένη.</li>
+            <li><b>Ηπατικά</b>: βλάβη ηπατοκυττάρων/διαταραχή σύζευξης ή απέκκρισης (ηπατίτιδες, γενετικά κ.ά.).</li>
+            <li><b>Μεταηπατικά</b>: απόφραξη χοληφόρων (λίθος, όγκος) → κυρίως συζευγμένη/χολόσταση.</li>
+          </ul>
+        </p>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="card">
+      <span class="tag"><b>Εργαστηριακά</b> • Πρώτες εξετάσεις</span>
+      <h2>Τι εξετάσεις αίματος θα ζητούσες (σε ίκτερο);</h2>
+      <p class="muted">
+        Στόχος: να ξεχωρίσεις <b>ηπατοκυτταρικό</b> vs <b>χολόσταση</b> vs <b>αιμόλυση</b>,
+        και να ψάξεις λοιμώδη/ανοσολογικά/μεταβολικά αίτια.
+      </p>
+      <ul>
+        <li><b>Ηπατικά ένζυμα:</b> AST, ALT, ALP, γGTP</li>
+        <li><b>Χολερυθρίνη:</b> ολική + άμεση/έμμεση (κλάσματα)</li>
+        <li><b>Συνθετική λειτουργία:</b> INR/PT, αλβουμίνη</li>
+        <li><b>Γενική αίματος:</b> Hb/Hct, λευκά, αιμοπετάλια</li>
+        <li><b>Δείκτες αιμόλυσης:</b> LDH, απτοσφαιρίνη, δικτυοερυθροκύτταρα</li>
+        <li><b>Ιολογικός έλεγχος:</b> HBV/HCV/HAV κ.ά. (όπως στην παρουσίαση)</li>
+      </ul>
+      <div class="note">
+        <b>Στην παρουσίαση</b> δίνονται τα αποτελέσματα που τελικά παραγγέλθηκαν (βλ. επόμενο κουτάκι).
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="card">
+      <span class="tag"><b>Αποτελέσματα</b> • Εργαστηριακά ευρήματα</span>
+      <h2>Εργαστηριακά ευρήματα (όπως δόθηκαν)</h2>
+      <ul>
+        <li>Hb 12 g/dl, Hct 38%, WBC 5100/mm³ (PMN 70%, Lym 24%, Mono 4%, Eos 2%)</li>
+        <li>Ουρία 47 mg/dl, Κρεατινίνη 1.2 mg/dl, Γλυκόζη 78 mg/dl, Χοληστερίνη 162 mg/dl</li>
+        <li><b>Χολερυθρίνη 3.3 mg/dl</b></li>
+        <li><b>AST 138 U/L, ALT 120 U/L</b></li>
+        <li><b>ALP 321 U/L, γGTP 158 U/L</b></li>
+        <li>HBsAg (-), HBcAb (-), anti-HAV (-), anti-HCV (-)</li>
+      </ul>
+      <details>
+        <summary>Ερμηνεία “pattern”</summary>
+        <p class="muted">
+          Υπάρχει αύξηση χολερυθρίνης + αύξηση AST/ALT και επίσης ALP/γGTP → <b>μικτό</b> μοτίβο
+          (ηπατοκυτταρικό + χολόσταση) ή αρχόμενη χολόσταση. Οι ιολογικοί δείκτες που δόθηκαν είναι αρνητικοί.
+        </p>
+      </details>
+    </section>
+
+    <!-- 17 -->
+    <section class="card">
+      <span class="tag"><b>Επιπλέον έλεγχος</b> • Γιατί;</span>
+      <h2>Γιατί ζητήθηκαν ANA/AMA/ASMA, Fe/φερριτίνη, α1-ΑΤ, σερουλοπλασμίνη + U/S;</h2>
+
+      <div class="qa">
+        <p class="q">Απάντηση (λογική):</p>
+        <p class="a">
+          Για να καλύψουμε <b>διαφορική διάγνωση ίκτερου/ηπατοπάθειας</b> όταν τα συχνά λοιμώδη αίτια δεν φαίνονται.
+          <ul>
+            <li><b>ANA/ASMA</b> → πιθανή <b>αυτοάνοση ηπατίτιδα</b></li>
+            <li><b>AMA</b> → χολαγγειίτιδες/αυτοάνοσες χολοστατικές καταστάσεις (ιδίως PBC)</li>
+            <li><b>Fe ορού/φερριτίνη</b> → <b>αιμοχρωμάτωση</b></li>
+            <li><b>α1-αντιθρυψίνη</b> → έλλειψη α1-ΑΤ (ηπατική νόσος)</li>
+            <li><b>Σερουλοπλασμίνη</b> → <b>Νόσος Wilson</b> (μεταβολισμός χαλκού), ειδικά σε νέο άτομο</li>
+            <li><b>Υπερηχογράφημα άνω κοιλίας</b> → έλεγχος χοληφόρων/χολόστασης, λίθων, μορφολογίας ήπατος</li>
+          </ul>
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">Τι περιλαμβάνει η διαφορική διάγνωση εδώ;</p>
+        <p class="a">
+          <b>Ιογενείς ηπατίτιδες</b> (αν και με τα συγκεκριμένα tests αρνητικές για HAV/HBV/HCV),
+          <b>αυτοάνοση ηπατίτιδα</b>, <b>χολόσταση/απόφραξη</b>,
+          <b>NAFLD</b>, <b>αιμοχρωμάτωση</b>, <b>έλλειψη α1-ΑΤ</b>, <b>Νόσος Wilson</b> (λόγω ηλικίας).
+        </p>
+      </div>
+    </section>
+
+    <!-- 18 -->
+    <section class="card">
+      <span class="tag"><b>Επόμενα βήματα</b> • Ευρήματα</span>
+      <h2>Ευρήματα επιπλέον ελέγχου</h2>
+      <ul>
+        <li>Όλα φυσιολογικά, <b>εκτός</b> από <b>σερουλοπλασμίνη χαμηλή</b>: 10 mg/dl (φ.τ. 20–40)</li>
+        <li>U/S: <b>μέτρια εναπόθεση λίπους</b> στο ήπαρ</li>
+        <li>Χοληδόχος κύστη & εξωηπατικά χοληφόρα: φυσιολογικά</li>
+      </ul>
+      <details>
+        <summary>Γιατί μετά ζητήθηκαν οφθαλμολογικός έλεγχος, MRI εγκεφάλου, χαλκός ούρων 24ώρου;</summary>
+        <ul>
+          <li>Νόσος Wilson μπορεί να κάνει <b>δακτύλιο Kayser–Fleischer</b> (κερατοειδής) → οφθαλμολογικός έλεγχος.</li>
+          <li>Μπορεί να προκαλέσει <b>βλάβες βασικών γαγγλίων</b> → νευρολογική συμμετοχή → MRI.</li>
+          <li>Αυξημένος <b>χαλκός ούρων 24ώρου</b> είναι ισχυρό στοιχείο υπερφόρτωσης χαλκού.</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- 19 -->
+    <section class="card">
+      <span class="tag"><b>Wilson</b> • Βασικά</span>
+      <h2>Νόσος Wilson — τα “SOS”</h2>
+      <ul>
+        <li>Κληρονομική διαταραχή μεταβολισμού <b>χαλκού</b></li>
+        <li>Διαταραχή απέκκρισης χαλκού από ηπατοκύτταρα στη <b>χολή</b> → τοξική βλάβη ήπατος & άλλων οργάνων</li>
+        <li><b>Αυτοσωματικός υπολειπόμενος</b></li>
+        <li>Γονίδιο <b>ATP7B</b> στο <b>13q14</b></li>
+        <li>Συχνότητα εκδήλωσης: ~<b>1:30.000</b></li>
+        <li>Ηλικία εμφάνισης: <b>6–40 ετών</b></li>
+        <li>Κλασικά: <b>δακτύλιος Kayser–Fleischer</b>, <b>εκφύλιση βασικών γαγγλίων</b>, <b>βλάβη ήπατος</b></li>
+        <li>Ομοζυγώτες: ίδια μετάλλαξη στα 2 αλληλόμορφα • Σύνθετοι ετεροζυγώτες: διαφορετικές μεταλλάξεις</li>
+      </ul>
+    </section>
+
+    <!-- 20 -->
+    <section class="card">
+      <span class="tag"><b>ATP7B</b> • Μεταλλάξεις</span>
+      <h2>ATP7B → P-type ATPase (μεταφορά χαλκού)</h2>
+      <p>
+        Το γονίδιο <b>ATP7B</b> κωδικοποιεί P-type ATPase για μεταφορά χαλκού στη μεμβράνη ηπατοκυττάρων.
+        Διαταραχή λειτουργίας → Νόσος Wilson.
+      </p>
+      <ul>
+        <li>&gt;70 μεταλλάξεις (διάσπαρτες): <b>εισχωρήσεις</b>, <b>απώλειες</b>, <b>σημειακές</b></li>
+        <li>Η θέση/τύπος μετάλλαξης (ΟΖ/ΣΕΖ) → βαθμός κατάργησης λειτουργίας ATP7B → <b>βαρύτητα</b> & <b>ηλικία εμφάνισης</b></li>
+      </ul>
+      <div class="note">
+        <b>Επεξήγηση:</b> διαφορετική “υπολειμματική λειτουργία” της ATP7B = διαφορετικό φαινότυπο.
+      </div>
+    </section>
+
+    <!-- 21 -->
+    <section class="card">
+      <span class="tag"><b>Διαγνωστική πορεία</b> • Κώστας</span>
+      <h2>Επιβεβαίωση Wilson στην περίπτωση</h2>
+      <ul>
+        <li>Οφθαλμολογική εξέταση & MRI εγκεφάλου: <b>χωρίς παθολογικά</b></li>
+        <li>Χαλκός ούρων 24ώρου: <b>141 μg</b> (φ.τ. 0–50)</li>
+        <li>Σύσταση: <b>βιοψία ήπατος</b></li>
+        <li>Χαλκός στο ήπαρ: <b>612 μg/g ξηρού βάρους</b> (φ.τ. &lt;40) → επιβεβαίωση Wilson</li>
+        <li>Έναρξη φαρμακευτικής αγωγής</li>
+      </ul>
+      <details>
+        <summary>Γιατί η βιοψία/ποσοτικός χαλκός είναι “gold standard” εδώ;</summary>
+        <p class="muted">
+          Επειδή δείχνει άμεσα την <b>υπερφόρτωση χαλκού</b> στο όργανο-στόχο. Η σερουλοπλασμίνη μπορεί να είναι
+          χαμηλή και σε άλλες καταστάσεις, αλλά ο υψηλός χαλκός ήπατος είναι πολύ ισχυρό τεκμήριο.
+        </p>
+      </details>
+      <p class="mini">Στην παρουσίαση φαίνονται ιστολογικές εικόνες: φυσιολογικό ήπαρ vs προχωρημένη Wilson (κίρρωση), εκφυλιστικές αλλοιώσεις και ροδανίνη (εναποθέσεις χαλκού).</p>
+    </section>
+
+    <!-- 22: Wilson Q&A -->
+    <section class="card">
+      <span class="tag"><b>Ερωτήσεις</b> • Wilson</span>
+      <h2>Απαντήσεις: Νόσος Wilson</h2>
+
+      <div class="qa">
+        <p class="q">1) Τι προκαλεί τη νόσο Wilson;</p>
+        <p class="a">
+          <b>Μεταλλάξεις στο ATP7B</b> (αυτοσωματικός υπολειπόμενος) → μειωμένη μεταφορά/απέκκριση χαλκού στη χολή →
+          συσσώρευση χαλκού στο ήπαρ και άλλα όργανα → <b>τοξική βλάβη</b>.
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">2) Γιατί είναι σπάνια πριν από το 6ο έτος;</p>
+        <p class="a">
+          Επειδή χρειάζεται <b>χρόνος</b> για να συσσωρευτεί αρκετός χαλκός ώστε να εμφανιστούν κλινικά/εργαστηριακά
+          σημεία. Στα πολύ μικρά παιδιά δεν έχει συνήθως προλάβει να γίνει μεγάλη υπερφόρτωση.
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">3) Τι θεραπευτικές επιλογές έχουμε;</p>
+        <p class="a">
+          <ul>
+            <li><b>Χηλικοί παράγοντες</b> που αυξάνουν αποβολή χαλκού (π.χ. πενικιλλαμίνη ή τριεντίνη — ανάλογα με πρωτόκολλα).</li>
+            <li><b>Ψευδάργυρος</b> για μείωση εντερικής απορρόφησης χαλκού.</li>
+            <li><b>Δίαιτα χαμηλή σε χαλκό</b> (ιδίως αρχικά/στην προσαρμογή).</li>
+            <li>Σε τελικό στάδιο/ανθεκτική νόσο: <b>μεταμόσχευση ήπατος</b>.</li>
+          </ul>
+        </p>
+      </div>
+
+      <div class="qa">
+        <p class="q">4) Τι θα συστήσετε στους συγγενείς του Κώστα;</p>
+        <p class="a">
+          Επειδή είναι <b>αυτοσωματική υπολειπόμενη</b> νόσος:
+          <ul>
+            <li><b>Έλεγχο πρώτου βαθμού συγγενών</b> (αδέρφια κυρίως) με κλινικό/βιοχημικό screening.</li>
+            <li>Ιδανικά <b>γενετικό έλεγχο</b> για ATP7B (όπου διαθέσιμο) ή/και εργαστηριακό (σερουλοπλασμίνη, χαλκός ούρων κ.ά.).</li>
+            <li>Γενετική συμβουλευτική για τον κίνδυνο φορείας/νόσου.</li>
+          </ul>
+        </p>
+      </div>
+    </section>
+
+    <!-- 23 -->
+    <section class="card">
+      <span class="tag"><b>Mini-SOS</b> • Γρήγορη απομνημόνευση</span>
+      <h2>Γρήγορα “SOS” που συνήθως ρωτάνε</h2>
+      <ul>
+        <li><b>Αίτιο νόσου</b>: παράγοντας που ξεκινά αναγνωρίσιμο παθολογικό μηχανισμό.</li>
+        <li><b>Εξωγενή</b> vs <b>Ενδογενή</b> αίτια (να μπορείς να τα απαριθμήσεις).</li>
+        <li><b>Πολυπαραγοντικά</b>: ≥2 γονίδια + περιβάλλον → προδιάθεση.</li>
+        <li><b>Κοιλιοκάκη</b>: γλουτένη/γλιαδίνη + HLA-DQ2/DQ8 → Τ-κύτταρα → ατροφία λαχνών → δυσαπορρόφηση.</li>
+        <li><b>Wilson</b>: ATP7B (AR) → μειωμένη απέκκριση χαλκού στη χολή → συσσώρευση χαλκού → ήπαρ/βασικά γάγγλια/KF.</li>
+      </ul>
+      <div class="hr"></div>
+      <p class="mini">
+        Tip: Αν θυμάσαι 3 “άξονες” (DNA→πρωτεΐνη→λειτουργία, πολυπαραγοντικά=γονίδια+περιβάλλον, και Wilson=χαλκός/ATP7B),
+        πιάνεις μεγάλο ποσοστό ερωτήσεων.
+      </p>
+    </section>
+
+    <!-- 24 -->
+    <section class="card">
+      <span class="tag"><b>Χρήση</b> • Πώς να το κάνεις “εικόνες”</span>
+      <h2>Προαιρετικά: πώς βάζεις εικόνες του PDF μέσα</h2>
+      <p class="muted">
+        Αν θέλεις να βάλεις και τις μικροφωτογραφίες/σχήματα: εξήγαγε τις σε .png και βάλε τις εδώ με
+        <span class="kbd">&lt;img src="images/page_15.png"&gt;</span>.
+      </p>
+      <details>
+        <summary>Μικρό template για εικόνα μέσα σε κουτάκι</summary>
+        <pre class="muted" style="white-space:pre-wrap;margin:8px 0 0">
+&lt;img src="images/page_15.png" alt="βράχυνση λαχνών" style="width:100%;border-radius:14px;border:1px solid #e5e7eb"&gt;
+        </pre>
+      </details>
+    </section>
+
+  </div>
+</div>
+<script>
+  // --- Simple 3-color highlighter with persistence (localStorage) ---
+  let currentClass = null;
+
+  const buttons = document.querySelectorAll(".hl-btn[data-color]");
+  const eraseBtn = document.getElementById("hl-erase");
+  const clearBtn = document.getElementById("hl-clear");
+
+  function setActive(btn){
+    buttons.forEach(b => b.classList.remove("active"));
+    if(btn) btn.classList.add("active");
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentClass = btn.dataset.color;
+      setActive(btn);
+    });
+  });
+
+  // Wrap selected text in a span with highlight class
+  function highlightSelection(cls){
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount === 0) return;
+
+    const range = sel.getRangeAt(0);
+    if(range.collapsed) return;
+
+    // Prevent highlighting outside main content if needed (optional)
+    // if(!document.querySelector(".wrap").contains(range.commonAncestorContainer)) return;
+
+    const span = document.createElement("span");
+    span.className = cls;
+    span.setAttribute("data-hl", "1");
+
+    try{
+      range.surroundContents(span);
+      sel.removeAllRanges();
+      saveHighlights();
+    }catch(e){
+      // If selection crosses multiple nodes, this can fail.
+      // Workaround: use extractContents and insert span.
+      const content = range.extractContents();
+      span.appendChild(content);
+      range.insertNode(span);
+      sel.removeAllRanges();
+      saveHighlights();
+    }
+  }
+
+  function removeHighlightFromSelection(){
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    if(range.collapsed) return;
+
+    // Find highlighted spans intersecting selection
+    const container = range.commonAncestorContainer.nodeType === 1
+      ? range.commonAncestorContainer
+      : range.commonAncestorContainer.parentElement;
+
+    const spans = container.querySelectorAll ? container.querySelectorAll('span[data-hl="1"]') : [];
+    spans.forEach(sp => {
+      // If span intersects selection, unwrap it
+      const spRange = document.createRange();
+      spRange.selectNodeContents(sp);
+      const intersects = range.compareBoundaryPoints(Range.END_TO_START, spRange) < 0 &&
+                         range.compareBoundaryPoints(Range.START_TO_END, spRange) > 0;
+      if(intersects){
+        const parent = sp.parentNode;
+        while(sp.firstChild) parent.insertBefore(sp.firstChild, sp);
+        parent.removeChild(sp);
+      }
+    });
+
+    sel.removeAllRanges();
+    saveHighlights();
+  }
+
+  function clearAllHighlights(){
+    const spans = document.querySelectorAll('span[data-hl="1"]');
+    spans.forEach(sp => {
+      const parent = sp.parentNode;
+      while(sp.firstChild) parent.insertBefore(sp.firstChild, sp);
+      parent.removeChild(sp);
+    });
+    localStorage.removeItem("highlights_html_v1");
+  }
+
+  // Save the content area HTML (keeps highlights)
+  function saveHighlights(){
+    const content = document.body.innerHTML;
+    localStorage.setItem("highlights_html_v1", content);
+  }
+
+  // Restore
+  (function restore(){
+    const saved = localStorage.getItem("highlights_html_v1");
+    if(saved){
+      document.open();
+      document.write("<!doctype html>" + saved);
+      document.close();
+      // After rewriting, JS handlers are gone, so force reload once.
+      // This keeps it simple without building a full hydration system.
+      // If you prefer, I can provide a "non-rewrite" version too.
+      setTimeout(()=>location.reload(), 50);
+    }
+  })();
+
+  // Apply highlight on mouseup (when user selects text)
+  document.addEventListener("mouseup", () => {
+    if(!currentClass) return;
+    // small delay so selection exists
+    setTimeout(() => highlightSelection(currentClass), 10);
+  });
+
+  eraseBtn.addEventListener("click", removeHighlightFromSelection);
+  clearBtn.addEventListener("click", () => {
+    if(confirm("Να σβηστούν ΟΛΑ τα highlights;")) clearAllHighlights();
+  });
+</script>
+
+</body>
+</html>
