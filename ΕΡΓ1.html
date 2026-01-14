@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1ο Εργαστήριο — Εισαγωγή στην Παθολογική Ανατομική (Notes Board)</title>
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --shadow: 0 10px 25px rgba(31,41,55,.07);
+      --radius:18px;
+
+      --hl1: rgba(255, 230, 109, .85);   /* κίτρινο */
+      --hl2: rgba(166, 255, 193, .75);   /* πράσινο */
+      --hl3: rgba(173, 216, 255, .75);   /* μπλε */
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, #e9f0ff 0%, transparent 60%),
+        radial-gradient(1200px 700px at 80% 0%, #e9fff5 0%, transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.35;
+    }
+    header{
+      padding:26px 18px 10px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    h1{ margin:0 0 6px; font-size: clamp(20px, 3vw, 32px); letter-spacing:-.02em; }
+    .sub{ margin:0; color:var(--muted); font-size:14px; }
+
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 18px 48px;
+    }
+
+    /* ===== Sticky toolbar ===== */
+    .toolbar{
+      position: sticky;
+      top: 10px;
+      z-index: 999;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      background: rgba(255,255,255,.90);
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      margin-bottom: 14px;
+    }
+    .left, .right{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .pill b{ color:var(--ink); }
+
+    button{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight:900;
+      font-size: 13px;
+    }
+    button:hover{ filter:brightness(.985); }
+
+    .hlbtn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:1000;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .dot{
+      width:14px; height:14px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      display:inline-block;
+    }
+    .active{
+      outline: 3px solid rgba(59,130,246,.25);
+    }
+
+    /* ===== Grid of cards: 4 columns ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:14px;
+    }
+    @media (max-width: 1100px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,1));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:14px 14px 12px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 170px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      color:var(--muted);
+      font-weight:1000;
+    }
+    h2{
+      margin:10px 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .muted{ color:var(--muted); font-size: 13px; margin:0 0 10px; }
+    ul{ margin:8px 0 0 18px; padding:0; }
+    li{ margin:6px 0; }
+    .mini{ font-size:12px; color:var(--muted); margin-top:10px; }
+
+    /* highlight rendering */
+    mark.hl1{ background: var(--hl1); padding:0 .15em; border-radius:.25em; }
+    mark.hl2{ background: var(--hl2); padding:0 .15em; border-radius:.25em; }
+    mark.hl3{ background: var(--hl3); padding:0 .15em; border-radius:.25em; }
+
+    /* Image placeholder per card */
+    .imgbox{
+      margin-top:10px;
+      border:1px dashed #cbd5e1;
+      border-radius: 14px;
+      padding:10px;
+      background:#fbfdff;
+    }
+    .imgrow{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .imgpreview{
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background:#fff;
+      display:none;
+    }
+    input[type="file"]{
+      font-size:12px;
+      font-weight:800;
+    }
+    .note{
+      font-size:12px;
+      color:var(--muted);
+      margin:8px 0 0;
+    }
+
+    /* Make all content highlightable (we wrap selection in <mark>) */
+    .highlight-surface{
+      user-select: text;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>1ο Εργαστήριο — Εισαγωγή στην Παθολογική Ανατομική</h1>
+  <p class="sub">Notes board σε κουτάκια (4/σειρά) + sticky highlighter 3 χρωμάτων + placeholders για εικόνες</p>
+</header>
+
+<div class="wrap">
+
+  <div class="toolbar">
+    <div class="left">
+      <span class="pill"><b>Highlighter:</b> επίλεξε κείμενο → πάτα χρώμα</span>
+
+      <button class="hlbtn" id="hl1"><span class="dot" style="background:var(--hl1)"></span>Κίτρινο</button>
+      <button class="hlbtn" id="hl2"><span class="dot" style="background:var(--hl2)"></span>Πράσινο</button>
+      <button class="hlbtn" id="hl3"><span class="dot" style="background:var(--hl3)"></span>Μπλε</button>
+
+      <button id="erase">🧽 Eraser (σε highlight)</button>
+      <button id="clearAll">🗑️ Καθάρισε όλα</button>
+    </div>
+
+    <div class="right">
+      <span class="pill"><b>Tip:</b> Τα highlights αποθηκεύονται τοπικά (browser) αυτόματα.</span>
+      <button id="exportHTML">⬇️ Export HTML</button>
+    </div>
+  </div>
+
+  <div class="grid highlight-surface" id="board">
+
+    <!-- 1 -->
+    <section class="card">
+      <span class="tag">Τί είναι</span>
+      <h2>Παθολογική Ανατομική (Pathology)</h2>
+      <p class="muted">Διαγνωστική ειδικότητα — «γέφυρα» βασικών επιστημών ↔ κλινικής.</p>
+      <ul>
+        <li>Δίνει διάγνωση με βάση μορφολογία ιστών/κυττάρων.</li>
+        <li>Καθοδηγεί θεραπεία (ιδίως ογκολογία) + πρόγνωση.</li>
+        <li>Συνδυάζεται με μοριακό έλεγχο (DNA/RNA, NGS) όταν χρειάζεται.</li>
+      </ul>
+      <p class="mini">Σύνδεση με ογκολογικό συμβούλιο και εξατομικευμένη θεραπεία.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="card">
+      <span class="tag">Ρόλος παθολογοανατόμου</span>
+      <h2>Από τον ασθενή → θεραπεία</h2>
+      <ul>
+        <li>Λήψη υλικού: βιοψία / χειρουργείο / κυτταρολογικό υλικό.</li>
+        <li>Παθολογοανατομική εξέταση + (όπου ενδείκνυται) NGS / μοριακά.</li>
+        <li>Συνεργασία: ογκολόγοι, χειρουργοί, ακτινοθεραπευτές, ακτινοδιαγνώστες.</li>
+      </ul>
+      <p class="mini">Στόχος: σωστή διάγνωση → σωστή απόφαση στο συμβούλιο.</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="card">
+      <span class="tag">Υλικό εργαστηρίου</span>
+      <h2>Παρασκευάσματα & παραπεμπτικά</h2>
+      <ul>
+        <li>Τα «βαζάκια»/δοχεία με ιστό + σωστή σήμανση.</li>
+        <li>Παραπεμπτικό με: στοιχεία ασθενούς, είδος υλικού, κλινικές πληροφορίες.</li>
+        <li>Χωρίς σωστή κλινική πληροφορία → χειρότερη/αβέβαιη διάγνωση.</li>
+      </ul>
+      <p class="mini">Το παραπεμπτικό είναι μέρος της διαγνωστικής διαδικασίας.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="card">
+      <span class="tag">Βασικά στάδια</span>
+      <h2>Ροή χειρισμού παρασκευάσματος</h2>
+      <ul>
+        <li>Παραλαβή νωπού ή σε φορμόλη 10% (φορμαλίνη).</li>
+        <li>Φωτογράφηση → επισκόπηση → σήμανση ορίων με σινική μελάνη.</li>
+        <li>Διάνοιξη/εκτομή για σωστή μονιμοποίηση.</li>
+        <li>Μονιμοποίηση στη φορμόλη: 24–48–72 ώρες.</li>
+      </ul>
+    </section>
+
+    <!-- 5 -->
+    <section class="card">
+      <span class="tag">Μακροσκοπική εξέταση</span>
+      <h2>Τί καταγράφω μακροσκοπικά</h2>
+      <ul>
+        <li>Αναγνώριση παρασκευάσματος + περιγραφή.</li>
+        <li>Διαστάσεις παρασκευάσματος & όγκου (και απόσταση από όρια).</li>
+        <li>Τοπική επέκταση όγκου.</li>
+        <li>Έλεγχος ορίων (κεντρικό/περιφερικό/περιμετρικό, δακτύλιοι αναστόμωσης).</li>
+        <li>Λεμφαδένες: πόσοι βρέθηκαν.</li>
+        <li>Εξωτοιχωματική διήθηση αγγείων + άλλες αλλοιώσεις (πολύποδες κ.ά.).</li>
+      </ul>
+      <p class="mini">Μετά τη μονιμοποίηση υπάρχει συρρίκνωση ιστού.</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="card">
+      <span class="tag">Μικροσκοπική εξέταση</span>
+      <h2>Τί καταγράφω ιστολογικά</h2>
+      <ul>
+        <li>Τύπος νεοπλάσματος + διαφοροποίηση (Grade).</li>
+        <li>Βάθος/έκταση διήθησης.</li>
+        <li>Λεμφαδένες: πόσοι διηθημένοι (± ENE).</li>
+        <li>Tumor deposits, απομακρυσμένες μεταστάσεις (αν υπάρχουν).</li>
+        <li>Όρια εκτομής & απόσταση από περιμετρικό/εν τω βάθει όριο.</li>
+        <li>Αγγειακή/λεμφαγγειακή & περινευρική διήθηση.</li>
+        <li>Budding: μεμονωμένα/μικρές ομάδες &lt;5 κυττάρων στα διηθητικά όρια.</li>
+        <li>Response μετά από νεοεπικουρική θεραπεία (grade υποστροφής).</li>
+        <li>Μικροπεριβάλλον/λοιπές παθολογίες + μοριακά ευρήματα.</li>
+      </ul>
+      <p class="mini">Παραδείγματα: βλεννώδες, signet ring.</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="card">
+      <span class="tag">Παράδειγμα (ορθό)</span>
+      <h2>Βιοψία ορθού → αδενοκαρκίνωμα</h2>
+      <ul>
+        <li>Άνδρας 74 ετών: απώλεια αίματος από ορθό.</li>
+        <li>Κολονοσκόπηση: κυκλοτερής ελκωτική μάζα στα 12 cm.</li>
+        <li>Βιοψία: αδενοκαρκίνωμα παχέος εντέρου.</li>
+        <li>Ακολούθησε Α-Χ/Θ (28 κύκλοι) και χαμηλή πρόσθια εκτομή.</li>
+      </ul>
+      <div class="imgbox">
+        <div class="imgrow">
+          <input type="file" accept="image/*" data-preview="img7" />
+          <span class="pill"><b>Βάλε εικόνα:</b> ιστολογική εικόνα/παρασκεύασμα από την αντίστοιχη διαφάνεια</span>
+        </div>
+        <img id="img7" class="imgpreview" alt="preview" />
+        <p class="note">Αν βάλεις την εικόνα, φαίνεται δίπλα στα notes για να «δένει» με το κείμενο.</p>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="card">
+      <span class="tag">Όρια & σινική</span>
+      <h2>Γιατί «βάφουμε» τα όρια με σινική μελάνη;</h2>
+      <ul>
+        <li>Για να αναγνωρίζεται ιστολογικά το ακριβές χειρουργικό όριο εκτομής.</li>
+        <li>Απαντά την κρίσιμη ερώτηση: <b>R0;</b> (πλήρης εκτομή) ή <b>R1/R2</b>;</li>
+        <li>Επηρεάζει σταδιοποίηση, πρόγνωση και ανάγκη για επιπλέον θεραπεία.</li>
+      </ul>
+      <p class="mini">Στα παρασκευάσματα παχέος εντέρου, ιδιαίτερα σημαντικό το περιμετρικό (CRM).</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="card">
+      <span class="tag">Case (πνεύμονας)</span>
+      <h2>Μονήρες πνευμονικό οζίδιο</h2>
+      <ul>
+        <li>Γυναίκα 59 ετών: επίμονος βήχας.</li>
+        <li>Ακτινογραφία: μονήρες οζίδιο ΔΕ άνω λοβού → CT → PET (SUVmax 5,6).</li>
+        <li>VATS ΔΕ: λήψη για <b>ταχεία βιοψία</b> → μετά άνω λοβεκτομή + λεμφαδενικός καθαρισμός.</li>
+      </ul>
+      <div class="imgbox">
+        <div class="imgrow">
+          <input type="file" accept="image/*" data-preview="img9" />
+          <span class="pill"><b>Βάλε εικόνα:</b> CT/PET + μακροσκοπική εικόνα παρασκευάσματος</span>
+        </div>
+        <img id="img9" class="imgpreview" alt="preview" />
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="card">
+      <span class="tag">Ταχεία βιοψία</span>
+      <h2>Πότε γίνεται Frozen section;</h2>
+      <ul>
+        <li>Μόνο όταν η απάντηση θα <b>αλλάξει το χειρουργείο</b>.</li>
+        <li>Ερωτήματα: καλοήθης/κακοήθης; τι είδους κακοήθεια; όρια εκτομής; είδος ιστού; επάρκεια για διάγνωση;</li>
+        <li>Ο ιστός πρέπει να είναι <b>νωπός</b> (όχι σε φορμόλη).</li>
+        <li>Στην περίπτωση του οζιδίου: δεν υπήρχε προηγούμενη ιστολογία → χρειάστηκε διεγχειρητική απάντηση.</li>
+      </ul>
+      <p class="mini">Θερμοκρασία κοπής/πάγωμα ~ -20°C (όπως αναφέρεται στη διαφάνεια).</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="card">
+      <span class="tag">Ανοσοϊστοχημεία</span>
+      <h2>Ανοσοϊστοχημεία (IHC) — γιατί τη θέλουμε;</h2>
+      <ul>
+        <li><b>Προέλευση</b> νεοπλασματικών κυττάρων (ιστογενετική διάγνωση).</li>
+        <li><b>Τυποποίηση</b> νεοπλασμάτων (π.χ. υποτύποι).</li>
+        <li><b>Θεραπεία καρκίνου</b>: προγνωστικοί/προβλεπτικοί δείκτες.</li>
+        <li><b>Έρευνα</b>.</li>
+      </ul>
+      <p class="mini">Παράδειγμα marker που αναφέρεται: TTF1 (πνεύμονας).</p>
+    </section>
+
+    <!-- 12 -->
+    <section class="card">
+      <span class="tag">Τελική διάγνωση</span>
+      <h2>Τί περιλαμβάνει το «Συμπέρασμα»</h2>
+      <ul>
+        <li>Σαφής διάγνωση + μέγεθος/υπότυπος (π.χ. αδενοκαρκίνωμα κυψελιδικού/λεπιδικού τύπου 1,1 cm).</li>
+        <li>Κατάσταση ορίων (π.χ. βρογχικό κολόβωμα ελεύθερο).</li>
+        <li>Λεμφαδένες: επιχώριοι ελεύθεροι/διηθημένοι → N στάδιο.</li>
+        <li>Τελική ταξινόμηση: <b>pTNM</b> (π.χ. pT1bN0).</li>
+        <li>Μοριακά: αν υπάρχουν «στοχεύσιμες» μεταλλάξεις (EGFR, ALK, KRAS κ.λπ.).</li>
+      </ul>
+      <p class="mini">Η απουσία στοχεύσιμων αλλαγών επηρεάζει θεραπευτικές επιλογές.</p>
+    </section>
+
+    <!-- 13 -->
+    <section class="card">
+      <span class="tag">Κυτταρολογία</span>
+      <h2>Τί εξετάζει η Κυτταρολογία;</h2>
+      <ul>
+        <li>Εξετάζει στο μικροσκόπιο <b>κύτταρα</b> και άμορφα στοιχεία σε υλικό υπό διάγνωση.</li>
+        <li>Με κυτταρομορφολογία + αλγόριθμους εκτιμά την κατάσταση ιστού/οργάνου προέλευσης.</li>
+        <li>Αν υπάρχει παθολογία, προσδιορίζει φύση βλάβης και (αν γίνεται) ταυτοποίηση.</li>
+        <li>Πάντα σε συνάρτηση με ιστορικό/κλινικά/εργαστηριακά.</li>
+      </ul>
+      <p class="mini">Καταγράφει και τον <b>βαθμό βεβαιότητας</b> της διάγνωσης.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="card">
+      <span class="tag">Απάντηση ερώτησης</span>
+      <h2>«Γιατί κύτταρα και όχι ιστοί;»</h2>
+      <ul>
+        <li><b>Λιγότερο επεμβατικό</b> από βιοψία/χειρουργείο (π.χ. υγρά, FNA).</li>
+        <li>Δίνει άριστη εικόνα <b>κυτταρικής μορφολογίας</b> (βλέπεις «ολόκληρα κύτταρα»).</li>
+        <li>Χρήσιμο για <b>γρήγορη</b> διαγνωστική/τριάζ και παρακολούθηση.</li>
+        <li>Μπορεί να οδηγήσει σε σωστή κλινική απόφαση χωρίς άμεση ιστική βιοψία.</li>
+        <li>Όταν χρειάζεται αρχιτεκτονική/«gold standard», τότε προχωράς σε ιστολογία.</li>
+      </ul>
+      <p class="mini">Με cell-block μπορείς να «πλησιάσεις» ιστολογία + IHC.</p>
+    </section>
+
+    <!-- 15 -->
+    <section class="card">
+      <span class="tag">Προετοιμασία δείγματος</span>
+      <h2>Εργαστηριακή ροή κυτταρολογίας (παράδειγμα)</h2>
+      <ul>
+        <li>Υλικό (π.χ. πλευριτικό υγρό): υγρή φάση, επίστρωση.</li>
+        <li>Φυγοκέντρηση → προετοιμασία → χρώση/κάλυψη.</li>
+        <li>Εναλλακτικά: <b>cell-block</b> → κύβος παραφίνης (και IHC αν χρειαστεί).</li>
+      </ul>
+      <p class="mini">Σκοπός: αξιοποιήσιμο υλικό για διάγνωση/δείκτες.</p>
+    </section>
+
+    <!-- 16 -->
+    <section class="card">
+      <span class="tag">Διαγνωστικός αλγόριθμος</span>
+      <h2>Βήματα «σκέψης» στο μικροσκόπιο</h2>
+      <ul>
+        <li><b>Πρώτα:</b> στοιχεία ασθενούς + είδος υλικού + κλινικό/απεικονιστικό ιστορικό.</li>
+        <li><b>Επάρκεια υλικού;</b> (αν όχι → ακατάλληλο/μη διαγνωστικό).</li>
+        <li><b>Παθολογικά ευρήματα;</b> Αν όχι → «χωρίς ειδικά παθολογικά ευρήματα».</li>
+        <li>Αν ναι → φλεγμονή (οξεία/χρόνια), μικροοργανισμοί, μη-νεοπλασματική βλάβη ή νεόπλασμα.</li>
+        <li>Αν νεόπλασμα → καλοήθες/δυναμικό κακοήθειας/θετικό για κακοήθεια → τυποποίηση (± IHC/μοριακά).</li>
+      </ul>
+      <p class="mini"><b>Απάντηση στα “?”:</b> τα ερωτηματικά είναι τα «σημεία απόφασης» (επάρκεια; παθολογικά; κακοήθεια;).</p>
+    </section>
+
+    <!-- 17 -->
+    <section class="card">
+      <span class="tag">Ιστολογία vs Κυτταρολογία</span>
+      <h2>Κύριες διαφορές (high yield)</h2>
+      <ul>
+        <li><b>Υλικό:</b> Ιστολογία = τμήματα ιστού · Κυτταρολογία = κύτταρα σε ποικίλα υλικά.</li>
+        <li><b>Λήψη:</b> Ιστολογία πιο επεμβατική · Κυτταρολογία μικρότερη επεμβατικότητα.</li>
+        <li><b>Αρχιτεκτονική:</b> Ιστολογία ΝΑΙ (gold standard) · Κυτταρολογία ΟΧΙ (εκτός αν cell-block).</li>
+        <li><b>Αρχείο:</b> Ιστολογία κύβοι παραφίνης + τομές · Κυτταρολογία συνήθως πλακίδια (± cell-block).</li>
+        <li><b>Μονιμοποίηση:</b> Ιστολογία φορμόλη 10% · Κυτταρολογία αιθανόλη/μεθανόλη (υγρή φάση).</li>
+        <li><b>DNA/RNA/πρωτεΐνες:</b> Κυτταρολογία συχνά άριστη διατήρηση.</li>
+      </ul>
+    </section>
+
+    <!-- 18 -->
+    <section class="card">
+      <span class="tag">Σημείωση</span>
+      <h2>Γιατί μας νοιάζει η διατήρηση DNA/RNA;</h2>
+      <ul>
+        <li>Για μοριακό έλεγχο (π.χ. NGS) που καθορίζει στοχευμένες θεραπείες.</li>
+        <li>Για βιοδείκτες που είναι προβλεπτικοί/προγνωστικοί.</li>
+        <li>Για επιλογή φαρμάκου (EGFR/ALK/ROS1 κ.λπ. σε πνεύμονα).</li>
+      </ul>
+      <p class="mini">Πρακτικό: η ποιότητα υλικού επηρεάζει το αποτέλεσμα των μοριακών.</p>
+    </section>
+
+    <!-- 19 -->
+    <section class="card">
+      <span class="tag">Αρχείο εργαστηρίου</span>
+      <h2>Τί κρατά το εργαστήριο;</h2>
+      <ul>
+        <li>Ιστολογία: κύβους παραφίνης + κεχρωσμένες τομές.</li>
+        <li>Κυτταρολογία: πλακίδια (και όπου γίνεται, cell-block ως «ιστικό» αρχείο).</li>
+        <li>Αρχειοθέτηση = δυνατότητα επανελέγχου/2ης γνώμης/νέων δεικτών στο μέλλον.</li>
+      </ul>
+    </section>
+
+    <!-- 20 -->
+    <section class="card">
+      <span class="tag">Συμπέρασμα</span>
+      <h2>Το “big picture”</h2>
+      <ul>
+        <li>Η Παθολογική Ανατομική είναι ο πυρήνας της διάγνωσης.</li>
+        <li>Συνδέει μορφολογία, κλινική εικόνα και μοριακή πληροφορία.</li>
+        <li>Είναι απαραίτητη για ογκολογικές αποφάσεις και εξατομικευμένη θεραπεία.</li>
+      </ul>
+      <p class="mini">Αυτό είναι το κεντρικό μήνυμα του εργαστηρίου.</p>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  // ====== HIGHLIGHTER: select text -> wrap in <mark class="hlX"> ======
+  const board = document.getElementById("board");
+  const btn1 = document.getElementById("hl1");
+  const btn2 = document.getElementById("hl2");
+  const btn3 = document.getElementById("hl3");
+  const eraseBtn = document.getElementById("erase");
+  const clearBtn = document.getElementById("clearAll");
+  const exportBtn = document.getElementById("exportHTML");
+
+  let mode = null; // "hl1" | "hl2" | "hl3" | "erase"
+
+  function setMode(m){
+    mode = m;
+    [btn1,btn2,btn3,eraseBtn].forEach(b => b.classList.remove("active"));
+    if(m==="hl1") btn1.classList.add("active");
+    if(m==="hl2") btn2.classList.add("active");
+    if(m==="hl3") btn3.classList.add("active");
+    if(m==="erase") eraseBtn.classList.add("active");
+  }
+
+  btn1.addEventListener("click", ()=>setMode("hl1"));
+  btn2.addEventListener("click", ()=>setMode("hl2"));
+  btn3.addEventListener("click", ()=>setMode("hl3"));
+  eraseBtn.addEventListener("click", ()=>setMode("erase"));
+
+  // Load saved board HTML (highlights) from localStorage
+  const KEY = "ergastirio1_notes_board_v1";
+  const saved = localStorage.getItem(KEY);
+  if(saved){
+    board.innerHTML = saved;
+    // re-hook image inputs after restoring
+    hookImageInputs();
+  }
+
+  function save(){
+    localStorage.setItem(KEY, board.innerHTML);
+  }
+
+  function wrapSelection(className){
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount===0) return;
+    const range = sel.getRangeAt(0);
+    if(range.collapsed) return;
+
+    // Prevent highlighting outside the board
+    if(!board.contains(range.commonAncestorContainer)) return;
+
+    const mark = document.createElement("mark");
+    mark.className = className;
+
+    try{
+      range.surroundContents(mark);
+    }catch(e){
+      // If selection crosses elements, fallback: extract contents
+      const frag = range.extractContents();
+      mark.appendChild(frag);
+      range.insertNode(mark);
+    }
+
+    sel.removeAllRanges();
+    save();
+  }
+
+  function eraseAtTarget(t){
+    // If click inside a mark, unwrap it
+    const m = t.closest && t.closest("mark.hl1, mark.hl2, mark.hl3");
+    if(!m) return;
+    const parent = m.parentNode;
+    while(m.firstChild) parent.insertBefore(m.firstChild, m);
+    parent.removeChild(m);
+    parent.normalize();
+    save();
+  }
+
+  board.addEventListener("mouseup", (e)=>{
+    if(mode==="hl1") wrapSelection("hl1");
+    if(mode==="hl2") wrapSelection("hl2");
+    if(mode==="hl3") wrapSelection("hl3");
+  });
+
+  board.addEventListener("click", (e)=>{
+    if(mode==="erase") eraseAtTarget(e.target);
+  });
+
+  clearBtn.addEventListener("click", ()=>{
+    // Remove all marks
+    board.querySelectorAll("mark.hl1, mark.hl2, mark.hl3").forEach(m=>{
+      const p = m.parentNode;
+      while(m.firstChild) p.insertBefore(m.firstChild, m);
+      p.removeChild(m);
+      p.normalize();
+    });
+    save();
+  });
+
+  // ====== Export: download a self-contained HTML with current highlights ======
+  exportBtn.addEventListener("click", ()=>{
+    const full = document.documentElement.outerHTML;
+    const blob = new Blob([full], {type:"text/html;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "1o_ergastirio_notes_highlighted.html";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  // ====== Image placeholders ======
+  function hookImageInputs(){
+    document.querySelectorAll('input[type="file"][data-preview]').forEach(inp=>{
+      inp.addEventListener("change", (e)=>{
+        const file = e.target.files && e.target.files[0];
+        if(!file) return;
+        const id = e.target.getAttribute("data-preview");
+        const img = document.getElementById(id);
+        if(!img) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          img.src = reader.result;
+          img.style.display = "block";
+          save(); // store base64 inside HTML via src (persists locally)
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  }
+  hookImageInputs();
+
+  // Auto-save occasionally (in case of small edits)
+  setInterval(save, 4000);
+</script>
+
+</body>
+</html>
