@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz - Φλεγμονή ΙΙ (Παθολογική Ανατομική)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 20px auto;
+      line-height: 1.5;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .question {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 4px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    .incorrect {
+      color: darkred;
+      font-weight: bold;
+    }
+    .explanation {
+      margin-top: 5px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Φλεγμονή ΙΙ</h1>
+<h2>Quiz Παθολογικής Ανατομικής (οξεία φλεγμονή – φάση 3 & 4)</h2>
+
+<form id="quizForm">
+
+  <!-- Q1 -->
+  <div class="question">
+    <p>1. Ποιος είναι ο βασικός στόχος της επιστράτευσης των λευκοκυττάρων στην οξεία φλεγμονή (φάση 3);</p>
+    <div class="options">
+      <label><input type="radio" name="q1" value="a"> Να αυξηθεί η αγγειακή διαπερατότητα</label>
+      <label><input type="radio" name="q1" value="b"> Να καταστρέψουν και να απομακρύνουν τον βλαπτικό παράγοντα</label>
+      <label><input type="radio" name="q1" value="c"> Να ενεργοποιήσουν τα λεμφοκύτταρα μνήμης</label>
+      <label><input type="radio" name="q1" value="d"> Να προκαλέσουν ίνωση και ουλοποίηση</label>
+    </div>
+    <div id="feedback-q1" class="explanation"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question">
+    <p>2. Ποια από τις παρακάτω διεργασίες ΔΕΝ ανήκει στα «φυσικά όπλα» ενός ενεργοποιημένου φαγοκυττάρου;</p>
+    <div class="options">
+      <label><input type="radio" name="q2" value="a"> Φαγοκυττάρωση</label>
+      <label><input type="radio" name="q2" value="b"> Σχηματισμός δραστικών ελευθέρων ριζών οξυγόνου (ROS)</label>
+      <label><input type="radio" name="q2" value="c"> Αποκοκκίωση με λυσοσωμικά ένζυμα</label>
+      <label><input type="radio" name="q2" value="d"> Παραγωγή αντισωμάτων IgG</label>
+    </div>
+    <div id="feedback-q2" class="explanation"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question">
+    <p>3. Ποια κύτταρα αποτελούν τα κυριότερα φαγοκύτταρα στην οξεία φλεγμονή;</p>
+    <div class="options">
+      <label><input type="radio" name="q3" value="a"> Β-λεμφοκύτταρα</label>
+      <label><input type="radio" name="q3" value="b"> Ουδετερόφιλα και μακροφάγα</label>
+      <label><input type="radio" name="q3" value="c"> Ηωσινόφιλα</label>
+      <label><input type="radio" name="q3" value="d"> Μαστοκύτταρα</label>
+    </div>
+    <div id="feedback-q3" class="explanation"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question">
+    <p>4. Τι ισχύει για την αποκοκκίωση των φαγοκυττάρων;</p>
+    <div class="options">
+      <label><input type="radio" name="q4" value="a"> Τα λυτικά ένζυμα παραμένουν πάντα μέσα στο φαγολυσόσωμα</label>
+      <label><input type="radio" name="q4" value="b"> Τα κοκκία εκκρίνονται στο εξωκυττάριο χώρο και μπορεί να καταστρέψουν και ιστούς του ξενιστή</label>
+      <label><input type="radio" name="q4" value="c"> Αφορά μόνο τα μακροφάγα αλλά όχι τα ουδετερόφιλα</label>
+      <label><input type="radio" name="q4" value="d"> Δεν σχετίζεται με την τοπική βλάβη ιστών</label>
+    </div>
+    <div id="feedback-q4" class="explanation"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question">
+    <p>5. Ποιο από τα παρακάτω χαρακτηρίζει τα ουδετερόφιλα σε σχέση με τα μακροφάγα;</p>
+    <div class="options">
+      <label><input type="radio" name="q5" value="a"> Κάνουν πολλή φαγοκυττάρωση και ελάχιστη αποκοκκίωση</label>
+      <label><input type="radio" name="q5" value="b"> Παράγουν NETs και συχνά συμμετέχουν σε εξωκυττάρια αποκοκκίωση</label>
+      <label><input type="radio" name="q5" value="c"> Δεν περιέχουν λυσοσωμικά ένζυμα</label>
+      <label><input type="radio" name="q5" value="d"> Δεν συμμετέχουν στην οξεία φλεγμονή</label>
+    </div>
+    <div id="feedback-q5" class="explanation"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question">
+    <p>6. Τα ουδετερόφιλα NETs (neutrophil extracellular traps):</p>
+    <div class="options">
+      <label><input type="radio" name="q6" value="a"> Αποτελούνται κυρίως από λιπίδια του κυτταροπλάσματος</label>
+      <label><input type="radio" name="q6" value="b"> Προέρχονται από το πυρηνικό DNA και μπορούν να παγιδεύουν μικρόβια</label>
+      <label><input type="radio" name="q6" value="c"> Είναι μικρά φαγοσώματα που περιέχουν μικρόβια</label>
+      <label><input type="radio" name="q6" value="d"> Δεν σχετίζονται με αυτοάνοσα νοσήματα</label>
+    </div>
+    <div id="feedback-q6" class="explanation"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question">
+    <p>7. Ποια από τις παρακάτω προτάσεις είναι ΣΩΣΤΗ για τα NETs;</p>
+    <div class="options">
+      <label><input type="radio" name="q7" value="a"> Μειώνουν τον κίνδυνο ανάπτυξης αυτοαντισωμάτων</label>
+      <label><input type="radio" name="q7" value="b"> Μπορούν να αποτελέσουν πηγή πυρηνικών αυτοαντιγόνων σε αυτοάνοσα νοσήματα</label>
+      <label><input type="radio" name="q7" value="c"> Δημιουργούνται μόνο από μακροφάγα</label>
+      <label><input type="radio" name="q7" value="d"> Δεν περιέχουν καμία αντιμικροβιακή ουσία</label>
+    </div>
+    <div id="feedback-q7" class="explanation"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question">
+    <p>8. Πώς σκοτώνουν στόχο τα κύτταρα φυσικοί φονείς (NK) όταν αποκοκκιώνονται;</p>
+    <div class="options">
+      <label><input type="radio" name="q8" value="a"> Με φαγοκυττάρωση και παραγωγή ROS</label>
+      <label><input type="radio" name="q8" value="b"> Με απελευθέρωση perforin και granzymes</label>
+      <label><input type="radio" name="q8" value="c"> Μόνο με αντισώματα IgE</label>
+      <label><input type="radio" name="q8" value="d"> Με παραγωγή κολλαγόνου</label>
+    </div>
+    <div id="feedback-q8" class="explanation"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question">
+    <p>9. Ποια από τις παρακάτω ουσίες ανήκει στους μηχανισμούς θανάτωσης εξαρτώμενους από το οξυγόνο;</p>
+    <div class="options">
+      <label><input type="radio" name="q9" value="a"> Λυσοζύμη</label>
+      <label><input type="radio" name="q9" value="b"> Υπεροξείδιο (O<sub>2</sub><sup>•−</sup>) και άλλες ελεύθερες ρίζες οξυγόνου</label>
+      <label><input type="radio" name="q9" value="c"> Λακτοφερίνη</label>
+      <label><input type="radio" name="q9" value="d"> Αμυντίνες/defensins</label>
+    </div>
+    <div id="feedback-q9" class="explanation"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question">
+    <p>10. Οι ελεύθερες ρίζες οξυγόνου που παράγονται από την «αναπνευστική έκρηξη» των φαγοκυττάρων:</p>
+    <div class="options">
+      <label><input type="radio" name="q10" value="a"> Σκοτώνουν μόνο τα μικρόβια, χωρίς να επηρεάζουν τα κύτταρα του ξενιστή</label>
+      <label><input type="radio" name="q10" value="b"> Μπορούν να σκοτώσουν μικρόβια αλλά και ουδετερόφιλα/μακροφάγα και να προκαλέσουν ιστική βλάβη</label>
+      <label><input type="radio" name="q10" value="c"> Δεν παράγονται σε φλεγμονή</label>
+      <label><input type="radio" name="q10" value="d"> Παράγονται μόνο από τα NK κύτταρα</label>
+    </div>
+    <div id="feedback-q10" class="explanation"></div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question">
+    <p>11. Ποιο από τα παρακάτω ΔΕΝ ανήκει στους μηχανισμούς θανάτωσης ανεξάρτητους από το οξυγόνο (κυρίως στα λυσοσώματα);</p>
+    <div class="options">
+      <label><input type="radio" name="q11" value="a"> Λυσοζύμη</label>
+      <label><input type="radio" name="q11" value="b"> Λακτοφερίνη</label>
+      <label><input type="radio" name="q11" value="c"> Κύρια βασική πρωτεΐνη (MBP)</label>
+      <label><input type="radio" name="q11" value="d"> Υπεροξείδιο του υδρογόνου (H<sub>2</sub>O<sub>2</sub>)</label>
+    </div>
+    <div id="feedback-q11" class="explanation"></div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question">
+    <p>12. Τι συμβαίνει όταν λυσοσωμικά ένζυμα διαρρέουν στον εξωκυττάριο χώρο;</p>
+    <div class="options">
+      <label><input type="radio" name="q12" value="a"> Ενεργοποιούν το συμπλήρωμα και μπορούν να καταστρέψουν θεμέλια ουσία και κύτταρα ιστών</label>
+      <label><input type="radio" name="q12" value="b"> Απενεργοποιούνται άμεσα και δεν έχουν καμία δράση</label>
+      <label><input type="radio" name="q12" value="c"> Μετατρέπονται σε αντιοξειδωτικά</label>
+      <label><input type="radio" name="q12" value="d"> Λειτουργούν μόνο μέσα σε φαγολυσόσωμα</label>
+    </div>
+    <div id="feedback-q12" class="explanation"></div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="question">
+    <p>13. Ποια από τις παρακάτω δομές ΔΕΝ αναφέρεται ως στόχος καταστροφής από λυσοσωμικά ένζυμα στον εξωκυττάριο χώρο;</p>
+    <div class="options">
+      <label><input type="radio" name="q13" value="a"> Κολλαγόνο</label>
+      <label><input type="radio" name="q13" value="b"> Ελαστίνη</label>
+      <label><input type="radio" name="q13" value="c"> Βασικές μεμβράνες</label>
+      <label><input type="radio" name="q13" value="d"> DNA των λεμφοκυττάρων μνήμης</label>
+    </div>
+    <div id="feedback-q13" class="explanation"></div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="question">
+    <p>14. Ποια είναι η συνέπεια όταν δεν μπορεί να ελεγχθεί η καταστροφή θεμέλιας ουσίας και κυττάρων από φαγοκύτταρα;</p>
+    <div class="options">
+      <label><input type="radio" name="q14" value="a"> Πλήρης λύση της φλεγμονής χωρίς βλάβη</label>
+      <label><input type="radio" name="q14" value="b"> Ανάπτυξη επουλωτικού κοκκιωματώδους ιστού</label>
+      <label><input type="radio" name="q14" value="c"> Επίμονη, επιβλαβής φλεγμονή με φαύλο κύκλο ιστικής καταστροφής</label>
+      <label><input type="radio" name="q14" value="d"> Καμία κλινική σημασία</label>
+    </div>
+    <div id="feedback-q14" class="explanation"></div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="question">
+    <p>15. Ποια από τις παρακάτω καταστάσεις αποτελεί κλασικό παράδειγμα «παράπλευρης απώλειας» από δράση ουδετερόφιλων/μακροφάγων;</p>
+    <div class="options">
+      <label><input type="radio" name="q15" value="a"> Φυσιολογική αιμόσταση μετά από τραύμα</label>
+      <label><input type="radio" name="q15" value="b"> Καταστροφή υγιών ιστών γύρω από εστία λοίμωξης κατά τη διάρκεια οξείας φλεγμονής</label>
+      <label><input type="radio" name="q15" value="c"> Καθαρή απομάκρυνση μικροβίων χωρίς ιστική βλάβη</label>
+      <label><input type="radio" name="q15" value="d"> Αύξηση παραγωγής αντισωμάτων από Β-λεμφοκύτταρα</label>
+    </div>
+    <div id="feedback-q15" class="explanation"></div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="question">
+    <p>16. Στη φάση 4 της οξείας φλεγμονής (Regulation – έλεγχος της αντίδρασης), ποια κατηγορία μορίων παίζει σημαντικό ρόλο στον περιορισμό της ιστικής βλάβης;</p>
+    <div class="options">
+      <label><input type="radio" name="q16" value="a"> Πρωτεάσες</label>
+      <label><input type="radio" name="q16" value="b"> Αντιπρωτεάσες</label>
+      <label><input type="radio" name="q16" value="c"> Κυτταροκίνες προ-φλεγμονώδεις</label>
+      <label><input type="radio" name="q16" value="d"> Χημειοκίνες</label>
+    </div>
+    <div id="feedback-q16" class="explanation"></div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="question">
+    <p>17. Για την α<sub>1</sub>-αντιθρυψίνη (A1AT) ισχύει ότι:</p>
+    <div class="options">
+      <label><input type="radio" name="q17" value="a"> Παράγεται κυρίως από τα ουδετερόφιλα</label>
+      <label><input type="radio" name="q17" value="b"> Παράγεται κυρίως στο ήπαρ και κυκλοφορεί στο αίμα και τους ιστούς</label>
+      <label><input type="radio" name="q17" value="c"> Δεν σχετίζεται με ελαστάση</label>
+      <label><input type="radio" name="q17" value="d"> Δρα μόνο μέσα στα λυσοσώματα</label>
+    </div>
+    <div id="feedback-q17" class="explanation"></div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="question">
+    <p>18. Τι συμβαίνει σε έλλειψη α<sub>1</sub>-αντιθρυψίνης;</p>
+    <div class="options">
+      <label><input type="radio" name="q18" value="a"> Υπερβολική αναστολή της ελαστάσης και σκληρυνση του πνεύμονα</label>
+      <label><input type="radio" name="q18" value="b"> Ανεξέλεγκτη δράση ελαστάσης που οδηγεί σε πνευμονικό εμφύσημα</label>
+      <label><input type="radio" name="q18" value="c"> Μείωση παραγωγής ROS από ουδετερόφιλα</label>
+      <label><input type="radio" name="q18" value="d"> Ανάπτυξη αποκλειστικά ηπατικής ανεπάρκειας χωρίς πνευμονική συμμετοχή</label>
+    </div>
+    <div id="feedback-q18" class="explanation"></div>
+  </div>
+
+    <!-- Q19 -->
+  <div class="question">
+    <p>19. Ποια από τις παρακάτω προϋποθέσεις είναι απαραίτητη για να υπάρξει Φάση 5 (Αποδρομή – λύση της αντίδρασης) στην οξεία φλεγμονή;</p>
+    <div class="options">
+      <label><input type="radio" name="q19" value="a"> Να συνεχίζει να υπάρχει ο βλαπτικός παράγοντας στο πεδίο</label>
+      <label><input type="radio" name="q19" value="b"> Να έχει αντιμετωπισθεί/αδρανοποιηθεί ο βλαπτικός παράγοντας</label>
+      <label><input type="radio" name="q19" value="c"> Να αυξηθεί ακόμη περισσότερο η αγγειακή διαπερατότητα</label>
+      <label><input type="radio" name="q19" value="d"> Να συσσωρευτούν ουδετερόφιλα στο πεδίο</label>
+    </div>
+    <div id="feedback-q19" class="explanation"></div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="question">
+    <p>20. Στη Φάση 5, τι συμβαίνει με τα ουδετερόφιλα που έχουν συσσωρευτεί στο πεδίο;</p>
+    <div class="options">
+      <label><input type="radio" name="q20" value="a"> Πολλαπλασιάζονται τοπικά για να ενισχύσουν τη φλεγμονή</label>
+      <label><input type="radio" name="q20" value="b"> Μετατρέπονται σε μακροφάγα</label>
+      <label><input type="radio" name="q20" value="c"> Υφίστανται απόπτωση και απομακρύνονται από μακροφάγα</label>
+      <label><input type="radio" name="q20" value="d"> Παραμένουν βιώσιμα για μεγάλο διάστημα χωρίς να απομακρύνονται</label>
+    </div>
+    <div id="feedback-q20" class="explanation"></div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="question">
+    <p>21. Ποιος τύπος μακροφάγου σχετίζεται κυρίως με την τελική φάση της οξείας αντίδρασης και την αποδρομή;</p>
+    <div class="options">
+      <label><input type="radio" name="q21" value="a"> Μακροφάγο τύπου Μ1 (προ-φλεγμονώδες)</label>
+      <label><input type="radio" name="q21" value="b"> Μακροφάγο τύπου Μ2 (αντι-φλεγμονώδες)</label>
+      <label><input type="radio" name="q21" value="c"> Δενδριτικό κύτταρο</label>
+      <label><input type="radio" name="q21" value="d"> Κύτταρο NK</label>
+    </div>
+    <div id="feedback-q21" class="explanation"></div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="question">
+    <p>22. Ποια είναι η κύρια λειτουργία των μακροφάγων τύπου Μ1;</p>
+    <div class="options">
+      <label><input type="radio" name="q22" value="a"> Καθαρισμός πεδίου και προαγωγή επιδιόρθωσης</label>
+      <label><input type="radio" name="q22" value="b"> Καταστολή φλεγμονώδους αντίδρασης</label>
+      <label><input type="radio" name="q22" value="c"> Προ-φλεγμονώδης δράση με φαγοκυττάρωση και έκκριση προ-φλεγμονωδών κυτταροκινών</label>
+      <label><input type="radio" name="q22" value="d"> Παρουσίαση αντιγόνου αποκλειστικά στα Β-λεμφοκύτταρα</label>
+    </div>
+    <div id="feedback-q22" class="explanation"></div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="question">
+    <p>23. Ποια από τις παρακάτω προτάσεις είναι ΣΩΣΤΗ για τη διαδικασία της αντιγονοπαρουσίασης;</p>
+    <div class="options">
+      <label><input type="radio" name="q23" value="a"> Αφορά μόνο κύτταρα της έμφυτης (μη ειδικής) ανοσίας χωρίς συμμετοχή Τ-λεμφοκυττάρων</label>
+      <label><input type="radio" name="q23" value="b"> Αποτελεί γέφυρα μεταξύ έμφυτης και επίκτητης (ειδικής) ανοσίας</label>
+      <label><input type="radio" name="q23" value="c"> Πραγματοποιείται αποκλειστικά από ουδετερόφιλα</label>
+      <label><input type="radio" name="q23" value="d"> Δεν έχει σημασία για τη ρύθμιση της φλεγμονώδους αντίδρασης</label>
+    </div>
+    <div id="feedback-q23" class="explanation"></div>
+  </div>
+
+  <!-- Q24 -->
+  <div class="question">
+    <p>24. Ποια κύτταρα συμμετέχουν περισσότερο στην αντιγονοπαρουσίαση όπως περιγράφεται στις διαφάνειες;</p>
+    <div class="options">
+      <label><input type="radio" name="q24" value="a"> Δενδριτικά κύτταρα ιστών, μακροφάγα Μ2 και Τ-λεμφοκύτταρα</label>
+      <label><input type="radio" name="q24" value="b"> Δενδριτικά κύτταρα ιστών, μακροφάγα και Β-λεμφοκύτταρα</label>
+      <label><input type="radio" name="q24" value="c"> Μόνο ουδετερόφιλα</label>
+      <label><input type="radio" name="q24" value="d"> Μόνο μαστοκύτταρα</label>
+    </div>
+    <div id="feedback-q24" class="explanation"></div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="question">
+    <p>25. Ποια από τις παρακάτω ΔΕΝ αποτελεί πιθανή έκβαση της οξείας φλεγμονής σε ιστικό επίπεδο;</p>
+    <div class="options">
+      <label><input type="radio" name="q25" value="a"> Πλήρης επαναφορά του ιστού στο φυσιολογικό (ίαση)</label>
+      <label><input type="radio" name="q25" value="b"> Εξέλιξη σε χρόνια φλεγμονή</label>
+      <label><input type="radio" name="q25" value="c"> Ουλοποίηση/ίνωση</label>
+      <label><input type="radio" name="q25" value="d"> Αύξηση κυττάρων όγκου λόγω φλεγμονής μέσα σε λίγες ώρες</label>
+    </div>
+    <div id="feedback-q25" class="explanation"></div>
+  </div>
+
+  <!-- Q26 -->
+  <div class="question">
+    <p>26. Σε συστηματικό επίπεδο, ποια από τις παρακάτω καταστάσεις αντιστοιχεί σε δυσμενή έκβαση της οξείας φλεγμονής;</p>
+    <div class="options">
+      <label><input type="radio" name="q26" value="a"> Ήπια αύξηση θερμοκρασίας που υποχωρεί με την ίαση</label>
+      <label><input type="radio" name="q26" value="b"> Σύνδρομο συστηματικής φλεγμονώδους αντίδρασης και πολυοργανική ανεπάρκεια</label>
+      <label><input type="radio" name="q26" value="c"> Φυσιολογική λευκοκυττάρωση χωρίς συμπτώματα</label>
+      <label><input type="radio" name="q26" value="d"> Παροδική ταχυκαρδία μετά από άσκηση</label>
+    </div>
+    <div id="feedback-q26" class="explanation"></div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="question">
+    <p>27. Στο παράδειγμα της λοίμωξης από SARS-CoV-2 (COVID-19), ποιο στοιχείο χαρακτηρίζει την «cytokine storm»;</p>
+    <div class="options">
+      <label><input type="radio" name="q27" value="a"> Απόλυτη αναστολή παραγωγής κυτταροκινών</label>
+      <label><input type="radio" name="q27" value="b"> Ανεξέλεγκτη παραγωγή προ- και αντι-φλεγμονωδών κυτταροκινών με ενεργοποίηση μακροφάγων και διαταραχή αιμόστασης</label>
+      <label><input type="radio" name="q27" value="c"> Μόνο τοπική φλεγμονή χωρίς συστηματική συμμετοχή</label>
+      <label><input type="radio" name="q27" value="d"> Καταστολή της επίκτητης ανοσίας χωρίς συμμετοχή της έμφυτης ανοσίας</label>
+    </div>
+    <div id="feedback-q27" class="explanation"></div>
+  </div>
+
+  <!-- Q28 -->
+  <div class="question">
+    <p>28. Σύμφωνα με τη διαφάνεια «…πάντα να θυμόμαστε», ποιοι παράγοντες συμβάλλουν στην ποικιλία της ατομικής φλεγμονώδους απάντησης στο ίδιο βλαπτικό ερέθισμα;</p>
+    <div class="options">
+      <label><input type="radio" name="q28" value="a"> Μόνο το είδος του μικροβίου</label>
+      <label><input type="radio" name="q28" value="b"> Γενετικό υπόβαθρο, ιδιοσυγκρασία, διατροφή/συνήθειες/περιβάλλον, ηλικία και γενική σωματική/ψυχική κατάσταση</label>
+      <label><input type="radio" name="q28" value="c"> Μόνο η ηλικία</label>
+      <label><input type="radio" name="q28" value="d"> Μόνο η φαρμακευτική αγωγή της στιγμής</label>
+    </div>
+    <div id="feedback-q28" class="explanation"></div>
+  </div>
+
+    <!-- Q29 -->
+  <div class="question">
+    <p>29. Τι χαρακτηρίζει την ορώδη οξεία φλεγμονή;</p>
+    <div class="options">
+      <label><input type="radio" name="q29" value="a"> Εξίδρωμα με υψηλή περιεκτικότητα κυττάρων και ινικής</label>
+      <label><input type="radio" name="q29" value="b"> Εξίδρωμα υγρού με μικρή περιεκτικότητα σε κύτταρα</label>
+      <label><input type="radio" name="q29" value="c"> Άφθονη παρουσία πύου</label>
+      <label><input type="radio" name="q29" value="d"> Νέκρωση επιθηλίου και διάβρωση</label>
+    </div>
+    <div id="feedback-q29" class="explanation"></div>
+  </div>
+
+  <!-- Q30 -->
+  <div class="question">
+    <p>30. Σε ποια κατάσταση συναντάμε συχνά ινώδη οξεία φλεγμονή;</p>
+    <div class="options">
+      <label><input type="radio" name="q30" value="a"> Ιογενής λοίμωξη δέρματος</label>
+      <label><input type="radio" name="q30" value="b"> Πλευρίτιδα ή περικαρδίτιδα με ίνωση</label>
+      <label><input type="radio" name="q30" value="c"> Ερπητική στοματίτιδα</label>
+      <label><input type="radio" name="q30" value="d"> Κρυολόγημα</label>
+    </div>
+    <div id="feedback-q30" class="explanation"></div>
+  </div>
+
+  <!-- Q31 -->
+  <div class="question">
+    <p>31. Πώς ορίζεται το απόστημα;</p>
+    <div class="options">
+      <label><input type="radio" name="q31" value="a"> Τοπική συλλογή πύου εντός ιστού</label>
+      <label><input type="radio" name="q31" value="b"> Εξίδρωμα χωρίς νεκρωμένα κύτταρα</label>
+      <label><input type="radio" name="q31" value="c"> Αιμορραγία με ουδετερόφιλα</label>
+      <label><input type="radio" name="q31" value="d"> Οίδημα λόγω λευκωματίνης</label>
+    </div>
+    <div id="feedback-q31" class="explanation"></div>
+  </div>
+
+  <!-- Q32 -->
+  <div class="question">
+    <p>32. Σε ποια παρακάτω θέση συχνά δημιουργείται έλκος;</p>
+    <div class="options">
+      <label><input type="radio" name="q32" value="a"> Σκελετικός μυς</label>
+      <label><input type="radio" name="q32" value="b"> Βλεννογόνος στομάχου, εντέρου, ουρογεννητικής οδού</label>
+      <label><input type="radio" name="q32" value="c"> Ημισφαίρια εγκεφάλου</label>
+      <label><input type="radio" name="q32" value="d"> Περιόστεο</label>
+    </div>
+    <div id="feedback-q32" class="explanation"></div>
+  </div>
+
+  <!-- Q33 -->
+  <div class="question">
+    <p>33. Ποιο παθογόνο ευθύνεται συχνότερα για λοβώδη πνευμονία;</p>
+    <div class="options">
+      <label><input type="radio" name="q33" value="a"> Staphylococcus aureus</label>
+      <label><input type="radio" name="q33" value="b"> Streptococcus pneumoniae</label>
+      <label><input type="radio" name="q33" value="c"> Mycoplasma pneumoniae</label>
+      <label><input type="radio" name="q33" value="d"> Legionella pneumophila</label>
+    </div>
+    <div id="feedback-q33" class="explanation"></div>
+  </div>
+
+  <!-- Q34 -->
+  <div class="question">
+    <p>34. Ποιος είναι ο ΜΗ φυσιολογικός εντοπισμός αποικισμού από πνευμονιόκοκκο;</p>
+    <div class="options">
+      <label><input type="radio" name="q34" value="a"> Ρινοφάρυγγας</label>
+      <label><input type="radio" name="q34" value="b"> Κυψελίδες</label>
+      <label><input type="radio" name="q34" value="c"> Στοματική κοιλότητα</label>
+      <label><input type="radio" name="q34" value="d"> Οροφάρυγγας</label>
+    </div>
+    <div id="feedback-q34" class="explanation"></div>
+  </div>
+
+  <!-- Q35 -->
+  <div class="question">
+    <p>35. Στην ερυθρά ήπωση της λοβώδους πνευμονίας τι παρατηρείται;</p>
+    <div class="options">
+      <label><input type="radio" name="q35" value="a"> Συλλογή ορώδους υγρού με λίγα κύτταρα</label>
+      <label><input type="radio" name="q35" value="b"> Συρροή ουδετερόφιλων & ερυθρών, εξίδρωμα στο παρέγχυμα</label>
+      <label><input type="radio" name="q35" value="c"> Συνδετικός ιστός αυξάνεται έντονα</label>
+      <label><input type="radio" name="q35" value="d"> Ίνωση και ουλοποίηση</label>
+    </div>
+    <div id="feedback-q35" class="explanation"></div>
+  </div>
+
+  <!-- Q36 -->
+  <div class="question">
+    <p>36. Ποια είναι η 1η φάση εξέλιξης της λοβώδους πνευμονίας;</p>
+    <div class="options">
+      <label><input type="radio" name="q36" value="a"> Γκρίζα ήπωση</label>
+      <label><input type="radio" name="q36" value="b"> Συμφόρηση</label>
+      <label><input type="radio" name="q36" value="c"> Ίνωση</label>
+      <label><input type="radio" name="q36" value="d"> Νέκρωση κυψελιδικού τοιχώματος</label>
+    </div>
+    <div id="feedback-q36" class="explanation"></div>
+  </div>
+
+  <!-- Q37 -->
+  <div class="question">
+    <p>37. Τι συμβαίνει στη φάση «λύση» της λοβώδους πνευμονίας; </p>
+    <div class="options">
+      <label><input type="radio" name="q37" value="a"> Αύξηση του εξιδρώματος & ουδετερόφιλων</label>
+      <label><input type="radio" name="q37" value="b"> Απομάκρυνση κυττάρων και εξιδρώματος – επαναφορά αερισμού</label>
+      <label><input type="radio" name="q37" value="c"> Εκτεταμένη ίνωση</label>
+      <label><input type="radio" name="q37" value="d"> Οριστική απώλεια λειτουργικότητας του πνεύμονα</label>
+    </div>
+    <div id="feedback-q37" class="explanation"></div>
+  </div>
+
+  <!-- Q38 -->
+  <div class="question">
+    <p>38. Ποιο εύρημα εξηγεί την υπόπνοια/δύσπνοια στην πνευμονία; </p>
+    <div class="options">
+      <label><input type="radio" name="q38" value="a"> Φυσιολογική δομή κυψελίδων</label>
+      <label><input type="radio" name="q38" value="b"> Γέμισμα κυψελίδων με υγρό → μειωμένη ανταλλαγή O₂</label>
+      <label><input type="radio" name="q38" value="c"> Αγγειοσύσπαση</label>
+      <label><input type="radio" name="q38" value="d"> Αύξηση αιμοσφαιρίνης</label>
+    </div>
+    <div id="feedback-q38" class="explanation"></div>
+  </div>
+
+    <!-- Q39 -->
+  <div class="question">
+    <p>39. Στη φάση της «φαιάς ηπάτωσης» της λοβώδους πνευμονίας τι κυριαρχεί ιστολογικά;</p>
+    <div class="options">
+      <label><input type="radio" name="q39" value="a"> Ορώδες εξίδρωμα με λίγα κύτταρα</label>
+      <label><input type="radio" name="q39" value="b"> Άφθονα μακροφάγα + αποκαθαριστικές λειτουργίες + ανακοίνωση νεκρών στοιχείων</label>
+      <label><input type="radio" name="q39" value="c"> Κυρίως λεμφοκύτταρα</label>
+      <label><input type="radio" name="q39" value="d"> Ανυπαρξία κυτταρικής φλεγμονής</label>
+    </div>
+    <div id="feedback-q39" class="explanation"></div>
+  </div>
+
+  <!-- Q40 -->
+  <div class="question">
+    <p>40. Τι καθορίζει την αποκατάσταση δομής στην πνευμονία;</p>
+    <div class="options">
+      <label><input type="radio" name="q40" value="a"> Ολική νέκρωση κυψελιδικών τοιχωμάτων</label>
+      <label><input type="radio" name="q40" value="b"> Διατήρηση ακέραιης βασικής μεμβράνης των κυψελίδων</label>
+      <label><input type="radio" name="q40" value="c"> Συνεχής παρουσία ινώδους στον αυλό</label>
+      <label><input type="radio" name="q40" value="d"> Χρόνιος αποικισμός των κυψελίδων</label>
+    </div>
+    <div id="feedback-q40" class="explanation"></div>
+  </div>
+
+  <!-- Q41 -->
+  <div class="question">
+    <p>41. Τι συμβαίνει όταν καταστραφεί το κυψελιδικό τοίχωμα;</p>
+    <div class="options">
+      <label><input type="radio" name="q41" value="a"> Πλήρης αποκατάσταση</label>
+      <label><input type="radio" name="q41" value="b"> Δημιουργία ουλής (βρογχοπνευμονία)</label>
+      <label><input type="radio" name="q41" value="c"> Ασυμπτωματική εικόνα</label>
+      <label><input type="radio" name="q41" value="d"> Συνεχής παραγωγή επιφανειοδραστικού</label>
+    </div>
+    <div id="feedback-q41" class="explanation"></div>
+  </div>
+
+  <!-- Q42 -->
+  <div class="question">
+    <p>42. Ποιο εύρημα χαρακτηρίζει την «καταλαμβάνουσα πνευμονία» (complicated pneumonia); 4]{index=4}</p>
+    <div class="options">
+      <label><input type="radio" name="q42" value="a"> Ήπια λοίμωξη με ταχεία αποδρομή</label>
+      <label><input type="radio" name="q42" value="b"> Εκτεταμένη νέκρωση & εμπύημα</label>
+      <label><input type="radio" name="q42" value="c"> Καμία συμμετοχή του υπεζωκότα</label>
+      <label><input type="radio" name="q42" value="d"> Απουσία κυψελιδικού εξιδρώματος</label>
+    </div>
+    <div id="feedback-q42" class="explanation"></div>
+  </div>
+
+  <!-- Q43 -->
+  <div class="question">
+    <p>43. Ποιο σύμπτωμα είναι τυπικό σε οξεία σκωληκοειδίτιδα;</p>
+    <div class="options">
+      <label><input type="radio" name="q43" value="a"> Πόνος στο δεξιό λαγόνιο βόθρο</label>
+      <label><input type="radio" name="q43" value="b"> Πόνος στον αριστερό άνω λοβό</label>
+      <label><input type="radio" name="q43" value="c"> Αφωνία</label>
+      <label><input type="radio" name="q43" value="d"> Εξάνθημα παλαμών</label>
+    </div>
+    <div id="feedback-q43" class="explanation"></div>
+  </div>
+
+  <!-- Q44 -->
+  <div class="question">
+    <p>44. Ποιο βασικό ιστολογικό χαρακτηριστικό χαρακτηρίζει την οξεία σκωληκοειδίτιδα;</p>
+    <div class="options">
+      <label><input type="radio" name="q44" value="a"> Υπερτροφία βλεννογόνου και απουσία φλεγμονής</label>
+      <label><input type="radio" name="q44" value="b"> Ουδετερόφιλα σε όλα τα στρώματα του τοιχώματος</label>
+      <label><input type="radio" name="q44" value="c"> Αποκλειστικά λεμφοζιδιακή υπερπλασία</label>
+      <label><input type="radio" name="q44" value="d"> Ίνωση με κολλαγόνο χωρίς οξεία αντίδραση</label>
+    </div>
+    <div id="feedback-q44" class="explanation"></div>
+  </div>
+
+  <!-- Q45 -->
+  <div class="question">
+    <p>45. Τι δείχνει η παρουσία αφθόνων ηωσινόφιλων στα τοιχώματα της σκωληκοειδούς απόφυσης;</p>
+    <div class="options">
+      <label><input type="radio" name="q45" value="a"> Τυπική βακτηριακή σκωληκοειδίτιδα</label>
+      <label><input type="radio" name="q45" value="b"> Οξεία αλλεργική αντίδραση ή παρασιτική αιτιολογία</label>
+      <label><input type="radio" name="q45" value="c"> Κακοήθεια</label>
+      <label><input type="radio" name="q45" value="d"> Χρόνια ίνωση</label>
+    </div>
+    <div id="feedback-q45" class="explanation"></div>
+  </div>
+
+  <!-- Q46 -->
+  <div class="question">
+    <p>46. Ποιο παράσιτο αναγνωρίζεται συχνά σε οξεία σκωληκοειδίτιδα παιδιών;</p>
+    <div class="options">
+      <label><input type="radio" name="q46" value="a"> Taenia solium</label>
+      <label><input type="radio" name="q46" value="b"> Enterobius vermicularis</label>
+      <label><input type="radio" name="q46" value="c"> Echinococcus granulosus</label>
+      <label><input type="radio" name="q46" value="d"> Ascaris lumbricoides</label>
+    </div>
+    <div id="feedback-q46" class="explanation"></div>
+  </div>
+
+  <!-- Q47 -->
+  <div class="question">
+    <p>47. Πού εντοπίζονται συνήθως τα παράσιτα Enterobius vermicularis στη σκωληκοειδίτιδα;</p>
+    <div class="options">
+      <label><input type="radio" name="q47" value="a"> Στον αυλό της απόφυσης</label>
+      <label><input type="radio" name="q47" value="b"> Μέσα στο μυϊκό τοίχωμα</label>
+      <label><input type="radio" name="q47" value="c"> Στο περιτόναιο</label>
+      <label><input type="radio" name="q47" value="d"> Στο ήπαρ</label>
+    </div>
+    <div id="feedback-q47" class="explanation"></div>
+  </div>
+
+  <!-- Q48 -->
+  <div class="question">
+    <p>48. Ποιο είναι το ΚΡΙΤΗΡΙΟ για «φλεγμονή σκωληκοειδούς απόφυσης» ιστολογικά;</p>
+    <div class="options">
+      <label><input type="radio" name="q48" value="a"> Μόνο υπερπλασία λεμφοζιδίων</label>
+      <label><input type="radio" name="q48" value="b"> Ουδετερόφιλα στη μυϊκή στιβάδα</label>
+      <label><input type="radio" name="q48" value="c"> Μόνο στο βλεννογόνο</label>
+      <label><input type="radio" name="q48" value="d"> Αποπτωτικά σώματα</label>
+    </div>
+    <div id="feedback-q48" class="explanation"></div>
+  </div>
+
+  <!-- Q49 -->
+  <div class="question">
+    <p>49. Ποια είναι η κλινική σημασία της καθυστέρησης αντιμετώπισης σκωληκοειδίτιδας;</p>
+    <div class="options">
+      <label><input type="radio" name="q49" value="a"> Δεν υπάρχει επιπλοκή</label>
+      <label><input type="radio" name="q49" value="b"> Κίνδυνος διάτρησης & περιτονίτιδας</label>
+      <label><input type="radio" name="q49" value="c"> Βελτίωση λόγω ανοσίας</label>
+      <label><input type="radio" name="q49" value="d"> Κατάργηση φλεγμονής</label>
+    </div>
+    <div id="feedback-q49" class="explanation"></div>
+  </div>
+
+  <!-- Q50 -->
+  <div class="question">
+    <p>50. Ποια αλλοίωση μπορεί να παρατηρηθεί στον αυλό σε σκωληκοειδίτιδα;</p>
+    <div class="options">
+      <label><input type="radio" name="q50" value="a"> Ορώδες υγρό</label>
+      <label><input type="radio" name="q50" value="b"> Πύον</label>
+      <label><input type="radio" name="q50" value="c"> Αέρας μόνο</label>
+      <label><input type="radio" name="q50" value="d"> Μόνο βλέννα χωρίς φλεγμονή</label>
+    </div>
+    <div id="feedback-q50" class="explanation"></div>
+  </div>
+
+    <!-- Q51 -->
+  <div class="question">
+    <p>51. Ποιος μεσολαβητής προκαλεί άμεσα αγγειοδιαστολή και αύξηση αγγειακής διαπερατότητας στην αρχή της φλεγμονής; :contentReference[oaicite:1]{index=1}</p>
+    <div class="options">
+      <label><input type="radio" name="q51" value="a"> Ισταμίνη</label>
+      <label><input type="radio" name="q51" value="b"> IL-10</label>
+      <label><input type="radio" name="q51" value="c"> IFN-γ</label>
+      <label><input type="radio" name="q51" value="d"> C5b-9 (MAC)</label>
+    </div>
+    <div id="feedback-q51" class="explanation"></div>
+  </div>
+
+  <!-- Q52 -->
+  <div class="question">
+    <p>52. Ποιο κύτταρο αποτελεί βασική πηγή ισταμίνης στη φλεγμονή; :contentReference[oaicite:2]{index=2}</p>
+    <div class="options">
+      <label><input type="radio" name="q52" value="a"> Μαστοκύτταρα</label>
+      <label><input type="radio" name="q52" value="b"> Ερυθρά αιμοσφαίρια</label>
+      <label><input type="radio" name="q52" value="c"> Θρομβοκύτταρα μόνο</label>
+      <label><input type="radio" name="q52" value="d"> Ενδοθηλιακά κύτταρα</label>
+    </div>
+    <div id="feedback-q52" class="explanation"></div>
+  </div>
+
+  <!-- Q53 -->
+  <div class="question">
+    <p>53. Ποιος τύπος υποδοχέα ισταμίνης εμπλέκεται κυρίως στη φλεγμονή; :contentReference[oaicite:3]{index=3}</p>
+    <div class="options">
+      <label><input type="radio" name="q53" value="a"> H1</label>
+      <label><input type="radio" name="q53" value="b"> H2</label>
+      <label><input type="radio" name="q53" value="c"> H3</label>
+      <label><input type="radio" name="q53" value="d"> H4</label>
+    </div>
+    <div id="feedback-q53" class="explanation"></div>
+  </div>
+
+  <!-- Q54 -->
+  <div class="question">
+    <p>54. Αραχιδονικό οξύ: από πού απελευθερώνεται; :contentReference[oaicite:4]{index=4}</p>
+    <div class="options">
+      <label><input type="radio" name="q54" value="a"> Από μεμβράνες κυττάρων μέσω φωσφολιπασών</label>
+      <label><input type="radio" name="q54" value="b"> Από τα μιτοχόνδρια μέσω κυτοχρώματος C</label>
+      <label><input type="radio" name="q54" value="c"> Από εξειδικευμένες αποθήκες στον πυρήνα</label>
+      <label><input type="radio" name="q54" value="d"> Από το αίμα με διάχυση</label>
+    </div>
+    <div id="feedback-q54" class="explanation"></div>
+  </div>
+
+  <!-- Q55 -->
+  <div class="question">
+    <p>55. Οι COX αναστολείς (NSAIDs) εμποδίζουν κυρίως την παραγωγή: :contentReference[oaicite:5]{index=5}</p>
+    <div class="options">
+      <label><input type="radio" name="q55" value="a"> Προσταγλανδινών</label>
+      <label><input type="radio" name="q55" value="b"> Λευκοτριενίων</label>
+      <label><input type="radio" name="q55" value="c"> Συμπληρώματος</label>
+      <label><input type="radio" name="q55" value="d"> Ισταμίνης</label>
+    </div>
+    <div id="feedback-q55" class="explanation"></div>
+  </div>
+
+  <!-- Q56 -->
+  <div class="question">
+    <p>56. Ποιο λευκοτριένιο προκαλεί βρογχόσπασμο και αύξηση διαπερατότητας; :contentReference[oaicite:6]{index=6}</p>
+    <div class="options">
+      <label><input type="radio" name="q56" value="a"> LTB4</label>
+      <label><input type="radio" name="q56" value="b"> LTC4</label>
+      <label><input type="radio" name="q56" value="c"> TXA2</label>
+      <label><input type="radio" name="q56" value="d"> PGI2</label>
+    </div>
+    <div id="feedback-q56" class="explanation"></div>
+  </div>
+
+  <!-- Q57 -->
+  <div class="question">
+    <p>57. TNF και IL-1: ποια από τις παρακάτω ΔΕΝ είναι δράση τους; :contentReference[oaicite:7]{index=7}</p>
+    <div class="options">
+      <label><input type="radio" name="q57" value="a"> Πυρετός</label>
+      <label><input type="radio" name="q57" value="b"> Ενεργοποίηση ενδοθηλίου</label>
+      <label><input type="radio" name="q57" value="c"> Χημειοταξία λευκοτριενίων</label>
+      <label><input type="radio" name="q57" value="d"> Αύξηση CRP</label>
+    </div>
+    <div id="feedback-q57" class="explanation"></div>
+  </div>
+
+  <!-- Q58 -->
+  <div class="question">
+    <p>58. Ποιος μεσολαβητής εμπλέκεται στη ΔΙΑΡΚΗ επιβίωση της φλεγμονής (χρόνια); :contentReference[oaicite:8]{index=8}</p>
+    <div class="options">
+      <label><input type="radio" name="q58" value="a"> IFN-γ</label>
+      <label><input type="radio" name="q58" value="b"> IL-8</label>
+      <label><input type="radio" name="q58" value="c"> TGF-β</label>
+      <label><input type="radio" name="q58" value="d"> Σεροτονίνη</label>
+    </div>
+    <div id="feedback-q58" class="explanation"></div>
+  </div>
+
+  <!-- Q59 -->
+  <div class="question">
+    <p>59. Χημειοκίνες: ποιος είναι ο βασικός ρόλος τους; :contentReference[oaicite:9]{index=9}</p>
+    <div class="options">
+      <label><input type="radio" name="q59" value="a"> Χημειοταξία λευκοκυττάρων</label>
+      <label><input type="radio" name="q59" value="b"> Ενεργοποίηση συμπληρώματος</label>
+      <label><input type="radio" name="q59" value="c"> Καταστολή ανοσολογικής μνήμης</label>
+      <label><input type="radio" name="q59" value="d"> Παραγωγή ινώδους</label>
+    </div>
+    <div id="feedback-q59" class="explanation"></div>
+  </div>
+
+  <!-- Q60 -->
+  <div class="question">
+    <p>60. Ποιο κλάσμα συμπληρώματος είναι σημαντικό για ΧΗΜΕΙΟΤΑΞΙΑ; :contentReference[oaicite:10]{index=10}</p>
+    <div class="options">
+      <label><input type="radio" name="q60" value="a"> C3b</label>
+      <label><input type="radio" name="q60" value="b"> C5a</label>
+      <label><input type="radio" name="q60" value="c"> C9</label>
+      <label><input type="radio" name="q60" value="d"> C1q</label>
+    </div>
+    <div id="feedback-q60" class="explanation"></div>
+  </div>
+
+  <!-- Q61 -->
+  <div class="question">
+    <p>61. Ποιο κλάσμα συμπληρώματος συμμετέχει άμεσα στη φαγοκυττάρωση (οπσονινοποίηση); :contentReference[oaicite:11]{index=11}</p>
+    <div class="options">
+      <label><input type="radio" name="q61" value="a"> C3b</label>
+      <label><input type="radio" name="q61" value="b"> C5b</label>
+      <label><input type="radio" name="q61" value="c"> C6</label>
+      <label><input type="radio" name="q61" value="d"> C2a</label>
+    </div>
+    <div id="feedback-q61" class="explanation"></div>
+  </div>
+
+  <!-- Q62 -->
+  <div class="question">
+    <p>62. Ποιο σύμπλοκο προκαλεί λύση βακτηρίων/κυττάρων στο συμπλήρωμα; :contentReference[oaicite:12]{index=12}</p>
+    <div class="options">
+      <label><input type="radio" name="q62" value="a"> MAC (C5b-9)</label>
+      <label><input type="radio" name="q62" value="b"> C1q</label>
+      <label><input type="radio" name="q62" value="c"> C4b2a</label>
+      <label><input type="radio" name="q62" value="d"> Μόνο IL-17</label>
+    </div>
+    <div id="feedback-q62" class="explanation"></div>
+  </div>
+
+    <!-- Q63 -->
+  <div class="question">
+    <p>63. Ποια από τα παρακάτω φάρμακα αναστέλλει την παραγωγή προσταγλανδινών μέσω COX-1/COX-2; :contentReference[oaicite:1]{index=1}</p>
+    <div class="options">
+      <label><input type="radio" name="q63" value="a"> ΜΣΑΦ (NSAIDs)</label>
+      <label><input type="radio" name="q63" value="b"> Αντιισταμινικά μόνο</label>
+      <label><input type="radio" name="q63" value="c"> Ατροπίνη</label>
+      <label><input type="radio" name="q63" value="d"> Β-αναστολείς</label>
+    </div>
+    <div id="feedback-q63" class="explanation"></div>
+  </div>
+
+  <!-- Q64 -->
+  <div class="question">
+    <p>64. Ποια κυτταροκίνην έχει ΚΥΡΙΩΣ αντιφλεγμονώδη δράση; :contentReference[oaicite:2]{index=2}</p>
+    <div class="options">
+      <label><input type="radio" name="q64" value="a"> IL-10</label>
+      <label><input type="radio" name="q64" value="b"> TNF</label>
+      <label><input type="radio" name="q64" value="c"> IL-1</label>
+      <label><input type="radio" name="q64" value="d"> IL-17</label>
+    </div>
+    <div id="feedback-q64" class="explanation"></div>
+  </div>
+
+  <!-- Q65 -->
+  <div class="question">
+    <p>65. TNF & IL-1: ποια είναι βασική τους ΔΡΑΣΗ; :contentReference[oaicite:3]{index=3}</p>
+    <div class="options">
+      <label><input type="radio" name="q65" value="a"> Ενεργοποίηση ενδοθηλίου & συστηματικές εκδηλώσεις</label>
+      <label><input type="radio" name="q65" value="b"> Αντιφλεγμονώδης καταστολή</label>
+      <label><input type="radio" name="q65" value="c"> Αναστολή λευκοκυττάρων</label>
+      <label><input type="radio" name="q65" value="d"> Μείωση CRP</label>
+    </div>
+    <div id="feedback-q65" class="explanation"></div>
+  </div>
+
+  <!-- Q66 -->
+  <div class="question">
+    <p>66. Ποιος μεσολαβητής προκαλεί Χημειοταξία; :contentReference[oaicite:4]{index=4}</p>
+    <div class="options">
+      <label><input type="radio" name="q66" value="a"> Χημειοκίνες</label>
+      <label><input type="radio" name="q66" value="b"> PGI2</label>
+      <label><input type="radio" name="q66" value="c"> TXA2</label>
+      <label><input type="radio" name="q66" value="d"> Προλακτίνη</label>
+    </div>
+    <div id="feedback-q66" class="explanation"></div>
+  </div>
+
+  <!-- Q67 -->
+  <div class="question">
+    <p>67. Ποιο κλάσμα συμπληρώματος είναι ΟΨΩΝΙΝΗ; :contentReference[oaicite:5]{index=5}</p>
+    <div class="options">
+      <label><input type="radio" name="q67" value="a"> C3b</label>
+      <label><input type="radio" name="q67" value="b"> C5a</label>
+      <label><input type="radio" name="q67" value="c"> C9</label>
+      <label><input type="radio" name="q67" value="d"> C1q</label>
+    </div>
+    <div id="feedback-q67" class="explanation"></div>
+  </div>
+
+  <!-- Q68 -->
+  <div class="question">
+    <p>68. Ποιο σύμπλοκο προκαλεί ΛΥΣΗ μικροβίων στο συμπλήρωμα; :contentReference[oaicite:6]{index=6}</p>
+    <div class="options">
+      <label><input type="radio" name="q68" value="a"> MAC (C5b-9)</label>
+      <label><input type="radio" name="q68" value="b"> C3a μόνο</label>
+      <label><input type="radio" name="q68" value="c"> C4b2a</label>
+      <label><input type="radio" name="q68" value="d"> MBL μόνο</label>
+    </div>
+    <div id="feedback-q68" class="explanation"></div>
+  </div>
+
+  <!-- Q69 -->
+  <div class="question">
+    <p>69. Τι προκαλεί ο TNF στο ήπαρ; :contentReference[oaicite:7]{index=7}</p>
+    <div class="options">
+      <label><input type="radio" name="q69" value="a"> Παραγωγή πρωτεϊνών οξείας φάσης (CRP) – μέσω IL-6</label>
+      <label><input type="radio" name="q69" value="b"> Καταστολή IL-6</label>
+      <label><input type="radio" name="q69" value="c"> Απόπτωση ηπατοκυττάρων μόνο</label>
+      <label><input type="radio" name="q69" value="d"> Μείωση C3</label>
+    </div>
+    <div id="feedback-q69" class="explanation"></div>
+  </div>
+
+  <!-- Q70 -->
+  <div class="question">
+    <p>70. Ποιο από τα παρακάτω ΔΕΝ αποτελεί συστηματική εκδήλωση φλεγμονής; :contentReference[oaicite:8]{index=8}</p>
+    <div class="options">
+      <label><input type="radio" name="q70" value="a"> Πυρετός</label>
+      <label><input type="radio" name="q70" value="b"> Ταχυκαρδία</label>
+      <label><input type="radio" name="q70" value="c"> Αύξηση λευκοκυττάρων</label>
+      <label><input type="radio" name="q70" value="d"> Μείωση ενδοθηλιακής ενεργοποίησης</label>
+    </div>
+    <div id="feedback-q70" class="explanation"></div>
+  </div>
+
+  <!-- Q71 -->
+  <div class="question">
+    <p>71. Ποιες ουσίες προκαλούν πυρετό; :contentReference[oaicite:9]{index=9}</p>
+    <div class="options">
+      <label><input type="radio" name="q71" value="a"> TNF, IL-1, IL-6</label>
+      <label><input type="radio" name="q71" value="b"> C5b-9</label>
+      <label><input type="radio" name="q71" value="c"> IL-10</label>
+      <label><input type="radio" name="q71" value="d"> H1 ισταμίνης</label>
+    </div>
+    <div id="feedback-q71" class="explanation"></div>
+  </div>
+
+  <!-- Q72 -->
+  <div class="question">
+    <p>72. Πού δρουν οι πυρετογόνες κυτταροκίνες για να προκαλέσουν πυρετό; :contentReference[oaicite:10]{index=10}</p>
+    <div class="options">
+      <label><input type="radio" name="q72" value="a"> Στο θερμορρυθμιστικό κέντρο του υποθαλάμου</label>
+      <label><input type="radio" name="q72" value="b"> Στα οστά</label>
+      <label><input type="radio" name="q72" value="c"> Στο μυοκάρδιο</label>
+      <label><input type="radio" name="q72" value="d"> Στους πνεύμονες</label>
+    </div>
+    <div id="feedback-q72" class="explanation"></div>
+  </div>
+
+  <!-- Q73 -->
+  <div class="question">
+    <p>73. Τι προκαλεί αύξηση CRP στον ορό; </p>
+    <div class="options">
+      <label><input type="radio" name="q73" value="a"> IL-6</label>
+      <label><input type="radio" name="q73" value="b"> IL-10</label>
+      <label><input type="radio" name="q73" value="c"> IFN-γ</label>
+      <label><input type="radio" name="q73" value="d"> Ακετυλοχολίνη</label>
+    </div>
+    <div id="feedback-q73" class="explanation"></div>
+  </div>
+
+  <!-- Q74 -->
+  <div class="question">
+    <p>74. Ποιο εύρημα στον ορό υποδηλώνει ΜΙΚΡΟΒΙΑΚΗ λοίμωξη; :contentReference[oaicite:12]{index=12}</p>
+    <div class="options">
+      <label><input type="radio" name="q74" value="a"> Σημαντική αύξηση πρωτεϊνών οξείας φάσης</label>
+      <label><input type="radio" name="q74" value="b"> Καθόλου CRP</label>
+      <label><input type="radio" name="q74" value="c"> Μείωση λευκοκυττάρων</label>
+      <label><input type="radio" name="q74" value="d"> Μείωση ιντερλευκινών</label>
+    </div>
+    <div id="feedback-q74" class="explanation"></div>
+  </div>
+
+  <!-- Q75 -->
+  <div class="question">
+    <p>75. Σε ιογενή λοίμωξη, τι αυξάνεται συνήθως στο αίμα; :contentReference[oaicite:13]{index=13}</p>
+    <div class="options">
+      <label><input type="radio" name="q75" value="a"> Λεμφοκύτταρα</label>
+      <label><input type="radio" name="q75" value="b"> Ουδετερόφιλα</label>
+      <label><input type="radio" name="q75" value="c"> Ηωσινόφιλα</label>
+      <label><input type="radio" name="q75" value="d"> Βασεόφιλα</label>
+    </div>
+    <div id="feedback-q75" class="explanation"></div>
+  </div>
+
+  <!-- Q76 -->
+  <div class="question">
+    <p>76. Τι προκαλεί λευκοκυττάρωση σε φλεγμονή; :contentReference[oaicite:14]{index=14}</p>
+    <div class="options">
+      <label><input type="radio" name="q76" value="a"> CSFs → παραγωγή και απελευθέρωση κυττάρων από μυελό</label>
+      <label><input type="radio" name="q76" value="b"> Μείωση κορτιζόλης</label>
+      <label><input type="radio" name="q76" value="c"> Μείωση κυτταροκινών</label>
+      <label><input type="radio" name="q76" value="d"> Αδρανοποίηση TNF</label>
+    </div>
+    <div id="feedback-q76" class="explanation"></div>
+  </div>
+
+  <!-- Q77 -->
+  <div class="question">
+    <p>77. Ηωσινοφιλία: ποια αιτιολογία είναι πιο πιθανή; :contentReference[oaicite:15]{index=15}</p>
+    <div class="options">
+      <label><input type="radio" name="q77" value="a"> Αλλεργία / παρασιτική λοίμωξη</label>
+      <label><input type="radio" name="q77" value="b"> Gram-σ θετικά βακτήρια</label>
+      <label><input type="radio" name="q77" value="c"> Ιογενής λοίμωξη</label>
+      <label><input type="radio" name="q77" value="d"> Πνευμονιόκοκκος</label>
+    </div>
+    <div id="feedback-q77" class="explanation"></div>
+  </div>
+
+  <!-- Q78 -->
+  <div class="question">
+    <p>78. Τι μπορεί να προκαλέσει καθυστερημένη αντιμετώπιση σοβαρής φλεγμονής; :contentReference[oaicite:16]{index=16}</p>
+    <div class="options">
+      <label><input type="radio" name="q78" value="a"> Σοβαρή υπόταση, σοκ, πολυοργανική ανεπάρκεια</label>
+      <label><input type="radio" name="q78" value="b"> Μόνο τοπικό οίδημα χωρίς συστηματική επίδραση</label>
+      <label><input type="radio" name="q78" value="c"> Άμεση ύφεση συμπτωμάτων</label>
+      <label><input type="radio" name="q78" value="d"> Αύξηση όρεξης</label>
+    </div>
+    <div id="feedback-q78" class="explanation"></div>
+  </div>
+
+
+</form>
+
+<script>
+  const correctAnswers = {
+    q1: 'b',
+    q2: 'd',
+    q3: 'b',
+    q4: 'b',
+    q5: 'b',
+    q6: 'b',
+    q7: 'b',
+    q8: 'b',
+    q9: 'b',
+    q10: 'b',
+    q11: 'd',
+    q12: 'a',
+    q13: 'd',
+    q14: 'c',
+    q15: 'b',
+    q16: 'b',
+    q17: 'b',
+    q18: 'b',
+    q19: 'b',
+    q20: 'c',
+    q21: 'b',
+    q22: 'c',
+    q23: 'b',
+    q24: 'b',
+    q25: 'd',
+    q26: 'b',
+    q27: 'b',
+    q28: 'b', q29:'b', q30:'b', q31:'a', q32:'b', q33:'b',
+q34:'b', q35:'b', q36:'b', q37:'b', q38:'b',q39:'b', q40:'b', q41:'b', q42:'b', q43:'a',
+q44:'b', q45:'b', q46:'b', q47:'a', q48:'b',
+q49:'b', q50:'b', q51:'a', q52:'a', q53:'a', q54:'a', q55:'a', q56:'b',
+q57:'c', q58:'a', q59:'a', q60:'b', q61:'a', q62:'a',
+q63:'a', q64:'a', q65:'a', q66:'a', q67:'a', q68:'a',
+q69:'a', q70:'d', q71:'a', q72:'a', q73:'a', q74:'a',
+q75:'a', q76:'a', q77:'a', q78:'a'
+  };
+
+  const explanations = {
+    q1: 'Φάση 3: σκοπός είναι η καταστροφή και απομάκρυνση του βλαπτικού παράγοντα.',
+    q2: 'Τα αντισώματα IgG δεν αποτελούν άμεσο «όπλο» του φαγοκυττάρου αλλά προϊόν Β-λεμφοκυττάρων.',
+    q3: 'Κύρια φαγοκυτταρικά κύτταρα: ουδετερόφιλα και μακροφάγα.',
+    q4: 'Η αποκοκκίωση απελευθερώνει λυτικά ένζυμα εξωκυττάρια και μπορεί να βλάψει ιστούς του ξενιστή.',
+    q5: 'Τα ουδετερόφιλα κάνουν αποκοκκίωση και δημιουργούν NETs, συμβάλλοντας σε ιστική βλάβη.',
+    q6: 'Τα NETs είναι δίκτυα χρωματίνης από πυρηνικό DNA που παγιδεύουν μικρόβια.',
+    q7: 'Η έκθεση πυρηνικού υλικού στα NETs μπορεί να αποτελέσει πηγή αυτοαντιγόνων.',
+    q8: 'Τα NK σκοτώνουν με perforin (διάνοιξη πόρων) και granzymes (ενεργοποίηση απόπτωσης).',
+    q9: 'Τα ROS της αναπνευστικής έκρηξης είναι οξυγονοεξαρτώμενοι μηχανισμοί θανάτωσης.',
+    q10: 'Οι ελεύθερες ρίζες βλάπτουν και παθογόνα και κύτταρα του ξενιστή.',
+    q11: 'Το H2O2 ανήκει στους οξυγονοεξαρτώμενους μηχανισμούς, όχι στους ανεξάρτητους από το Ο2.',
+    q12: 'Η διαρροή λυσοσωμικών ενζύμων ενεργοποιεί συμπλήρωμα και καταστρέφει θεμέλια ουσία.',
+    q13: 'Στο pdf αναφέρονται κολλαγόνο, ελαστίνη, βασικές μεμβράνες – όχι ειδικά DNA λεμφοκυττάρων.',
+    q14: 'Η ανεξέλεγκτη καταστροφή ιστών οδηγεί σε επιβλαβή, παρατεινόμενη φλεγμονή (νόσο).',
+    q15: '«Παράπλευρη απώλεια»: βλάβη γειτονικών υγιών ιστών σε εστία λοίμωξης/φλεγμονής.',
+    q16: 'Οι αντιπρωτεάσες περιορίζουν τη δράση λυσοσωμικών πρωτεασών και την ιστική καταστροφή.',
+    q17: 'Η A1AT είναι αντιπρωτεάση που παράγεται στο ήπαρ και κυκλοφορεί στο αίμα/ιστούς.',
+    q18: 'Η έλλειψη A1AT → ανεξέλεγκτη ελαστάση ουδετερόφιλων → εμφύσημα πνεύμονα.',
+    q19: 'Για αποδρομή χρειάζεται να έχει αντιμετωπισθεί/αδρανοποιηθεί ο βλαπτικός παράγοντας.',
+    q20: 'Στη φάση 5 τα ουδετερόφιλα υφίστανται απόπτωση και απομακρύνονται από μακροφάγα.',
+    q21: 'Τα Μ2 μακροφάγα σχετίζονται με την τελική φάση της οξείας αντίδρασης και την καταστολή της φλεγμονής.',
+    q22: 'Τα Μ1 μακροφάγα είναι προ-φλεγμονώδη: φαγοκυττάρωση, ιστική καταστροφή και έκκριση προ-φλεγμονωδών κυτταροκινών.',
+    q23: 'Η αντιγονοπαρουσίαση αποτελεί γέφυρα μεταξύ έμφυτης και επίκτητης ανοσίας.',
+    q24: 'Κυριότερα APC: δενδριτικά κύτταρα, μακροφάγα και Β-λεμφοκύτταρα.',
+    q25: 'Έκβαση σε λίγες ώρες σε νεοπλασία δεν αποτελεί κλασική έκβαση οξείας φλεγμονής. Οι κύριες εκβάσεις είναι ίαση, χρόνια φλεγμονή ή ίνωση/ουλή.',
+    q26: 'Συστηματική φλεγμονώδης αντίδραση με πολυοργανική ανεπάρκεια είναι βαριά δυσμενής έκβαση της οξείας φλεγμονής.',
+    q27: 'Στην COVID-19 η “cytokine storm” χαρακτηρίζεται από ανεξέλεγκτη παραγωγή κυτταροκινών, ενεργοποίηση μακροφάγων, διαταραχή αιμόστασης και κίνδυνο DIC/πολυοργανικής ανεπάρκειας.',
+    q28: 'Η ατομική φλεγμονώδης απάντηση εξαρτάται από γενετικό υπόβαθρο, ιδιοσυγκρασία, διατροφή/συνήθειες/περιβάλλον, ηλικία και γενική σωματική/ψυχική κατάσταση.',
+    q29:'Ορώδης = υγρό με λίγα κύτταρα (π.χ. φυσαλίδες δέρματος).',
+q30:'Ίνωση σε πλευρίτιδα/περικαρδίτιδα με ινώδες εξίδρωμα.',
+q31:'Το απόστημα = συλλογή πύου σε ιστό (νεκρωμένα κύτταρα + ουδετερόφιλα).',
+q32:'Έλκη συχνά σε βλεννογόνους & σε δέρμα υπερτασικών/διαβητικών.',
+q33:'Ο πνευμονιόκοκκος = *συχνότερο αίτιο* λοβώδους πνευμονίας.',
+q34:'Μη φυσιολογικός εντοπισμός είναι οι κυψελίδες → προκαλεί νόσο.',
+q35:'Ερυθρά ήπωση = εξίδρωμα + ουδετερόφιλα & ερυθρά.',
+q36:'Πρώτη φάση: Συμφόρηση (24 ώρες).',
+q37:'Λύση = απομάκρυνση εξιδρώματος & επαναφορά αερισμού.',
+q38:'Κυψελίδες γεμάτες υγρό → χαμηλή O₂ πρόσληψη → υπόπνοια.',
+q39:'Φαιά ηπάτωση: μακροφάγα – καθαρισμός νεκρωτικών στοιχείων.',
+q40:'Αν η βασική μεμβράνη μείνει ακέραιη → δυνατότητα αποκατάστασης.',
+q41:'Καταστροφή τοιχώματος → ουλοποίηση/βρογχοπνευμονία.',
+q42:'Νέκρωση + εμπύημα = complicated pneumonia.',
+q43:'Κλασικό σύμπτωμα: πόνος RIF.',
+q44:'Ουδετερόφιλα σε όλα τα στρώματα του τοιχώματος.',
+q45:'Ηωσινόφιλα = αλλεργία/παρασιτική αιτία.',
+q46:'Enterobius vermicularis = συχνά σε παιδιά.',
+q47:'Τα pinworms βρίσκονται στον αυλό.',
+q48:'Ουδετερόφιλα στη μυϊκή στοιβάδα = οξεία σκωληκοειδίτιδα.',
+q49:'Καθυστέρηση → διάτρηση → περιτονίτιδα.',
+q50:'Συνήθως υπάρχει πύον στον αυλό.',
+q51:'Ισταμίνη = αγγειοδιαστολή + ↑διαπερατότητα.',
+q52:'Μαστοκύτταρα = βασική πηγή ισταμίνης.',
+q53:'H1 = φλεγμονώδεις δράσεις ισταμίνης.',
+q54:'Απελευθερώνεται από φωσφολιπιδικές μεμβράνες.',
+q55:'COX μπλοκάρουν προσταγλανδίνες.',
+q56:'LTC4 (και LTD4/LTE4) → βρογχόσπασμος.',
+q57:'TNF/IL-1 δεν κάνουν χημειοταξία λευκοτριενίων.',
+q58:'IFN-γ → διατήρηση χρόνιου φλεγμονώδους κύκλου.',
+q59:'Χημειοκίνες = χημειοταξία λευκοκυττάρων.',
+q60:'C5a = ισχυρός χημειοτακτικός παράγοντας.',
+q61:'C3b = οψωνίνη → φαγοκυττάρωση.',
+q62:'MAC (C5b-9) = λύση κυττάρων.',
+q63:'NSAIDs αναστέλλουν COX → ↓προσταγλανδίνες.',
+q64:'IL-10 = ισχυρή αντιφλεγμονώδης.',
+q65:'TNF/IL-1 ενεργοποιούν ενδοθήλιο & δίνουν συστηματικές εκδηλώσεις.',
+q66:'Οι χημειοκίνες κάνουν χημειοταξία.',
+q67:'C3b = οψωνίνη.',
+q68:'MAC C5b-9 → λύση κυττάρων/βακτηρίων.',
+q69:'TNF/IL-6 → CRP & πρωτεΐνες οξείας φάσης.',
+q70:'Η φλεγμονή αυξάνει ενδοθηλιακή ενεργοποίηση — δεν τη μειώνει.',
+q71:'TNF/IL-1/IL-6 → πυρετός.',
+q72:'Δρουν στον υποθάλαμο → ↑θερμοκρασίας set-point.',
+q73:'IL-6 → ↑CRP.',
+q74:'Μικροβιακή λοίμωξη → σημαντική αύξηση CRP/πρωτεϊνών οξείας φάσης.',
+q75:'Ιογενής λοίμωξη → λεμφοκυττάρωση.',
+q76:'CSFs αυξάνουν την απελευθέρωση κυττάρων από μυελό.',
+q77:'Ηωσινοφιλία → αλλεργίες/παράσιτα.',
+q78:'Καθυστέρηση → shock, MODS.'
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('quizForm');
+
+  // Για κάθε ερώτηση, βάλε event listener στα radio buttons
+  for (const q in correctAnswers) {
+    const inputs = form.querySelectorAll('input[name="' + q + '"]');
+    inputs.forEach(input => {
+      input.addEventListener('change', () => {
+        handleAnswer(q, input.value);
+      });
+    });
+  }
+});
+
+function handleAnswer(questionName, selectedValue) {
+  const form = document.getElementById('quizForm');
+  const inputs = form.querySelectorAll('input[name="' + questionName + '"]');
+  const correctValue = correctAnswers[questionName];
+  const feedbackDiv = document.getElementById('feedback-' + questionName);
+
+  // Καθαρίζουμε προηγούμενα χρώματα
+  inputs.forEach(input => {
+    const label = input.parentElement;
+    label.classList.remove('correct', 'incorrect');
+  });
+
+  // Πάντα πρασινίζει η σωστή απάντηση
+  inputs.forEach(input => {
+    if (input.value === correctValue) {
+      input.parentElement.classList.add('correct');
+    }
+  });
+
+  // Αν διάλεξες λάθος, κοκκινίζει αυτή που διάλεξες
+  if (selectedValue !== correctValue) {
+    const selectedInput = Array.from(inputs).find(i => i.value === selectedValue);
+    if (selectedInput) {
+      selectedInput.parentElement.classList.add('incorrect');
+    }
+  }
+
+  // Κείμενο feedback
+  if (feedbackDiv) {
+    if (selectedValue === correctValue) {
+      feedbackDiv.innerHTML = '<span class="correct">Σωστό!</span> ' + explanations[questionName];
+    } else {
+      feedbackDiv.innerHTML =
+        '<span class="incorrect">Λάθος.</span> ' +
+        'Η σωστή απάντηση είναι: ' + correctValue.toUpperCase() + '. ' +
+        explanations[questionName];
+    }
+  }
+}
+
+
+</script>
+
+</body>
+</html>
