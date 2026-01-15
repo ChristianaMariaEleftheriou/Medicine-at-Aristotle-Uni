@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Παθολογική Ανατομική – Εικόνες για Εξετάσεις</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f5f5ff;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      padding: 1rem 0 0.3rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      margin: 0.4rem 0 0.8rem;
+    }
+
+    .top-bar button {
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: #4b6cff;
+      color: #fff;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .top-bar button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.5rem 0.8rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.1fr) minmax(300px, 1.4fr);
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+      align-items: stretch;
+    }
+
+    .img-box, .text-box {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      padding: 0.6rem 0.7rem;
+      box-sizing: border-box;
+      font-size: 0.88rem;
+    }
+
+    .img-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .img-box img {
+      max-width: 100%;
+      max-height: 320px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .text-box h3 {
+      margin: 0 0 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      margin-bottom: 0.25rem;
+      background: #e3f0ff;
+      color: #174ea6;
+    }
+
+    ul {
+      margin: 0.2rem 0 0;
+      padding-left: 1.1rem;
+    }
+
+    li {
+      margin-bottom: 0.15rem;
+    }
+
+    .highlight {
+      font-weight: 700;
+      color: #b00063;
+    }
+
+    @media (max-width: 800px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Παθολογική Ανατομική – Εικόνες για Εξετάσεις</h1>
+  <div class="subtitle">Αριστερά: εικόνα • Δεξιά: τι πρέπει να ξέρω για την εξέταση</div>
+</header>
+
+<div class="top-bar">
+  <button onclick="window.open('path_practice_quiz.html', '_blank')">
+    Άνοιξε το practice quiz
+  </button>
+</div>
+
+<div class="container" id="cases-container">
+  <!-- ΕΔΩ ΘΑ ΜΠΟΥΝ ΟΙ ΣΕΙΡΕΣ ΜΕ JS -->
+</div>
+
+<script>
+  // 🔹 ΕΔΩ ΘΑ ΣΟΥ ΔΙΝΩ ΕΓΩ ΤΟ ARRAY ΚΑΘΕ ΦΟΡΑ
+  // ΔΕΙΓΜΑ ΓΙΑ 2 ΠΕΡΙΠΤΩΣΕΙΣ – ΘΑ ΤΟ ΑΛΛΑΞΟΥΜΕ ΜΕ ΤΑ ΔΙΚΑ ΣΟΥ:
+  const cases = [
+  {
+    img: "page_3_img_1.jpeg",
+    tag: "Εικόνα 1",
+    title: "Κύτταρα ειδικής ανοσίας – αναγνώριση αντιγόνου & λειτουργίες",
+    bullets: [
+      "<span class='highlight'>Β λεμφοκύτταρο</span>: αναγνώριση μικροβίου → πλασματοκύτταρο → παραγωγή αντισωμάτων → εξουδετέρωση, οψωνινοποίηση, ενεργοποίηση συμπληρώματος.",
+      "<span class='highlight'>Th (CD4+)</span>: αναγνώριση αντιγόνου σε MHC II από APC → έκκριση κυτταροκινών → ενεργοποίηση μακροφάγων, φλεγμονώδης απάντηση, βοήθεια σε Β και Tc.",
+      "<span class='highlight'>Tc (CD8+)</span>: αναγνώριση μολυσμένου κυττάρου μέσω MHC I → άμεση θανάτωση (perforin, granzymes).",
+      "<span class='highlight'>Treg</span>: καταστολή ανοσολογικής απάντησης – πρόληψη αυτοανοσίας.",
+      "<span class='highlight'>NK</span>: φυσική κυτταροτοξικότητα χωρίς ειδική αναγνώριση αντιγόνου – σκοτώνουν κύτταρα με χαμηλή έκφραση MHC I."
+    ]
+  },
+  {
+    img: "page_4_img_1.jpeg",
+    tag: "Εικόνα 2",
+    title: "Διαφοροποίηση Naive CD4+ Τ-κυττάρου σε υποομάδες Th",
+    bullets: [
+      "Naive CD4+ κύτταρο διαφοροποιείται ανάλογα με κυτταροκίνες μικροπεριβάλλοντος.",
+      "<span class='highlight'>Th1</span>: IL-12, INF-γ → παραγωγή IFN-γ, TNF → κυτταρική ανοσία, ενεργοποίηση μακροφάγων.",
+      "<span class='highlight'>Th2</span>: IL-4 → παραγωγή IL-4, IL-5, IL-13 → IgE, ηωσινόφιλα, αλλεργία και παράσιτα.",
+      "<span class='highlight'>Th17</span>: IL-1, IL-6, IL-23, TGF-β → IL-17, IL-21 κ.ά. → ουδετερόφιλα, χρόνια φλεγμονή, αυτοάνοσα.",
+      "<span class='highlight'>Treg</span>: TGF-β, IL-2 → IL-10, TGF-β → ανοσορύθμιση/καταστολή.",
+      "<span class='highlight'>Tfh</span>: IL-21 → βοήθεια σε Β-κύτταρα στα βλαστικά κέντρα (class switching, συγγένεια αντισωμάτων)."
+    ]
+  },
+  {
+    img: "page_5_img_1.jpeg",
+    tag: "Εικόνα 3",
+    title: "Πορεία ωρίμανσης Β-κυττάρου & ρόλος Pax5",
+    bullets: [
+      "Από <span class='highlight'>λεμφοειδή πρόδρομο</span> → pre-pro-B → pro-B → pre-B → ανώριμο Β → ώριμο Β → ενεργοποιημένο Β → πλασματοκύτταρο.",
+      "<span class='highlight'>V(D)J ανασυνδυασμός</span> στο pro-B στάδιο δημιουργεί μοναδικό BCR.",
+      "Το <span class='highlight'>CD19</span> εμφανίζεται νωρίς και παραμένει σε όλα τα στάδια Β-κύτρου (εκτός πλασματοκυττάρου).",
+      "<span class='highlight'>Pax5</span>: μεταγραφικός παράγοντας που διατηρεί την ταυτότητα Β-κυττάρου – καταστολή γονιδίων πλασματοκυττάρου.",
+      "Απώλεια/δυσλειτουργία Pax5 σχετίζεται με λευχαιμίες/λεμφώματα Β-γραμμής."
+    ]
+  },
+  {
+    img: "page_5_img_2.jpeg",
+    tag: "Εικόνα 4",
+    title: "Ανοσοϊστοχημεία Β-ζώνης λεμφαδένα (π.χ. PAX5 ή CD20)",
+    bullets: [
+      "Καφέ χρώση σε συμπαγή περιοχή: θετικά Β-κύτταρα (βλαστικά κέντρα/φλοιός λεμφαδένα).",
+      "Γαλάζιες περιοχές (αιματοξυλίνη): αρνητικά κύτταρα ή υπόστρωμα.",
+      "Σημαντικό να ξεχωρίζεις <span class='highlight'>περιορισμένη</span> B-ζώνη (φυσιολογική) από <span class='highlight'>διάχυτη μονοτονία</span> (λέμφωμα).",
+      "Εξέταση: «Ποια κύτταρα τονίζονται; Σε ποια ζώνη του λεμφαδένα;»."
+    ]
+  },
+  {
+    img: "page_5_img_3.jpeg",
+    tag: "Εικόνα 5",
+    title: "Διαφορετικές ζώνες χρώσης – αρχιτεκτονική λεμφαδένα",
+    bullets: [
+      "Διακριτά στρογγυλά/οζώδη κέντρα και μεγαλύτερες μάζες καφέ χρώσης → διαφορετικές περιοχές Β-κυττάρων.",
+      "Η διατήρηση της φυσιολογικής αρχιτεκτονικής (φλοιός με θυλάκια, παραφλοιός, μυελός) υποστηρίζει <span class='highlight'>αντιδραστική υπερπλασία</span> και όχι λέμφωμα.",
+      "Σε λέμφωμα συχνά βλέπουμε <span class='highlight'>διάχυτη</span> αντικατάσταση και μονοτονία κυττάρων.",
+      "Εξέταση: διάκριση αντιδραστικού λεμφαδένα vs νεοπλασματικού (pattern, μονοτονία, καταστροφή αρχιτεκτονικής)."
+    ]
+  },
+  {
+    img: "page_5_img_4.png",
+    tag: "Εικόνα 6",
+    title: "Έκφραση CD19/CD20 & ανοσοσφαιρινών σε στάδια Β-κυττάρου",
+    bullets: [
+      "Στο <span class='highlight'>bone marrow</span>: stem cell → pro-B → pre-B → ανώριμο Β (επιφανειακό IgM).",
+      "Στην <span class='highlight'>περιφέρεια</span>: naive Β (IgM + IgD), μετά από ενεργοποίηση memory Β & plasmablast/πλασματοκύτταρο (κυρίως IgG).",
+      "<span class='highlight'>CD19</span>: εκφράζεται σχεδόν σε όλα τα στάδια Β-κυττάρου (μέχρι πλασματοβλάστη).",
+      "<span class='highlight'>CD20</span>: αρχίζει πιο αργά (από pre-B/ανώριμο Β) και χάνεται στα ώριμα πλασματοκύτταρα.",
+      "Κλινικό: στόχος μονοκλωνικών αντισωμάτων (π.χ. Rituximab anti-CD20) σε Β-λεμφώματα."
+    ]
+  },
+  {
+    img: "page_5_img_5.png",
+    tag: "Εικόνα 7",
+    title: "B-cell receptor (BCR) – δομή",
+    bullets: [
+      "BCR = μεμβρανική IgM (βαριά + ελαφρά αλυσίδα) συνδεδεμένη με CD79A/CD79B.",
+      "Περιλαμβάνει <span class='highlight'>μεταβλητές περιοχές</span> (αναγνώριση αντιγόνου) και <span class='highlight'>σταθερές περιοχές</span>.",
+      "Τα CD79A/B μεταδίδουν το σήμα ενδοκυττάρια μετά τη δέσμευση του αντιγόνου.",
+      "Σημαντικό για λεμφώματα: κλωνικότητα BCR (ίδια ελαφρά αλυσίδα κ ή λ) → μονοκλωνικός πληθυσμός."
+    ]
+  },
+  {
+    img: "page_7_img_1.jpeg",
+    tag: "Εικόνα 8",
+    title: "MHC γονιδιακό σύμπλεγμα – Class I, II, III",
+    bullets: [
+      "Στο <span class='highlight'>χρωμόσωμα 6</span> βρίσκεται το HLA/MHC σύμπλεγμα.",
+      "<span class='highlight'>Class II</span>: DP, DQ, DR – γονίδια για α και β αλυσίδες, έκφραση σε APC, παρουσιάζουν εξωγενή αντιγόνα σε CD4+.",
+      "<span class='highlight'>Class III</span>: γονίδια για συμπλήρωμα (C2, C4, factor B) και κυτταροκίνες (TNF, LT).",
+      "<span class='highlight'>Class I</span>: B, C, A – αλυσίδες MHC I, έκφραση σε όλα τα εμπύρηνα κύτταρα, παρουσιάζουν ενδογενή αντιγόνα σε CD8+.",
+      "Εξέταση: να μπορείς να ξεχωρίσεις τι ανήκει σε κάθε τάξη και ποια κύτταρα τα εκφράζουν."
+    ]
+  },
+  {
+    img: "page_8_img_1.jpeg",
+    tag: "Εικόνα 9",
+    title: "Κληρονόμηση MHC – HLA haplotypes",
+    bullets: [
+      "<span class='highlight'>Haplotype</span>: το σύνολο των HLA αλληλομόρφων σε ένα χρωμόσωμα 6 (DP, DQ, DR, B, C, A).",
+      "Συνήθως κληρονομείται ως ενιαίο σύνολο από κάθε γονέα (σπάνιες ανασυνδυάσεις).",
+      "Τα παιδιά παίρνουν έναν haplotype από τον κάθε γονέα → 4 πιθανοί συνδυασμοί.",
+      "Κλινικό: σημαντικό σε μεταμοσχεύσεις – συμβατότητα HLA μειώνει κίνδυνο απόρριψης.",
+      "Ερώτηση εξετάσεων: «Τι σημαίνει ότι οι HLA απλότυποι κληρονομούνται;»."
+    ]
+  },
+  {
+    img: "page_9_img_1.jpeg",
+    tag: "Εικόνα 10",
+    title: "Δομή MHC Class I & Class II μορίων",
+    bullets: [
+      "Πάνω: ξανά το γονιδιακό σύμπλεγμα (DP, DQ, DR, B, C, A, TNF, LT).",
+      "Κάτω αριστερά: <span class='highlight'>MHC II</span> – 2 αλυσίδες (α και β), εξωκυττάριοι δομικοί τομείς α1/α2, β1/β2, αυλάκι σύνδεσης πεπτιδίου μεταξύ α1-β1.",
+      "Κάτω δεξιά: <span class='highlight'>MHC I</span> – βαριά αλυσίδα (α1, α2, α3) + β2-microglobulin, αυλάκι σύνδεσης πεπτιδίου μεταξύ α1-α2.",
+      "MHC I παρουσιάζει <span class='highlight'>ενδογενή</span> πεπτίδια σε CD8+ · MHC II <span class='highlight'>εξωγενή</span> σε CD4+.",
+      "Εξέταση: να μπορείς να περιγράψεις τις δομικές διαφορές Class I vs Class II και τον τύπο αντιγόνου που παρουσιάζουν."
+    ]
+  }
+];
+
+
+  // 🔹 ΜΗΝ ΠΕΙΡΑΖΕΙΣ ΤΙΠΟΤΑ ΑΠΟ ΚΑΤΩ, ΘΑ ΤΑ ΚΑΝΕΙ ΟΛΑ ΜΟΝΟ ΤΟΥ
+  const container = document.getElementById('cases-container');
+
+  cases.forEach((item, index) => {
+    const row = document.createElement('div');
+    row.className = 'row';
+
+    const imgBox = document.createElement('div');
+    imgBox.className = 'img-box';
+    const img = document.createElement('img');
+    img.src = item.img;
+    img.alt = item.title || `Εικόνα ${index + 1}`;
+    imgBox.appendChild(img);
+
+    const textBox = document.createElement('div');
+    textBox.className = 'text-box';
+
+    const tagSpan = document.createElement('span');
+    tagSpan.className = 'tag';
+    tagSpan.textContent = item.tag || `Εικόνα ${index + 1}`;
+
+    const titleEl = document.createElement('h3');
+    titleEl.textContent = item.title || '';
+
+    const ul = document.createElement('ul');
+    (item.bullets || []).forEach(text => {
+      const li = document.createElement('li');
+      li.innerHTML = text;
+      ul.appendChild(li);
+    });
+
+    textBox.appendChild(tagSpan);
+    textBox.appendChild(titleEl);
+    textBox.appendChild(ul);
+
+    row.appendChild(imgBox);
+    row.appendChild(textBox);
+
+    container.appendChild(row);
+  });
+</script>
+
+</body>
+</html>

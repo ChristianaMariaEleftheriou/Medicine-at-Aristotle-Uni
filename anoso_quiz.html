@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz – Ανοσολογική Απόκριση 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5ff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      padding: 1rem 1.2rem 0.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      padding: 0 0.8rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #444;
+      margin: 0.4rem 0 0.8rem;
+      text-align: center;
+    }
+
+    .question {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 0.8rem 0.9rem;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .q-text {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    ul.options {
+      list-style: none;
+      padding: 0;
+      margin: 0.2rem 0 0;
+    }
+
+    .option {
+      margin-bottom: 0.3rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.13s ease, border-color 0.13s ease, transform 0.05s ease;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .option.correct {
+      background: #c6f6c6;
+      border-color: #38a169;
+      font-weight: 600;
+    }
+
+    .option.wrong {
+      background: #ffd6d6;
+      border-color: #e53e3e;
+      text-decoration: line-through;
+    }
+
+    .q-footer {
+      margin-top: 0.3rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    .q-footer span {
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .question {
+        padding: 0.7rem 0.75rem;
+      }
+      .q-text {
+        font-size: 0.9rem;
+      }
+      .option {
+        font-size: 0.86rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Quiz – Ανοσολογική Απόκριση 1</h1>
+    <div class="subtitle">Φυσική & Επίκτητη Ανοσία – παρουσίαση Κολέτσα</div>
+  </header>
+
+  <div class="container">
+    <div class="note">
+      Κάνε κλικ σε μια απάντηση. Αν είναι σωστή γίνεται <b>πράσινη</b>, αν είναι λάθος <b>κόκκινη</b> και εμφανίζεται ταυτόχρονα η σωστή.
+    </div>
+
+    <!-- Q1 -->
+    <div class="question">
+      <div class="q-text">
+        1. Ποιος είναι ο πιο σωστός ορισμός της <b>ανοσίας</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Η ικανότητα του οργανισμού να παράγει αντισώματα μόνο μετά από εμβολιασμό.</li>
+        <li class="option" data-correct="true">Η προφύλαξη / αντίσταση του οργανισμού σε βλαπτικούς παράγοντες και λοιμώξεις.</li>
+        <li class="option" data-correct="false">Η ικανότητα του οργανισμού να αυξάνει τη θερμοκρασία του.</li>
+        <li class="option" data-correct="false">Η ικανότητα παραγωγής φλεγμονής χωρίς παρουσία μικροβίων.</li>
+      </ul>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question">
+      <div class="q-text">
+        2. Τι μελετά κυρίως η <b>Ανοσοπαθολογία</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Τη φυσιολογική ανάπτυξη των λεμφοκυττάρων.</li>
+        <li class="option" data-correct="true">Τους παθολογικούς ανοσολογικούς μηχανισμούς που προκαλούν βλάβες σε ιστούς και όργανα.</li>
+        <li class="option" data-correct="false">Μόνο τις αλλεργικές αντιδράσεις τύπου Ι.</li>
+        <li class="option" data-correct="false">Μόνο τις ιογενείς λοιμώξεις.</li>
+      </ul>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question">
+      <div class="q-text">
+        3. Ποια είναι βασική <b>οδός μετάδοσης</b> λοιμωδών νοσημάτων από άνθρωπο σε άνθρωπο;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Σταγονίδια από πταρμό και βήχα.</li>
+        <li class="option" data-correct="false">Μόνο με ενδοφλέβια ένεση.</li>
+        <li class="option" data-correct="false">Μόνο με εντομολογικούς φορείς.</li>
+        <li class="option" data-correct="false">Μόνο με άμεση επαφή αίματος.</li>
+      </ul>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question">
+      <div class="q-text">
+        4. Ποιο από τα παρακάτω <b>χαρακτηρίζει</b> τη <u>φυσική (έμφυτη) ανοσία</u>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Δεν έχει ανοσολογική μνήμη και δρα άμεσα, μη ειδικά.</li>
+        <li class="option" data-correct="false">Είναι απολύτως ειδική για κάθε αντιγόνο.</li>
+        <li class="option" data-correct="false">Ενεργοποιείται μόνο μετά από εμβολιασμό.</li>
+        <li class="option" data-correct="false">Δρα αποκλειστικά μέσω αντισωμάτων.</li>
+      </ul>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question">
+      <div class="q-text">
+        5. Ποιο από τα παρακάτω <b>ΔΕΝ</b> είναι κύριο συστατικό της φυσικής ανοσίας;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Επιθηλιακοί φραγμοί.</li>
+        <li class="option" data-correct="false">Φαγοκύτταρα (μακροφάγα, ουδετερόφιλα).</li>
+        <li class="option" data-correct="false">NK κύτταρα.</li>
+        <li class="option" data-correct="true">Πλασματοκύτταρα που παράγουν ειδικά αντισώματα.</li>
+      </ul>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question">
+      <div class="q-text">
+        6. Ποιο ζευγάρι είναι σωστό σχετικά με <b>φυσική vs επίκτητη ανοσία</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Φυσική: άμεση, μη ειδική – Επίκτητη: βραδύτερη, ειδική, με μνήμη.</li>
+        <li class="option" data-correct="false">Φυσική: βραδεία, ειδική – Επίκτητη: άμεση, μη ειδική.</li>
+        <li class="option" data-correct="false">Και οι δύο έχουν τον ίδιο χρόνο έναρξης.</li>
+        <li class="option" data-correct="false">Και οι δύο στερούνται ανοσολογικής μνήμης.</li>
+      </ul>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question">
+      <div class="q-text">
+        7. Ποιο από τα παρακάτω <b>ΔΕΝ</b> αποτελεί μηχανισμό φυσικού φραγμού των επιφανειών του σώματος;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Αποφολίδωση του δέρματος.</li>
+        <li class="option" data-correct="false">Δάκρυα και βλεφαρισμός.</li>
+        <li class="option" data-correct="true">Σύνθεση IgG στο πλάσμα.</li>
+        <li class="option" data-correct="false">Γαστρική οξύτητα.</li>
+      </ul>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question">
+      <div class="q-text">
+        8. Ποιο από τα παρακάτω <b>αντιμικροβιακά</b> βρίσκεται φυσιολογικά σε εκκρίσεις όπως τα δάκρυα και το σάλιο;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Λυσοζύμη.</li>
+        <li class="option" data-correct="false">Ινσουλίνη.</li>
+        <li class="option" data-correct="false">Αλβουμίνη.</li>
+        <li class="option" data-correct="false">Παραθορμόνη.</li>
+      </ul>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question">
+      <div class="q-text">
+        9. Ποιος είναι βασικός <b>προστατευτικός ρόλος</b> της φυσιολογικής μικροβιακής χλωρίδας;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Κατάληψη υποδοχέων και αναστολή προσκόλλησης παθογόνων.</li>
+        <li class="option" data-correct="false">Πλήρης αποστείρωση των επιφανειών.</li>
+        <li class="option" data-correct="false">Παραγωγή αυτοαντισωμάτων.</li>
+        <li class="option" data-correct="false">Αναστολή φαγοκυττάρωσης.</li>
+      </ul>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question">
+      <div class="q-text">
+        10. Ποια κλινική κατάσταση σχετίζεται με <b>διαταραχή της μικροβιακής χλωρίδας του εντέρου</b> μετά από αντιβιοτικά;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Ψευδομεμβρανώδης κολίτιδα από C. difficile.</li>
+        <li class="option" data-correct="false">Οξεία σκωληκοειδίτιδα.</li>
+        <li class="option" data-correct="false">Οξεία παγκρεατίτιδα.</li>
+        <li class="option" data-correct="false">Νεφρωσικό σύνδρομο.</li>
+      </ul>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question">
+      <div class="q-text">
+        11. Ποιος από τους παρακάτω τύπους μακροφάγων βρίσκεται στον <b>εγκέφαλο</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Κύτταρα Kupffer.</li>
+        <li class="option" data-correct="true">Μικρογλοία.</li>
+        <li class="option" data-correct="false">Κυψελιδικά μακροφάγα.</li>
+        <li class="option" data-correct="false">Μεσαγγειακά φαγοκύτταρα.</li>
+      </ul>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question">
+      <div class="q-text">
+        12. Τα <b>κύτταρα Paneth</b> εντοπίζονται:
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Στο ενδοκάρδιο της καρδιάς.</li>
+        <li class="option" data-correct="true">Στις κρύπτες του λεπτού εντέρου, προστατεύοντας τα βλαστικά κύτταρα.</li>
+        <li class="option" data-correct="false">Στα ηπατικά λόβια.</li>
+        <li class="option" data-correct="false">Στο μυοκάρδιο.</li>
+      </ul>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question">
+      <div class="q-text">
+        13. Ποια από τις παρακάτω ουσίες είναι σημαντική για την <b>προστασία του ουροποιητικού</b> από λοιμώξεις;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Έκκριση χολικών αλάτων.</li>
+        <li class="option" data-correct="true">Η συνεχής ροή των ούρων προς μία κατεύθυνση.</li>
+        <li class="option" data-correct="false">Αναστροφή της ροής των ούρων (παλινδρόμηση).</li>
+        <li class="option" data-correct="false">Υψηλή συγκέντρωση γλυκόζης στα ούρα.</li>
+      </ul>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question">
+      <div class="q-text">
+        14. Τι είναι τα <b>PAMPs</b> (Pathogen-Associated Molecular Patterns);
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Μοριακά πρότυπα μικροβιακής προέλευσης που αναγνωρίζονται από κύτταρα της φυσικής ανοσίας.</li>
+        <li class="option" data-correct="false">Αυτοαντιγόνα του οργανισμού.</li>
+        <li class="option" data-correct="false">Οποιαδήποτε κυτταροκίνες.</li>
+        <li class="option" data-correct="false">Μόνο οι ορμόνες του θυρεοειδούς.</li>
+      </ul>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question">
+      <div class="q-text">
+        15. Οι <b>PRRs (Pattern Recognition Receptors)</b> εντοπίζονται:
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Στη μεμβράνη, στα ενδοσώματα και στο κυτταρόπλασμα κυττάρων της φυσικής ανοσίας.</li>
+        <li class="option" data-correct="false">Μόνο στον πυρήνα των Τ λεμφοκυττάρων.</li>
+        <li class="option" data-correct="false">Αποκλειστικά στα ερυθροκύτταρα.</li>
+        <li class="option" data-correct="false">Μόνο στα B λεμφοκύτταρα.</li>
+      </ul>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question">
+      <div class="q-text">
+        16. Ποια από τις παρακάτω προτάσεις για το <b>inflammasome</b> είναι σωστή;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Είναι κυτταροπλασματικό σύμπλοκο που ενεργοποιεί την κασπάση-1 και την παραγωγή IL-1.</li>
+        <li class="option" data-correct="false">Είναι επιφανειακό αντίσωμα στην μεμβράνη των Β κυττάρων.</li>
+        <li class="option" data-correct="false">Είναι σύμπλοκο που παράγει IL-10 και αναστέλλει κάθε φλεγμονή.</li>
+        <li class="option" data-correct="false">Είναι πρωτεΐνη-φορέας οξυγόνου στο πλάσμα.</li>
+      </ul>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question">
+      <div class="q-text">
+        17. Ποια κλινική συνέπεια μπορεί να έχει ένα <b>υπερδραστήριο inflammasome</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Αυτοφλεγμονώδη σύνδρομα με υπερβολική παραγωγή IL-1.</li>
+        <li class="option" data-correct="false">Απόλυτη ανοσία σε όλες τις λοιμώξεις.</li>
+        <li class="option" data-correct="false">Μόνιμη αναιμία.</li>
+        <li class="option" data-correct="false">Πλήρη αναστολή φλεγμονής.</li>
+      </ul>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question">
+      <div class="q-text">
+        18. Ποιο από τα παρακάτω χαρακτηρίζει καλύτερα την <b>επίκτητη (ειδική) ανοσία</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Δρά ανεξάρτητα από τα λεμφοκύτταρα.</li>
+        <li class="option" data-correct="true">Περιλαμβάνει χυμική (αντισώματα) και κυτταρική (Τ, Β λεμφοκύτταρα) ανοσία με ανοσολογική μνήμη.</li>
+        <li class="option" data-correct="false">Δεν επηρεάζεται από εμβολιασμούς.</li>
+        <li class="option" data-correct="false">Χρησιμοποιεί μόνο ουδετερόφιλα και μακροφάγα.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    // Βρίσκουμε όλες τις επιλογές
+    const options = document.querySelectorAll('.option');
+
+    options.forEach(option => {
+      option.addEventListener('click', function () {
+        const questionDiv = this.closest('.question');
+        if (questionDiv.dataset.answered === 'true') {
+          return; // μην επιτρέπεις δεύτερη απάντηση
+        }
+
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('wrong');
+          // βρες και χρωμάτισε τη σωστή απάντηση
+          const siblings = questionDiv.querySelectorAll('.option');
+          siblings.forEach(opt => {
+            if (opt.getAttribute('data-correct') === 'true') {
+              opt.classList.add('correct');
+            }
+          });
+        }
+
+        questionDiv.dataset.answered = 'true';
+      });
+    });
+  </script>
+
+</body>
+</html>

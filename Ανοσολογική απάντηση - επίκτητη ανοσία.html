@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Ανοσολογική Απόκριση 2 – Μαθησιακές Κάρτες</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f5f5ff;
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 1rem 0 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .top-bar button {
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: #4b6cff;
+      color: #fff;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .top-bar button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 0.9rem;
+      padding: 0.9rem;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 0.75rem 0.8rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      margin-bottom: 0.25rem;
+    }
+
+    .tag-blue   { background: #e3f0ff; color: #174ea6; }
+    .tag-green  { background: #e3ffe8; color: #0b7a30; }
+    .tag-orange { background: #ffe9d9; color: #b04900; }
+    .tag-pink   { background: #ffe6f3; color: #b00063; }
+    .tag-purple { background: #ede4ff; color: #5b2ab3; }
+
+    .highlight-blue   { color: #174ea6; font-weight: 700; }
+    .highlight-green  { color: #0b7a30; font-weight: 700; }
+    .highlight-orange { color: #b04900; font-weight: 700; }
+    .highlight-pink   { color: #b00063; font-weight: 700; }
+    .highlight-purple { color: #5b2ab3; font-weight: 700; }
+
+    ul {
+      padding-left: 1rem;
+      margin: 0.1rem 0 0;
+    }
+
+    li {
+      margin-bottom: 0.15rem;
+    }
+
+    @media (max-width: 1100px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+      }
+    }
+
+    @media (max-width: 550px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ανοσολογική Απόκριση 2</h1>
+  <div class="subtitle">Κύτταρα ειδικής ανοσίας, MHC, TCR, λεμφαδένας, αντισώματα</div>
+
+  <div class="top-bar">
+    <button onclick="window.open('anoso2_quiz.html', '_blank')">
+      Άνοιξε το quiz σε νέο tab
+    </button>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. Χυμική & Κυτταρική ανοσία -->
+    <div class="card">
+      <div class="tag tag-blue">Επίκτητη ανοσία</div>
+      <h3>Χυμική & Κυτταρική ανοσία</h3>
+      <ul>
+        <li><span class="highlight-blue">Χυμική</span>: παραγωγή <b>αντισωμάτων</b> (Β λεμφοκύτταρα → πλασματοκύτταρα).</li>
+        <li><span class="highlight-blue">Κυτταρική</span>: <b>Β, Τ4, Τ8, Τ/NK</b> λεμφοκύτταρα & μακροφάγα, δενδριτικά.</li>
+        <li>Β-κύτταρα: BCR, έκφραση <b>IgM, CD79α</b>.</li>
+        <li>Τ-κύτταρα: TCR, σύμπλεγμα <b>CD3</b>.</li>
+      </ul>
+    </div>
+
+    <!-- 2. Κύτταρα ειδικής ανοσίας – εικόνα σελίδα 3 -->
+    <div class="card">
+      <div class="tag tag-green">Εικόνα</div>
+      <h3>Κύτταρα ειδικής ανοσίας – λειτουργίες</h3>
+      <ul>
+        <li><b>Β λεμφοκύτταρο</b>: αναγνώριση μικροβίου → πλασματοκύτταρο → αντισώματα → <span class="highlight-green">εξουδετέρωση, οψωνινοποίηση, συμπλήρωμα</span>.</li>
+        <li><b>Th (CD4+)</b>: αναγνωρίζουν αντιγόνο σε APC → κυτταροκίνες → <b>ενεργοποίηση μακροφάγων</b>, φλεγμονή, ενεργοποίηση Β & Τ8.</li>
+        <li><b>Tc (CD8+)</b>: αναγνωρίζουν μολυσμένα κύτταρα μέσω MHC I → <span class="highlight-orange">κυτταροτοξικότητα</span>, θανάτωση.</li>
+        <li><b>Treg</b>: <span class="highlight-pink">αναστολή/ρύθμιση</span> της ανοσολογικής απάντησης.</li>
+        <li><b>NK</b>: θανάτωση μολυσμένων ή όγκων χωρίς ειδική αναγνώριση αντιγόνου.</li>
+      </ul>
+    </div>
+
+    <!-- 3. PAX5 & CD20 -->
+    <div class="card">
+      <div class="tag tag-pink">Δείκτες Β-κυττάρων</div>
+      <h3>PAX5 & CD20</h3>
+      <ul>
+        <li><b>PAX5</b>: μεταγραφικός παράγοντας – έκφραση κατά τη διαφοροποίηση Β-κυττάρων (εικόνα σελ. 5).</li>
+        <li><b>CD20</b>: επιφανειακό μόριο ώριμων Β-κυττάρων – έντονη χρώση στους βλαστικούς θυλάκους.</li>
+        <li>Χρήσιμοι <span class="highlight-blue">ανοσοϊστοχημικοί δείκτες</span> σε λεμφώματα Β-κυττάρων.</li>
+      </ul>
+    </div>
+
+    <!-- 4. Μόρια αναγνώρισης αντιγόνων -->
+    <div class="card">
+      <div class="tag tag-blue">Αναγνώριση Ag</div>
+      <h3>Μόρια αναγνώρισης αντιγόνων</h3>
+      <ul>
+        <li><b>BCR</b>: μεμβρανική ανοσοσφαιρίνη (IgM) + CD79α.</li>
+        <li><b>TCR</b>: υποδοχέας Τ-κυττάρων (αβ ή γδ).</li>
+        <li><b>MHC</b> μόρια: τάξης I & II.</li>
+        <li><b>Συνδιεγερτικά μόρια</b>: απαραίτητα για πλήρη ενεργοποίηση.</li>
+        <li><b>PRRs</b> σε μακροφάγα & δενδριτικά (Toll-like receptors) αναγνωρίζουν PAMPs.</li>
+      </ul>
+    </div>
+
+    <!-- 5. MHC: τάξεις -->
+    <div class="card">
+      <div class="tag tag-purple">MHC/HLA</div>
+      <h3>Τάξεις MHC – τι παρουσιάζουν;</h3>
+      <ul>
+        <li><span class="highlight-blue">MHC I</span> (HLA-A, -B, -C): σε όλα τα εμπύρηνα κύτταρα.</li>
+        <li>Παρουσιάζουν <b>ενδογενή αντιγόνα</b> σε <span class="highlight-green">CD8+ Τ</span> λεμφοκύτταρα.</li>
+        <li><span class="highlight-blue">MHC II</span> (HLA-DP, -DQ, -DR): σε APC, μακροφάγα, Β-κύτταρα.</li>
+        <li>Παρουσιάζουν <b>εξωγενή αντιγόνα</b> σε <span class="highlight-green">CD4+ Τ</span>.</li>
+        <li><span class="highlight-blue">MHC III</span>: συστατικά συμπληρώματος (C3, C4, Bf) & TNF, λεμφοτοξίνη.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Κληρονόμηση MHC -->
+    <div class="card">
+      <div class="tag tag-purple">Πολυμορφισμός</div>
+      <h3>Κληρονόμηση MHC</h3>
+      <ul>
+        <li>Γονιδιακό σύμπλεγμα στο <b>χρωμόσωμα 6</b>, με υψηλό πολυμορφισμό.</li>
+        <li>Κάθε γονιδιακός τόπος έχει πολλά <b>αλληλόμορφα</b>.</li>
+        <li>Συνδυασμοί από μητέρα & πατέρα → <span class="highlight-green">μοναδική HLA κατανομή</span> για κάθε άτομο.</li>
+        <li>Κλινική σημασία σε <b>μεταμοσχεύσεις</b> & προδιάθεση σε νοσήματα.</li>
+      </ul>
+    </div>
+
+    <!-- 7. Thymic education -->
+    <div class="card">
+      <div class="tag tag-green">Θύμος</div>
+      <h3>Θυμική εκπαίδευση Τ-κυττάρων</h3>
+      <ul>
+        <li>Ο θύμος <b>επιλέγει τα χρήσιμα</b>, αγνοεί τα άχρηστα και <b>καταστρέφει τα επικίνδυνα</b> (σελ. 10,13).</li>
+        <li>Αποτέλεσμα:
+          <ul>
+            <li><span class="highlight-green">positive selection</span>: επιβίωση Τ-κυττάρων με μέτρια συγγένεια για αυτο-MHC.</li>
+            <li><span class="highlight-pink">negative selection</span>: απόπτωση ισχυρά αυτοαντιγον-αντιδραστικών κλώνων.</li>
+          </ul>
+        </li>
+        <li>Ισορροπία μεταξύ <b>ανοχής (self)</b> & <b>ανοσίας (pathogens)</b> (εικόνα σελ. 11).</li>
+      </ul>
+    </div>
+
+    <!-- 8. Στάδια ωρίμανσης Τ -->
+    <div class="card">
+      <div class="tag tag-green">Τ λεμφοκύτταρα</div>
+      <h3>Στάδια ωρίμανσης T-λεμφοκυττάρων</h3>
+      <ul>
+        <li>Πρόδρομα Τ-κύτταρα: <b>δεν</b> εκφράζουν TCR, CD3, CD4, CD8 (σελ. 12).</li>
+        <li>Διαδοχικές φάσεις:
+          <ul>
+            <li>διπλά αρνητικά (CD4−CD8−)</li>
+            <li>διπλά θετικά (CD4+CD8+)</li>
+            <li>μονοθετικά <b>CD4+</b> ή <b>CD8+</b>.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 9. Γενικά για T-λεμφοκύτταρα -->
+    <div class="card">
+      <div class="tag tag-green">Τ λεμφοκύτταρα</div>
+      <h3>Ιδιότητες T-λεμφοκυττάρων</h3>
+      <ul>
+        <li>Αποτελούν <b>60–70%</b> των περιφερικών λεμφοκυττάρων.</li>
+        <li>Αναγνωρίζουν αντιγόνα <b>μόνο όταν παρουσιάζονται</b> από άλλες APC μέσω MHC.</li>
+        <li>Παράγουν τεράστιο ρεπερτόριο TCR (≈10<sup>15</sup> μεταβλητές περιοχές) με <b>λιγότερα από 400 γονίδια</b> (ανασυνδυασμός).</li>
+        <li>Το σύμπλεγμα <b>CD3</b> μεταδίδει το σήμα στο κύτταρο.</li>
+      </ul>
+    </div>
+
+    <!-- 10. Th1 & Th2 -->
+    <div class="card">
+      <div class="tag tag-blue">CD4+ Th</div>
+      <h3>Th1 & Th2 – κλασική διαφορά</h3>
+      <ul>
+        <li><span class="highlight-green">Th1</span>:
+          <ul>
+            <li>παράγουν <b>IL-2, IFN-γ</b>.</li>
+            <li>ενεργοποιούν <b>μακροφάγα</b>, καθυστερημένη υπερευαισθησία, παραγωγή οψωνινών.</li>
+          </ul>
+        </li>
+        <li><span class="highlight-pink">Th2</span>:
+          <ul>
+            <li>παράγουν <b>IL-4, IL-5</b>.</li>
+            <li>προάγουν παραγωγή <b>αντισωμάτων</b> από Β-κύτταρα.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 11. CD8+ T -->
+    <div class="card">
+      <div class="tag tag-orange">CD8+ Τ</div>
+      <h3>CD8+ Τ-λεμφοκύτταρα – κυτταροτοξικότητα</h3>
+      <ul>
+        <li>Ποσοστό: <b>30–40%</b> των Τ-κυττάρων.</li>
+        <li>Εκφράζουν <b>CD8</b> και αναγνωρίζουν αντιγόνα σε <span class="highlight-blue">MHC I</span>.</li>
+        <li>Ο τρόπος εισόδου του αντιγόνου (ενδογενές/εξωγενές) καθορίζει την οδό επεξεργασίας & την τύχη (σελ. 16).</li>
+        <li>Κυτταροτοξική δράση με <b>περφορίνη, γρανζύμες</b>, απόπτωση στόχου.</li>
+      </ul>
+    </div>
+
+    <!-- 12. TCR diversity -->
+    <div class="card">
+      <div class="tag tag-purple">TCR</div>
+      <h3>Αναδιάταξη TCR & ποικιλία</h3>
+      <ul>
+        <li>Ανασυνδυασμοί V(D)J δημιουργούν ~<b>10<sup>8</sup></b> διαφορετικούς TCR ανά στιγμή (εικόνα σελ. 22).</li>
+        <li>Γονίδια RAG1/RAG2 κωδικοποιούν τις <b>νουκλεάσες/λιγάσες</b> που επιτελούν τις αναδιατάξεις (σελ. 17).</li>
+        <li>Κάθε Τ-κύτταρο → <span class="highlight-blue">ένας TCR, μία ειδικότητα</span> (σελ. 18, 21).</li>
+        <li>Πολυκλωνικές λεμφοϋπερπλασίες = αντιδραστική απάντηση.</li>
+      </ul>
+    </div>
+
+    <!-- 13. BCR & μονοκλωνικότητα -->
+    <div class="card">
+      <div class="tag tag-purple">BCR</div>
+      <h3>BCR αναδιατάξεις & μονοκλωνικότητα</h3>
+      <ul>
+        <li>Διαφορετικά Β-κύτταρα με διαφορετικό BCR παράγουν <b>πολυκλωνική απάντηση</b> (πολλοί τύποι αντισωμάτων).</li>
+        <li>Μυέλωμα/λέμφωμα: <span class="highlight-pink">μονοκλωνική</span> διαταραχή (ένας κλώνος).</li>
+        <li>Μοριακή διερεύνηση: peaks IGH (VA, VB, VC) & TCR – υψηλά επάρματα υποδηλώνουν μονοκλωνικό πληθυσμό (σελ. 20).</li>
+        <li>Ανοσοϊστοχημεία: πλασματοκύτταρα με μόνο κ ή μόνο λ ελαφρά αλυσίδα → μονοκλωνικό πλάσμα.</li>
+      </ul>
+    </div>
+
+    <!-- 14. Φάσεις ειδικής ανοσίας -->
+    <div class="card">
+      <div class="tag tag-blue">Φάσεις</div>
+      <h3>Φάσεις ειδικής ανοσολογικής απάντησης</h3>
+      <ul>
+        <li><span class="highlight-green">Επαγωγική</span>: επεξεργασία & παρουσίαση αντιγόνου από APC.</li>
+        <li><span class="highlight-green">Κεντρική</span>: ενεργοποίηση, πολλαπλασιασμός & διαφοροποίηση λεμφοκυττάρων.</li>
+        <li><span class="highlight-green">Δραστική</span>: παραγωγή αντισωμάτων & δραστικών Τ-κυττάρων.</li>
+      </ul>
+    </div>
+
+    <!-- 15. Ιδιότητες ειδικής ανοσίας -->
+    <div class="card">
+      <div class="tag tag-blue">Χαρακτηριστικά</div>
+      <h3>Ιδιότητες ειδικής ανοσίας</h3>
+      <ul>
+        <li><b>Ειδικότητα</b>.</li>
+        <li><b>Ετερογένεια / ποικιλία</b>.</li>
+        <li><b>Ανοσολογική μνήμη</b>.</li>
+        <li><b>Κλωνική εξάπλωση</b>.</li>
+        <li><b>Εξειδίκευση</b>.</li>
+        <li><b>Σύσπαση & ομοιόσταση</b> μετά το τέλος της απάντησης.</li>
+      </ul>
+    </div>
+
+    <!-- 16. Λέμφος & διαδρομή αντιγόνου -->
+    <div class="card">
+      <div class="tag tag-green">Λεμφαδένας</div>
+      <h3>Λέμφος & διαδρομή αντιγόνου</h3>
+      <ul>
+        <li>Η λέμφος μεταφέρει:
+          <ul>
+            <li>αντιγόνα</li>
+            <li>APCs με αντιγόνο</li>
+            <li>συστατικά συμπληρώματος.</li>
+          </ul>
+        </li>
+        <li>Προσαγωγά λεμφαγγεία → <b>φλοιός, παραφλοιός</b> → απαγωγά → αλυσίδα λεμφαδένων → φλεβικό σύστημα → θωρακικός πόρος.</li>
+      </ul>
+    </div>
+
+    <!-- 17. APC S100 -->
+    <div class="card">
+      <div class="tag tag-green">APCs</div>
+      <h3>Αντιγονοπαρουσιαστικά κύτταρα (APC)</h3>
+      <ul>
+        <li>Μεταφέρουν αντιγόνα & φτάνουν στον <b>παραφλοιό</b> του λεμφαδένα (σελ. 28).</li>
+        <li>Χημειοκίνες & μακροφάγα βοηθούν στη μετακίνηση και αποδέσμευση από επιφάνειες.</li>
+        <li>Τεμαχίζουν το αντιγόνο και το παρουσιάζουν με <span class="highlight-blue">MHC II</span> σε Th λεμφοκύτταρα.</li>
+        <li>Δείκτης <b>S100+</b> σε δενδριτικά κύτταρα στις εικόνες.</li>
+      </ul>
+    </div>
+
+    <!-- 18. Αρχιτεκτονική λεμφαδένα CD20/CD3 -->
+    <div class="card">
+      <div class="tag tag-orange">Λεμφαδένας</div>
+      <h3>Αρχιτεκτονική λεμφαδένα</h3>
+      <ul>
+        <li><b>Φλοιός</b> = Β-ζώνη (<span class="highlight-blue">CD20+</span>).</li>
+        <li><b>Παραφλοιός</b> = Τ-ζώνη (<span class="highlight-blue">CD3+</span>).</li>
+        <li>Μικροβιακή λοίμωξη → διέγερση κυρίως <span class="highlight-green">Β-ζώνης</span>.</li>
+        <li>Ιογενής λοίμωξη → διέγερση κυρίως <span class="highlight-green">Τ-ζώνης</span> (σελ. 29).</li>
+      </ul>
+    </div>
+
+    <!-- 19. Follicular dendritic cells -->
+    <div class="card">
+      <div class="tag tag-orange">FDC</div>
+      <h3>Follicular Dendritic Cells (FDC)</h3>
+      <ul>
+        <li><b>Δεν</b> φαγοκυτταρώνουν ούτε επεξεργάζονται αντιγόνα.</li>
+        <li><span class="highlight-blue">Παγιδεύουν αντιγόνα</span> στην επιφάνειά τους.</li>
+        <li>Διεγείρουν & διαφοροποιούν Β-κύτταρα στους βλαστικούς κέντρους.</li>
+        <li>Δείκτες στις εικόνες: <b>CD10</b>, <b>BCL2</b>, <b>CD23</b> (σελ. 30).</li>
+      </ul>
+    </div>
+
+    <!-- 20. Πολυκλωνικά πλασματοκύτταρα -->
+    <div class="card">
+      <div class="tag tag-pink">κ / λ</div>
+      <h3>Πολυκλωνική vs μονοκλωνική απάντηση</h3>
+      <ul>
+        <li>Στον αντιδραστικό λεμφαδένα: πλασματοκύτταρα με <b>και κ και λ</b> ελαφρές αλυσίδες → <span class="highlight-green">πολυκλωνική</span> παραγωγή αντισωμάτων (σελ. 31).</li>
+        <li>Σε νεόπλασμα (πλ. μυέλωμα): <b>μόνο κ ή μόνο λ</b> → <span class="highlight-pink">μονοκλωνικός κλώνος</span>.</li>
+      </ul>
+    </div>
+
+    <!-- 21. Εξωλεμφαδενικός λεμφικός ιστός -->
+    <div class="card">
+      <div class="tag tag-green">MALT</div>
+      <h3>Εξωλεμφαδενικός λεμφικός ιστός</h3>
+      <ul>
+        <li>Αρχιτεκτονική παρόμοια με λεμφαδένα.</li>
+        <li>Παράδειγμα: <b>βιοψία ρινοφάρυγγα</b> με λεμφοζίδια (σελ. 32).</li>
+        <li>Είσοδος λεμφοκυττάρων μετά από αναγνώριση <b>addressins</b> ενδοθηλιακών κυττάρων.</li>
+      </ul>
+    </div>
+
+    <!-- 22. Κυκλοφορία λεμφοκυττάρων / HEV -->
+    <div class="card">
+      <div class="tag tag-green">Κυκλοφορία</div>
+      <h3>Λεμφοκύτταρα σε λεμφαδένες & σπλήνα</h3>
+      <ul>
+        <li>Λεμφοκύτταρα εισέρχονται στον λεμφαδένα μέσω <span class="highlight-blue">υψηλών ενδοθηλιακών φλεβιδίων</span> (HEV).</li>
+        <li>Ειδικά μόρια <b>addressins</b> ανά περιοχή – επιτρέπουν στα λεμφοκύτταρα να επιστρέφουν στον «δικό τους» ιστό.</li>
+        <li>Σπλήνας: μακροφάγα καταστρέφουν μικρόβια οψωνινωμένα με <b>IgG ή C3b</b>, ιδιαίτερα με κάψα (π.χ. πνευμονιόκοκκος).</li>
+        <li>Μετά από σπληνεκτομή → ανάγκη <b>ανοσοποίησης & αντιμικροβιακής κάλυψης</b>.</li>
+      </ul>
+    </div>
+
+    <!-- 23. Χυμική ανοσία / αντισώματα -->
+    <div class="card">
+      <div class="tag tag-blue">Χυμική ανοσία</div>
+      <h3>Κύριες δράσεις αντισωμάτων</h3>
+      <ul>
+        <li><b>Προστατευτική δράση</b>: αποκλεισμός/αναστολή προσκόλλησης μικροβίου ή τοξίνης στους υποδοχείς.</li>
+        <li><b>Ενεργοποίηση συμπληρώματος</b>.</li>
+        <li><b>ADCC</b> – από αντισώματα εξαρτώμενη κυτταρική κυτταροτοξικότητα (π.χ. NK, μακροφάγα).</li>
+      </ul>
+    </div>
+
+    <!-- 24. Δομή ανοσοσφαιρινών -->
+    <div class="card">
+      <div class="tag tag-purple">Ig δομή</div>
+      <h3>Δομή ανοσοσφαιρινών</h3>
+      <ul>
+        <li><b>2 βαριές + 2 ελαφρές</b> αλυσίδες.</li>
+        <li><span class="highlight-blue">Fab</span> τμήμα: δέσμευση αντιγόνου.</li>
+        <li><span class="highlight-blue">Fc</span> τμήμα:
+          <ul>
+            <li>διέλευση πλακουντιακού φραγμού</li>
+            <li>δέσμευση συμπληρώματος</li>
+            <li>πρόσδεση σε Fc-υποδοχείς άλλων κυττάρων.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 25. Τύποι ανοσοσφαιρινών -->
+    <div class="card">
+      <div class="tag tag-purple">Ig ισότυποι</div>
+      <h3>Τύποι ανοσοσφαιρινών (ισότυποι)</h3>
+      <ul>
+        <li><b>IgM</b>: πρώτη στην πρωτογενή απάντηση, πενταμερής.</li>
+        <li><b>IgG</b>: κύρια στον ορό, διαπερνά πλακούντα.</li>
+        <li><b>IgA</b>: εκκριτική, στους βλεννογόνους.</li>
+        <li><b>IgE</b>: αλλεργικές αντιδράσεις, ηωσινόφιλα, παρασιτώσεις.</li>
+        <li><b>IgD</b>: επιφανειακός υποδοχέας σε ανώριμα Β-κύτταρα.</li>
+      </ul>
+    </div>
+
+    <!-- 26. Σήψη -->
+    <div class="card">
+      <div class="tag tag-orange">Σήψη</div>
+      <h3>Όταν αποτυγχάνει η άμυνα – Σηψαιμία</h3>
+      <ul>
+        <li>Αποτυχία περιορισμού μικροβιακού παράγοντα → είσοδος στο αίμα = <b>σηψαιμία</b>.</li>
+        <li>Αν το μικρόβιο «πάει» εξαρχής στο αίμα αντί για λεμφαγγεία → πάλι σηψαιμία.</li>
+        <li>Κλινικά:
+          <ul>
+            <li>πυρετός</li>
+            <li>ρίγος</li>
+            <li>υπόταση</li>
+            <li><span class="highlight-pink">shock</span>.</li>
+          </ul>
+        </li>
+        <li>Ιδιαίτερα επικίνδυνα: <b>αιμόφιλος, πνευμονιόκοκκος</b> (λόγω κάψας).</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz – Ανοσολογική Απάντηση 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5ff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      padding: 1rem 1.2rem 0.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      padding: 0 0.8rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #444;
+      margin: 0.4rem 0 0.8rem;
+      text-align: center;
+    }
+
+    .question {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 0.8rem 0.9rem;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .q-text {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    ul.options {
+      list-style: none;
+      padding: 0;
+      margin: 0.2rem 0 0;
+    }
+
+    .option {
+      margin-bottom: 0.3rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.13s ease, border-color 0.13s ease, transform 0.05s ease;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .option.correct {
+      background: #c6f6c6;
+      border-color: #38a169;
+      font-weight: 600;
+    }
+
+    .option.wrong {
+      background: #ffd6d6;
+      border-color: #e53e3e;
+      text-decoration: line-through;
+    }
+
+    @media (max-width: 600px) {
+      .question {
+        padding: 0.7rem 0.75rem;
+      }
+      .q-text {
+        font-size: 0.9rem;
+      }
+      .option {
+        font-size: 0.86rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Quiz – Ανοσολογική Απάντηση 2</h1>
+    <div class="subtitle">Κύτταρα ειδικής ανοσίας, MHC, TCR, λεμφαδένας, αντισώματα</div>
+  </header>
+
+  <div class="container">
+    <div class="note">
+      Κάνε κλικ σε μια απάντηση. Αν είναι σωστή γίνεται <b>πράσινη</b>, αν είναι λάθος <b>κόκκινη</b> και εμφανίζεται ταυτόχρονα η σωστή.
+    </div>
+
+    <!-- Q1 -->
+    <div class="question">
+      <div class="q-text">
+        1. Ποιο από τα παρακάτω <b>χαρακτηρίζει σωστά</b> τη χυμική ανοσία;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Βασίζεται στην παραγωγή αντισωμάτων από Β-λεμφοκύτταρα και πλασματοκύτταρα.</li>
+        <li class="option" data-correct="false">Αφορά αποκλειστικά NK και μακροφάγα.</li>
+        <li class="option" data-correct="false">Δρα μόνο μέσω συμπληρώματος χωρίς αντισώματα.</li>
+        <li class="option" data-correct="false">Αναφέρεται μόνο στις φλεγμονώδεις κυτταροκίνες.</li>
+      </ul>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question">
+      <div class="q-text">
+        2. Ποιος συνδυασμός <b>είναι σωστός</b> για τα μόρια MHC;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">MHC I: σε όλα τα εμπύρηνα κύτταρα, παρουσιάζει ενδογενή αντιγόνα σε CD8+ Τ-κύτταρα.</li>
+        <li class="option" data-correct="false">MHC II: σε όλα τα ερυθροκύτταρα, παρουσιάζει αντιγόνα σε Β-κύτταρα.</li>
+        <li class="option" data-correct="false">MHC III: είναι υποδοχέας Τ-κυττάρων στην επιφάνεια των Τ.</li>
+        <li class="option" data-correct="false">MHC I: μόνο στα Β-λεμφοκύτταρα.</li>
+      </ul>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question">
+      <div class="q-text">
+        3. Τι ισχύει για τη <b>κληρονόμηση του MHC/HLA</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Υψηλός πολυμορφισμός → κάθε άτομο έχει μοναδική HLA αντιγονική κατανομή.</li>
+        <li class="option" data-correct="false">Όλοι οι άνθρωποι μοιράζονται ακριβώς τα ίδια HLA αντιγόνα.</li>
+        <li class="option" data-correct="false">Το MHC βρίσκεται σε πολλά διαφορετικά χρωμοσώματα.</li>
+        <li class="option" data-correct="false">Δεν έχει ρόλο στις μεταμοσχεύσεις.</li>
+      </ul>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question">
+      <div class="q-text">
+        4. Ποια από τις παρακάτω προτάσεις για την <b>εκπαίδευση των Τ-κυττάρων στον θύμο</b> είναι σωστή;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Περιλαμβάνει positive και negative selection για να διατηρηθεί ανοχή στο self και ικανότητα αναγνώρισης ξένων αντιγόνων.</li>
+        <li class="option" data-correct="false">Διατηρούνται κυρίως τα κύτταρα με πολύ υψηλή συγγένεια για αυτοαντιγόνα.</li>
+        <li class="option" data-correct="false">Δεν επηρεάζεται από τα MHC μόρια.</li>
+        <li class="option" data-correct="false">Γίνεται μόνο στο μυελό των οστών.</li>
+      </ul>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question">
+      <div class="q-text">
+        5. Ποια είναι η <b>σωστή περιγραφή</b> των CD4+ Τ-βοηθητικών (Th) λεμφοκυττάρων;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Ρυθμίζουν την ανοσολογική απάντηση και βοηθούν Β-κύτταρα και CD8+ Τ-κύτταρα μέσω κυτταροκινών.</li>
+        <li class="option" data-correct="false">Παράγουν αποκλειστικά αντισώματα.</li>
+        <li class="option" data-correct="false">Δεν αναγνωρίζουν αντιγόνο μέσω MHC.</li>
+        <li class="option" data-correct="false">Είναι ίδια με τα NK κύτταρα.</li>
+      </ul>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question">
+      <div class="q-text">
+        6. Ποια από τις παρακάτω λειτουργίες <b>αντιστοιχεί κυρίως στα Th1</b> κύτταρα;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Παράγουν IL-2 και IFN-γ και ενεργοποιούν τα μακροφάγα.</li>
+        <li class="option" data-correct="false">Παράγουν IL-4 και IL-5 και διεγείρουν παραγωγή IgE.</li>
+        <li class="option" data-correct="false">Καταστέλλουν την ανοσολογική απάντηση (Treg).</li>
+        <li class="option" data-correct="false">Δρουν ως κύρια κύτταρα της φυσικής ανοσίας.</li>
+      </ul>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question">
+      <div class="q-text">
+        7. Τα CD8+ Τ-λεμφοκύτταρα:
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Αναγνωρίζουν αντιγόνα μόνο μέσω MHC II.</li>
+        <li class="option" data-correct="true">Εκφράζουν CD8 και αναγνωρίζουν αντιγόνα συνδεδεμένα με MHC I, ασκώντας κυτταροτοξική δράση.</li>
+        <li class="option" data-correct="false">Παράγουν ανοσοσφαιρίνες IgM.</li>
+        <li class="option" data-correct="false">Δεν εμπλέκονται στην κάθαρση ιών.</li>
+      </ul>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question">
+      <div class="q-text">
+        8. Η τεράστια ποικιλία των TCR (<i>T cell receptors</i>) οφείλεται κυρίως:
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Σε ανασυνδυασμούς V(D)J στα γονίδια των TCR με τη δράση των RAG γονιδίων.</li>
+        <li class="option" data-correct="false">Στο ότι κάθε Τ-κύτταρο αποκτά τυχαία ένα έτοιμο αντίσωμα από Β-κύτταρο.</li>
+        <li class="option" data-correct="false">Στη δράση του συμπληρώματος.</li>
+        <li class="option" data-correct="false">Στην αλλαγή του Fc τμήματος των Ig.</li>
+      </ul>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question">
+      <div class="q-text">
+        9. Τι σημαίνει ότι οι αντιδράσεις σε μια λεμφοϋπερπλασία είναι <b>πολυκλωνικές</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Υπάρχουν πολλοί κλώνοι Β ή Τ-λεμφοκυττάρων με διαφορετικούς υποδοχείς.</li>
+        <li class="option" data-correct="false">Προέρχονται από έναν μόνο κλώνο κυττάρων.</li>
+        <li class="option" data-correct="false">Δεν εμπλέκονται υποδοχείς BCR/TCR.</li>
+        <li class="option" data-correct="false">Σημαίνει πάντα κακοήθεια.</li>
+      </ul>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question">
+      <div class="q-text">
+        10. Στη μοριακή διερεύνηση αναδιατάξεων BCR/TCR, ποιο εύρημα <b>υποδηλώνει μονοκλωνικότητα</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Ένα ή λίγα υψηλά, στενά peaks που αντιστοιχούν σε έναν κλώνο λεμφοκυττάρων.</li>
+        <li class="option" data-correct="false">Πολλά μικρά διάσπαρτα peaks διαφορετικών μεγεθών.</li>
+        <li class="option" data-correct="false">Πλήρης απουσία peaks.</li>
+        <li class="option" data-correct="false">Ίση έκφραση κ και λ σε όλες τις περιοχές.</li>
+      </ul>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question">
+      <div class="q-text">
+        11. Ποιο είναι το <b>σωστό</b> για τη ζώνη φλοιού και παραφλοιού ενός λεμφαδένα;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Φλοιός: Β-ζώνη (CD20+), Παραφλοιός: Τ-ζώνη (CD3+).</li>
+        <li class="option" data-correct="false">Φλοιός: μόνο μακροφάγα, Παραφλοιός: μόνο ουδετερόφιλα.</li>
+        <li class="option" data-correct="false">Φλοιός: Τ-ζώνη, Παραφλοιός: Β-ζώνη.</li>
+        <li class="option" data-correct="false">Και οι δύο περιέχουν μόνο NK κύτταρα.</li>
+      </ul>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question">
+      <div class="q-text">
+        12. Σε μικροβιακή λοίμωξη του λεμφαδένα, ποια ζώνη <b>διεγείρεται κυρίως</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Η Β-ζώνη του φλοιού.</li>
+        <li class="option" data-correct="false">Μόνο η Τ-ζώνη του παραφλοιού.</li>
+        <li class="option" data-correct="false">Μόνο τα κέντρα του μυελού.</li>
+        <li class="option" data-correct="false">Καμία ζώνη δεν αλλάζει.</li>
+      </ul>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question">
+      <div class="q-text">
+        13. Ποιο από τα παρακάτω <b>ΔΕΝ</b> ισχύει για τα follicular dendritic cells (FDC);
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="false">Παγιδεύουν αντιγόνα στην επιφάνειά τους.</li>
+        <li class="option" data-correct="false">Διεγείρουν και διαφοροποιούν Β-κύτταρα στα βλαστικά κέντρα.</li>
+        <li class="option" data-correct="true">Φαγοκυτταρώνουν και καταστρέφουν τα αντιγόνα που συναντούν.</li>
+        <li class="option" data-correct="false">Σχετίζονται με δείκτες όπως CD23 στις εικόνες.</li>
+      </ul>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question">
+      <div class="q-text">
+        14. Τι υποδηλώνει η παρουσία πλασματοκυττάρων <b>και με κ και με λ</b> ελαφρές αλυσίδες σε έναν αντιδραστικό λεμφαδένα;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Πολυκλωνική φυσιολογική ανοσολογική απάντηση.</li>
+        <li class="option" data-correct="false">Μονοκλωνικό πλασματοκυτταρικό νεόπλασμα.</li>
+        <li class="option" data-correct="false">Απουσία παραγωγής αντισωμάτων.</li>
+        <li class="option" data-correct="false">Σήψη.</li>
+      </ul>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question">
+      <div class="q-text">
+        15. Ποιος είναι ο βασικός ρόλος των <b>υψηλών ενδοθηλιακών φλεβιδίων (HEV)</b> στον λεμφαδένα;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Επιτρέπουν την είσοδο λεμφοκυττάρων από το αίμα στον λεμφαδένα, με ειδική αναγνώριση addressins.</li>
+        <li class="option" data-correct="false">Είναι το σημείο εξόδου των ερυθροκυττάρων από τον λεμφαδένα.</li>
+        <li class="option" data-correct="false">Παράγουν IgG.</li>
+        <li class="option" data-correct="false">Αποτελούν τριχοειδή της σπλήνας.</li>
+      </ul>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question">
+      <div class="q-text">
+        16. Ποιος από τους παρακάτω συνδυασμούς <b>δράσης αντισωμάτων</b> είναι σωστός;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Αποκλεισμός πρόσδεσης μικροβίων/τοξινών, ενεργοποίηση συμπληρώματος, ADCC.</li>
+        <li class="option" data-correct="false">Μόνο μεταφορά οξυγόνου.</li>
+        <li class="option" data-correct="false">Μόνο ρύθμιση αρτηριακής πίεσης.</li>
+        <li class="option" data-correct="false">Μόνο ενεργοποίηση RAG γονιδίων.</li>
+      </ul>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question">
+      <div class="q-text">
+        17. Ποια από τις παρακάτω ιδιότητες <b>αντιστοιχεί στο Fc τμήμα</b> μιας ανοσοσφαιρίνης;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Δέσμευση συμπληρώματος, διέλευση πλακούντα και πρόσδεση σε Fc-υποδοχείς κυττάρων.</li>
+        <li class="option" data-correct="false">Εξειδικευμένη δέσμευση αντιγόνου.</li>
+        <li class="option" data-correct="false">Καθορισμός μόνο της κ/λ ελαφράς αλυσίδας.</li>
+        <li class="option" data-correct="false">Δεν έχει καμία λειτουργία.</li>
+      </ul>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question">
+      <div class="q-text">
+        18. Ποια από τις παρακάτω καταστάσεις περιγράφει καλύτερα τη <b>σηψαιμία</b>;
+      </div>
+      <ul class="options">
+        <li class="option" data-correct="true">Όταν ο μικροβιακός παράγοντας δεν περιορίζεται τοπικά, περνά στο αίμα και προκαλεί συστηματικά συμπτώματα.</li>
+        <li class="option" data-correct="false">Όταν το αντιγόνο περιορίζεται μόνο στη λέμφο.</li>
+        <li class="option" data-correct="false">Όταν υπάρχει μόνο ήπιος τοπικός πυρετός χωρίς βακτηριαιμία.</li>
+        <li class="option" data-correct="false">Κατάσταση όπου συμμετέχουν μόνο ιοί χωρίς βακτήρια.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    const options = document.querySelectorAll('.option');
+
+    options.forEach(option => {
+      option.addEventListener('click', function () {
+        const questionDiv = this.closest('.question');
+        if (questionDiv.dataset.answered === 'true') {
+          return;
+        }
+
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+
+        if (isCorrect) {
+          this.classList.add('correct');
+        } else {
+          this.classList.add('wrong');
+          const siblings = questionDiv.querySelectorAll('.option');
+          siblings.forEach(opt => {
+            if (opt.getAttribute('data-correct') === 'true') {
+              opt.classList.add('correct');
+            }
+          });
+        }
+
+        questionDiv.dataset.answered = 'true';
+      });
+    });
+  </script>
+
+</body>
+</html>

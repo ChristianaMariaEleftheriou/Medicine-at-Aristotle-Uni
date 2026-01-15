@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Ανοσολογική Απόκριση 1 – Μαθησιακές Κάρτες</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f5f5ff;
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 1rem 0 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .top-bar button {
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: #4b6cff;
+      color: #fff;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .top-bar button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(200px, 1fr));
+      gap: 0.9rem;
+      padding: 0.9rem;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 0.75rem 0.8rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      margin-bottom: 0.25rem;
+    }
+
+    .tag-blue   { background: #e3f0ff; color: #174ea6; }
+    .tag-green  { background: #e3ffe8; color: #0b7a30; }
+    .tag-orange { background: #ffe9d9; color: #b04900; }
+    .tag-pink   { background: #ffe6f3; color: #b00063; }
+    .tag-purple { background: #ede4ff; color: #5b2ab3; }
+
+    .highlight-blue   { color: #174ea6; font-weight: 700; }
+    .highlight-green  { color: #0b7a30; font-weight: 700; }
+    .highlight-orange { color: #b04900; font-weight: 700; }
+    .highlight-pink   { color: #b00063; font-weight: 700; }
+    .highlight-purple { color: #5b2ab3; font-weight: 700; }
+
+    ul {
+      padding-left: 1rem;
+      margin: 0.1rem 0 0;
+    }
+
+    li {
+      margin-bottom: 0.15rem;
+    }
+
+    @media (max-width: 1100px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 550px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ανοσολογική Απόκριση 1</h1>
+  <div class="subtitle">Σύνοψη παρουσίασης – Κολέτσα (Φυσική & Επίκτητη Ανοσία)</div>
+
+  <div class="top-bar">
+    <button onclick="window.open('anoso_quiz.html', '_blank')">
+      Άνοιξε το quiz σε νέο tab
+    </button>
+  </div>
+
+  <div class="grid">
+    <!-- 1. Ορισμός ανοσίας -->
+    <div class="card">
+      <div class="tag tag-blue">Βασικό</div>
+      <h3>Τι είναι <span class="highlight-blue">Ανοσία</span>;</h3>
+      <ul>
+        <li>Η <b>προφύλαξη / αντίσταση</b> του οργανισμού σε βλαπτικούς παράγοντες.</li>
+        <li>Εξασφαλίζει την <b>επιβίωση</b> απέναντι στις λοιμώξεις.</li>
+        <li>Διακρίνεται σε <span class="highlight-green">Φυσική</span> & <span class="highlight-purple">Επίκτητη</span> ανοσία.</li>
+      </ul>
+    </div>
+
+    <!-- 2. Ανοσοπαθολογία -->
+    <div class="card">
+      <div class="tag tag-pink">Ανοσοπαθολογία</div>
+      <h3>Τι μελετά η Ανοσοπαθολογία;</h3>
+      <ul>
+        <li>Παθολογικούς ανοσολογικούς μηχανισμούς που προκαλούν <b>αλλοιώσεις σε ιστούς & όργανα</b>.</li>
+        <li><b>Εκτροπή</b> μηχανισμών άμυνας.</li>
+        <li><b>Παράδοξες αντιδράσεις</b> (υπερευαισθησίες, αυτοανοσία).</li>
+        <li>Συγγενή ή επίκτητα <b>ελλείμματα</b> του ανοσοποιητικού.</li>
+      </ul>
+    </div>
+
+    <!-- 3. Οδοί μετάδοσης λοίμωξης -->
+    <div class="card">
+      <div class="tag tag-orange">Λοίμωξη</div>
+      <h3>Κύριες οδοί μετάδοσης</h3>
+      <ul>
+        <li>Από άνθρωπο σε άνθρωπο: <b>πταρμός, βήχας, βλεννογόνοι</b>.</li>
+        <li>Από <b>τροφή / νερό</b> (κοπρανοστοματική οδός).</li>
+        <li>Από <b>ζώα ή έντομα</b> (ελονοσία, κίτρινος πυρετός, λύσσα).</li>
+        <li>Μέσω <b>αντικειμένων / τραυματισμών</b> (βελόνες κ.λπ.).</li>
+      </ul>
+    </div>
+
+    <!-- 4. Φυσική vs Επίκτητη -->
+    <div class="card">
+      <div class="tag tag-blue">Σύγκριση</div>
+      <h3><span class="highlight-green">Φυσική</span> vs <span class="highlight-purple">Επίκτητη</span> ανοσία</h3>
+      <ul>
+        <li><span class="highlight-green">Φυσική</span>: κύτταρα & πρωτεΐνες <b>πάντα παρόντα</b>, άμεση αντίδραση.</li>
+        <li>Καθαρίζουν μικρόβια & <b>κατεστραμμένα κύτταρα</b>.</li>
+        <li><span class="highlight-purple">Επίκτητη</span>: ενεργοποίηση ειδικών μηχανισμών (λεμφοκύτταρα).</li>
+        <li>Στόχος: <b>εξουδετέρωση</b> παθογόνων, <b>ανοσολογική μνήμη</b>.</li>
+      </ul>
+    </div>
+
+    <!-- 5. Χαρακτηριστικά φυσικής ανοσίας -->
+    <div class="card">
+      <div class="tag tag-green">Φυσική ανοσία</div>
+      <h3>Χαρακτηριστικά</h3>
+      <ul>
+        <li><b>Μη ειδική – αυτόματη</b> (δεν χρειάζεται προηγούμενη επαφή).</li>
+        <li><b>Δεν</b> διαθέτει ανοσολογική μνήμη.</li>
+        <li>Κύρια συστατικά:
+          <ul>
+            <li>Επιθηλιακοί φραγμοί</li>
+            <li>Φαγοκύτταρα (μακροφάγα, ουδετερόφιλα)</li>
+            <li>Δενδριτικά, NK, ILCs</li>
+            <li>Πρωτεΐνες (π.χ. συμπλήρωμα)</li>
+          </ul>
+        </li>
+        <li><b>PAMPs</b> → κεντρικός ρόλος στην οξεία φλεγμονή.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Ανατομικός φραγμός & απομάκρυνση -->
+    <div class="card">
+      <div class="tag tag-green">Επιφάνειες σώματος</div>
+      <h3>Ανατομικός φραγμός & ροές</h3>
+      <ul>
+        <li><b>Δέρμα</b>, αναπνευστική & γαστρεντερική οδός.</li>
+        <li><b>Απομάκρυνση</b> μικροβίων με:
+          <ul>
+            <li>Αποφολίδωση του δέρματος</li>
+            <li>Αφόδευση, ούρηση</li>
+            <li>Βλέφαρα – δάκρυα</li>
+            <li>Σάλιο, πταρμός</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 7. Τοπική παραγωγή αντιμικροβιακών -->
+    <div class="card">
+      <div class="tag tag-green">Χημικοί παράγοντες</div>
+      <h3>Τοπικά αντιμικροβιακά</h3>
+      <ul>
+        <li><b>Λυσοζύμη</b>.</li>
+        <li>Γλυκολιπίδια & σύστημα <b>λακτοϋπεροξειδάσης</b> στο σάλιο.</li>
+        <li><b>Γαστρική οξύτητα</b>.</li>
+        <li><b>Όξινες εκκρίσεις</b> δέρματος & κόλπου.</li>
+        <li><b>Σπερμίνη</b> & βακτηριοκτόνες ιδιότητες σπέρματος.</li>
+      </ul>
+    </div>
+
+    <!-- 8. Βακτηριακή παρεμβολή I -->
+    <div class="card">
+      <div class="tag tag-orange">Μικροβιακή χλωρίδα</div>
+      <h3>Βακτηριακή παρεμβολή (Ι)</h3>
+      <ul>
+        <li><b>Propionibacterium acnes</b> → επιβραδύνει S. aureus, S. pyogenes.</li>
+        <li>Λεπτό & παχύ έντερο: ~<b>400 είδη</b> μικροβίων.</li>
+        <li>Αναερόβια του εντέρου → αναστέλλουν είδη <b>Salmonella</b>.</li>
+        <li>Χλωρίδα εντέρου → προλαμβάνει εγκατάσταση <b>Shigella</b>.</li>
+      </ul>
+    </div>
+
+    <!-- 9. Βακτηριακή παρεμβολή II -->
+    <div class="card">
+      <div class="tag tag-orange">Μικροβιακή χλωρίδα</div>
+      <h3>Βακτηριακή παρεμβολή (ΙΙ)</h3>
+      <ul>
+        <li><b>Streptococcus viridans</b>: προλαμβάνει στον φάρυγγα την αύξηση του πνευμονιόκοκκου.</li>
+        <li><b>Λακτοβάκιλλος</b> του κόλπου → προστασία από παθογόνα.</li>
+        <li><span class="highlight-pink">PAP test</span>: αξιολόγηση κυττάρων τραχήλου & φλεγμονής.</li>
+      </ul>
+    </div>
+
+    <!-- 10. Παρεμπόδιση προσκόλλησης -->
+    <div class="card">
+      <div class="tag tag-green">Επιφάνειες</div>
+      <h3>Παρεμπόδιση προσκόλλησης μικροβίων</h3>
+      <ul>
+        <li><b>Κατάληψη υποδοχέων</b> από φυσιολογική χλωρίδα.</li>
+        <li>Επιβράδυνση προσκόλλησης από:
+          <ul>
+            <li>pH</li>
+            <li>Γλυκοπρωτεΐνες</li>
+          </ul>
+        </li>
+        <li><span class="highlight-blue">Εκκριτικές IgA</span>:
+          <ul>
+            <li>Εξουδετέρωση</li>
+            <li>Αναστολή προσκόλλησης</li>
+            <li>Λύση & φαγοκυττάρωση βακτηρίων</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 11. Κύτταρα Paneth -->
+    <div class="card">
+      <div class="tag tag-green">Έντερο</div>
+      <h3>Κύτταρα Paneth</h3>
+      <ul>
+        <li>Εκκρίνουν <b>μικροβιοκτόνους παράγοντες</b> των κοκκίων:
+          <ul>
+            <li>Λυσοζύμη</li>
+            <li>Πρωτεΐνες άμυνας</li>
+          </ul>
+        </li>
+        <li>Προστατεύουν <b>βλαστικά κύτταρα</b> στη βάση των κρυπτών.</li>
+        <li>Αναγνωρίζουν <b>PAMPs</b> παθογόνων.</li>
+        <li>Μύκητες & πρωτόζωα <b>δεν</b> προκαλούν αποκοκκίωση.</li>
+      </ul>
+    </div>
+
+    <!-- 12. Διαταραχή χλωρίδας εντέρου -->
+    <div class="card">
+      <div class="tag tag-orange">Κλινικό</div>
+      <h3>Διαταραχή μικροβιακής χλωρίδας εντέρου</h3>
+      <ul>
+        <li>Στο <span class="highlight-green">παχύ έντερο</span> συμβιωτικά μικρόβια προστατεύουν από παθογόνα.</li>
+        <li><b>Αντιβιοτικά</b> → διαταραχή χλωρίδας.</li>
+        <li><b>Ψευδομεμβρανώδης κολίτιδα</b> (C. difficile).</li>
+        <li>Τοξίνες → <b>κοιλιαλγία & διάρροια</b>.</li>
+      </ul>
+    </div>
+
+    <!-- 13. Ουροποιητικό -->
+    <div class="card">
+      <div class="tag tag-green">Ουροποιητικό</div>
+      <h3>Αμυντικοί μηχανισμοί</h3>
+      <ul>
+        <li>Φυσιολογικά τα ούρα είναι <b>στείρα μικροβίων</b>.</li>
+        <li><b>Μονή κατεύθυνση</b> ροής ούρων.</li>
+        <li>Κυστεοουρητηρική παλινδρόμηση → ουρολοιμώξεις / πυελονεφρίτιδα.</li>
+        <li>pH ούρων: σημαντικό για αποτροπή λοίμωξης.</li>
+        <li>Συχνές κυστίτιδες σε γυναίκες (κοντή ουρήθρα).</li>
+        <li>Διαβητικά ούρα (αυξημένη γλυκόζη) → προδιάθεση σε ουρολοιμώξεις.</li>
+      </ul>
+    </div>
+
+    <!-- 14. Κύτταρα φυσικής ανοσίας -->
+    <div class="card">
+      <div class="tag tag-green">Κύτταρα</div>
+      <h3>Κύτταρα φυσικής ανοσίας</h3>
+      <ul>
+        <li><b>Μακροφάγα</b></li>
+        <li><b>Ουδετερόφιλα</b></li>
+        <li><b>NK</b> (Natural Killer) κύτταρα</li>
+        <li><b>Δενδριτικά</b> (αντιγονοπαρουσιαστικά)</li>
+        <li><b>Πρωτεΐνες συμπληρώματος</b></li>
+        <li>Μη ειδική απόκριση σε <b>όλα τα αντιγόνα</b>.</li>
+      </ul>
+    </div>
+
+    <!-- 15. Ειδικοί τύποι μακροφάγων -->
+    <div class="card">
+      <div class="tag tag-pink">SOS</div>
+      <h3>Τύποι μακροφάγων (να θυμάσαι!)</h3>
+      <ul>
+        <li><b>Κύτταρα Kupffer</b> (ήπαρ).</li>
+        <li><b>Μικρογλοία</b> (ΚΝΣ).</li>
+        <li><b>Κυψελιδικά</b> μακροφάγα (πνεύμονες).</li>
+        <li><b>Μακροφάγα λεμφαδένων</b>.</li>
+        <li><b>Συνοβιακά τύπου Α</b> (αρθρώσεις).</li>
+        <li><b>Μεσαγγειακά φαγοκύτταρα</b> σπειραμάτων (νεφρός).</li>
+      </ul>
+    </div>
+
+    <!-- 16. PAMPs, DAMPs, PRRs -->
+    <div class="card">
+      <div class="tag tag-blue">Μηχανισμοί</div>
+      <h3><span class="highlight-blue">PAMPs</span>, <span class="highlight-blue">DAMPs</span> & PRRs</h3>
+      <ul>
+        <li>Κύτταρα φυσικής ανοσίας αναγνωρίζουν:
+          <ul>
+            <li><b>PAMPs</b>: μικροβιακές δομές.</li>
+            <li><b>DAMPs</b>: νεκρά / βλαμμένα κύτταρα.</li>
+          </ul>
+        </li>
+        <li>Με <span class="highlight-purple">υποδοχείς αναγνώρισης προτύπου (PRRs)</span>:
+          <ul>
+            <li><b>Μεμβρανικοί</b>: εξωκυττάρια παθογόνα.</li>
+            <li><b>Ενδοσωμικοί</b>: μικρόβια μέσα σε ενδοσώματα.</li>
+            <li><b>Κυτταροπλασματικοί</b>: μικρόβια στο κυτταρόπλασμα.</li>
+          </ul>
+        </li>
+        <li>~<b>100 PRRs</b> για ~1000 πρότυπα.</li>
+      </ul>
+    </div>
+
+    <!-- 17. Inflammasome -->
+    <div class="card">
+      <div class="tag tag-orange">Inflammasome</div>
+      <h3>Τι είναι το Inflammasome;</h3>
+      <ul>
+        <li><b>Κυτταροπλασματικό πολυπρωτεϊνικό σύμπλοκο</b>.</li>
+        <li>Ενεργοποιεί την <b>κασπάση-1</b>.</li>
+        <li>Κασπάση-1: διάσπαση πρόδρομου <b>IL-1</b> → ενεργή IL-1.</li>
+        <li>IL-1 → <b>στρατολόγηση λευκοκυττάρων, πυρετός</b>.</li>
+        <li><span class="highlight-pink">Υπερδραστήριο inflammasome</span> → αυτοφλεγμονώδη σύνδρομα.</li>
+      </ul>
+    </div>
+
+    <!-- 18. Μηχανισμοί αποφυγής -->
+    <div class="card">
+      <div class="tag tag-orange">Παθογόνα</div>
+      <h3>Μηχανισμοί αποφυγής ανοσοποιητικού</h3>
+      <ul>
+        <li>Απόκρυψη αντιγόνων.</li>
+        <li>Αλλαγή αντιγόνων στην επιφάνεια.</li>
+        <li>Παρεμπόδιση παρουσίασης αντιγόνου.</li>
+        <li>Παραγωγή ουσιών που <b>αναστέλλουν</b> ανοσολογικές αντιδράσεις.</li>
+        <li>Ενδοκυττάρια εντόπιση.</li>
+      </ul>
+    </div>
+
+    <!-- 19. Ευπαθείς ομάδες -->
+    <div class="card">
+      <div class="tag tag-pink">Κίνδυνος</div>
+      <h3>Ευπαθείς ομάδες για λοιμώξεις</h3>
+      <ul>
+        <li>Άτομα με <b>ανοσοανεπάρκεια</b>.</li>
+        <li><b>Υποσιτισμός</b>.</li>
+        <li>Χρόνια νοσήματα (π.χ. Σ.Δ., ΧΑΠ).</li>
+        <li><b>Ανοσοκατασταλτικά</b> & χημειοθεραπευτικά φάρμακα.</li>
+        <li>Μετεγχειρητικοί ασθενείς.</li>
+        <li>Νοσηλευόμενοι → ενδονοσοκομειακές λοιμώξεις, ανθεκτικά στελέχη.</li>
+      </ul>
+    </div>
+
+    <!-- 20. Εξέλιξη ανοσολογικής απάντησης -->
+    <div class="card">
+      <div class="tag tag-blue">Χρόνος</div>
+      <h3>Εξέλιξη ανοσολογικής απόκρισης</h3>
+      <ul>
+        <li><span class="highlight-green">Φυσική ανοσία</span>:
+          <ul>
+            <li>NK, μακροφάγα, ουδετερόφιλα</li>
+            <li>Κυτταροκίνες</li>
+          </ul>
+        </li>
+        <li>Καταστροφή εισβολέα → <b>καθαρισμός & αποκατάσταση</b>.</li>
+        <li>Υπερδραστηριότητα φυσικής ανοσίας → <b>οξεία φλεγμονή</b>.</li>
+        <li>Αποτυχία πρώτης γραμμής → ενεργοποίηση <span class="highlight-purple">επίκτητης ανοσίας</span>.</li>
+        <li>Μακροχρόνια ενεργοποίηση → <b>χρόνια φλεγμονή</b>.</li>
+        <li>Σε αυτοάνοσα: ως πρώτη απάντηση δρα κυρίως η επίκτητη ανοσία.</li>
+      </ul>
+    </div>
+
+    <!-- 21. Επίκτητη ανοσία -->
+    <div class="card">
+      <div class="tag tag-purple">Επίκτητη ανοσία</div>
+      <h3>Χυμική & Κυτταρική</h3>
+      <ul>
+        <li><span class="highlight-blue">Χυμική</span>:
+          <ul>
+            <li>Παραγωγή <b>αντισωμάτων</b>.</li>
+            <li>Πλασματοκύτταρα (από Β λεμφοκύτταρα).</li>
+          </ul>
+        </li>
+        <li><span class="highlight-blue">Κυτταρική</span>:
+          <ul>
+            <li><b>Λεμφοκύτταρα</b> Β, Τ8, Τ4, Τ/NK.</li>
+            <li>Μακροφάγα & δενδριτικά → παρουσίαση αντιγόνου.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>

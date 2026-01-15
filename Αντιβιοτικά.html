@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Antibiotics Board — One Page</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --paper:#111824;
+      --card:#121c2b;
+      --stroke:#23314a;
+      --text:#e9eef7;
+      --muted:#a6b3c7;
+
+      --ok:#30d158;
+      --warn:#ffd60a;
+      --bad:#ff453a;
+      --info:#64d2ff;
+
+      --beta:#7c5cff;
+      --protein:#ff9f0a;
+      --dna:#34c759;
+      --folate:#ff375f;
+      --mem:#00c7be;
+
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(124,92,255,.25), transparent 55%),
+                  radial-gradient(900px 700px at 90% 0%, rgba(100,210,255,.18), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,20,.65);
+      border-bottom:1px solid rgba(35,49,74,.7);
+    }
+
+    .wrap{ max-width:1200px; margin:0 auto; padding:18px 16px; }
+    .title{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    h1{ margin:0; font-size:22px; letter-spacing:.2px; }
+    .subtitle{ margin:6px 0 0; color:var(--muted); font-size:13px; }
+
+    .controls{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1.2fr .9fr .9fr;
+      gap:10px;
+    }
+    @media (max-width: 900px){
+      .controls{ grid-template-columns: 1fr; }
+    }
+
+    .search, .select, .btn{
+      border:1px solid rgba(35,49,74,.9);
+      background: rgba(17,24,36,.8);
+      color:var(--text);
+      border-radius: 14px;
+      padding:12px 12px;
+      outline:none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .search{ width:100%; font-size:14px; }
+    .select{ width:100%; font-size:14px; }
+    .btn{
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      font-weight:600;
+      transition: transform .08s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ border-color: rgba(100,210,255,.6); }
+    .btn:active{ transform: translateY(1px); }
+
+    .pillrow{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:8px;
+      align-items:center;
+    }
+    .pill{
+      border:1px solid rgba(35,49,74,.9);
+      background: rgba(18,28,43,.7);
+      color:var(--muted);
+      border-radius: 999px;
+      padding:6px 10px;
+      font-size:12px;
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{ width:10px; height:10px; border-radius:999px; display:inline-block; }
+
+    main .wrap{ padding-top:18px; padding-bottom:40px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 1100px){ .grid{ grid-template-columns: repeat(8, 1fr); } }
+    @media (max-width: 780px){ .grid{ grid-template-columns: repeat(4, 1fr); } }
+
+    .card{
+      grid-column: span 4;
+      background: linear-gradient(180deg, rgba(18,28,43,.95), rgba(17,24,36,.9));
+      border:1px solid rgba(35,49,74,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      transition: transform .12s ease, border-color .2s ease;
+    }
+    .card:hover{ transform: translateY(-2px); border-color: rgba(100,210,255,.35); }
+
+    .bar{
+      height:6px; width:100%;
+      background: rgba(255,255,255,.06);
+    }
+    .bar > div{ height:100%; width:100%; }
+    .cardhead{
+      padding:14px 14px 10px;
+      display:flex; justify-content:space-between; gap:10px;
+      align-items:flex-start;
+    }
+    .tag{
+      font-size:11px;
+      color:rgba(255,255,255,.85);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      padding:4px 8px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .name{
+      font-size:16px; font-weight:800; margin:0 0 2px;
+      letter-spacing:.2px;
+    }
+    .mini{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+    .cardbody{ padding:0 14px 14px; }
+
+    .section{
+      margin-top:10px;
+      border:1px solid rgba(35,49,74,.75);
+      background: rgba(11,15,20,.35);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    .section > button{
+      width:100%;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px;
+      border:0;
+      background: transparent;
+      color: var(--text);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .section > button span{
+      color: var(--muted);
+      font-weight:600;
+      font-size:12px;
+    }
+    .content{
+      display:none;
+      padding:0 12px 12px;
+      color: var(--text);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .content ul{ margin:8px 0 0 18px; padding:0; }
+    .content li{ margin:4px 0; color: rgba(233,238,247,.92); }
+    .sos{
+      border-left:4px solid var(--bad);
+      padding-left:10px;
+      margin-top:10px;
+      color: rgba(255,255,255,.92);
+    }
+    .muted{ color: var(--muted); }
+
+    .actions{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .chipbtn{
+      border:1px solid rgba(35,49,74,.9);
+      background: rgba(18,28,43,.55);
+      color: var(--text);
+      border-radius: 999px;
+      padding:8px 10px;
+      font-size:12px;
+      cursor:pointer;
+      display:flex; gap:8px; align-items:center;
+    }
+    .chipbtn[aria-pressed="true"]{
+      border-color: rgba(48,209,88,.6);
+      background: rgba(48,209,88,.12);
+    }
+
+    /* category colors */
+    .c-beta .bar > div{ background: linear-gradient(90deg, rgba(124,92,255,.9), rgba(124,92,255,.35)); }
+    .c-protein .bar > div{ background: linear-gradient(90deg, rgba(255,159,10,.95), rgba(255,159,10,.35)); }
+    .c-dna .bar > div{ background: linear-gradient(90deg, rgba(52,199,89,.95), rgba(52,199,89,.35)); }
+    .c-folate .bar > div{ background: linear-gradient(90deg, rgba(255,55,95,.95), rgba(255,55,95,.35)); }
+    .c-mem .bar > div{ background: linear-gradient(90deg, rgba(0,199,190,.95), rgba(0,199,190,.35)); }
+
+    footer{
+      border-top:1px solid rgba(35,49,74,.7);
+      color: var(--muted);
+      font-size:12px;
+      padding:14px 0 20px;
+      text-align:center;
+    }
+
+    .hidden{ display:none !important; }
+    .counter{
+      font-size:12px;
+      color: var(--muted);
+      margin-top:10px;
+    }
+    .counter b{ color: var(--text); }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div class="title">
+      <div>
+        <h1>Antibiotics Board — One Page</h1>
+        <p class="subtitle">Κουτάκια σαν “χαρτί”, με αναζήτηση, φίλτρα, κουμπιά & “έμαθα” για γρήγορη επανάληψη.</p>
+      </div>
+      <div class="pillrow" aria-label="Legend">
+        <div class="pill"><span class="dot" style="background:var(--beta)"></span> Κυτταρικό τοίχωμα (β-λακτάμες)</div>
+        <div class="pill"><span class="dot" style="background:var(--protein)"></span> Πρωτεϊνοσύνθεση</div>
+        <div class="pill"><span class="dot" style="background:var(--dna)"></span> Νουκλεϊκά οξέα</div>
+        <div class="pill"><span class="dot" style="background:var(--folate)"></span> Φυλλικό οξύ</div>
+        <div class="pill"><span class="dot" style="background:var(--mem)"></span> Μεμβράνη</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="q" class="search" placeholder="🔎 Αναζήτηση (π.χ. 'ceftriaxone', 'MRSA', 'MHC', 'Pseudomonas', 'ενδοκαρδίτιδα')">
+      <select id="filterCat" class="select">
+        <option value="all">Φίλτρο κατηγορίας: Όλα</option>
+        <option value="c-beta">Κυτταρικό τοίχωμα (β-λακτάμες)</option>
+        <option value="c-protein">Πρωτεϊνοσύνθεση</option>
+        <option value="c-dna">Νουκλεϊκά οξέα</option>
+        <option value="c-folate">Φυλλικό οξύ</option>
+        <option value="c-mem">Μεμβράνη</option>
+      </select>
+      <button id="toggleDetails" class="btn" type="button">🧠 Κρύψε/Δείξε λεπτομέρειες</button>
+    </div>
+
+    <div class="counter">
+      Εμφάνιση: <b id="countShown">0</b> / <b id="countAll">0</b> κουτάκια • “Έμαθα”: <b id="countDone">0</b>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div id="grid" class="grid" aria-label="Cards grid">
+      <!-- ====== ΚΑΡΤΕΣ (Μπορείς να αντιγράψεις/κολλήσεις όσες θες) ====== -->
+
+      <!-- Β-λακτάμες (Παράδειγμα) -->
+      <article class="card c-beta" data-tags="beta β-λακτάμες penicillin pbp peptidoglycan gram+ gram-">
+        <div class="bar"><div></div></div>
+        <div class="cardhead">
+          <div>
+            <h3 class="name">β-λακταμικά (overview)</h3>
+            <p class="mini">Βακτηριοκτόνα • Χρονοεξαρτώμενη δράση • Δρουν σε ενεργό πολλαπλασιασμό</p>
+          </div>
+          <div class="tag">Cell Wall</div>
+        </div>
+        <div class="cardbody">
+          <div class="section">
+            <button type="button" data-open>
+              Μηχανισμός <span>PBPs → ↓πεπτιδογλυκάνη</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Δένονται σε <b>PBP</b> → αναστολή σύνθεσης πεπτιδογλυκάνης → λύση.</li>
+                <li><span class="muted">Κλειδί:</span> θέλει βακτήρια που “χτίζουν” τοίχωμα (φάση ανάπτυξης).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <button type="button" data-open>
+              SOS / Παγίδες <span>αντοχή, β-λακταμάσες</span>
+            </button>
+            <div class="content">
+              <div class="sos">
+                <b>Αντοχή:</b> β-λακταμάσες • αλλαγή PBPs • ↓διαπερατότητα (porins).
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="chipbtn" type="button" data-done aria-pressed="false">✅ Έμαθα</button>
+            <button class="chipbtn" type="button" data-collapse>📚 Άνοιξε/Κλείσε όλα</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Πενικιλίνες (Παράδειγμα) -->
+      <article class="card c-beta" data-tags="penicillin amoxicillin ampicillin augmentin clavulanate strep enterococcus listeria">
+        <div class="bar"><div></div></div>
+        <div class="cardhead">
+          <div>
+            <h3 class="name">Αμινοπενικιλίνες</h3>
+            <p class="mini">Αμοξικιλλίνη / Αμπικιλλίνη • καλύτερη κάλυψη στρεπτόκοκκου</p>
+          </div>
+          <div class="tag">β-Lactams</div>
+        </div>
+        <div class="cardbody">
+          <div class="section">
+            <button type="button" data-open>
+              Φάσμα <span>Strep↑, Enterococcus, κάποια Gram(-)</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Καλή αντι-στρεπτοκοκκική κάλυψη (και πνευμονιόκοκκο).</li>
+                <li>Δρα σε ευαίσθητο <b>Enterococcus</b>.</li>
+                <li>Κάποια Gram(-) → ιδανικά μετά από αντιβιόγραμμα.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <button type="button" data-open>
+              Κλινικά <span>φαρυγγίτιδα, ωτίτιδα, μηνιγγίτιδα* </span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Στρεπτοκοκκική φαρυγγίτιδα, οξεία μέση ωτίτιδα.</li>
+                <li>Μηνιγγίτιδα από Listeria/meningococcus/pneumococcus (με κατάλληλο προφίλ).</li>
+              </ul>
+              <div class="sos">
+                <b>SOS:</b> ανεπαρκής αντι-σταφυλοκοκκική κάλυψη λόγω πενικιλλινάσης.
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="chipbtn" type="button" data-done aria-pressed="false">✅ Έμαθα</button>
+            <button class="chipbtn" type="button" data-collapse>📚 Άνοιξε/Κλείσε όλα</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Πρωτεϊνοσύνθεση (Παράδειγμα) -->
+      <article class="card c-protein" data-tags="aminoglycosides gentamicin amikacin 30S nephrotoxicity ototoxicity synergy">
+        <div class="bar"><div></div></div>
+        <div class="cardhead">
+          <div>
+            <h3 class="name">Αμινογλυκοσίδες (30S)</h3>
+            <p class="mini">Βακτηριοκτόνες • Συχνά σε συνδυασμό • Νεφρο/Ωτοτοξικότητα</p>
+          </div>
+          <div class="tag">Protein</div>
+        </div>
+        <div class="cardbody">
+          <div class="section">
+            <button type="button" data-open>
+              Μηχανισμός <span>30S → λάθη μετάφρασης</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Δένονται στη <b>30S</b> → διαταράσσουν πρωτεϊνοσύνθεση (bactericidal).</li>
+                <li>Καλή δράση σε Gram(-) (enterobacteriaceae, Pseudomonas κ.ά.).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <button type="button" data-open>
+              Ανεπιθύμητες / SOS <span>νεφρό, ωτό, NM block</span>
+            </button>
+            <div class="content">
+              <div class="sos">
+                <ul>
+                  <li><b>Νεφροτοξικότητα</b>, <b>ωτοτοξικότητα</b>.</li>
+                  <li><b>Νευρομυϊκός αποκλεισμός</b> (προσοχή σε μυασθένεια).</li>
+                  <li>Συχνά <b>συνέργεια</b> με β-λακτάμες/γλυκοπεπτίδια για Gram(+).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="chipbtn" type="button" data-done aria-pressed="false">✅ Έμαθα</button>
+            <button class="chipbtn" type="button" data-collapse>📚 Άνοιξε/Κλείσε όλα</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- DNA/RNA (Παράδειγμα) -->
+      <article class="card c-dna" data-tags="quinolones ciprofloxacin levofloxacin moxifloxacin dna gyrase qt tendon">
+        <div class="bar"><div></div></div>
+        <div class="cardhead">
+          <div>
+            <h3 class="name">Κινολόνες</h3>
+            <p class="mini">DNA gyrase/Topoisomerase • QT • Τένοντες • C. difficile</p>
+          </div>
+          <div class="tag">DNA/RNA</div>
+        </div>
+        <div class="cardbody">
+          <div class="section">
+            <button type="button" data-open>
+              Μηχανισμός <span>↓DNA gyrase</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Αναστολή DNA gyrase / topoisomerase → μπλοκ αντιγραφής DNA.</li>
+                <li><span class="muted">Σκέψη:</span> “σταματάς το ξετύλιγμα/επαν-τύλιγμα DNA”.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="section">
+            <button type="button" data-open>
+              SOS <span>χόνδρος, QT, τένοντες</span>
+            </button>
+            <div class="content">
+              <div class="sos">
+                <ul>
+                  <li>Αποφυγή σε παιδιά/εφήβους/εγκύους (χόνδρος).</li>
+                  <li>QT παράταση, τενοντίτιδα/ρήξη τένοντα, περιφερική νευροπάθεια.</li>
+                  <li>Διάρροια από C. difficile.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="chipbtn" type="button" data-done aria-pressed="false">✅ Έμαθα</button>
+            <button class="chipbtn" type="button" data-collapse>📚 Άνοιξε/Κλείσε όλα</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Folate (Παράδειγμα) -->
+      <article class="card c-folate" data-tags="trimethoprim sulfamethoxazole cotrimoxazole folate paba mrsa nocardia">
+        <div class="bar"><div></div></div>
+        <div class="cardhead">
+          <div>
+            <h3 class="name">Co-trimoxazole (TMP-SMX)</h3>
+            <p class="mini">Σύνθεση φυλλικού • χρήσιμο σε MRSA/Nocardia κ.ά.</p>
+          </div>
+          <div class="tag">Folate</div>
+        </div>
+        <div class="cardbody">
+          <div class="section">
+            <button type="button" data-open>
+              Μηχανισμός <span>2 βήματα φυλλικού</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>SMX: ανταγωνιστής PABA → ↓διϋδροφυλλικό</li>
+                <li>TMP: αναστολή διϋδροφυλλικής αναγωγάσης → ↓τετραϋδροφυλλικό</li>
+              </ul>
+            </div>
+          </div>
+          <div class="section">
+            <button type="button" data-open>
+              Κλινικά <span>κύστη, MRSA δέρμα</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Μη επιπλεγμένη κυστίτιδα (σε κατάλληλες περιπτώσεις).</li>
+                <li>Λοιμώξεις δέρματος/μαλακών μορίων από MRSA (όταν ενδείκνυται).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="chipbtn" type="button" data-done aria-pressed="false">✅ Έμαθα</button>
+            <button class="chipbtn" type="button" data-collapse>📚 Άνοιξε/Κλείσε όλα</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Μεμβράνη (Παράδειγμα) -->
+      <article class="card c-mem" data-tags="polymyxins colistin membrane gram- nephrotoxicity neurotoxicity">
+        <div class="bar"><div></div></div>
+        <div class="cardhead">
+          <div>
+            <h3 class="name">Πολυμυξίνες (Colistin)</h3>
+            <p class="mini">Μεμβράνη Gram(-) • τοξικότητα → “last resort”</p>
+          </div>
+          <div class="tag">Membrane</div>
+        </div>
+        <div class="cardbody">
+          <div class="section">
+            <button type="button" data-open>
+              Μηχανισμός <span>LPS/φωσφολιπίδια</span>
+            </button>
+            <div class="content">
+              <ul>
+                <li>Δρουν στη μεμβράνη Gram(-): αλληλεπίδραση με LPS/φωσφολιπίδια → ↑διαπερατότητα → θάνατος.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="section">
+            <button type="button" data-open>
+              SOS <span>νεφρο/νευροτοξικότητα</span>
+            </button>
+            <div class="content">
+              <div class="sos">
+                Περιορισμένη χρήση λόγω <b>νεφροτοξικότητας</b> και <b>νευροτοξικότητας</b>.
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="chipbtn" type="button" data-done aria-pressed="false">✅ Έμαθα</button>
+            <button class="chipbtn" type="button" data-collapse>📚 Άνοιξε/Κλείσε όλα</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ====== /ΚΑΡΤΕΣ ====== -->
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Tip: Αν θες να προσθέσεις νέο κουτάκι, αντέγραψε ένα & άλλαξε <b>data-tags</b>, τίτλο και τα sections.
+  </div>
+</footer>
+
+<script>
+  // ---------- helpers ----------
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+  const grid = $("#grid");
+  const q = $("#q");
+  const filterCat = $("#filterCat");
+  const toggleDetails = $("#toggleDetails");
+
+  const countShown = $("#countShown");
+  const countAll = $("#countAll");
+  const countDone = $("#countDone");
+
+  let detailsHidden = false;
+
+  // ---------- section toggles ----------
+  function wireCard(card){
+    // per-section expand
+    $$("[data-open]", card).forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const content = btn.nextElementSibling;
+        const open = content.style.display === "block";
+        content.style.display = open ? "none" : "block";
+      });
+    });
+
+    // collapse/expand all inside card
+    const collapseBtn = $("[data-collapse]", card);
+    if(collapseBtn){
+      collapseBtn.addEventListener("click", ()=>{
+        const contents = $$(".content", card);
+        const anyClosed = contents.some(c => c.style.display !== "block");
+        contents.forEach(c => c.style.display = anyClosed ? "block" : "none");
+      });
+    }
+
+    // done toggle + persist in localStorage
+    const doneBtn = $("[data-done]", card);
+    if(doneBtn){
+      const key = "done:" + card.querySelector(".name").textContent.trim();
+      const saved = localStorage.getItem(key) === "1";
+      doneBtn.setAttribute("aria-pressed", saved ? "true" : "false");
+
+      doneBtn.addEventListener("click", ()=>{
+        const now = doneBtn.getAttribute("aria-pressed") !== "true";
+        doneBtn.setAttribute("aria-pressed", now ? "true" : "false");
+        localStorage.setItem(key, now ? "1" : "0");
+        updateCounters();
+      });
+    }
+  }
+
+  $$(".card", grid).forEach(wireCard);
+
+  // ---------- filter/search ----------
+  function normalize(s){
+    return (s || "")
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove accents
+  }
+
+  function applyFilters(){
+    const term = normalize(q.value);
+    const cat = filterCat.value;
+
+    let shown = 0;
+    $$(".card", grid).forEach(card=>{
+      const tags = normalize(card.getAttribute("data-tags") || "");
+      const text = normalize(card.innerText);
+      const matchesTerm = !term || tags.includes(term) || text.includes(term);
+      const matchesCat = (cat === "all") || card.classList.contains(cat);
+
+      const visible = matchesTerm && matchesCat;
+      card.classList.toggle("hidden", !visible);
+      if(visible) shown++;
+    });
+
+    countShown.textContent = shown;
+    updateCounters();
+  }
+
+  function updateCounters(){
+    const allCards = $$(".card", grid);
+    countAll.textContent = allCards.length;
+
+    let done = 0;
+    allCards.forEach(card=>{
+      const doneBtn = $("[data-done]", card);
+      if(doneBtn && doneBtn.getAttribute("aria-pressed") === "true") done++;
+    });
+    countDone.textContent = done;
+  }
+
+  q.addEventListener("input", applyFilters);
+  filterCat.addEventListener("change", applyFilters);
+
+  // ---------- global hide/show details ----------
+  toggleDetails.addEventListener("click", ()=>{
+    detailsHidden = !detailsHidden;
+    $$(".content", grid).forEach(c=>{
+      // only hide contents, keep headings visible
+      c.style.display = detailsHidden ? "none" : c.style.display;
+    });
+    // also dim "mini" lines if hiding (optional feel)
+    $$(".mini", grid).forEach(p=>{
+      p.style.opacity = detailsHidden ? "0.85" : "1";
+    });
+  });
+
+  // init
+  updateCounters();
+  applyFilters();
+</script>
+</body>
+</html>
