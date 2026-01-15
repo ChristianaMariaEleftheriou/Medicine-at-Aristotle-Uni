@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<title>Pathology Labs</title>
+<style>
+body{font-family:system-ui;background:#f6f8ff;padding:40px}
+a{display:block;margin:12px 0;padding:14px;
+background:white;border-radius:14px;
+text-decoration:none;font-weight:700;color:#1f2937}
+</style>
+</head>
+<body>
+<h1>🧠 Παρουσιάσεις Αμφιθεάτρων & QUIZZES</h1>
+<a href="Αντιβιοτικά.html">Αντιβιοτικά</a>
+<h1>🧠 Microbiology Labs</h1>
+<a href="Εργαστηριο 1.html">Εργαστήριο 1</a>
+<a href="Εργαστηριο 2.html">Εργαστήριο 2</a>
+<a href="Εργαστήριο 3.html">Εργαστήριο 3</a>
+<a href="Εργαστήριο 4.html">Εργαστήριο 4</a>
+<a href="Εργαστήριο 5.html">Εργαστήριο 5</a>
+<a href="Εργαστήριο 6.html">Εργαστήριο 6</a>
+</body>
+</html>
