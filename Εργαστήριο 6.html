@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz 6ο Εργαστήριο</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fafafa;
+      line-height: 1.5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .question {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .question h3 {
+      margin-top: 0;
+      font-size: 1rem;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .answer {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 6px 10px;
+      background: #f5f5f5;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.95rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .answer:hover {
+      background: #eeeeee;
+    }
+
+    .answer.correct {
+      background: #c8e6c9;       /* πράσινο */
+      border-color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .answer.incorrect {
+      background: #ffcdd2;       /* κόκκινο */
+      border-color: #c62828;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Quiz – 6ο Εργαστήριο Μικροβιολογίας</h1>
+<p class="intro">
+  Πάτησε σε μία απάντηση. Η σωστή θα πρασινίσει αμέσως (λάθος = κόκκινο).
+</p>
+
+<!-- 1 -->
+<div class="question" data-answer="b">
+  <h3>1. Ποιο από τα παρακάτω ΔΕΝ αποτελεί γενικό χαρακτηριστικό των εντεροβακτηριοειδών;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Gram αρνητικά, μη σπορογόνα βακτήρια</button>
+    <button class="answer" data-option="b">Θετική δοκιμασία οξειδάσης σε όλα τα είδη</button>
+    <button class="answer" data-option="c">Ανάγουν τα νιτρικά σε νιτρώδη</button>
+    <button class="answer" data-option="d">Ζυμώνουν τη γλυκόζη</button>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="question" data-answer="c">
+  <h3>2. Ποιο είναι το βασικό στοιχείο διαφοροποίησης στο άγαρ MacConkey;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Η παραγωγή σπορών</button>
+    <button class="answer" data-option="b">Η ύπαρξη πρωτεϊνών του εξωτερικού τοιχώματος</button>
+    <button class="answer" data-option="c">Η ικανότητα ζύμωσης της λακτόζης</button>
+    <button class="answer" data-option="d">Η ύπαρξη κάψας</button>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="question" data-answer="a">
+  <h3>3. Πώς εμφανίζονται οι αποικίες των λακτόζη-θετικών εντεροβακτηριοειδών στο άγαρ MacConkey;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Κόκκινες / ροζ αποικίες</button>
+    <button class="answer" data-option="b">Άχρωμες αποικίες</button>
+    <button class="answer" data-option="c">Μαύρες αποικίες με άλω</button>
+    <button class="answer" data-option="d">Πράσινες μεταλλικές αποικίες</button>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="question" data-answer="d">
+  <h3>4. Ποιο από τα παρακάτω ΔΕΝ ανήκει στα εντεροβακτηριοειδή που δεν διασπούν τη λακτόζη;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Σιγκέλλες</button>
+    <button class="answer" data-option="b">Σαλμονέλλες</button>
+    <button class="answer" data-option="c">Πρωτέες</button>
+    <button class="answer" data-option="d">Εscherichia coli</button>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="question" data-answer="b">
+  <h3>5. Ποιο χαρακτηριστικό ΔΕΝ είναι σωστό για τα βακτήρια του γένους Proteus;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Gram αρνητικά, κινητά</button>
+    <button class="answer" data-option="b">Παράγουν χαρακτηριστική οσμή γιασεμιού</button>
+    <button class="answer" data-option="c">Παράγουν H₂S</button>
+    <button class="answer" data-option="d">Διασπούν την ουρία (θετική ουρεάση)</button>
+  </div>
+</div>
+
+<!-- 6 -->
+<div class="question" data-answer="c">
+  <h3>6. Ποια από τις παρακάτω μορφές ΔΕΝ αναφέρεται ως μορφή πολυμορφισμού του Proteus;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Βακτηριδιακή μορφή</button>
+    <button class="answer" data-option="b">Κοκκοβακτηριδιακή μορφή</button>
+    <button class="answer" data-option="c">Σπειροχαϊκή μορφή</button>
+    <button class="answer" data-option="d">Νηματοειδής μορφή</button>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="question" data-answer="a">
+  <h3>7. Ποιος είναι ο χαρακτηριστικός τρόπος ανάπτυξης του Proteus σε στερεά θρεπτικά υλικά;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Ερπυσμός με σχηματισμό ομόκεντρων δακτυλίων</button>
+    <button class="answer" data-option="b">Σχηματισμός αλυσίδων κοκκίων</button>
+    <button class="answer" data-option="c">Σχηματισμός μικρών S αποικιών</button>
+    <button class="answer" data-option="d">Ανάπτυξη μόνο σε αναερόβιες συνθήκες</button>
+  </div>
+</div>
+
+<!-- 8 -->
+<div class="question" data-answer="d">
+  <h3>8. Ποιος από τους παρακάτω ΔΕΝ αποτελεί τύπο Proteus που αναφέρεται στο εργαστήριο;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Proteus vulgaris</button>
+    <button class="answer" data-option="b">Proteus mirabilis</button>
+    <button class="answer" data-option="c">Proteus morganii (Morganella)</button>
+    <button class="answer" data-option="d">Proteus pneumoniae</button>
+  </div>
+</div>
+
+<!-- 9 -->
+<div class="question" data-answer="b">
+  <h3>9. Ποια από τις παρακάτω λοιμώξεις ΔΕΝ αναφέρεται ως τυπική για τον Proteus;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Λοιμώξεις ουροποιητικού</button>
+    <button class="answer" data-option="b">Ιογενείς ηπατίτιδες</button>
+    <button class="answer" data-option="c">Επιμολύνσεις τραυμάτων και κατακλίσεων</button>
+    <button class="answer" data-option="d">Μηνιγγίτιδες</button>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="question" data-answer="c">
+  <h3>10. Η δοκιμασία Weil–Felix βασίζεται σε κοινά αντιγόνα μεταξύ:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Πρωτέων και σταφυλόκοκκων</button>
+    <button class="answer" data-option="b">Πρωτέων και μυκοβακτηριδίων</button>
+    <button class="answer" data-option="c">Πρωτέων και ρικετσιών</button>
+    <button class="answer" data-option="d">Πρωτέων και μυκήτων</button>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="question" data-answer="a">
+  <h3>11. Ποιο βακτήριο δίνει τυπικά θετική αντίδραση οξειδάσης;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Ψευδομονάδα</button>
+    <button class="answer" data-option="b">Salmonella typhi</button>
+    <button class="answer" data-option="c">Shigella sonnei</button>
+    <button class="answer" data-option="d">Escherichia coli</button>
+  </div>
+</div>
+
+<!-- 12 -->
+<div class="question" data-answer="d">
+  <h3>12. Η δοκιμασία οξειδάσης χρησιμοποιεί ως αντιδραστήριο:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Κρυσταλλικό ιώδες</button>
+    <button class="answer" data-option="b">Σαφρανίνη</button>
+    <button class="answer" data-option="c">Φουξίνη</button>
+    <button class="answer" data-option="d">1% τετραμεθυλ-παρα-φαινυλενο-διαμίνη</button>
+  </div>
+</div>
+
+<!-- 13 -->
+<div class="question" data-answer="c">
+  <h3>13. Ποιο από τα παρακάτω ΔΕΝ είναι χαρακτηριστικό της Pseudomonas aeruginosa;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Gram αρνητικό βακτηρίδιο</button>
+    <button class="answer" data-option="b">Ζωηρή κίνηση με πολικές βλεφαρίδες</button>
+    <button class="answer" data-option="c">Υποχρεωτικά αναερόβιο μικρόβιο</button>
+    <button class="answer" data-option="d">Ανάπτυξη έως τους 42°C</button>
+  </div>
+</div>
+
+<!-- 14 -->
+<div class="question" data-answer="b">
+  <h3>14. Ποια είναι η χαρακτηριστική οσμή των καλλιεργειών της ψευδομονάδας;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Οσμή σκόρδου</button>
+    <button class="answer" data-option="b">Αρωματική οσμή γιασεμιού (τριμεθυλαμίνη)</button>
+    <button class="answer" data-option="c">Οσμή ποντικιού</button>
+    <button class="answer" data-option="d">Οσμή βουτύρου</button>
+  </div>
+</div>
+
+<!-- 15 -->
+<div class="question" data-answer="a">
+  <h3>15. Ποια από τις παρακάτω χρωστικές ΔΕΝ σχετίζεται με την ψευδομονάδα;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Χλωροφυλλίνη</button>
+    <button class="answer" data-option="b">Πυοκυανίνη</button>
+    <button class="answer" data-option="c">Πυοβερδίνη</button>
+    <button class="answer" data-option="d">Πυορουμπίνη</button>
+  </div>
+</div>
+
+<!-- 16 -->
+<div class="question" data-answer="d">
+  <h3>16. Ποιο από τα παρακάτω ΔΕΝ αναφέρεται ως παράγοντας λοιμογόνου δράσης της ψευδομονάδας;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Ενδοτοξίνη</button>
+    <button class="answer" data-option="b">Εξωτοξίνη Α</button>
+    <button class="answer" data-option="c">Πυοσίνες</button>
+    <button class="answer" data-option="d">Ενδοσπόρια</button>
+  </div>
+</div>
+
+<!-- 17 -->
+<div class="question" data-answer="c">
+  <h3>17. Σε ποια από τις παρακάτω καταστάσεις η ψευδομονάδα αποτελεί κλασικό παθογόνο;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Οξεία μέση ωτίτιδα σε υγιή παιδιά</button>
+    <button class="answer" data-option="b">Λοίμωξη τύπου οστρακιάς</button>
+    <button class="answer" data-option="c">Λοιμώξεις εγκαυμάτων και τραυμάτων με κυανό πύον</button>
+    <button class="answer" data-option="d">Λοιμώξεις του δέρματος από ζωοανθρωπονόσους</button>
+  </div>
+</div>
+
+<!-- 18 -->
+<div class="question" data-answer="b">
+  <h3>18. Η λοίμωξη από ψευδομονάδα στους πνεύμονες είναι ιδιαίτερα συχνή σε:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Ασθενείς με σακχαρώδη διαβήτη τύπου 2</button>
+    <button class="answer" data-option="b">Ασθενείς με κυστική ίνωση</button>
+    <button class="answer" data-option="c">Επαγγελματίες υγείας</button>
+    <button class="answer" data-option="d">Νεογνά με φυσιολογικό τοκετό</button>
+  </div>
+</div>
+
+<!-- 19 -->
+<div class="question" data-answer="d">
+  <h3>19. Ποιο χαρακτηριστικό συμβάλλει ιδιαίτερα στις ενδονοσοκομειακές λοιμώξεις από ψευδομονάδα;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Η παραγωγή σπορών</button>
+    <button class="answer" data-option="b">Η αυξημένη φωτοσύνθεση</button>
+    <button class="answer" data-option="c">Η αδυναμία επιβίωσης σε χαμηλές θερμοκρασίες</button>
+    <button class="answer" data-option="d">Η ανθεκτικότητα σε απολυμαντικά και πολλαπλά αντιβιοτικά</button>
+  </div>
+</div>
+
+<!-- 20 -->
+<div class="question" data-answer="c">
+  <h3>20. Ποιο από τα παρακάτω είναι σωστό για τη Serratia;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Είναι Gram θετικός κόκκος</button>
+    <button class="answer" data-option="b">Είναι υποχρεωτικά ενδοκυττάριο βακτήριο</button>
+    <button class="answer" data-option="c">Προκαλεί κυρίως ενδονοσοκομειακές λοιμώξεις</button>
+    <button class="answer" data-option="d">Μεταδίδεται μόνο με σταγονίδια αέρα</button>
+  </div>
+</div>
+
+<!-- 21 -->
+<div class="question" data-answer="a">
+  <h3>21. Ποιες από τις παρακάτω λοιμώξεις σχετίζονται με Serratia marcescens;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Λοιμώξεις ουροφόρων οδών και ενδοκαρδίτιδες</button>
+    <button class="answer" data-option="b">Λέπρα</button>
+    <button class="answer" data-option="c">Φυματίωση</button>
+    <button class="answer" data-option="d">Διφθερίτιδα</button>
+  </div>
+</div>
+
+<!-- 22 -->
+<div class="question" data-answer="b">
+  <h3>22. Ποιος είναι ο κύριος τρόπος μετάδοσης των λοιμώξεων από Serratia στα νοσοκομεία;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Μόνο με τσιμπήματα εντόμων</button>
+    <button class="answer" data-option="b">Μέσω ιατρικών συσκευών και ενδοφλέβιων υγρών</button>
+    <button class="answer" data-option="c">Με αερογενή διασπορά</button>
+    <button class="answer" data-option="d">Μέσω αιμορραγικών κηλίδων στο δέρμα</button>
+  </div>
+</div>
+
+<!-- 23 -->
+<div class="question" data-answer="c">
+  <h3>23. Ποιο χαρακτηριστικό είναι κοινό στις σαλμονέλλες;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Είναι ακίνητες</button>
+    <button class="answer" data-option="b">Διασπούν τη λακτόζη</button>
+    <button class="answer" data-option="c">Είναι κινητά Gram αρνητικά βακτηρίδια με περίτριχες βλεφαρίδες</button>
+    <button class="answer" data-option="d">Είναι Gram θετικά βακτήρια</button>
+  </div>
+</div>
+
+<!-- 24 -->
+<div class="question" data-answer="d">
+  <h3>24. Ποιο από τα παρακάτω είδη ΔΕΝ περιλαμβάνεται στις σαλμονέλλες που αναφέρονται;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Salmonella Typhi</button>
+    <button class="answer" data-option="b">Salmonella Paratyphi A</button>
+    <button class="answer" data-option="c">Salmonella enteritidis</button>
+    <button class="answer" data-option="d">Salmonella pneumoniae</button>
+  </div>
+</div>
+
+<!-- 25 -->
+<div class="question" data-answer="a">
+  <h3>25. Ποιο αντιγόνο των σαλμονελλών αντιστοιχεί στο λιποπολυσακχαριδικό τμήμα του κυτταρικού τοιχώματος;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Σωματικό αντιγόνο Ο</button>
+    <button class="answer" data-option="b">Βλεφαριδικό αντιγόνο Η</button>
+    <button class="answer" data-option="c">Επιφανειακό αντιγόνο Vi</button>
+    <button class="answer" data-option="d">Καψιδικό αντιγόνο Μ</button>
+  </div>
+</div>
+
+<!-- 26 -->
+<div class="question" data-answer="c">
+  <h3>26. Το αντιγόνο Vi των σαλμονελλών είναι:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Ενδοτοξίνη</button>
+    <button class="answer" data-option="b">Βλεφαριδική πρωτεΐνη</button>
+    <button class="answer" data-option="c">Επιφανειακό αντιγόνο, ανάλογο του Κ των άλλων εντεροβακτηριοειδών</button>
+    <button class="answer" data-option="d">Πεπτιδογλυκάνη</button>
+  </div>
+</div>
+
+<!-- 27 -->
+<div class="question" data-answer="b">
+  <h3>27. Η ταξινόμηση των σαλμονελλών κατά Kauffmann–White βασίζεται κυρίως:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Στην παραγωγή χρωστικών</button>
+    <button class="answer" data-option="b">Στα σωματικά αντιγόνα Ο και στα βλεφαριδικά αντιγόνα Η</button>
+    <button class="answer" data-option="c">Στην παρουσία σπορών</button>
+    <button class="answer" data-option="d">Στην ευαισθησία στα απολυμαντικά</button>
+  </div>
+</div>
+
+<!-- 28 -->
+<div class="question" data-answer="a">
+  <h3>28. Ποιο από τα παρακάτω τρόφιμα ΔΕΝ αναφέρεται ως συχνή πηγή σαλμονέλλας;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Λεμόνια</button>
+    <button class="answer" data-option="b">Ωμά αυγά</button>
+    <button class="answer" data-option="c">Γάλα</button>
+    <button class="answer" data-option="d">Κρέας και προϊόντα κρέατος</button>
+  </div>
+</div>
+
+<!-- 29 -->
+<div class="question" data-answer="d">
+  <h3>29. Σε ποια θερμοκρασία και για πόσο χρόνο απονεκρώνονται οι σαλμονέλλες σύμφωνα με το εργαστήριο;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">37°C για 5 λεπτά</button>
+    <button class="answer" data-option="b">100°C για 2 λεπτά</button>
+    <button class="answer" data-option="c">50°C για 30 λεπτά</button>
+    <button class="answer" data-option="d">60°C για 15–20 λεπτά</button>
+  </div>
+</div>
+
+<!-- 30 -->
+<div class="question" data-answer="c">
+  <h3>30. Ποια από τις παρακάτω μορφές νόσου ΔΕΝ οφείλεται τυπικά σε σαλμονέλλες;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Τυφοειδής πυρετός</button>
+    <button class="answer" data-option="b">Εντεροκολίτιδα λοιμώδους τύπου</button>
+    <button class="answer" data-option="c">Ιογενής γαστρεντερίτιδα από ροταϊούς</button>
+    <button class="answer" data-option="d">Γενικευμένη λοίμωξη με μικροβιαιμία</button>
+  </div>
+</div>
+
+<!-- 31 -->
+<div class="question" data-answer="b">
+  <h3>31. Ποιος είναι ο χρόνος επώασης του τυφοειδούς πυρετού;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">24–72 ώρες</button>
+    <button class="answer" data-option="b">7–14 ημέρες</button>
+    <button class="answer" data-option="c">1–4 ώρες</button>
+    <button class="answer" data-option="d">30–40 ημέρες</button>
+  </div>
+</div>
+
+<!-- 32 -->
+<div class="question" data-answer="a">
+  <h3>32. Ποια από τις παρακάτω εκδηλώσεις ΔΕΝ αποτελεί χαρακτηριστικό της μικροβιακής τροφικής δηλητηρίασης από σταφυλοκοκκική εντεροτοξίνη σε σχέση με τις σαλμονέλλες;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Μεγάλος χρόνος επώασης 1–4 ημέρες</button>
+    <button class="answer" data-option="b">Βραχύς χρόνος επώασης λίγων ωρών</button>
+    <button class="answer" data-option="c">Έμετοι και διάρροια</button>
+    <button class="answer" data-option="d">Απουσία μικροβιαιμίας</button>
+  </div>
+</div>
+
+<!-- 33 -->
+<div class="question" data-answer="d">
+  <h3>33. Ποια είναι η βασική μέθοδος εργαστηριακής διάγνωσης του τυφοειδούς πυρετού κατά την 1η εβδομάδα της νόσου;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Κοπρανοκαλλιέργεια</button>
+    <button class="answer" data-option="b">Ουροκαλλιέργεια</button>
+    <button class="answer" data-option="c">Ορολογική αντίδραση Widal</button>
+    <button class="answer" data-option="d">Αιματοκαλλιέργεια</button>
+  </div>
+</div>
+
+<!-- 34 -->
+<div class="question" data-answer="c">
+  <h3>34. Η οροσυγκολλητική αντίδραση Widal γίνεται συνήθως:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Τις πρώτες 24 ώρες της νόσου</button>
+    <button class="answer" data-option="b">Μετά τον 1ο μήνα</button>
+    <button class="answer" data-option="c">Στο τέλος της 1ης εβδομάδας της νόσου</button>
+    <button class="answer" data-option="d">Μόνο σε χρόνια φορεία</button>
+  </div>
+</div>
+
+<!-- 35 -->
+<div class="question" data-answer="a">
+  <h3>35. Ποιος τίτλος αντισωμάτων θεωρείται διαγνωστικά σημαντικός για το αντιγόνο Ο στη δοκιμασία Widal;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">&gt; 1:100</button>
+    <button class="answer" data-option="b">&gt; 1:10</button>
+    <button class="answer" data-option="c">&gt; 1:1000</button>
+    <button class="answer" data-option="d">&gt; 1:20</button>
+  </div>
+</div>
+
+<!-- 36 -->
+<div class="question" data-answer="b">
+  <h3>36. Ποιο από τα παρακάτω ΔΕΝ χρησιμοποιείται ως θρεπτικό υλικό για την απομόνωση σαλμονελλών από κόπρανα;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">MacConkey άγαρ</button>
+    <button class="answer" data-option="b">Άγαρ αίματος με α-αιμόλυση</button>
+    <button class="answer" data-option="c">SS άγαρ</button>
+    <button class="answer" data-option="d">DCA άγαρ</button>
+  </div>
+</div>
+
+<!-- 37 -->
+<div class="question" data-answer="d">
+  <h3>37. Ποια από τις παρακάτω προτάσεις για τη θεραπεία των τυφοπαρατυφικών λοιμώξεων είναι σωστή;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Δεν χορηγούνται ποτέ αντιβιοτικά</button>
+    <button class="answer" data-option="b">Χορηγούνται μόνο τοπικά αντισηπτικά</button>
+    <button class="answer" data-option="c">Χρησιμοποιείται αποκλειστικά πενικιλλίνη G</button>
+    <button class="answer" data-option="d">Μπορούν να χρησιμοποιηθούν χλωραμφαινικόλη, αμπικιλλίνη, κοτριμοξαζόλη ή κινολόνες</button>
+  </div>
+</div>
+
+<!-- 38 -->
+<div class="question" data-answer="c">
+  <h3>38. Για τη θεραπεία της εντεροκολίτιδας από σαλμονέλλα σε απλές περιπτώσεις ισχύει ότι:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Χορηγούνται πάντα αντιβιοτικά για 14 ημέρες</button>
+    <button class="answer" data-option="b">Δεν χρειάζεται ενυδάτωση</button>
+    <button class="answer" data-option="c">Δεν δίνονται συνήθως αντιβιοτικά, αλλά υγρά και ηλεκτρολύτες</button>
+    <button class="answer" data-option="d">Χορηγείται μόνο κορτιζόνη</button>
+  </div>
+</div>
+
+<!-- 39 -->
+<div class="question" data-answer="b">
+  <h3>39. Ποιο από τα παρακάτω είναι σωστό για τα διαθέσιμα εμβόλια κατά του τυφοειδούς πυρετού;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Υπάρχει μόνο ζωντανό εμβόλιο σε μία δόση</button>
+    <button class="answer" data-option="b">Υπάρχουν τόσο ενέσιμο εμβόλιο (Typhim Vi) όσο και πόσιμο (Vivotif)</button>
+    <button class="answer" data-option="c">Τα εμβόλια χορηγούνται μόνο ενδοφλέβια</button>
+    <button class="answer" data-option="d">Δεν χρησιμοποιούνται προφυλακτικά σε ταξιδιώτες</button>
+  </div>
+</div>
+
+<!-- 40 -->
+<div class="question" data-answer="a">
+  <h3>40. Ποια είναι η κύρια οδός μετάδοσης της Σ. Typhi στον άνθρωπο;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Πεπτική οδός μέσω μολυσμένου νερού ή τροφίμων</button>
+    <button class="answer" data-option="b">Αερογενής διασπορά</button>
+    <button class="answer" data-option="c">Ενδομήτρια μετάδοση</button>
+    <button class="answer" data-option="d">Δερματική επαφή με σπέρμα</button>
+  </div>
+</div>
+
+<!-- 41 -->
+<div class="question" data-answer="c">
+  <h3>41. Ποιο από τα παρακάτω ΔΕΝ είναι σωστό για τις σιγκέλλες;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Είναι Gram αρνητικά βακτηρίδια</button>
+    <button class="answer" data-option="b">Δεν έχουν βλεφαρίδες, άρα είναι ακίνητα</button>
+    <button class="answer" data-option="c">Διαθέτουν βλεφαριδικό αντιγόνο Η</button>
+    <button class="answer" data-option="d">Δεν σχηματίζουν σπόρους</button>
+  </div>
+</div>
+
+<!-- 42 -->
+<div class="question" data-answer="d">
+  <h3>42. Ποιο είδος Shigella θεωρείται τυπικό αίτιο σοβαρής δυσεντερίας με εξωτοξίνη;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">S. sonnei</button>
+    <button class="answer" data-option="b">S. boydii</button>
+    <button class="answer" data-option="c">S. flexneri</button>
+    <button class="answer" data-option="d">S. dysenteriae τύπου 1 (Shiga)</button>
+  </div>
+</div>
+
+<!-- 43 -->
+<div class="question" data-answer="b">
+  <h3>43. Ποιο μοναδικό αντιγόνο διαθέτουν οι σιγκέλλες σύμφωνα με το εργαστήριο;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Βλεφαριδικό Η</button>
+    <button class="answer" data-option="b">Σωματικό Ο</button>
+    <button class="answer" data-option="c">Επιφανειακό Vi</button>
+    <button class="answer" data-option="d">Καψιδικό Κ</button>
+  </div>
+</div>
+
+<!-- 44 -->
+<div class="question" data-answer="a">
+  <h3>44. Ποια είναι η ελάχιστη μολυσματική δόση των σιγκελλών που μπορεί να προκαλέσει λοίμωξη;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">10–100 βακτηρίδια</button>
+    <button class="answer" data-option="b">10⁵–10⁶ βακτηρίδια</button>
+    <button class="answer" data-option="c">1 βακτηρίδιο</button>
+    <button class="answer" data-option="d">Πάνω από 10⁸ βακτηρίδια</button>
+  </div>
+</div>
+
+<!-- 45 -->
+<div class="question" data-answer="c">
+  <h3>45. Ποιος είναι ο χρόνος επώασης της μικροβιακής δυσεντερίας από Shigella;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">1–4 ημέρες</button>
+    <button class="answer" data-option="b">7–14 ημέρες</button>
+    <button class="answer" data-option="c">24–72 ώρες</button>
+    <button class="answer" data-option="d">4–6 εβδομάδες</button>
+  </div>
+</div>
+
+<!-- 46 -->
+<div class="question" data-answer="d">
+  <h3>46. Ποιο από τα παρακάτω ΔΕΝ χαρακτηρίζει τη μικροβιακή δυσεντερία από σιγκέλλες;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Νεκρώσεις και εξελκώσεις στο παχύ έντερο</button>
+    <button class="answer" data-option="b">Σχηματισμός ψευδομεμβρανών</button>
+    <button class="answer" data-option="c">Κενώσεις με βλέννη και αίμα</button>
+    <button class="answer" data-option="d">Απουσία ερυθρών αιμοσφαιρίων και πυοσφαιρίων στα κόπρανα</button>
+  </div>
+</div>
+
+<!-- 47 -->
+<div class="question" data-answer="b">
+  <h3>47. Ποια από τις παρακάτω προτάσεις περιγράφει σωστά τη διαφορά μικροβιακής από αμοιβαδική δυσεντερία;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Στη μικροβιακή δυσεντερία δεν υπάρχει ποτέ αιμορραγία</button>
+    <button class="answer" data-option="b">Στη μικροβιακή δυσεντερία τα κόπρανα περιέχουν ερυθρά και πυοσφαίρια, ενώ στην αμοιβαδική όχι</button>
+    <button class="answer" data-option="c">Η αμοιβαδική δυσεντερία προκαλείται από Gram αρνητικά βακτήρια</button>
+    <button class="answer" data-option="d">Η μικροβιακή δυσεντερία έχει πάντοτε χρόνο επώασης άνω των 7 ημερών</button>
+  </div>
+</div>
+
+<!-- 48 -->
+<div class="question" data-answer="c">
+  <h3>48. Ποια από τις παρακάτω ομάδες μικροοργανισμών αναφέρεται ως συχνό αίτιο οξείας διάρροιας σε παιδιά;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Ιοί HIV</button>
+    <button class="answer" data-option="b">Μυκοβακτηρίδια φυματίωσης</button>
+    <button class="answer" data-option="c">Rota ιοί, σιγκέλλες, EPEC/ETEC, καμπυλοβακτηρίδια</button>
+    <button class="answer" data-option="d">Κλωστηρίδια τετάνου</button>
+  </div>
+</div>
+
+<!-- 49 -->
+<div class="question" data-answer="a">
+  <h3>49. Στη μικροσκοπική εξέταση κοπράνων σε δυσεντερία από σιγκέλλα αναμένονται:</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Πυοσφαίρια και ερυθρά αιμοσφαίρια</button>
+    <button class="answer" data-option="b">Μόνο κρυστάλλοι ουρικού οξέος</button>
+    <button class="answer" data-option="c">Μόνο λιποσταγονίδια</button>
+    <button class="answer" data-option="d">Δεν παρατηρείται κανένα κύτταρο</button>
+  </div>
+</div>
+
+<!-- 50 -->
+<div class="question" data-answer="d">
+  <h3>50. Ποιο από τα παρακάτω αντιβιοτικά ΔΕΝ αναφέρεται ως πιθανή θεραπευτική επιλογή για σοβαρή μικροβιακή δυσεντερία;</h3>
+  <div class="answers">
+    <button class="answer" data-option="a">Αμπικιλλίνη</button>
+    <button class="answer" data-option="b">Χλωραμφενικόλη</button>
+    <button class="answer" data-option="c">Κοτριμοξαζόλη</button>
+    <button class="answer" data-option="d">Πενικιλλίνη G κατά Gram(+) κόκκων</button>
+  </div>
+</div>
+
+<script>
+  // Μόλις φορτώσει η σελίδα, βάζουμε event listeners σε όλες τις απαντήσεις
+  document.addEventListener('DOMContentLoaded', function () {
+    const questions = document.querySelectorAll('.question');
+
+    questions.forEach(function (q) {
+      const correctOption = q.getAttribute('data-answer');
+      const buttons = q.querySelectorAll('.answer');
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          // καθαρίζουμε προηγούμενα χρώματα στη συγκεκριμένη ερώτηση
+          buttons.forEach(function (b) {
+            b.classList.remove('correct', 'incorrect');
+          });
+
+          if (btn.getAttribute('data-option') === correctOption) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

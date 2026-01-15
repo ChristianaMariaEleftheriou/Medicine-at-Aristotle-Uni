@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Ανοσιακή απόκριση σε βακτηριακές λοιμώξεις</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background: #f7f7fb;
+    }
+
+    header {
+      background: linear-gradient(135deg, #3949ab, #1e88e5);
+      color: white;
+      padding: 12px 18px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      margin: 0 0 4px 0;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #e8eaf6;
+      border-bottom: 1px solid #c5cae9;
+    }
+
+    nav button {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: white;
+      cursor: pointer;
+      font-size: 13px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+      transition: background 0.15s, transform 0.05s;
+    }
+
+    nav button:hover {
+      transform: translateY(-1px);
+    }
+
+    nav button.active {
+      background: #3949ab;
+      color: white;
+    }
+
+    main {
+      padding: 18px;
+      max-width: 1000px;
+      margin: 0 auto 40px auto;
+    }
+
+    section {
+      display: none;
+      background: white;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #303f9f;
+    }
+
+    h3 {
+      margin-top: 18px;
+      color: #3949ab;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #616161;
+      background: #e0f2f1;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    dt {
+      font-weight: bold;
+      margin-top: 12px;
+      color: #303f9f;
+    }
+
+    dd {
+      margin-left: 12px;
+      margin-top: 4px;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8eaf6;
+    }
+
+    /* Quiz */
+    .quiz-question {
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .quiz-question h4 {
+      margin: 0 0 8px 0;
+      color: #303f9f;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #c5cae9;
+      background: #fafafa;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s;
+    }
+
+    .answers button.correct {
+      background: #c8e6c9;   /* πράσινο */
+      border-color: #2e7d32;
+    }
+
+    .answers button.wrong {
+      background: #ffcdd2;   /* κόκκινο */
+      border-color: #c62828;
+    }
+
+    .answers button:disabled {
+      cursor: default;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #757575;
+    }
+
+    .image-note {
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      color: #455a64;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ανοσιακή απόκριση σε βακτηριακές λοιμώξεις</h1>
+  <p>Σύνοψη βασικών εννοιών, εξεταστικών σημείων και επανάληψη με quiz.</p>
+</header>
+
+<nav>
+  <button class="tab-button active" data-target="orismoi">Ορισμοί</button>
+  <button class="tab-button" data-target="exetastika">Εξεταστικά σημεία</button>
+  <button class="tab-button" data-target="genikes">Γενικές πληροφορίες & συγκρίσεις</button>
+  <button class="tab-button" data-target="quiz">Quiz πολλαπλής επιλογής</button>
+</nav>
+
+<main>
+
+  <!-- ΟΡΙΣΜΟΙ -->
+  <section id="orismoi" class="active">
+    <h2>Ορισμοί</h2>
+
+    <div class="note">
+      Σημείωση: Σε παρένθεση γράφω τη σελίδα της παρουσίασης για να μπορείς
+      να βρεις εύκολα τη διαφάνεια (π.χ. «(σελίδα 3)»).
+    </div>
+
+    <dl>
+      <dt>Ανοσία (σελίδα 3)</dt>
+      <dd>
+        Το σύνολο των ιδιοτήτων του οργανισμού που τον καθιστούν
+        <strong>ανθεκτικό</strong> και τον προστατεύουν από τη δράση ειδικών
+        λοιμογόνων αιτίων.
+      </dd>
+
+      <dt>Ανοσιακό σύστημα (σελίδα 4)</dt>
+      <dd>
+        Πολυδύναμο σύνολο κυττάρων και μορίων που κινητοποιούνται όταν ο
+        οργανισμός εκτεθεί σε παθογόνο ή ξένο παράγοντα, με στόχο την
+        ανοσιακή απόκριση και την εξουδετέρωση του παθογόνου.
+      </dd>
+
+      <dt>Φυσική ή έμφυτη ανοσία (μη ειδική) (σελίδες 5, 8–12)</dt>
+      <dd>
+        Ταχύτατη, <strong>μη ειδική</strong> άμυνα που υπάρχει από τη γέννηση.
+        Περιλαμβάνει προστατευτικούς φραγμούς (δέρμα, βλεννογόνους), φλεγμονή,
+        πυρετό, φαγοκύτταρα, NK κύτταρα, συμπλήρωμα, πρωτεΐνες οξείας φάσης κ.ά.
+      </dd>
+
+      <dt>Επίκτητη (ειδική) ανοσία (σελίδες 8–11, 37–39)</dt>
+      <dd>
+        Ανοσιακή απάντηση που αναπτύσσεται μετά από επαφή με συγκεκριμένο
+        αντιγόνο. Είναι <strong>ειδική</strong>, έχει μνήμη και βελτιώνεται σε
+        επανέκθεση. Χωρίζεται σε χυμική (αντισώματα από Β-λεμφοκύτταρα) και
+        κυτταρική (Τ-λεμφοκύτταρα).
+      </dd>
+
+      <dt>Φυσικοί προστατευτικοί φραγμοί (σελίδες 6–7, 12–13)</dt>
+      <dd>
+        Δέρμα, βλεννογόνοι και τα υγρά/εκκρίσεις τους (ιδρώτας, σμήγμα,
+        γαστρικό υγρό, χολή, ούρα, δάκρυα, σάλιο κ.ά.), καθώς και μηχανικοί
+        παράγοντες όπως η ροή υγρών, οι περισταλτικές κινήσεις και οι κροσσοί.
+      </dd>
+
+      <dt>Φαγοκυττάρωση (σελίδα 15)</dt>
+      <dd>
+        Η σύλληψη, πέψη και καταστροφή μικροοργανισμών από φαγοκύτταρα
+        (ουδετερόφιλα, μονοκύτταρα/μακροφάγα) μέσω ενδοκυττάριων μηχανισμών
+        παραγωγής δραστικών μορφών οξυγόνου και ενζύμων.
+      </dd>
+
+      <dt>Φυσικά κυτταροκτόνα κύτταρα – NK (σελίδα 16)</dt>
+      <dd>
+        Μη-Β, μη-Τ λεμφοκύτταρα που παρέχουν φυσική ανοσία έναντι ιογενώς
+        μολυσμένων κυττάρων και καρκινικών κυττάρων, αναγνωρίζοντας κύτταρα
+        στόχους μέσω ειδικών υποδοχέων.
+      </dd>
+
+      <dt>Πρωτεΐνες οξείας φάσης (σελίδα 17)</dt>
+      <dd>
+        Πρωτεΐνες του πλάσματος (CRP, κλάσματα συμπληρώματος, αναστολείς
+        πρωτεασών, ινωδογόνο κ.ά.) των οποίων η συγκέντρωση αυξάνει σε
+        λοιμώξεις και φλεγμονές, υπό την επήρεια κυτταροκινών όπως IL-1, IL-6,
+        TNF-α.
+      </dd>
+
+      <dt>Ιντερφερόνες (σελίδες 18, 22)</dt>
+      <dd>
+        Κυτταροκίνες (IFN-α, IFN-β, IFN-γ) που παράγονται κυρίως από κύτταρα
+        μολυσμένα με ενδοκυττάριους μικροοργανισμούς και προστατεύουν τα
+        γειτονικά κύτταρα, αυξάνοντας την έκφραση MHC και ενεργοποιώντας ΝΚ
+        κύτταρα και μακροφάγα.
+      </dd>
+
+      <dt>Κυτταροκίνες / Χημειοκίνες (σελίδες 19–22)</dt>
+      <dd>
+        Μικρές πρωτεΐνες που εκκρίνονται από κύτταρα του ανοσιακού συστήματος
+        και τροποποιούν τη δράση άλλων κυττάρων με κατάλληλους υποδοχείς.
+        Χημειοκίνες = υποομάδα κυτταροκινών που προκαλούν χημειοταξία
+        λευκών αιμοσφαιρίων.
+      </dd>
+
+      <dt>PAMPs & DAMPs (σελίδες 23–24)</dt>
+      <dd>
+        <strong>PAMPs</strong>: συστατικά μικροβίων κοινά σε πολλές ομάδες
+        (π.χ. LPS βακτηρίων), αλλά απόντα από κύτταρα ξενιστή.  
+        <strong>DAMPs</strong>: δομές που εμφανίζονται σε κύτταρα του
+        ξενιστή που έχουν υποστεί βλάβη.
+      </dd>
+
+      <dt>PRRs και TLRs (σελίδες 24–26)</dt>
+      <dd>
+        <strong>PRRs</strong> (Pathogen Recognition Receptors): υποδοχείς
+        αναγνώρισης παθογόνων (όπως οι TLRs) σε μακροφάγα/δενδριτικά, που
+        αναγνωρίζουν PAMPs/DAMPs και ενεργοποιούν ανοσιακές απαντήσεις μέσω
+        παραγωγής κυτταροκινών.  
+        <strong>TLRs</strong>: συγκεκριμένη οικογένεια PRRs που αναγνωρίζει
+        σταθερές βακτηριακές χημικές δομές (π.χ. στοιχεία τοιχώματος, LPS).
+      </dd>
+
+      <dt>MHC / HLA (σελίδες 29–30)</dt>
+      <dd>
+        <strong>MHC</strong>: μείζον σύμπλεγμα ιστοσυμβατότητας (Major
+        Histocompatibility Complex).  
+        Στον άνθρωπο τα μόρια ονομάζονται <strong>HLA</strong>
+        (Human Leukocyte Antigens)· παρουσιάζουν πεπτιδικά αντιγόνα στα
+        Τ-λεμφοκύτταρα και είναι απαραίτητα για την ειδική ανοσιακή απόκριση.
+      </dd>
+            <dt>Παθογόνο (σελίδες 2–4)</dt>
+      <dd>
+        Κάθε μικροοργανισμός (βακτήριο, ιός, μύκητας, παράσιτο) ή τοξίνη
+        που μπορεί να προκαλέσει <strong>νόσο</strong> στον ξενιστή.
+      </dd>
+
+      <dt>Λοίμωξη (σελίδα 2)</dt>
+      <dd>
+        Η <strong>διείσδυση, εγκατάσταση και πολλαπλασιασμός</strong> ενός
+        παθογόνου μικροοργανισμού στον ξενιστή. Μπορεί να είναι ασυμπτωματική
+        ή να συνοδεύεται από κλινικά συμπτώματα.
+      </dd>
+
+      <dt>Αποικισμός</dt>
+      <dd>
+        Παρουσία μικροοργανισμών σε επιφάνειες ή κοιλότητες του σώματος
+        <strong>χωρίς να προκαλούν νόσο</strong>. Π.χ. φυσιολογική μικροβιακή
+        χλωρίδα του εντέρου ή του δέρματος.
+      </dd>
+
+      <dt>Φλεγμονή (σελίδα 12)</dt>
+      <dd>
+        Τοπική αντίδραση των ιστών σε βλαπτικό ερέθισμα (λοίμωξη,
+        τραύμα, χημικοί παράγοντες), που χαρακτηρίζεται κλασικά από
+        <strong>ερυθρότητα, θερμότητα, οίδημα, πόνο</strong> και διαταραχή
+        λειτουργίας. Αποσκοπεί στην απομάκρυνση του βλαπτικού παράγοντα
+        και την αποκατάσταση του ιστού.
+      </dd>
+
+      <dt>Πυρετός (σελίδες 12, 20)</dt>
+      <dd>
+        Αύξηση της θερμοκρασίας σώματος πάνω από τα φυσιολογικά όρια,
+        εξαιτίας «ρύθμισης» του θερμορυθμιστικού κέντρου του υποθαλάμου
+        από πυρετογόνες ουσίες (π.χ. IL-1, IL-6, TNF). Αποτελεί
+        <strong>αμυντική</strong> αντίδραση σε λοίμωξη ή φλεγμονή.
+      </dd>
+
+      <dt>Αντιγόνο (σελίδες 27, 31–32)</dt>
+      <dd>
+        Κάθε ουσία που μπορεί να αναγνωριστεί από υποδοχείς
+        <strong>αντισωμάτων ή Τ-λεμφοκυττάρων</strong> και να προκαλέσει
+        ειδική ανοσιακή απάντηση. Συνήθως είναι πρωτεΐνες ή πολυσακχαρίτες.
+      </dd>
+
+      <dt>Επίτοπος (αντιγονικός καθοριστής)</dt>
+      <dd>
+        Η <strong>μικρότερη ειδική περιοχή</strong> ενός αντιγόνου που
+        αναγνωρίζεται άμεσα από το αντίσωμα ή τον υποδοχέα των Τ-κυττάρων.
+        Ένα αντιγόνο έχει πολλαπλούς επιτόπους.
+      </dd>
+
+      <dt>Αντίσωμα / Ανοσοσφαιρίνη</dt>
+      <dd>
+        Πρωτεΐνη (τύπου γ-σφαιρίνης) που παράγεται από διαφοροποιημένα
+        Β-λεμφοκύτταρα (πλασματοκύτταρα) ως απάντηση σε συγκεκριμένο
+        αντιγόνο. Διαθέτει <strong>μεταβλητή περιοχή</strong> για ειδική
+        αναγνώριση του αντιγόνου και <strong>σταθερή περιοχή</strong> για
+        ενεργοποίηση άλλων μηχανισμών (συμπλήρωμα, φαγοκύτταρα).
+      </dd>
+
+      <dt>Κύριες τάξεις ανοσοσφαιρινών (IgG, IgM, IgA, IgE, IgD)</dt>
+      <dd>
+        <ul>
+          <li><strong>IgM</strong>: πρώτη ανοσοσφαιρίνη που παράγεται
+              σε πρωτογενή ανοσιακή απάντηση.</li>
+          <li><strong>IgG</strong>: κύρια ανοσοσφαιρίνη ορού, παρέχει
+              μακροχρόνια προστασία, περνάει τον πλακούντα.</li>
+          <li><strong>IgA</strong>: στις εκκρίσεις βλεννογόνων (σάλιο,
+              δάκρυα, γάλα, εντερικό υγρό) – <strong>βλεννογονική ανοσία</strong>.</li>
+          <li><strong>IgE</strong>: αλλεργικές αντιδράσεις τύπου Ι, άμυνα
+              έναντι παρασίτων.</li>
+          <li><strong>IgD</strong>: στην επιφάνεια ανώριμων Β-κυττάρων.</li>
+        </ul>
+      </dd>
+
+      <dt>Χυμική ανοσία</dt>
+      <dd>
+        Κλάδος της επίκτητης ανοσίας που βασίζεται κυρίως σε
+        <strong>αντισώματα</strong> (Β-λεμφοκύτταρα/πλασματοκύτταρα) και
+        σε διαλυτούς παράγοντες (συμπλήρωμα κ.ά.) για την εξουδετέρωση
+        εξωκυττάριων παθογόνων και τοξινών.
+      </dd>
+
+      <dt>Κυτταρική ανοσία</dt>
+      <dd>
+        Κλάδος της επίκτητης ανοσίας που βασίζεται στην δράση
+        <strong>Τ-λεμφοκυττάρων</strong> (CD4, CD8) και στην ενεργοποίηση
+        μακροφάγων και ΝΚ. Ιδιαίτερα σημαντική για ενδοκυττάρια παθογόνα
+        και κακοήθη κύτταρα.
+      </dd>
+
+      <dt>Αντιγονοπαρουσιαστικά κύτταρα – APC (σελίδες 31–32)</dt>
+      <dd>
+        Κύτταρα (κυρίως <strong>δενδριτικά, μακροφάγα, Β-λεμφοκύτταρα</strong>)
+        που προσλαμβάνουν, επεξεργάζονται και παρουσιάζουν πεπτιδικά
+        αντιγόνα σε μόρια MHC στα Τ-λεμφοκύτταρα, ξεκινώντας την
+        ειδική ανοσιακή απάντηση.
+      </dd>
+
+      <dt>Συμπλήρωμα (σελίδες 12, 14, 17–18, 42)</dt>
+      <dd>
+        Σύστημα ορολογικών πρωτεϊνών που ενεργοποιούνται καταρρακτωτά
+        (κλασική, εναλλακτική, οδός λεκτίνης) και οδηγούν σε:
+        <strong>οψωνοποίηση</strong>, χημειοταξία φλεγμονωδών κυττάρων
+        και σχηματισμό συμπλέγματος προσβολής μεμβράνης (λύση κυττάρων).
+      </dd>
+
+      <dt>Οψωνοποίηση</dt>
+      <dd>
+        Επικάλυψη μικροβίου με «οψωνίνες» (π.χ. IgG, C3b) ώστε να
+        αναγνωριστεί και να φαγοκυτταρωθεί πιο αποτελεσματικά από
+        μακροφάγα και ουδετερόφιλα.
+      </dd>
+
+      <dt>Ουδετερόφιλα πολυμορφοπύρηνα (σελίδα 10)</dt>
+      <dd>
+        Κύρια κύτταρα της <strong>οξείας</strong> φλεγμονώδους αντίδρασης.
+        Φαγοκυτταρώνουν μικρόβια, απελευθερώνουν ένζυμα και δραστικές μορφές
+        οξυγόνου. Πρώτα που καταφθάνουν στην εστία λοίμωξης.
+      </dd>
+
+      <dt>Μακροφάγα / Μονοκύτταρα (σελίδες 10, 15)</dt>
+      <dd>
+        Φαγοκύτταρα που δρουν σε πιο όψιμη φάση από τα ουδετερόφιλα.
+        Φαγοκυτταρώνουν παθογόνα και κυτταρικά υπολείμματα, εκκρίνουν
+        κυτταροκίνες και λειτουργούν ως APC για τα Τ-λεμφοκύτταρα.
+      </dd>
+
+      <dt>Δενδριτικά κύτταρα (σελίδα 10)</dt>
+      <dd>
+        Εξειδικευμένα APC που συλλαμβάνουν αντιγόνα στους ιστούς, μεταναστεύουν
+        στους λεμφαδένες και <strong>ενεργοποιούν τα παρθένα Τ-λεμφοκύτταρα</strong>.
+        Κρίσιμα για την έναρξη της επίκτητης ανοσίας.
+      </dd>
+
+
+    </dl>
+
+    <p class="image-note">Εικόνα – Σελίδα 7 παρουσίασης (πίνακας προστατευτικών φραγμών)</p>
+    <!-- Βάλε εδώ δική σου εικόνα, π.χ.:
+    <img src="page7_barriers.png" alt="Προστατευτικοί φραγμοί ανά σύστημα">
+    -->
+  </section>
+
+  <!-- ΕΞΕΤΑΣΤΙΚΑ ΣΗΜΕΙΑ -->
+  <section id="exetastika">
+    <h2>Εξεταστικά σημεία</h2>
+
+    <p class="note">
+      Ιδέες για ερωτήσεις προφορικών/γραπτών. Μπορούμε μετά να τις μετατρέψουμε
+      και σε quiz.
+    </p>
+
+    <h3>1. Φυσικοί φραγμοί & φυσική ανοσία</h3>
+    <ul>
+      <li>Να αναφέρεις τους βασικούς φυσικούς φραγμούς και ένα παράδειγμα για
+          κάθε σύστημα (δέρμα, αναπνευστικό, γαστρεντερικό, ουρογεννητικό,
+          οφθαλμός).</li>
+      <li>Ποιοι είναι οι μηχανικοί και ποιοι οι χημικοί παράγοντες άμυνας
+          (πίνακας σελίδας 7).</li>
+      <li>Τι περιλαμβάνεται στους παράγοντες μη ειδικής άμυνας: πυρετός,
+          φλεγμονή, πρωτεΐνες οξείας φάσης, ιντερφερόνες, συμπλήρωμα,
+          φαγοκύτταρα, ΝΚ, ηωσινόφιλα (σελίδα 12).</li>
+    </ul>
+
+    <h3>2. Κύτταρα της φυσικής και επίκτητης ανοσίας</h3>
+    <ul>
+      <li>Να ξεχωρίσεις τα κύτταρα της φυσικής από αυτά της επίκτητης ανοσίας
+          (σελίδα 10).</li>
+      <li>Τι είναι τα ΝΚ κύτταρα και ποιος είναι ο ρόλος τους στις ιογενείς
+          λοιμώξεις και στον καρκίνο (σελίδα 16).</li>
+      <li>Διάκριση Β-, Τ-λεμφοκυττάρων και δενδριτικών κυττάρων ως κύρια
+          κύτταρα της επίκτητης ανοσίας.</li>
+    </ul>
+
+    <h3>3. Κυτταροκίνες – Πρωτεΐνες οξείας φάσης</h3>
+    <ul>
+      <li>Ποιος είναι ο ρόλος των TNF, IL-1, IL-6 στη φλεγμονή, τον πυρετό και
+          τις πρωτεΐνες οξείας φάσης (πίνακας σελίδας 20).</li>
+      <li>Τι είναι οι χημειοκίνες και ποια είναι η βασική δράση τους
+          (σελίδα 21).</li>
+      <li>Πώς οι ιντερφερόνες τύπου Ι (IFN-α, IFN-β) προστατεύουν τα γειτονικά
+          κύτταρα (σελίδα 22).</li>
+    </ul>
+
+    <h3>4. PRRs – PAMPs – TLRs</h3>
+    <ul>
+      <li>Ορισμός PAMPs και DAMPs, παραδείγματα.</li>
+      <li>Τι είναι οι PRRs και οι TLRs και σε ποια κύτταρα εκφράζονται
+          (μακροφάγα, δενδριτικά – σελίδες 24–26).</li>
+      <li>Πώς η ενεργοποίηση των TLRs οδηγεί σε παραγωγή κυτταροκινών και
+          έναρξη ειδικής ανοσιακής απάντησης.</li>
+    </ul>
+
+    <h3>5. Παρουσίαση αντιγόνου – MHC</h3>
+    <ul>
+      <li>Τι σημαίνει «MHC περιορισμός» των Τ-λεμφοκυττάρων
+          (σελίδα 29).</li>
+      <li>Διαφορές MHC τάξης I και MHC τάξης II και ποια Τ-κύτταρα
+          αναγνωρίζουν το καθένα (CD8 vs CD4).</li>
+      <li>Λειτουργικός ρόλος των APC (μακροφάγων, δενδριτικών) στην έναρξη της
+          ειδικής ανοσίας (σελίδες 31–32).</li>
+    </ul>
+
+    <h3>6. Ειδικές ανοσοαπαντήσεις σε βακτήρια</h3>
+    <ul>
+      <li>Διάκριση ανοσιακής απάντησης σε <strong>εξωκυττάρια</strong> και
+          <strong>ενδοκυττάρια</strong> μικρόβια (σελίδες 38–39).</li>
+      <li>Ποιος είναι ο ρόλος των αντισωμάτων (IgA, IgG κ.λπ.) στις
+          εξωκυττάριες λοιμώξεις (εξουδετέρωση, λύση μέσω συμπληρώματος,
+          παρεμπόδιση πρόσληψης Fe).</li>
+      <li>Πώς τα CD8+ Τ-λεμφοκύτταρα αντιμετωπίζουν ενδοκυττάρια μικρόβια
+          και ποια είναι τα παραδείγματα μικροβίων που επιβιώνουν μέσα
+          στα φαγοκύτταρα (Μυκοβακτηρίδιο φυματίωσης, Ναϊσσέριες, Χλαμύδια,
+          Σαλμονέλλες κ.ά.).</li>
+    </ul>
+  </section>
+
+  <!-- ΓΕΝΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ & ΣΥΓΚΡΙΣΕΙΣ -->
+  <section id="genikes">
+    <h2>Γενικές πληροφορίες & συγκρίσεις</h2>
+
+    <h3>1. Φυσική vs Επίκτητη ανοσία</h3>
+    <table>
+      <tr>
+        <th></th>
+        <th>Φυσική / έμφυτη</th>
+        <th>Επίκτητη / ειδική</th>
+      </tr>
+      <tr>
+        <td>Ειδικότητα</td>
+        <td>Μη ειδική, αναγνωρίζει μοτίβα (PAMPs)</td>
+        <td>Υψηλή ειδικότητα για συγκεκριμένα αντιγόνα</td>
+      </tr>
+      <tr>
+        <td>Χρόνος έναρξης</td>
+        <td>Άμεση (λεπτά–ώρες)</td>
+        <td>Βραδύτερη (ημέρες) στην πρώτη επαφή</td>
+      </tr>
+      <tr>
+        <td>Μνήμη</td>
+        <td>Όχι ανοσιακή μνήμη</td>
+        <td>Υπάρχει μνήμη – ισχυρότερη απάντηση σε επανέκθεση</td>
+      </tr>
+      <tr>
+        <td>Κύρια κύτταρα</td>
+        <td>Ουδετερόφιλα, μακροφάγα, ΝΚ, δενδριτικά</td>
+        <td>Β-λεμφοκύτταρα, Τ-λεμφοκύτταρα (CD4, CD8)</td>
+      </tr>
+      <tr>
+        <td>Μόρια κλειδιά</td>
+        <td>Συμπλήρωμα, πρωτεΐνες οξείας φάσης, κυτταροκίνες, PRRs</td>
+        <td>Αντισώματα, TCR, MHC, κυτταροκίνες Τ-κυττάρων</td>
+      </tr>
+    </table>
+
+    <h3>2. Εξωκυττάρια vs ενδοκυττάρια βακτήρια</h3>
+    <table>
+      <tr>
+        <th></th>
+        <th>Εξωκυττάρια μικρόβια</th>
+        <th>Ενδοκυττάρια μικρόβια</th>
+      </tr>
+      <tr>
+        <td>Θέση</td>
+        <td>Εκτός κυττάρων, σε αίμα, ιστούς, βλεννογόνους</td>
+        <td>Μέσα σε κύτταρα (μακροφάγα, επιθηλιακά κ.ά.)</td>
+      </tr>
+      <tr>
+        <td>Κύρια άμυνα</td>
+        <td>Αντισώματα (IgA, IgG), συμπλήρωμα, φαγοκύτταρα</td>
+        <td>CD8+ Τ-κύτταρα, ενεργοποιημένα μακροφάγα, ΝΚ</td>
+      </tr>
+      <tr>
+        <td>Παραδείγματα μηχανισμών</td>
+        <td>Οψωνοποίηση, λύση με συμπλήρωμα, εξουδετέρωση τοξινών</td>
+        <td>Επαγωγή απόπτωσης κυττάρου-στόχου, παραγωγή IFN-γ</td>
+      </tr>
+      <tr>
+        <td>Ειδικά παραδείγματα</td>
+        <td>Πνευμονιόκοκκος, στρεπτόκοκκοι κ.ά.</td>
+        <td>Μυκοβακτηρίδιο φυματίωσης, χλαμύδια, ρικέτσιες κτλ.</td>
+      </tr>
+    </table>
+
+    <h3>3. Στάδια φλεγμονώδους αντίδρασης (σελίδα 36)</h3>
+    <ul>
+      <li>Τοπική αγγειοδιαστολή → ερυθρότητα (rubor) και αύξηση θερμοκρασίας
+          (calor).</li>
+      <li>Αύξηση διαπερατότητας τριχοειδών → οίδημα (tumor).</li>
+      <li>Ερέθισμα νευρικών απολήξεων → πόνος (dolor).</li>
+      <li>Τελικό αποτέλεσμα: διαταραχή λειτουργικότητας στην περιοχή, αλλά
+          ταυτόχρονα έναρξη διαδικασιών επούλωσης.</li>
+    </ul>
+
+    <h3>4. Βασικά εργαστηριακά βήματα στη διάγνωση βακτηριακών λοιμώξεων</h3>
+    <ul>
+      <li>Λήψη σύντομου ιστορικού (σελίδα 46).</li>
+      <li>Σωστή λήψη κατάλληλου παθολογικού υλικού (αίμα, ΕΝΥ, υγρά, πτύελα,
+          ούρα, κόπρανα, επιχρίσματα κ.ά. – σελίδες 47–57).</li>
+      <li>Συντήρηση δείγματος (συνήθως 4°C, αποφυγή οξυγόνου για αναερόβια,
+          ταχεία αποστολή στο εργαστήριο).</li>
+      <li>Μικροσκόπηση, καλλιέργεια (αερόβια/αναερόβια), ορολογική διάγνωση,
+          μοριακές τεχνικές (PCR – σελίδες 58–64).</li>
+    </ul>
+
+    <p class="image-note">Εικόνα – Σελίδα 46 παρουσίασης (διάγραμμα ροής εργαστηρίου)</p>
+    <!-- Εδώ μπορείς να βάλεις εικόνα από τη σελίδα 46:
+    <img src="page46_lab_flow.png" alt="Βήματα εργαστηριακής διάγνωσης">
+    -->
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>Quiz πολλαπλής επιλογής</h2>
+    <p class="small">
+      Πάτησε μια απάντηση· η σωστή πρασινίζει αμέσως. Μπορούμε να προσθέσουμε
+      όσες ερωτήσεις θέλεις.
+    </p>
+
+    <div class="quiz-question">
+      <h4>1. Ποιο από τα παρακάτω ανήκει στους φυσικούς <em>μηχανικούς</em> φραγμούς;</h4>
+      <div class="answers">
+        <button data-correct="false">α) CRP (C-αντιδρώσα πρωτεΐνη)</button>
+        <button data-correct="true">β) Κροσσωτό επιθήλιο αναπνευστικού βλεννογόνου</button>
+        <button data-correct="false">γ) Ιντερφερόνες τύπου Ι</button>
+        <button data-correct="false">δ) Αντισώματα IgG</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>2. Ποια από τις παρακάτω προτάσεις για τη φυσική ανοσία είναι ΣΩΣΤΗ;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Παρέχει άμεση αλλά μη ειδική άμυνα έναντι παθογόνων.</button>
+        <button data-correct="false">β) Έχει ανοσιακή μνήμη που βελτιώνεται σε επανέκθεση.</button>
+        <button data-correct="false">γ) Βασίζεται αποκλειστικά στην παραγωγή αντισωμάτων.</button>
+        <button data-correct="false">δ) Δεν συμμετέχουν κύτταρα, μόνο διαλυτοί παράγοντες.</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>3. Οι ιντερφερόνες IFN-α και IFN-β παράγονται κυρίως από:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Β-λεμφοκύτταρα</button>
+        <button data-correct="true">β) Μακροφάγα και ινοβλάστες</button>
+        <button data-correct="false">γ) Μόνο ΝΚ κύτταρα</button>
+        <button data-correct="false">δ) Μόνο ουδετερόφιλα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>4. Ποιος συνδυασμός είναι ΣΩΣΤΟΣ;</h4>
+      <div class="answers">
+        <button data-correct="false">α) CD4 Τ-κύτταρα – MHC τάξης I</button>
+        <button data-correct="true">β) CD8 Τ-κύτταρα – MHC τάξης I</button>
+        <button data-correct="false">γ) CD8 Τ-κύτταρα – MHC τάξης II</button>
+        <button data-correct="false">δ) ΝΚ κύτταρα – MHC τάξης II</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>5. PAMPs είναι:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Κυτταροκίνες που εκκρίνονται σε φλεγμονή</button>
+        <button data-correct="true">β) Μοριακά μοτίβα χαρακτηριστικά των παθογόνων αλλά όχι των κυττάρων του ξενιστή</button>
+        <button data-correct="false">γ) Υποδοχείς σε μακροφάγα για αναγνώριση αντιγόνων</button>
+        <button data-correct="false">δ) Μόνο οι τοξίνες των βακτηρίων</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>6. Ποιο είναι ΚΥΡΙΩΣ χαρακτηριστικό της ανοσοαπάντησης σε εξωκυττάρια μικρόβια;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Ενεργοποίηση CD8+ Τ-κυττάρων και λύση μολυσμένων κυττάρων</button>
+        <button data-correct="true">β) Παραγωγή αντισωμάτων και ενεργοποίηση συμπληρώματος</button>
+        <button data-correct="false">γ) Ενεργοποίηση μόνο ΝΚ κυττάρων</button>
+        <button data-correct="false">δ) Αποκλειστικά παραγωγή ιντερφερονών</button>
+      </div>
+
+          <div class="quiz-question">
+      <h4>7. Ποιο από τα παρακάτω ΔΕΝ ανήκει στους παράγοντες μη ειδικής (έμφυτης) ανοσίας;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Φλεγμονή</button>
+        <button data-correct="false">β) Πυρετός</button>
+        <button data-correct="false">γ) Φυσικά κυτταροκτόνα κύτταρα (NK)</button>
+        <button data-correct="true">δ) Παραγωγή ειδικών αντισωμάτων IgG έναντι συγκεκριμένου αντιγόνου</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>8. Ποια τάξη ανοσοσφαιρίνης είναι κυρίως υπεύθυνη για τη βλεννογονική ανοσία (εκκρίσεις όπως σάλιο, δάκρυα, εντερικό υγρό);</h4>
+      <div class="answers">
+        <button data-correct="false">α) IgG</button>
+        <button data-correct="true">β) IgA</button>
+        <button data-correct="false">γ) IgM</button>
+        <button data-correct="false">δ) IgE</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>9. Ποιος είναι ένας ΚΥΡΙΟΣ ρόλος του TNF (παράγοντας νέκρωσης όγκων);</h4>
+      <div class="answers">
+        <button data-correct="false">α) Καταστολή φλεγμονής και αναστολή έκφρασης MHC II</button>
+        <button data-correct="true">β) Ενεργοποίηση ενδοθηλιακών κυττάρων και πρόκληση φλεγμονής/πήξης</button>
+        <button data-correct="false">γ) Μείωση σύνθεσης πρωτεϊνών οξείας φάσης στο ήπαρ</button>
+        <button data-correct="false">δ) Ειδική εξουδετέρωση ιικών σωματιδίων στον ορό</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>10. Χημειοκίνες είναι:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Πρωτεΐνες που ενεργοποιούν αποκλειστικά τα Β-λεμφοκύτταρα</button>
+        <button data-correct="true">β) Μικρές πρωτεΐνες που κατευθύνουν τη μετανάστευση λευκών αιμοσφαιρίων (χημειοταξία)</button>
+        <button data-correct="false">γ) Πεπτίδια που σχηματίζουν πόρους στη μεμβράνη βακτηρίων</button>
+        <button data-correct="false">δ) Ορμόνες του ενδοκρινικού συστήματος</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>11. PRRs (Pathogen Recognition Receptors) είναι υποδοχείς που:</h4>
+      <div class="answers">
+        <button data-correct="true">α) Αναγνωρίζουν PAMPs και DAMPs σε μακροφάγα/δενδριτικά κύτταρα</button>
+        <button data-correct="false">β) Βρίσκονται μόνο στα Β-λεμφοκύτταρα</button>
+        <button data-correct="false">γ) Δεσμεύουν αποκλειστικά IgG</button>
+        <button data-correct="false">δ) Εκφράζονται μόνο στα ερυθρά αιμοσφαίρια</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>12. Οι υποδοχείς τύπου Toll (TLRs) βρίσκονται κυρίως:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Στην επιφάνεια των ερυθρών αιμοσφαιρίων</button>
+        <button data-correct="true">β) Στη μεμβράνη μακροφάγων και δενδριτικών κυττάρων</button>
+        <button data-correct="false">γ) Μόνο στον πυρήνα των κυττάρων</button>
+        <button data-correct="false">δ) Μόνο στα Β-λεμφοκύτταρα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>13. «MHC περιορισμός» σημαίνει ότι:</h4>
+      <div class="answers">
+        <button data-correct="true">α) Τα Τ-κύτταρα αναγνωρίζουν πεπτίδια μόνο όταν παρουσιάζονται πάνω σε συμβατά MHC μόρια</button>
+        <button data-correct="false">β) Τα Β-κύτταρα χρειάζονται MHC για να παράγουν αντισώματα</button>
+        <button data-correct="false">γ) Οι NK δεν μπορούν να δράσουν χωρίς MHC</button>
+        <button data-correct="false">δ) Τα αντισώματα συνδέονται άμεσα με MHC</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>14. Ανοσοαπάντηση σε τοξίνες (π.χ. διφθεριτική, τετανική, αλλαντική):</h4>
+      <div class="answers">
+        <button data-correct="false">α) Βασίζεται αποκλειστικά σε CD8+ Τ-κύτταρα</button>
+        <button data-correct="true">β) Περιλαμβάνει παραγωγή αντισωμάτων (αντιτοξινών) που εξουδετερώνουν την τοξίνη</button>
+        <button data-correct="false">γ) Δεν συμμετέχουν καθόλου Β-λεμφοκύτταρα</button>
+        <button data-correct="false">δ) Είναι μόνο μέρος της μη ειδικής ανοσίας</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>15. Ποιο είναι το ΠΡΩΤΟ βήμα στη συμβολή του μικροβιολογικού εργαστηρίου στη διάγνωση μιας λοίμωξης;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Λήψη σύντομου ιστορικού από τον ασθενή</button>
+        <button data-correct="false">β) Άμεση καλλιέργεια χωρίς στοιχεία κλινικής εικόνας</button>
+        <button data-correct="false">γ) Χορήγηση αντιβιοτικών πριν από οποιαδήποτε λήψη δείγματος</button>
+        <button data-correct="false">δ) Εκτίμηση αντιβιογράμματος χωρίς καλλιέργεια</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>16. Για το εγκεφαλονωτιαίο υγρό (ΕΝΥ) ισχύει:</h4>
+      <div class="answers">
+        <button data-correct="true">α) Πρέπει να εξετάζεται άμεσα και να ΜΗΝ ψύχεται ή θερμαίνεται</button>
+        <button data-correct="false">β) Συνιστάται πάντα φύλαξη στο ψυγείο για 24 ώρες</button>
+        <button data-correct="false">γ) Μπορεί να παραμένει σε θερμοκρασία δωματίου για πολλές ημέρες</button>
+        <button data-correct="false">δ) Δεν χρειάζεται προσοχή στις συνθήκες μεταφοράς</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>17. Για τις αιμοκαλλιέργειες (καλλιέργεια αίματος) ποιο από τα παρακάτω είναι ΣΩΣΤΟ;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Συλλογή 2–3 δειγμάτων αίματος επί πυρετού ή σε τυχαίες ώρες μέσα σε 24 ώρες</button>
+        <button data-correct="false">β) Αρκεί ένα μόνο δείγμα αίματος ανεξαρτήτως χρόνου λήψης</button>
+        <button data-correct="false">γ) Δεν χρειάζεται απολύμανση του δέρματος πριν από τη λήψη</button>
+        <button data-correct="false">δ) Το αίμα φυλάσσεται στην κατάψυξη πριν καλλιεργηθεί</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>18. Οι ιντερφερόνες τύπου Ι (IFN-α, IFN-β):</h4>
+      <div class="answers">
+        <button data-correct="false">α) Παράγονται μόνο από Β-λεμφοκύτταρα</button>
+        <button data-correct="true">β) Παράγονται κυρίως από μακροφάγα και ινοβλάστες και αυξάνουν την έκφραση MHC I</button>
+        <button data-correct="false">γ) Είναι ειδικές για τον κάθε μικροοργανισμό</button>
+        <button data-correct="false">δ) Δρουν μόνο στα Τ-λεμφοκύτταρα</button>
+      </div>
+
+          <div class="quiz-question">
+      <h4>19. Ποιο κύτταρο είναι το ΠΡΩΤΟ που καταφθάνει στην οξεία φλεγμονώδη αντίδραση;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Ουδετερόφιλα πολυμορφοπύρηνα</button>
+        <button data-correct="false">β) Μακροφάγα</button>
+        <button data-correct="false">γ) Δενδριτικά κύτταρα</button>
+        <button data-correct="false">δ) CD4 Τ-λεμφοκύτταρα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>20. Ποια ανοσοσφαιρίνη είναι η ΠΡΩΤΗ που παράγεται σε πρωτογενή ανοσιακή απάντηση;</h4>
+      <div class="answers">
+        <button data-correct="true">α) IgM</button>
+        <button data-correct="false">β) IgG</button>
+        <button data-correct="false">γ) IgE</button>
+        <button data-correct="false">δ) IgA</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>21. Το σύστημα του συμπληρώματος συμβάλλει σε όλα τα παρακάτω ΕΚΤΟΣ από:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Οψωνοποίηση</button>
+        <button data-correct="false">β) Χημειοταξία φλεγμονωδών κυττάρων</button>
+        <button data-correct="false">γ) Σχηματισμό συμπλέγματος προσβολής μεμβράνης (λύση)</button>
+        <button data-correct="true">δ) Άμεση παραγωγή αντισωμάτων</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>22. Ποια από τις παρακάτω κυτταροκίνες προκαλεί παραγωγή πρωτεϊνών οξείας φάσης στο ήπαρ;</h4>
+      <div class="answers">
+        <button data-correct="false">α) IL-2</button>
+        <button data-correct="true">β) IL-6</button>
+        <button data-correct="false">γ) IFN-γ</button>
+        <button data-correct="false">δ) TGF-β</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>23. Τα CD8+ Τ-λεμφοκύτταρα ενεργοποιούνται κυρίως για:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Παραγωγή αντισωμάτων έναντι τοξινών</button>
+        <button data-correct="true">β) Θανάτωση ενδοκυττάριων μολυσμένων κυττάρων</button>
+        <button data-correct="false">γ) Απελευθέρωση IgA στους βλεννογόνους</button>
+        <button data-correct="false">δ) Παραγωγή CRP στο ήπαρ</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>24. Σε εξωκυττάρια μικρόβια, ο κυρίαρχος μηχανισμός άμυνας είναι:</h4>
+      <div class="answers">
+        <button data-correct="true">α) Αντισώματα και συμπλήρωμα</button>
+        <button data-correct="false">β) CD8+ Τ-λεμφοκύτταρα</button>
+        <button data-correct="false">γ) Μόνο ΝΚ κύτταρα</button>
+        <button data-correct="false">δ) Ενεργοποίηση ιντερφερονών Ι</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>25. Ποιο κύτταρο λειτουργεί ως το πιο ισχυρό αντιγονοπαρουσιαστικό κύτταρο;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Μακροφάγo</button>
+        <button data-correct="true">β) Δενδριτικό κύτταρο</button>
+        <button data-correct="false">γ) Ουδετερόφιλο</button>
+        <button data-correct="false">δ) Ερυθρό αιμοσφαίριο</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>26. Ποιος μικροοργανισμός είναι χαρακτηριστικό παράδειγμα ενδοκυττάριου παθογόνου;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Πνευμονιόκοκκος</button>
+        <button data-correct="true">β) Mycobacterium tuberculosis</button>
+        <button data-correct="false">γ) Στρεπτόκοκκος ομάδας A</button>
+        <button data-correct="false">δ) Σαλμονέλλα Typhi μόνο σε αίμα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>27. Ποια τάξη ανοσοσφαιρίνης μπορεί να περάσει τον πλακούντα και να προστατεύσει το έμβρυο;</h4>
+      <div class="answers">
+        <button data-correct="true">α) IgG</button>
+        <button data-correct="false">β) IgM</button>
+        <button data-correct="false">γ) IgA</button>
+        <button data-correct="false">δ) IgE</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>28. Η οψωνοποίηση διευκολύνει κυρίως:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Την έκκριση χημειοκινών από τα Τ-κύτταρα</button>
+        <button data-correct="true">β) Τη φαγοκυττάρωση μικροβίων από μακροφάγα και ουδετερόφιλα</button>
+        <button data-correct="false">γ) Την παραγωγή αντισωμάτων</button>
+        <button data-correct="false">δ) Την απόπτωση των NK κυττάρων</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>29. Ποια από τις παρακάτω ΔΕΝ είναι πρωτεΐνη οξείας φάσης;</h4>
+      <div class="answers">
+        <button data-correct="false">α) CRP</button>
+        <button data-correct="false">β) Ινωδογόνο</button>
+        <button data-correct="false">γ) Κλάσματα συμπληρώματος</button>
+        <button data-correct="true">δ) Ιντερφερόνη γ</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>30. Οι TLRs ενεργοποιούν την ανοσιακή απάντηση κυρίως μέσω:</h4>
+      <div class="answers">
+        <button data-correct="false">α) Παραγωγής IgE</button>
+        <button data-correct="true">β) Επαγωγής σύνθεσης κυτταροκινών και έκφρασης MHC</button>
+        <button data-correct="false">γ) Απενεργοποίησης μακροφάγων</button>
+        <button data-correct="false">δ) Αναστολής φλεγμονής</button>
+      </div>
+    </div>
+
+    <style>
+  .explain-block {
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #eef2ff;
+    border-radius: 10px;
+  }
+  .explain-block h4 {
+    margin: 0 0 10px 0;
+    color: #23396b;
+  }
+  .explain-block textarea {
+    width: 100%;
+    min-height: 60px;
+    border-radius: 8px;
+    border: 1px solid #b6c2e8;
+    padding: 8px;
+    font-size: 14px;
+  }
+  .reveal-btn {
+    margin-top: 8px;
+    background: #3949ab;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .answer-box {
+    margin-top: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #b6c2e8;
+    display: none;
+    font-size: 14px;
+  }
+</style>
+
+<div class="explain-block">
+  <h4>1) Τι είναι οψωνοποίηση και γιατί είναι σημαντική;</h4>
+  <textarea placeholder="Γράψε την σκέψη σου..."></textarea>
+  <button class="reveal-btn">Δες τη σωστή απάντηση</button>
+  <div class="answer-box">
+    Η οψωνοποίηση είναι η επικάλυψη μικροβίων με οψωνίνες (π.χ. IgG και C3b) ώστε να αναγνωριστούν και να φαγοκυτταρωθούν πιο αποτελεσματικά από ουδετερόφιλα και μακροφάγα.
+  </div>
+</div>
+
+<div class="explain-block">
+  <h4>2) Πώς η IL-6 συμβάλλει στην άμυνα του οργανισμού;</h4>
+  <textarea placeholder="Σημείωσέ το εδώ..."></textarea>
+  <button class="reveal-btn">Δες τη σωστή απάντηση</button>
+  <div class="answer-box">
+    Η IL-6 παράγεται σε φλεγμονή και διεγείρει το ήπαρ να παράγει πρωτεΐνες οξείας φάσης (π.χ. CRP, ινωδογόνο), ενισχύοντας την ανοσιακή απόκριση.
+  </div>
+</div>
+
+<div class="explain-block">
+  <h4>3) Τι σημαίνει MHC περιορισμός των Τ-λεμφοκυττάρων;</h4>
+  <textarea placeholder="Η δική σου διατύπωση..."></textarea>
+  <button class="reveal-btn">Δες τη σωστή απάντηση</button>
+  <div class="answer-box">
+    Τα Τ-κύτταρα αναγνωρίζουν πεπτίδια μόνο όταν παρουσιάζονται πάνω σε συμβατά μόρια MHC του ξενιστή (MHC I για CD8 και MHC II για CD4).
+  </div>
+</div>
+
+<div class="explain-block">
+  <h4>4) Γιατί οι ιντερφερόνες τύπου Ι θεωρούνται αντι-ιικές;</h4>
+  <textarea placeholder="Σκέψου το και γράψε..."></textarea>
+  <button class="reveal-btn">Δες τη σωστή απάντηση</button>
+  <div class="answer-box">
+    Οι ιντερφερόνες τύπου Ι (IFN-α, IFN-β) αυξάνουν την έκφραση MHC I και ενεργοποιούν γειτονικά κύτταρα να αναπτύξουν αντι-ιικούς μηχανισμούς ώστε να μπλοκάρουν τον ιικό πολλαπλασιασμό.
+  </div>
+</div>
+
+<div class="explain-block">
+  <h4>5) Ποιος είναι ο κύριος ρόλος των δενδριτικών κυττάρων;</h4>
+  <textarea placeholder="Γράψε σαν να το εξηγείς σε άλλον..."></textarea>
+  <button class="reveal-btn">Δες τη σωστή απάντηση</button>
+  <div class="answer-box">
+    Τα δενδριτικά κύτταρα συλλαμβάνουν αντιγόνα στους ιστούς, μεταναστεύουν σε λεμφαδένες και ενεργοποιούν τα παρθένα Τ-λεμφοκύτταρα — είναι ο πιο ισχυρός APC.
+  </div>
+</div>
+
+<div class="explain-block">
+  <h4>6) Γιατί τα CD8+ Τ-κύτταρα είναι κρίσιμα για ενδοκυττάρια παθογόνα;</h4>
+  <textarea placeholder="Σκέψου το περιβάλλον του μικροβίου..."></textarea>
+  <button class="reveal-btn">Δες τη σωστή απάντηση</button>
+  <div class="answer-box">
+    Τα CD8+ Τ-κύτταρα ανιχνεύουν και καταστρέφουν κύτταρα που έχουν μολυνθεί ενδοκυττάρια (όπως από ιούς ή μικροβιακά παράσιτα), όπου τα αντισώματα δεν φτάνουν.
+  </div>
+</div>
+
+    <div class="quiz-question">
+      <h4>31. Ποιο είναι το ΠΡΩΤΟ βήμα στη διαδικασία διάγνωσης λοιμώξεων στο μικροβιολογικό εργαστήριο;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Λήψη σύντομου ιστορικού</button>
+        <button data-correct="false">β) Χορήγηση αντιβιοτικών πριν από λήψη δείγματος</button>
+        <button data-correct="false">γ) PCR χωρίς καλλιέργεια</button>
+        <button data-correct="false">δ) Αξιολόγηση αντιβιογράμματος</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>32. Ποιο δείγμα ΔΕΝ πρέπει να καταψύχεται ούτε να μείνει πολύ ώρα σε θερμοκρασία δωματίου;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Ούρα</button>
+        <button data-correct="true">β) Εγκεφαλονωτιαίο υγρό (ΕΝΥ)</button>
+        <button data-correct="false">γ) Πτύελα</button>
+        <button data-correct="false">δ) Επιχρίσματα από τραχηλικό δείγμα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>33. Για τις αιμοκαλλιέργειες, ποιο από τα παρακάτω είναι ΣΩΣΤΟ;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Συλλογή 2–3 δειγμάτων σε διαφορετικούς χρόνους μέσα σε 24 ώρες</button>
+        <button data-correct="false">β) Αρκεί ένα μόνο δείγμα</button>
+        <button data-correct="false">γ) Δεν απαιτείται απολύμανση του δέρματος</button>
+        <button data-correct="false">δ) Φυλάσσουμε το αίμα στην κατάψυξη πριν την καλλιέργεια</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>34. Ποιο από τα παρακάτω δείγματα ΔΕΝ χρειάζεται ειδικές συνθήκες μεταφοράς;</h4>
+      <div class="answers">
+        <button data-correct="false">α) ΕΝΥ</button>
+        <button data-correct="false">β) Δείγματα αναερόβιων καλλιεργειών</button>
+        <button data-correct="true">γ) Επιχρίσματα από δέρμα</button>
+        <button data-correct="false">δ) Αίμα για καλλιέργεια</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>35. Ποια μέθοδος χρησιμοποιείται για ταχεία ανίχνευση παθογόνων με υψηλή ειδικότητα;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Χρώση Gram μόνο</button>
+        <button data-correct="true">β) PCR (μοριακή διάγνωση)</button>
+        <button data-correct="false">γ) Καλλιέργεια σε απλό άγαρ αίματος</button>
+        <button data-correct="false">δ) Μικροσκόπηση χωρίς ενίσχυση</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>36. Τι παρέχει το αντιβιόγραμμα;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Πληροφορίες για την ευαισθησία ή αντοχή μικροβίου σε αντιβιοτικά</button>
+        <button data-correct="false">β) Διάκριση ιογενούς από βακτηριακή λοίμωξη</button>
+        <button data-correct="false">γ) Ταξινόμηση τύπου αντιγόνου</button>
+        <button data-correct="false">δ) Παραγωγή αντισωμάτων in vitro</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>37. Γιατί η σωστή λήψη του δείγματος επηρεάζει το αποτέλεσμα της καλλιέργειας;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Επειδή επιμόλυνση ή λάθος λήψη μπορεί να δώσει ψευδώς θετικά/αρνητικά αποτελέσματα</button>
+        <button data-correct="false">β) Επειδή το εργαστήριο το διορθώνει πάντα</button>
+        <button data-correct="false">γ) Επειδή τα παθογόνα δεν επιβιώνουν στο αίμα</button>
+        <button data-correct="false">δ) Επειδή οι καλλιέργειες είναι όλες ίδιες</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>38. Ποιο από τα παρακάτω ισχύει για τις μοριακές τεχνικές διάγνωσης;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Έχουν υψηλή ευαισθησία και ανιχνεύουν παθογόνα ακόμη και σε χαμηλές συγκεντρώσεις</button>
+        <button data-correct="false">β) Χρειάζονται πάντα καλλιέργεια πριν την εφαρμογή</button>
+        <button data-correct="false">γ) Δεν έχουν κλινική σημασία</button>
+        <button data-correct="false">δ) Αργούν περισσότερο από τις κλασικές καλλιέργειες</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>39. Τι προσφέρει η μικροσκόπηση Gram πριν την καλλιέργεια;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Γρήγορη ένδειξη τύπου μικροβίου (Gram + ή Gram -)</button>
+        <button data-correct="false">β) Οριστική ταυτοποίηση παθογόνου</button>
+        <button data-correct="false">γ) Άμεσο αντιβιόγραμμα</button>
+        <button data-correct="false">δ) Πληροφορία μόνο για ιούς</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>40. Ποιος λόγος κάνει τις καλλιέργειες «χρυσό κανόνα» διάγνωσης βακτηριακών λοιμώξεων;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Επιτρέπουν απομόνωση παθογόνου και έλεγχο ευαισθησίας σε αντιβιοτικά</button>
+        <button data-correct="false">β) Δίνουν άμεσα αποτελέσματα σε λίγα λεπτά</button>
+        <button data-correct="false">γ) Ανιχνεύουν μόνο ιούς</button>
+        <button data-correct="false">δ) Δεν απαιτούν καμία δεξιότητα</button>
+      </div>
+    </div>
+
+        <div class="quiz-question">
+      <h4>41. Σε ποιο από τα παρακάτω δείγματα είναι ΑΠΑΡΑΙΤΗΤΟ η λήψη να γίνει πριν τη χορήγηση αντιβιοτικών;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Αιμοκαλλιέργειες</button>
+        <button data-correct="false">β) Επιχρίσματα δέρματος</button>
+        <button data-correct="false">γ) Ούρα για γενική ούρων</button>
+        <button data-correct="false">δ) Πτύελα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>42. Ποιο δείγμα απαιτεί ΑΜΕΣΗ μεταφορά στο εργαστήριο χωρίς ψύξη;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Εγκεφαλονωτιαίο υγρό (ΕΝΥ)</button>
+        <button data-correct="false">β) Αίμα σε EDTA</button>
+        <button data-correct="false">γ) Δείγματα κοπράνων</button>
+        <button data-correct="false">δ) Επιχρίσματα ουρήθρας</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>43. Ποιο από τα παρακάτω θεωρείται λόγος απόρριψης δείγματος από το εργαστήριο;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Λήψη πτυέλου</button>
+        <button data-correct="true">β) Δείγμα κοπράνων σε ανοιχτό δοχείο χωρίς συντήρηση</button>
+        <button data-correct="false">γ) Λήψη πηκτικού αίματος</button>
+        <button data-correct="false">δ) Υψηλή CRP</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>44. Για έλεγχο μηνιγγίτιδας, ποιο στοιχείο είναι πιο κλινικά κρίσιμο όσον αφορά τη διαχείριση του δείγματος;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Να μην ανακινηθεί το φιαλίδιο</button>
+        <button data-correct="true">β) Να φτάσει άμεσα στο εργαστήριο γιατί το παθογόνο είναι ευαίσθητο στο περιβάλλον</button>
+        <button data-correct="false">γ) Να φυλάσσεται σε -20°C</button>
+        <button data-correct="false">δ) Να μείνει στο θάλαμο αναμονής 2 ώρες</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>45. Σε ύποπτη βακτηριαιμία, γιατί συλλέγονται πολλαπλές αιμοκαλλιέργειες;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Γιατί το αίμα αλλάζει σύσταση</button>
+        <button data-correct="true">β) Για να μειωθεί η πιθανότητα ψευδώς θετικών από επιμόλυνση και να αυξηθεί η ευαισθησία</button>
+        <button data-correct="false">γ) Γιατί το εργαστήριο ζητά ποσότητα</button>
+        <button data-correct="false">δ) Για να γίνει PCR</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>46. Σε ποια περίπτωση απαιτείται αναερόβια καλλιέργεια;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Απόστημα μαλακών μορίων</button>
+        <button data-correct="false">β) Επιχρίσματα επιπεφυκότα</button>
+        <button data-correct="false">γ) Σάλιο</button>
+        <button data-correct="false">δ) ΕΝΥ</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>47. Τι προσφέρει το αντιβιόγραμμα σε σχέση με PCR;</h4>
+      <div class="answers">
+        <button data-correct="false">α) Ανίχνευση μικροβιακού DNA</button>
+        <button data-correct="true">β) Εξατομίκευση θεραπείας βάσει ευαισθησίας μικροβίου</button>
+        <button data-correct="false">γ) Οριστική ταυτοποίηση ιού</button>
+        <button data-correct="false">δ) Διάκριση Gram + από Gram -</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>48. Γιατί στην αιμοκαλλιέργεια απαιτείται προσεκτική απολύμανση του δέρματος πριν τη λήψη;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Για να μην επιμολυνθεί το δείγμα από χλωρίδα δέρματος (π.χ. σταφυλόκοκκος)</button>
+        <button data-correct="false">β) Για να αλλάξει το pH του αίματος</button>
+        <button data-correct="false">γ) Για να εξουδετερωθεί το μικρόβιο</button>
+        <button data-correct="false">δ) Για να μειωθεί η CRP</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>49. Ποια είναι η σωστή αναλογία αίματος προς θρεπτικό υλικό στο φιαλίδιο αίματος;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Περίπου 1:10 (αίμα : καλλιεργητικό υλικό)</button>
+        <button data-correct="false">β) 10:1</button>
+        <button data-correct="false">γ) 1:1</button>
+        <button data-correct="false">δ) 2:1</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>50. Ποια από τις παρακάτω τεχνικές χρησιμοποιείται για γρήγορη αρχική εκτίμηση πριν την καλλιέργεια;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Μικροσκόπηση και χρώση Gram</button>
+        <button data-correct="false">β) Αντιβιόγραμμα κατευθείαν</button>
+        <button data-correct="false">γ) PCR ως πρώτο βήμα πάντα</button>
+        <button data-correct="false">δ) Ανοσοφθορισμός μόνο</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>51. Γιατί τα δείγματα ούρων συχνά απορρίπτονται από το εργαστήριο;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Επειδή η λήψη τους μπορεί να είναι λανθασμένη λόγω επιμόλυνσης βλεννογόνων και δέρματος</button>
+        <button data-correct="false">β) Επειδή τα ούρα δεν μεταφέρουν μικρόβια</button>
+        <button data-correct="false">γ) Επειδή είναι αναερόβια</button>
+        <button data-correct="false">δ) Επειδή δεν χρειάζονται καλλιέργεια</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>52. Ποιο από τα παρακάτω ΔΕΙΓΜΑΤΑ απαιτεί αναερόβιες συνθήκες κατά την μεταφορά;</h4>
+      <div class="answers">
+        <button data-correct="false">α) ΕΝΥ</button>
+        <button data-correct="true">β) Πύον από απόστημα βαθιών ιστών</button>
+        <button data-correct="false">γ) Επιχρίσματα τραχήλου</button>
+        <button data-correct="false">δ) Επιδερμικά ξέσματα</button>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <h4>53. Πότε ΔΕΝ πρέπει να καταψυχθεί ένα δείγμα;</h4>
+      <div class="answers">
+        <button data-correct="true">α) Όταν είναι ΕΝΥ που εξετάζεται για μηνιγγίτιδα</button>
+        <button data-correct="false">β) Όταν πρόκειται για ούρα</button>
+        <button data-correct="false">γ) Όταν είναι αίμα για αντιβιόγραμμα</button>
+        <button data-correct="false">δ) Όταν είναι δείγμα κοπράνων για καλλιέργεια</button>
+      </div>
+    </div>
+
+
+
+<script>
+  document.querySelectorAll('.reveal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans = btn.nextElementSibling;
+      ans.style.display = ans.style.display === "block" ? "none" : "block";
+    });
+  });
+</script>
+
+
+    </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  // Αλλαγή "σελίδας"
+  const buttons = document.querySelectorAll('.tab-button');
+  const sections = document.querySelectorAll('main section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.target;
+      sections.forEach(sec => {
+        sec.classList.toggle('active', sec.id === target);
+      });
+    });
+  });
+
+  // Λειτουργία quiz
+  const answerButtons = document.querySelectorAll('.answers button');
+  answerButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const parent = button.parentElement;
+      const all = parent.querySelectorAll('button');
+
+      // μην απαντάει δύο φορές το ίδιο
+      if ([...all].some(b => b.classList.contains('correct') || b.classList.contains('wrong'))) {
+        return;
+      }
+
+      all.forEach(b => {
+        const isCorrect = b.dataset.correct === 'true';
+        b.classList.add(isCorrect ? 'correct' : 'wrong');
+        b.disabled = true;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

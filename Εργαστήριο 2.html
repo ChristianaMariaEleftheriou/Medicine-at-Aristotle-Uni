@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz – Εργαστήριο 2 Μικροβιολογία I</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5fb;
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #3949ab, #1e88e5);
+      color: white;
+      padding: 14px 18px;
+    }
+
+    header h1 {
+      margin: 0 0 4px 0;
+      font-size: 20px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 16px auto 40px auto;
+      padding: 0 12px;
+    }
+
+    .info {
+      background: #e8eaf6;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #303f9f;
+      margin-bottom: 14px;
+    }
+
+    .quiz-question {
+      background: white;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      border: 1px solid #e0e0f0;
+    }
+
+    .quiz-question h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #1a237e;
+    }
+
+    .quiz-question small {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #757575;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #c5cae9;
+      background: #fafafa;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s, transform 0.05s;
+    }
+
+    .answers button:hover {
+      transform: translateY(-1px);
+    }
+
+    .answers button.correct {
+      background: #c8e6c9;
+      border-color: #2e7d32;
+    }
+
+    .answers button.wrong {
+      background: #ffcdd2;
+      border-color: #c62828;
+    }
+
+    .answers button:disabled {
+      cursor: default;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 10px;
+    }
+    .menu-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: white;
+        border: 2px solid #c62828;
+        color: #c62828;
+        border-radius: 10px;
+        margin-bottom: 14px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .menu-btn:hover {
+        background: #c62828;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Quiz – Εργαστήριο 2: Gram(+) κόκκοι</h1>
+  <p>Σταφυλόκοκκος, στρεπτόκοκκος, εντερόκοκκος, πνευμονιόκοκκος</p>
+</header>
+
+<main>
+  <div class="info">
+    Κάθε ερώτηση διορθώνεται μόνη της: με το πρώτο κλικ βάφεται πράσινη η σωστή
+    απάντηση και κόκκινες οι λάθος.
+  </div>
+
+  <!-- 1 -->
+  <div class="quiz-question">
+    <h4>1. Ποια από τις παρακάτω ιδιότητες είναι τυπική για τους σταφυλόκοκκους;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Gram(+) κόκκοι σε διάταξη «τσαμπί»</button>
+      <button data-correct="false">β) Gram(-) διπλόκοκκοι</button>
+      <button data-correct="false">γ) Gram(+) κόκκοι σε μακριές αλυσίδες</button>
+      <button data-correct="false">δ) Κινητοί με βλεφαρίδες</button>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="quiz-question">
+    <h4>2. Ποιο από τα παρακάτω ΙΣΧΥΕΙ για τον Staphylococcus aureus;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Είναι πηκτασενεργός (coagulase +)</button>
+      <button data-correct="false">β) Είναι καταλάση αρνητικός</button>
+      <button data-correct="false">γ) Δεν αναπτύσσεται σε 9% NaCl</button>
+      <button data-correct="false">δ) Δεν προκαλεί αιμόλυση</button>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="quiz-question">
+    <h4>3. Ποια δοκιμασία χρησιμοποιείται εργαστηριακά για να διαχωρίσουμε σταφυλόκοκκο από στρεπτόκοκκο;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Δοκιμασία καταλάσης</button>
+      <button data-correct="false">β) Δοκιμασία ουρεάσης</button>
+      <button data-correct="false">γ) Δοκιμασία CAMP</button>
+      <button data-correct="false">δ) Δοκιμασία οξειδάσης</button>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="quiz-question">
+    <h4>4. Ποιο από τα παρακάτω ΔΕΝ αποτελεί βασικό είδος σταφυλόκοκκου;</h4>
+    <div class="answers">
+      <button data-correct="false">α) S. aureus</button>
+      <button data-correct="false">β) S. epidermidis</button>
+      <button data-correct="false">γ) S. saprophyticus</button>
+      <button data-correct="true">δ) S. pyogenes</button>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="quiz-question">
+    <h4>5. Ποια ιδιότητα χαρακτηρίζει τον S. saprophyticus;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Προκαλεί συχνά ουρολοιμώξεις σε νέες γυναίκες</button>
+      <button data-correct="false">β) Είναι κύριο αίτιο ενδοκαρδίτιδας σε τεχνητές βαλβίδες</button>
+      <button data-correct="false">γ) Παράγει έντονη β-αιμόλυση σε αιματούχο</button>
+      <button data-correct="false">δ) Είναι πάντα νοσοκομειακό παθογόνο</button>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="quiz-question">
+    <h4>6. Ποιο ένζυμο/δοκιμασία σχετίζεται με την παθογένεια και τη διαγνωστική του S. aureus;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Πηκτάση (coagulase)</button>
+      <button data-correct="false">β) Οξειδάση</button>
+      <button data-correct="false">γ) Ινδολοπαραγωγή</button>
+      <button data-correct="false">δ) Λεκιθινάση</button>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="quiz-question">
+    <h4>7. Ποια από τις παρακάτω καταστάσεις ΔΕΝ σχετίζεται τυπικά με S. aureus;</h4>
+    <div class="answers">
+      <button data-correct="false">α) Δοθιήνες και ψευδάνθρακας</button>
+      <button data-correct="false">β) Σύνδρομο τοξικής καταπληξίας</button>
+      <button data-correct="false">γ) Σύνδρομο «ζεματισμένου» δέρματος</button>
+      <button data-correct="true">δ) Αιμολυτική ουρεμική συνδρομή</button>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="quiz-question">
+    <h4>8. Ποιο χαρακτηριστικό διακρίνει τον MRSA (methicillin resistant S. aureus);</h4>
+    <div class="answers">
+      <button data-correct="true">α) Τροποποιημένη PBP2 λόγω γονιδίου mecA</button>
+      <button data-correct="false">β) Παραγωγή εκτεταμένου φάσματος β-λακταμάσης</button>
+      <button data-correct="false">γ) Αντοχή μόνο στις μακρολίδες</button>
+      <button data-correct="false">δ) Υποχρεωτικά σπορογόνος μορφή</button>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="quiz-question">
+    <h4>9. Ποιο από τα παρακάτω ισχύει για την εντεροτοξίνη του S. aureus;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Είναι θερμοανθεκτική και προκαλεί τροφική δηλητηρίαση με έμετο/διάρροια</button>
+      <button data-correct="false">β) Καταστρέφεται εύκολα στους 60°C</button>
+      <button data-correct="false">γ) Προκαλεί κυρίως μηνιγγίτιδα</button>
+      <button data-correct="false">δ) Δρα μόνο αν το βακτήριο βρίσκεται ζωντανό στο έντερο</button>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="quiz-question">
+    <h4>10. Ποιο είναι το βασικό μορφολογικό γνώρισμα των στρεπτοκόκκων;</h4>
+    <div class="answers">
+      <button data-correct="false">α) Διπλόκοκκοι σε σχήμα φασολιού</button>
+      <button data-correct="true">β) Gram(+) κόκκοι σε αλυσίδες</button>
+      <button data-correct="false">γ) Ραβδία σε σχήμα L</button>
+      <button data-correct="false">δ) Συστάδες τύπου «σταφυλιού»</button>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="quiz-question">
+    <h4>11. Ποια ομάδα στρεπτοκόκκων κατά Lancefield αντιστοιχεί στους κλασικούς «πυογόνους» β-αιμολυτικούς στρεπτοκόκκους;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Ομάδα Α</button>
+      <button data-correct="false">β) Ομάδα Β</button>
+      <button data-correct="false">γ) Ομάδα D</button>
+      <button data-correct="false">δ) Ομάδα C</button>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="quiz-question">
+    <h4>12. Ποια νοσήματα είναι κλασικές μεταστρεπτοκοκκικές επιπλοκές ομάδας Α;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Ρευματικός πυρετός και οξεία σπειραματονεφρίτιδα</button>
+      <button data-correct="false">β) Λοιμώδης μονοπυρήνωση και ηπατίτιδα</button>
+      <button data-correct="false">γ) Λεμφοκοκκιωμάτωση και λέπρα</button>
+      <button data-correct="false">δ) Φυματίωση και διφθερίτιδα</button>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="quiz-question">
+    <h4>13. Ποια τοξίνη ευθύνεται για το εξάνθημα της οστρακιάς;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Ερυθρογόνος/πυρετογόνος τοξίνη του στρεπτοκόκκου</button>
+      <button data-correct="false">β) Εντεροτοξίνη Α</button>
+      <button data-correct="false">γ) Νευροτοξίνη</button>
+      <button data-correct="false">δ) Εξωτοξίνη TSST-1</button>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="quiz-question">
+    <h4>14. Ποια δοκιμασία είναι τυπικά θετική στον β-αιμολυτικό στρεπτόκοκκο ομάδας Β (S. agalactiae);</h4>
+    <div class="answers">
+      <button data-correct="true">α) CAMP test</button>
+      <button data-correct="false">β) Δοκιμασία καταλάσης</button>
+      <button data-correct="false">γ) Οπτοκίνη</button>
+      <button data-correct="false">δ) Bacitracin ευαισθησία</button>
+    </div>
+  </div>
+
+  <!-- 15 -->
+  <div class="quiz-question">
+    <h4>15. Ποια είναι η πρώτη επιλογή αντιβιοτικής θεραπείας για πυογόνο στρεπτόκοκκο ομάδας Α, σύμφωνα με το εργαστήριο;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Πενικιλλίνη για 10 ημέρες</button>
+      <button data-correct="false">β) Τετρακυκλίνες σε μονοθεραπεία</button>
+      <button data-correct="false">γ) Αμινογλυκοσίδες μόνο</button>
+      <button data-correct="false">δ) Φθοριοκινολόνες πρώτης γενιάς</button>
+    </div>
+  </div>
+
+  <!-- 16 -->
+  <div class="quiz-question">
+    <h4>16. Ο εντερόκοκκος (ομάδα D) χαρακτηρίζεται από:</h4>
+    <div class="answers">
+      <button data-correct="true">α) Θετικές δοκιμασίες χολής και εσκουλίνης, ανθεκτικότητα στα αντιβιοτικά</button>
+      <button data-correct="false">β) Πηκτασενεργό ένζυμο</button>
+      <button data-correct="false">γ) Υποχρεωτική σπορογένεση</button>
+      <button data-correct="false">δ) Ολική απουσία ανθεκτικότητας</button>
+    </div>
+  </div>
+
+  <!-- 17 -->
+  <div class="quiz-question">
+    <h4>17. Ποια από τις παρακάτω λοιμώξεις ΔΕΝ είναι τυπική για εντερόκοκκο;</h4>
+    <div class="answers">
+      <button data-correct="false">α) Ουρολοίμωξη</button>
+      <button data-correct="false">β) Ενδοκαρδίτιδα</button>
+      <button data-correct="false">γ) Ενδονοσοκομειακή σηψαιμία</button>
+      <button data-correct="true">δ) Λοιμώδης μονοπυρήνωση</button>
+    </div>
+  </div>
+
+  <!-- 18 -->
+  <div class="quiz-question">
+    <h4>18. Ποιο από τα παρακάτω είναι τυπικό μορφολογικό γνώρισμα του πνευμονιοκόκκου;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Gram(+) διπλόκοκκος λογχοειδής με έλυτρο</button>
+      <button data-correct="false">β) Gram(-) ραβδί</button>
+      <button data-correct="false">γ) Gram(+) κόκκος σε αλυσίδες χωρίς έλυτρο</button>
+      <button data-correct="false">δ) Κινητό ραβδί με βλεφαρίδες</button>
+    </div>
+  </div>
+
+  <!-- 19 -->
+  <div class="quiz-question">
+    <h4>19. Ποια δοκιμασία στο αιματούχο άγαρ βοηθά στη διάκριση πνευμονιοκόκκου από πράσινίζοντες στρεπτοκόκκους;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Δοκιμασία οπτοκίνης (αναστολή ανάπτυξης)</button>
+      <button data-correct="false">β) Δοκιμασία καταλάσης</button>
+      <button data-correct="false">γ) Δοκιμασία CAMP</button>
+      <button data-correct="false">δ) Δοκιμασία ουρεάσης</button>
+    </div>
+  </div>
+
+  <!-- 20 -->
+  <div class="quiz-question">
+    <h4>20. Το έλυτρο του πνευμονιοκόκκου αποτελείται από:</h4>
+    <div class="answers">
+      <button data-correct="true">α) Πολυσακχαρίτη SSS με σημαντικές αντιγονικές ιδιότητες</button>
+      <button data-correct="false">β) Λιποπολυσακχαρίτη (LPS)</button>
+      <button data-correct="false">γ) Πρωτεΐνες τύπου εξωτοξίνης</button>
+      <button data-correct="false">δ) Λιπαρά οξέα βραχείας αλύσου</button>
+    </div>
+  </div>
+
+  <!-- 21 -->
+  <div class="quiz-question">
+    <h4>21. Ποια από τις παρακάτω λοιμώξεις είναι κλασικά πνευμονιοκοκκική;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Πνευμονία λοβιακού τύπου</button>
+      <button data-correct="false">β) Φυματίωση</button>
+      <button data-correct="false">γ) Τυφοειδής πυρετός</button>
+      <button data-correct="false">δ) Χολέρα</button>
+    </div>
+  </div>
+
+  <!-- 22 -->
+  <div class="quiz-question">
+    <h4>22. Ποιο αντιβιοτικό θεωρείται φάρμακο εκλογής για πνευμονιοκοκκικές λοιμώξεις (εκτός μηνιγγίτιδας), σύμφωνα με το μάθημα;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Πενικιλλίνη G</button>
+      <button data-correct="false">β) Αμφοτερικίνη Β</button>
+      <button data-correct="false">γ) Ισονιαζίδη</button>
+      <button data-correct="false">δ) Μετρονιδαζόλη</button>
+    </div>
+  </div>
+
+  <!-- 23 -->
+  <div class="quiz-question">
+    <h4>23. Το πολυδύναμο εμβόλιο PCV για τον πνευμονιόκοκκο περιέχει:</h4>
+    <div class="answers">
+      <button data-correct="true">α) Κεκαθαρμένους πολυσακχαρίτες από πολλούς οροτύπους πνευμονιοκόκκου</button>
+      <button data-correct="false">β) Ζωντανά εξασθενημένα μυκοβακτηρίδια</button>
+      <button data-correct="false">γ) Μόνο πρωτεϊνικά αντιγόνα</button>
+      <button data-correct="false">δ) Αντισώματα έτοιμα προς έγχυση</button>
+    </div>
+  </div>
+
+    <!-- 24 -->
+  <div class="quiz-question">
+    <h4>24. Σε τι τύπο δείγματος γίνεται κλασικά η δοκιμασία πηκτάσης για S. aureus;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Σε πλάσμα αίματος του οποίου η πήξη έχει ανασταλεί με κιτρικά ή οξαλικά άλατα</button>
+      <button data-correct="false">β) Σε ολόκληρο μη αντιπηκτικό αίμα</button>
+      <button data-correct="false">γ) Σε φυσιολογικό ορό</button>
+      <button data-correct="false">δ) Σε ούρα 24ώρου</button>
+    </div>
+  </div>
+
+  <!-- 25 -->
+  <div class="quiz-question">
+    <h4>25. Ποιος είναι ο ρόλος της πηκτάσης στην παθογένεια των παθογόνων σταφυλόκοκκων;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Εμποδίζει τη φαγοκυττάρωση δημιουργώντας θρόμβο γύρω από τα βακτήρια</button>
+      <button data-correct="false">β) Διασπά τις ανοσοσφαιρίνες IgG</button>
+      <button data-correct="false">γ) Αδρανοποιεί το συμπλήρωμα</button>
+      <button data-correct="false">δ) Εμποδίζει τη σύνδεση της μεθικιλλίνης με τις PBPs</button>
+    </div>
+  </div>
+
+  <!-- 26 -->
+  <div class="quiz-question">
+    <h4>26. Ποιο σχήμα αντοχής χρησιμοποιείται εργαστηριακά για να ξεχωρίσουμε τα είδη σταφυλόκοκκου με βάση την αντοχή στη νοβοβιοκίνη;</h4>
+    <div class="answers">
+      <button data-correct="true">α) S. saprophyticus: ανθεκτικός, S. aureus / S. epidermidis: ευαίσθητοι</button>
+      <button data-correct="false">β) Μόνο S. aureus είναι ανθεκτικός</button>
+      <button data-correct="false">γ) Μόνο S. epidermidis είναι ανθεκτικός</button>
+      <button data-correct="false">δ) Όλοι οι σταφυλόκοκκοι είναι ανθεκτικοί</button>
+    </div>
+  </div>
+
+  <!-- 27 -->
+  <div class="quiz-question">
+    <h4>27. Ποια κλινική εικόνα ταιριάζει περισσότερο με εντεροτοξινική τροφική δηλητηρίαση από S. aureus;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Έμετοι και διάρροια 1–8 ώρες μετά τη λήψη τροφής, χωρίς πυρετό</button>
+      <button data-correct="false">β) Υψηλός πυρετός και αιματηρή διάρροια μετά από 3–5 ημέρες</button>
+      <button data-correct="false">γ) Βαριά αφυδάτωση μετά από 1 εβδομάδα</button>
+      <button data-correct="false">δ) Υποξεία ενδοκαρδίτιδα μετά από εβδομάδες</button>
+    </div>
+  </div>
+
+  <!-- 28 -->
+  <div class="quiz-question">
+    <h4>28. Ποιο χαρακτηριστικό είναι ΙΔΙΑΙΤΕΡΑ σημαντικό για S. epidermidis στις νοσοκομειακές λοιμώξεις;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Λοιμώξεις σε τεχνητές προθέσεις και υλικά (προθέσεις, καθετήρες) με συχνή αντοχή στη μεθικιλλίνη</button>
+      <button data-correct="false">β) Παραγωγή εντεροτοξίνης και οστρακιάς</button>
+      <button data-correct="false">γ) Νευροτοξική δράση</button>
+      <button data-correct="false">δ) Υποχρεωτικά αναερόβια ανάπτυξη</button>
+    </div>
+  </div>
+
+  <!-- 29 -->
+  <div class="quiz-question">
+    <h4>29. Ποιο είναι το κύριο αντιγόνο ταξινόμησης των β-αιμολυτικών στρεπτοκόκκων κατά Lancefield;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Ο πολυσακχαρίτης C του κυτταρικού τοιχώματος</button>
+      <button data-correct="false">β) Η πρωτεΐνη Μ της επιφάνειας</button>
+      <button data-correct="false">γ) Το λιποπολυσακχαρίδιο της εξωτερικής μεμβράνης</button>
+      <button data-correct="false">δ) Η κάψουλα πολυσακχαρίτη SSS</button>
+    </div>
+  </div>
+
+  <!-- 30 -->
+  <div class="quiz-question">
+    <h4>30. Ποια χαρακτηριστικά είναι τυπικά για τον εντερόκοκκο (ομάδα D);</h4>
+    <div class="answers">
+      <button data-correct="true">α) Gram(+) κόκκοι σε ζεύγη ή μικρές αλυσίδες, χολή(+), εσκουλίνη(+), υψηλή ανθεκτικότητα σε αντιβιοτικά</button>
+      <button data-correct="false">β) Gram(-) διπλόκοκκοι με εξωτερική μεμβράνη</button>
+      <button data-correct="false">γ) Υποχρεωτικά σπορογόνοι</button>
+      <button data-correct="false">δ) Μόνο άλφα-αιμολυτικοί σε αιματούχο άγαρ</button>
+    </div>
+  </div>
+
+  <!-- 31 -->
+  <div class="quiz-question">
+    <h4>31. Ποιο από τα παρακάτω ΔΕΝ είναι τυπική εντόπιση λοίμωξης από εντερόκοκκο;</h4>
+    <div class="answers">
+      <button data-correct="false">α) Ουρολοίμωξη</button>
+      <button data-correct="false">β) Ενδοκαρδίτιδα</button>
+      <button data-correct="false">γ) Ενδονοσοκομειακή σηψαιμία</button>
+      <button data-correct="true">δ) Οστρακιά σε παιδιά</button>
+    </div>
+  </div>
+
+  <!-- 32 -->
+  <div class="quiz-question">
+    <h4>32. Ποια ιδιότητα των αποικιών S (smooth) του πνευμονιοκόκκου σχετίζεται άμεσα με τη λοιμογόνο δύναμη;</h4>
+    <div class="answers">
+      <button data-correct="true">α) Η παρουσία ελύτρου από πολυσακχαρίτη SSS που δυσχεραίνει τη φαγοκυττάρωση</button>
+      <button data-correct="false">β) Η παραγωγή εντεροτοξίνης</button>
+      <button data-correct="false">γ) Η παραγωγή LPS στην εξωτερική μεμβράνη</button>
+      <button data-correct="false">δ) Η ικανότητα σπορογένεσης</button>
+    </div>
+  </div>
+
+  <!-- 33 -->
+  <div class="quiz-question">
+    <h4>33. Ποιο από τα παρακάτω ΔΕΝ αποτελεί ένδειξη χορήγησης του πολυδύναμου πνευμονιοκοκκικού εμβολίου (PCV) σύμφωνα με το μάθημα;</h4>
+    <div class="answers">
+      <button data-correct="false">α) Ηλικία &gt;65 ετών</button>
+      <button data-correct="false">β) Δρεπανοκυτταρική αναιμία σε παιδί άνω των 2 ετών</button>
+      <button data-correct="false">γ) Βαριά χρόνια καρδιοαναπνευστική νόσος</button>
+      <button data-correct="true">δ) Εγκυμοσύνη στο 2ο τρίμηνο</button>
+    </div>
+  </div>
+    <div class="container">
+        <button class="menu-btn" onclick="window.open('Εργαστηριο 2 quiz 2.html','_blanck')">Δοκίμασε το Quiz 2 του Εργαστηρίου 2</button>
+    </div>
+    
+</main>
+
+<script>
+  // Event delegation για όλα τα κουμπιά answers
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.answers button');
+    if (!btn) return;
+
+    const group = btn.parentElement.querySelectorAll('button');
+
+    // αν έχουν ήδη χρωματιστεί, μην ξανα-απαντά
+    const alreadyAnswered = Array.from(group).some(b =>
+      b.classList.contains('correct') || b.classList.contains('wrong')
+    );
+    if (alreadyAnswered) return;
+
+    group.forEach(b => {
+      const isCorrect = b.dataset.correct === 'true';
+      b.classList.add(isCorrect ? 'correct' : 'wrong');
+      b.disabled = true;
+    });
+  });
+</script>
+
+</body>
+</html>
+
+

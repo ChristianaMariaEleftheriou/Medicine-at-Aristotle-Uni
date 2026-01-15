@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Μικροβιολογία – Ερωτήσεις & Σημειώσεις</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --card-bg: #ffffff;
+      --text: #222222;
+      --accent: #3b82f6;
+      --border: #e0e0ed;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.2rem 1rem 2rem;
+    }
+
+    h1, h2, h3 {
+      margin-top: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.6rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-top: 1.2rem;
+    }
+
+    .block {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      margin-bottom: 0.7rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+
+    /* ΚΛΙΚ σε ερώτηση */
+    .q {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      white-space: pre-wrap;
+      cursor: pointer;
+      position: relative;
+      padding-right: 1.4rem;
+    }
+
+    .q::after {
+      content: "▾";
+      position: absolute;
+      right: 0.2rem;
+      top: 0.1rem;
+      font-size: 0.85rem;
+      color: #666;
+      transition: transform 0.15s ease;
+    }
+
+    .block.open .q::after {
+      transform: rotate(180deg);
+    }
+
+    .a {
+      margin-left: 0.4rem;
+      margin-top: 0.25rem;
+      white-space: pre-wrap;
+      display: none; /* κρυμμένες οι απαντήσεις αρχικά */
+    }
+
+    .block.open .a {
+      display: block;
+    }
+
+    .separator {
+      border-top: 1px dashed #ddd;
+      margin: 1rem 0;
+    }
+
+    ul {
+      margin-top: 0.2rem;
+      margin-bottom: 0.4rem;
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.15rem;
+    }
+
+    .mcq-options {
+      margin-left: 0.8rem;
+      margin-top: 0.2rem;
+      margin-bottom: 0.3rem;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 0.8rem 0.6rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+      h3 {
+        font-size: 1rem;
+      }
+      .block {
+        padding: 0.7rem 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+<h1>Μικροβιολογία – Συγκεντρωτικές Ερωτήσεις & Απαντήσεις</h1>
+
+<!-- =========================
+     ΦΥΜΑΤΙΩΣΗ / MYCOBACTERIUM
+     ========================= -->
+<h2>Φυματίωση – Mycobacterium tuberculosis</h2>
+
+<h3>✅ Βασικές θεωρητικές ερωτήσεις</h3>
+
+<div class="block">
+  <div class="q">1) Γιατί τα μυκοβακτηρίδια είναι οξεάντοχα;</div>
+  <div class="a">Λόγω των κηρωδών λιπιδίων και των μυκολικών οξέων στο κυτταρικό τοίχωμα, τα οποία δεν επιτρέπουν τον αποχρωματισμό με οξέα και αλκοόλη.</div>
+</div>
+
+<div class="block">
+  <div class="q">2) Τι απαιτείται για να χρωματιστούν τα μυκοβακτηρίδια στη χρώση Ziehl–Neelsen;</div>
+  <div class="a">Απαιτείται θέρμανση, ώστε να δημιουργηθούν ρήγματα στο κηρώδες περίβλημα και να εισχωρήσει η φουξίνη.</div>
+</div>
+
+<div class="block">
+  <div class="q">3) Τι κάνει το πράσινο του μαλαχίτη στο θρεπτικό υλικό Löwenstein–Jensen;</div>
+  <div class="a">Αναστέλλει την ανάπτυξη άλλων βακτηρίων, επιτρέποντας να αναπτυχθούν μόνο τα μυκοβακτηρίδια (σε συνδυασμό με αυγό, ασπαραγίνη και γλυκερίνη).</div>
+</div>
+
+<div class="block">
+  <div class="q">4) Γιατί η καλλιέργεια πρέπει να επωάζεται έως και 8 εβδομάδες;</div>
+  <div class="a">Επειδή τα μυκοβακτηρίδια έχουν πολύ αργό ρυθμό ανάπτυξης και σχηματίζουν αποικίες μετά από 3–4 εβδομάδες, οπότε για ασφαλή αποκλεισμό χρειάζεται παρατεταμένη επώαση.</div>
+</div>
+
+<div class="block">
+  <div class="q">5) Τι δείχνει θετική δοκιμασία Mantoux;</div>
+  <div class="a">Μπορεί να δείχνει ενεργή νόσο ή παλαιά λοίμωξη ή εμβολιασμό με BCG. Δεν σημαίνει απαραίτητα ότι υπάρχει ενεργή φυματίωση τη στιγμή της εξέτασης.</div>
+</div>
+
+<div class="block">
+  <div class="q">6) Πότε γίνεται θετική η Mantoux μετά τη μόλυνση ή τον εμβολιασμό;</div>
+  <div class="a">Συνήθως 4–6 εβδομάδες μετά τη λοίμωξη ή τον εμβολιασμό με BCG, και μπορεί να παραμένει θετική για 3–7 χρόνια.</div>
+</div>
+
+<div class="block">
+  <div class="q">7) Ποια βακτηρίδια είναι οξεάντοχα;</div>
+  <div class="a">Τα μυκοβακτηρίδια (π.χ. Mycobacterium tuberculosis, Mycobacterium bovis) και οι νοκάρδιες.</div>
+</div>
+
+<div class="block">
+  <div class="q">8) Πού μπορεί να εξαπλωθεί η φυματίωση εκτός των πνευμόνων;</div>
+  <div class="a">Σε οστά, αρθρώσεις, νεφρούς, μήνιγγες, έντερο, λεμφαδένες και άλλα όργανα.</div>
+</div>
+
+<div class="block">
+  <div class="q">9) Τι είναι το σύμπλεγμα Ghon;</div>
+  <div class="a">Είναι η πρωτοπαθής πνευμονική εστία μαζί με την προσβολή των πυλαίων λεμφαδένων (πρωτοπαθές σύμπλεγμα φυματίωσης).</div>
+</div>
+
+<div class="block">
+  <div class="q">10) Πώς μεταδίδεται η φυματίωση;</div>
+  <div class="a">Με εισπνοή μολυσματικών σταγονιδίων που αποβάλλονται με τον βήχα, την ομιλία ή το φτέρνισμα από άτομο που πάσχει ή αποβάλλει Mycobacterium tuberculosis.</div>
+</div>
+
+<h3>🔥 Κλινικού τύπου ερωτήσεις</h3>
+
+<div class="block">
+  <div class="q">11) Ασθενής με Mantoux θετική αλλά φυσιολογική ακτινογραφία θώρακος. Τι υποδηλώνει;</div>
+  <div class="a">Πιθανότατα λανθάνουσα φυματίωση (παλαιά ή ανενεργή λοίμωξη).</div>
+</div>
+
+<div class="block">
+  <div class="q">12) Γιατί μπορεί η Mantoux να είναι αρνητική σε ασθενή με ενεργό νόσο;</div>
+  <div class="a">Λόγω ανεπαρκούς κυτταρικής ανοσίας (π.χ. HIV λοίμωξη, σοβαρή ανοσοκαταστολή, εξάντληση ανοσοποιητικού), με αποτέλεσμα ψευδώς αρνητικό αποτέλεσμα.</div>
+</div>
+
+<div class="block">
+  <div class="q">13) Ποια είναι η παθολογοανατομική αλλοίωση–κλειδί στη φυματίωση;</div>
+  <div class="a">Το κοκκίωμα με τυροειδή νέκρωση (φυμάτιο).</div>
+</div>
+
+<div class="block">
+  <div class="q">14) Γιατί χρειάζονται πολλαπλά φάρμακα στη θεραπεία της φυματίωσης;</div>
+  <div class="a">Για την αποφυγή ανάπτυξης αντοχής (ανθεκτικά στελέχη, συμπεριλαμβανομένης της πολυανθεκτικής φυματίωσης – MDR) και για αποτελεσματική εκρίζωση των μικροβίων.</div>
+</div>
+
+<div class="block">
+  <div class="q">15) Ποιο αντιφυματικό σχετίζεται με ηπατοτοξικότητα και ποιο με οπτική νευρίτιδα;</div>
+  <div class="a">Ριφαμπικίνη και ισονιαζίδη: ηπατοτοξικότητα. Αιθαμβουτόλη: οπτική νευρίτιδα.</div>
+</div>
+
+<h3>🧠 MCQs για εξάσκηση (Φυματίωση)</h3>
+
+<div class="block">
+  <div class="q">1) Ποια δήλωση είναι σωστή για το Mycobacterium tuberculosis;</div>
+  <div class="mcq-options">
+    A. Αναπτύσσεται γρήγορα σε συνηθισμένα θρεπτικά υλικά<br>
+    B. Είναι υποχρεωτικά αερόβιο<br>
+    C. Δεν είναι οξεάντοχο<br>
+    D. Δεν προσβάλλει άλλα όργανα εκτός του πνεύμονα
+  </div>
+  <div class="a">Σωστό: B → Είναι υποχρεωτικά αερόβιο.</div>
+</div>
+
+<div class="block">
+  <div class="q">2) Η χρώση Ziehl–Neelsen απαιτεί:</div>
+  <div class="mcq-options">
+    A. Θέρμανση για είσοδο της φουξίνης<br>
+    B. Ψύξη για απομάκρυνση της χρωστικής<br>
+    C. Αποχρωματισμό με οξινισμένο οινόπνευμα<br>
+    D. Και A και C
+  </div>
+  <div class="a">Σωστό: D → Θέρμανση + αποχρωματισμός με οξινισμένο οινόπνευμα.</div>
+</div>
+
+<div class="block">
+  <div class="q">3) Θετική Mantoux σημαίνει:</div>
+  <div class="mcq-options">
+    A. Ενεργή νόσος<br>
+    B. Παλαιά νόσος<br>
+    C. Εμβολιασμός<br>
+    D. Οποιοδήποτε από τα παραπάνω
+  </div>
+  <div class="a">Σωστό: D → Μπορεί να οφείλεται σε ενεργή ή παλαιά νόσο ή σε εμβολιασμό.</div>
+</div>
+
+<div class="block">
+  <div class="q">4) Το σύμπλεγμα Ghon παρατηρείται σε:</div>
+  <div class="mcq-options">
+    A. Δευτεροπαθή φυματίωση<br>
+    B. Πρωτοπαθή φυματίωση<br>
+    C. Λεμφαδενική φυματίωση<br>
+    D. Σπηλαιώδη νόσο
+  </div>
+  <div class="a">Σωστό: B → Πρωτοπαθή φυματίωση.</div>
+</div>
+
+<div class="block">
+  <div class="q">5) Γιατί απαιτούνται 6–9 μήνες θεραπείας φυματίωσης;</div>
+  <div class="mcq-options">
+    A. Γιατί τα φάρμακα είναι αδύναμα<br>
+    B. Λόγω αργής ανάπτυξης του μικροβίου<br>
+    C. Γιατί ο ασθενής δεν ανταποκρίνεται<br>
+    D. Για διασπορά αντιβιοτικών
+  </div>
+  <div class="a">Σωστό: B → Λόγω της πολύ αργής ανάπτυξης του Mycobacterium tuberculosis.</div>
+</div>
+
+<h3>🔹 Σημαντικές ερωτήσεις θεωρίας (Φυματίωση)</h3>
+
+<div class="block">
+  <div class="q">1) Τι εξασφαλίζει η παστερίωση του γάλακτος;</div>
+  <div class="a">Καταστροφή του Mycobacterium bovis, που προκαλεί φυματίωση στα βοοειδή και μπορεί να μεταδοθεί στον άνθρωπο.</div>
+</div>
+
+<div class="block">
+  <div class="q">2) Γιατί το Mycobacterium tuberculosis επιβιώνει μέσα στα μακροφάγα;</div>
+  <div class="a">Επειδή αναστέλλει τη φαγολυσοσωμική σύντηξη και τη φαγοκυτταρική καταστροφή, πολλαπλασιαζόμενο ενδοκυττάρια.</div>
+</div>
+
+<div class="block">
+  <div class="q">3) Ποιο στοιχείο της ανοσίας είναι πιο σημαντικό στη φυματίωση;</div>
+  <div class="a">Η κυτταρομεσολαβούμενη ανοσία (T–λεμφοκύτταρα CD4+ και ενεργοποιημένα μακροφάγα) και η υπερευαισθησία επιβραδυνόμενου τύπου.</div>
+</div>
+
+<div class="block">
+  <div class="q">4) Τι προκαλεί η ανεπαρκής κυτταρική ανοσία σε πρωτοπαθή λοίμωξη;</div>
+  <div class="a">Ταχεία εξέλιξη σε πρωτογενή φυματίωση με πιθανή γενικευμένη νόσο.</div>
+</div>
+
+<div class="block">
+  <div class="q">5) Τι είναι ο «κεγχροειδής» τύπος φυματίωσης;</div>
+  <div class="a">Διάσπαρτη φυματίωση με πολλά μικρά φυμάτια στους πνεύμονες (σαν σπόροι κεχριού).</div>
+</div>
+
+<div class="block">
+  <div class="q">6) Ποιος ιστολογικός σχηματισμός χαρακτηρίζει τη φυματίωση;</div>
+  <div class="a">Κοκκίωμα με τυροειδή νέκρωση, επιθηλιοειδή κύτταρα και γιγαντοκύτταρα τύπου Langhans.</div>
+</div>
+
+<div class="block">
+  <div class="q">7) Ποια είναι η συχνότερη οδός μετάδοσης;</div>
+  <div class="a">Εισπνοή σταγονιδίων από άτομα που αποβάλλουν Mycobacterium tuberculosis με τον βήχα, την ομιλία ή το φτέρνισμα.</div>
+</div>
+
+<div class="block">
+  <div class="q">8) Πότε θεωρείται η Mantoux θετική;</div>
+  <div class="a">Όταν η διήθηση (σκληρία/ερύθημα) είναι συνήθως &gt;10 mm μετά από 72 ώρες, ανάλογα και με την ομάδα κινδύνου.</div>
+</div>
+
+<div class="block">
+  <div class="q">9) Τι σημαίνει αρνητική Mantoux;</div>
+  <div class="a">Συνήθως αποκλείει ενεργό φυματίωση, αλλά μπορεί να είναι ψευδώς αρνητική σε ανοσοκαταστολή ή πολύ πρώιμη λοίμωξη.</div>
+</div>
+
+<div class="block">
+  <div class="q">10) Τι περιέχει το εμβόλιο BCG;</div>
+  <div class="a">Εξασθενημένο στέλεχος Mycobacterium bovis.</div>
+</div>
+
+<h3>🔹 Ερωτήσεις εργαστηρίου / διάγνωσης (Φυματίωση)</h3>
+
+<div class="block">
+  <div class="q">11) Ποιες τεχνικές χρησιμοποιούνται για τη εργαστηριακή διάγνωση της φυματίωσης;</div>
+  <div class="a">Μικροσκόπηση οξεάντοχων βακίλων με Ziehl–Neelsen, καλλιέργεια σε Löwenstein–Jensen, ραδιομετρικές μέθοδοι και μοριακές μέθοδοι όπως PCR.</div>
+</div>
+
+<div class="block">
+  <div class="q">12) Πώς φαίνονται τα οξεάντοχα βακτήρια στη Ziehl–Neelsen;</div>
+  <div class="a">Ως κόκκινοι–ροζ βάκιλοι σε μπλε φόντο.</div>
+</div>
+
+<div class="block">
+  <div class="q">13) Τι κάνει το NaOH στο άμεσο παρασκεύασμα πτυέλων;</div>
+  <div class="a">Ρευστοποιεί τη βλέννα και μειώνει τους άλλους μικροοργανισμούς, βοηθώντας στην «εμπλουτισμένη» ανίχνευση των μυκοβακτηριδίων.</div>
+</div>
+
+<div class="block">
+  <div class="q">14) Τι σημαίνει MDR–TB;</div>
+  <div class="a">Multidrug–resistant tuberculosis: στελέχη Mycobacterium tuberculosis ανθεκτικά σε περισσότερα από ένα φάρμακα πρώτης εκλογής (π.χ. ισονιαζίδη και ριφαμπικίνη).</div>
+</div>
+
+<div class="block">
+  <div class="q">15) Γιατί δίνονται 3–4 φάρμακα μαζί στη θεραπεία;</div>
+  <div class="a">Για να προληφθεί η ανάπτυξη ανθεκτικότητας και να εξασφαλιστεί επαρκής εκρίζωση του Mycobacterium tuberculosis.</div>
+</div>
+
+<h3>🔹 Σενάρια τύπου εξέτασης (Φυματίωση)</h3>
+
+<div class="block">
+  <div class="q">Σενάριο 1:</div>
+  <div class="a">Ασθενής με Mantoux θετική, χωρίς συμπτώματα. Πιθανότερη ερμηνεία: λανθάνουσα φυματίωση.</div>
+</div>
+
+<div class="block">
+  <div class="q">Σενάριο 2:</div>
+  <div class="a">Ασθενής με HIV εμφανίζει αρνητική Mantoux παρ’ ότι έχει ακτινολογικά ευρήματα συμβατά με φυματίωση. Αιτία: ανοσοκαταστολή → ψευδώς αρνητική Mantoux.</div>
+</div>
+
+<div class="block">
+  <div class="q">Σενάριο 3:</div>
+  <div class="a">Μετά από Ziehl–Neelsen θετική, η επιβεβαίωση γίνεται με καλλιέργεια σε Löwenstein–Jensen και PCR.</div>
+</div>
+
+<div class="block">
+  <div class="q">Σενάριο 4:</div>
+  <div class="a">Σπήλαιο σε ακτινογραφία θώρακος: συμβατό με δευτεροπαθή φυματίωση με τυροειδή νέκρωση και κοιλότητα στον πνευμονικό ιστό.</div>
+</div>
+
+<hr class="separator">
+
+<!-- =========================
+     ΕΝΤΕΡΟΒΑΚΤΗΡΙΔΙΑ L(+)
+     ========================= -->
+
+<h2>Εντεροβακτηρίδια – Λακτόζη θετικά (L+)</h2>
+
+<h3>✅ Θεωρητικές ερωτήσεις</h3>
+
+<div class="block">
+  <div class="q">1) Ποια είναι τα γενικά χαρακτηριστικά των εντεροβακτηριοειδών;</div>
+  <div class="a">Gram αρνητικά, μη σπορογόνα, οξειδάση αρνητικά, προαιρετικά αναερόβια, ζυμώνουν τη γλυκόζη και ανάγουν νιτρικά σε νιτρώδη.</div>
+</div>
+
+<div class="block">
+  <div class="q">2) Ποια τέσσερα γένη ζυμώνουν τη λακτόζη και παράγουν κόκκινες αποικίες στο άγαρ MacConkey;</div>
+  <div class="a">Escherichia, Klebsiella, Enterobacter, Citrobacter.</div>
+</div>
+
+<div class="block">
+  <div class="q">3) Τι σημαίνει ότι ένα εντεροβακτηριοειδές είναι λακτόζη θετικό στο MacConkey;</div>
+  <div class="a">Ότι ζυμώνει τη λακτόζη και σχηματίζει ερυθρές/ροζ αποικίες λόγω πτώσης του pH.</div>
+</div>
+
+<div class="block">
+  <div class="q">4) Τι σημαίνει προφίλ IMViC ++-- για Escherichia coli και --++ για Klebsiella;</div>
+  <div class="a">Escherichia coli: indole +, methyl red +, Voges–Proskauer -, citrate -. Klebsiella: indole -, methyl red -, Voges–Proskauer +, citrate +.</div>
+</div>
+
+<div class="block">
+  <div class="q">5) Τι δείχνει θετική δοκιμασία ινδόλης;</div>
+  <div class="a">Την παρουσία του ενζύμου τρυπτοφανάσης: παράγεται ινδόλη από τρυπτοφάνη και με το αντιδραστήριο Kovac’s σχηματίζεται κόκκινη ζώνη.</div>
+</div>
+
+<div class="block">
+  <div class="q">6) Πώς ερμηνεύεται η δοκιμασία ερυθρού μεθυλίου (MR);</div>
+  <div class="a">Κόκκινο χρώμα (pH ≤ 4,5) σημαίνει έντονη παραγωγή οξέων από ζύμωση γλυκόζης.</div>
+</div>
+
+<div class="block">
+  <div class="q">7) Τι σημαίνει μαύρη ζώνη σε Kligler;</div>
+  <div class="a">Παραγωγή υδροθείου (H₂S).</div>
+</div>
+
+<div class="block">
+  <div class="q">8) Τι δείχνει ροζ χρώμα στη δοκιμασία ουρίας;</div>
+  <div class="a">Θετική ουρεάση: διάσπαση ουρίας, παραγωγή αμμωνίας και αύξηση του pH.</div>
+</div>
+
+<div class="block">
+  <div class="q">9) Τι αντιγόνα διαθέτει η Escherichia coli και ποιο σχετίζεται με νεογνική μηνιγγίτιδα;</div>
+  <div class="a">Η Escherichia coli διαθέτει O (σωματικό), H (βλεφαριδικό) και K (περιβλημάτων) αντιγόνα. Το K1 αντιγόνο σχετίζεται ιδιαίτερα με νεογνική μηνιγγίτιδα.</div>
+</div>
+
+<div class="block">
+  <div class="q">10) Ποιο εντεροαιμορραγικό στέλεχος Escherichia coli σχετίζεται με αιμολυτικό ουραιμικό σύνδρομο (HUS);</div>
+  <div class="a">Το εντεροαιμορραγικό στέλεχος Escherichia coli (EHEC), συνήθως οροτύπου O157:H7.</div>
+</div>
+
+<h3>✅ Κλινικές / παθολογίας ερωτήσεις (L+)</h3>
+
+<div class="block">
+  <div class="q">11) Ποιο μικρόβιο αποτελεί κύριο αίτιο οξέων ουρολοιμώξεων (≈80%);</div>
+  <div class="a">Escherichia coli, λόγω των ινιδίων (fimbriae) που το βοηθούν να προσκολλάται στον ουροεπιθήλιο.</div>
+</div>
+
+<div class="block">
+  <div class="q">12) Ποιο αντιγόνο Escherichia coli συνδέεται με νεογνική μηνιγγίτιδα;</div>
+  <div class="a">Το αντιγόνο K1 του περιβλήματος.</div>
+</div>
+
+<div class="block">
+  <div class="q">13) Τι σημαίνει αν βρεθεί Escherichia coli σε πόσιμο νερό;</div>
+  <div class="a">Δείχνει κοπρανώδη μόλυνση και πιθανή παρουσία παθογόνων μικροοργανισμών στο νερό.</div>
+</div>
+
+<div class="block">
+  <div class="q">14) Ποια μορφή Escherichia coli προκαλεί διάρροια ταξιδιωτών;</div>
+  <div class="a">Το εντεροτοξινογόνο στέλεχος Escherichia coli (ETEC), το οποίο παράγει τις εντεροτοξίνες LT (heat–labile) και ST (heat–stable).</div>
+</div>
+
+<div class="block">
+  <div class="q">15) Ποια παθολογία προκαλεί το εντεροαιμορραγικό στέλεχος Escherichia coli (EHEC) και ποια η κλασική τριάδα;</div>
+  <div class="a">Προκαλεί αιμολυτικό ουραιμικό σύνδρομο (HUS): αναιμία, οξεία νεφρική ανεπάρκεια και θρομβοπενία.</div>
+</div>
+
+<h3>✅ Εργαστηριακές / διαγνωστικές ερωτήσεις (L+)</h3>
+
+<div class="block">
+  <div class="q">16) Τι δείγμα χρησιμοποιείται σε ουροκαλλιέργεια και πώς πρέπει να συλλεχθεί;</div>
+  <div class="a">Μέση πρωινή ούρηση σε αποστειρωμένη φιάλη, με προσεκτικό καθαρισμό της περιοχής και άμεση εξέταση ή ψύξη του δείγματος.</div>
+</div>
+
+<div class="block">
+  <div class="q">17) Πότε θεωρείται θετική η ουρολοίμωξη;</div>
+  <div class="a">Σε ενήλικες: &gt;10⁵ μικροοργανισμοί ανά ml. Στα παιδιά: &gt;10⁴ μικροοργανισμοί ανά ml.</div>
+</div>
+
+<div class="block">
+  <div class="q">18) Πώς ερμηνεύεις ανάπτυξη Gram αρνητικών στον MacConkey και στο αιματούχο άγαρ;</div>
+  <div class="a">Το MacConkey δείχνει αν ζυμώνεται η λακτόζη (λακτόζη θετικό ή αρνητικό), ενώ το αιματούχο αξιολογεί γενικότερη ανάπτυξη και αιμόλυση. Ερυθρές αποικίες στο MacConkey σημαίνουν λακτόζη θετικό εντεροβακτηριοειδές.</div>
+</div>
+
+<div class="block">
+  <div class="q">19) Πώς διαγιγνώσκεται και διαφοροποιείται εργαστηριακά η Escherichia coli από την Klebsiella;</div>
+  <div class="a">
+    Escherichia coli: IMViC + + - -, συνήθως χωρίς παχιά κάψα.<br>
+    Klebsiella: IMViC - - + +, σχηματίζει χαρακτηριστικά βλεννώδεις αποικίες λόγω παχιάς κάψας.
+  </div>
+</div>
+
+<div class="block">
+  <div class="q">20) Ποια είναι η αρχή του αντιβιογράμματος κατά Kirby–Bauer;</div>
+  <div class="a">Διασπορά δίσκων αντιβιοτικών σε επιφάνεια άγαρ, επώαση και μέτρηση ζωνών αναστολής γύρω από κάθε δίσκο για την εκτίμηση ευαισθησίας ή αντοχής.</div>
+</div>
+
+<h3>🔥 Mini MCQs για εξάσκηση (L+)</h3>
+
+<div class="block">
+  <div class="q">1) Ερυθρές αποικίες σε άγαρ MacConkey υποδηλώνουν:</div>
+  <div class="mcq-options">
+    A) Ζύμωση λακτόζης<br>
+    B) Παραγωγή H₂S<br>
+    C) Απουσία κίνησης
+  </div>
+  <div class="a">Σωστό: A → Ζύμωση λακτόζης.</div>
+</div>
+
+<div class="block">
+  <div class="q">2) Ποιο προφίλ IMViC ταιριάζει στην Escherichia coli;</div>
+  <div class="mcq-options">
+    A) - - + +<br>
+    B) + + - -<br>
+    C) - + + -
+  </div>
+  <div class="a">Σωστό: B → + + - -.</div>
+</div>
+
+<div class="block">
+  <div class="q">3) Μαύρη ζώνη στον Kligler σημαίνει:</div>
+  <div class="mcq-options">
+    A) Ζύμωση λακτόζης<br>
+    B) Παραγωγή H₂S<br>
+    C) Παραγωγή ουρίας
+  </div>
+  <div class="a">Σωστό: B → Παραγωγή υδροθείου.</div>
+</div>
+
+<div class="block">
+  <div class="q">4) Ποιο παθογόνο στέλεχος Escherichia coli σχετίζεται περισσότερο με αιματηρή διάρροια;</div>
+  <div class="mcq-options">
+    A) ETEC<br>
+    B) EPEC<br>
+    C) EHEC
+  </div>
+  <div class="a">Σωστό: C → Εντεροαιμορραγικό Escherichia coli.</div>
+</div>
+
+<div class="block">
+  <div class="q">5) Ποιο αντιγόνο σχετίζεται με νεογνική μηνιγγίτιδα;</div>
+  <div class="mcq-options">
+    A) H<br>
+    B) O<br>
+    C) K1
+  </div>
+  <div class="a">Σωστό: C → K1.</div>
+</div>
+
+<hr class="separator">
+
+<!-- =========================
+     ΕΝΤΕΡΟΒΑΚΤΗΡΙΔΙΑ L(-)
+     ========================= -->
+
+<h2>Εντεροβακτηρίδια – Λακτόζη αρνητικά (L−) και άλλα Gram (-) ραβδία</h2>
+
+<h3>🔴 Γενικά χαρακτηριστικά</h3>
+
+<div class="block">
+  <div class="q">1) Τι χαρακτηριστικό έχουν κοινό τα εντεροβακτηριοειδή λακτόζη αρνητικά στο MacConkey;</div>
+  <div class="a">Παράγουν άχρωμες αποικίες, επειδή δεν ζυμώνουν τη λακτόζη.</div>
+</div>
+
+<div class="block">
+  <div class="q">2) Ποια βασικά χαρακτηριστικά μοιράζονται τα εντεροβακτηριοειδή γενικά;</div>
+  <div class="a">Είναι Gram αρνητικά, μη σπορογόνα, ζυμώνουν τη γλυκόζη, ανάγουν νιτρικά σε νιτρώδη και είναι οξειδάση αρνητικά.</div>
+</div>
+
+<h3>🔴 Proteus</h3>
+
+<div class="block">
+  <div class="q">3) Ποιο χαρακτηριστικό μικροβιακής ανάπτυξης θεωρείται παθογνωμονικό για το γένος Proteus;</div>
+  <div class="a">Ο ερπυσμός (swarming) με σχηματισμό ομόκεντρων κυμάτων στην επιφάνεια του άγαρ.</div>
+</div>
+
+<div class="block">
+  <div class="q">4) Πώς μυρίζει συχνά ο Proteus και ποια δοκιμασία είναι χαρακτηριστικά θετική;</div>
+  <div class="a">Έχει οσμή νωπών ιχθύων και είναι χαρακτηριστικά θετικός στη δοκιμασία ουρεάσης.</div>
+</div>
+
+<div class="block">
+  <div class="q">5) Ποιες λοιμώξεις προκαλούν συνήθως τα είδη Proteus;</div>
+  <div class="a">Ουρολοιμώξεις, λοιμώξεις τραυμάτων/εγκαυμάτων, ενδονοσοκομειακές λοιμώξεις και, σε ορισμένες περιπτώσεις, μηνιγγίτιδες.</div>
+</div>
+
+<h3>🔴 Pseudomonas aeruginosa (Ψευδομονάδα)</h3>
+
+<div class="block">
+  <div class="q">6) Τι χρώματα παράγουν οι χρωστικές της Pseudomonas aeruginosa;</div>
+  <div class="a">
+    Πυοκυανίνη: κυανοπράσινη<br>
+    Πυοβερδίνη: κιτρινοπράσινη<br>
+    Πυορουμπίνη: ερυθρομέλαινη<br>
+    Πυομελανίνη: καστανομέλαινη
+  </div>
+</div>
+
+<div class="block">
+  <div class="q">7) Τι ιδιαίτερη οσμή έχει η Pseudomonas aeruginosa και μέχρι ποια θερμοκρασία μπορεί να αναπτύσσεται;</div>
+  <div class="a">Παρουσιάζει άρωμα που θυμίζει γιασεμί ή τριμεθυλαμίνη και μπορεί να αναπτυχθεί μέχρι τους 42°C.</div>
+</div>
+
+<div class="block">
+  <div class="q">8) Πού μπορεί να ανιχνευθεί φυσιολογικά και τι λοιμώξεις προκαλεί η Pseudomonas aeruginosa;</div>
+  <div class="a">
+    Σε ποσοστό περίπου 10% των ανθρώπων ανευρίσκεται στην εντερική χλωρίδα.<br>
+    Προκαλεί λοιμώξεις τραυμάτων/εγκαυμάτων, γαγγραινώδες έκθυμα, λοιμώξεις σε ασθενείς με κυστική ίνωση, ουρολοιμώξεις και σοβαρές ενδονοσοκομειακές λοιμώξεις.
+  </div>
+</div>
+
+<h3>🔴 Serratia</h3>
+
+<div class="block">
+  <div class="q">9) Τι είδους λοιμώξεις προκαλεί το γένος Serratia και πώς μεταδίδεται;</div>
+  <div class="a">Προκαλεί ενδονοσοκομειακές λοιμώξεις (αναπνευστικού, ουροφόρων οδών, μηνιγγίτιδες, ενδοκαρδίτιδες) και μπορεί να μεταδοθεί από άτομο σε άτομο, αλλά και μέσω ιατρικών συσκευών και υγρών.</div>
+</div>
+
+<h3>🔴 Salmonella</h3>
+
+<div class="block">
+  <div class="q">10) Ποια αντιγόνα διαθέτει η Salmonella;</div>
+  <div class="a">Διαθέτει το σωματικό αντιγόνο O, το βλεφαριδικό αντιγόνο H και το επιφανειακό αντιγόνο Vi.</div>
+</div>
+
+<div class="block">
+  <div class="q">11) Ποιες δύο βασικές μορφές νόσου προκαλούν τα είδη Salmonella;</div>
+  <div class="a">Τυφοειδή πυρετό (γενικευμένη λοίμωξη) και εντεροκολίτιδα (μικροβιακή τροφική δηλητηρίαση λοιμώδους τύπου).</div>
+</div>
+
+<div class="block">
+  <div class="q">12) Ποιος είναι ο χρόνος επώασης του τυφοειδούς πυρετού και ποια η οδός μετάδοσης;</div>
+  <div class="a">Ο χρόνος επώασης είναι περίπου 7–14 ημέρες και η μετάδοση γίνεται από την πεπτική οδό (μολυσμένες τροφές ή νερό).</div>
+</div>
+
+<div class="block">
+  <div class="q">13) Ποιο αντιγόνο ελέγχεται με την αντίδραση Widal και πότε πραγματοποιείται η εξέταση;</div>
+  <div class="a">Γίνεται συγκολλητινοαντίδραση έναντι των αντιγόνων O και H της Salmonella, συνήθως στο τέλος της 1ης εβδομάδας, όταν έχουν αναπτυχθεί αντισώματα.</div>
+</div>
+
+<h3>🔴 Shigella</h3>
+
+<div class="block">
+  <div class="q">14) Ποιο χαρακτηριστικό έχει η Shigella dysenteriae στη ζύμωση μανιτόλης;</div>
+  <div class="a">Η Shigella dysenteriae είναι μανιτόλη αρνητική, σε αντίθεση με τα άλλα είδη Shigella που είναι συνήθως μανιτόλη θετικά.</div>
+</div>
+
+<div class="block">
+  <div class="q">15) Ποιο αντιγόνο έχουν οι σιγκέλλες και γιατί;</div>
+  <div class="a">Έχουν μόνο σωματικό αντιγόνο O, διότι δεν διαθέτουν βλεφαρίδες, άρα δεν έχουν αντιγόνο H (είναι ακίνητες).</div>
+</div>
+
+<div class="block">
+  <div class="q">16) Ποιο είδος Shigella παράγει εξωτοξίνη και ποια η δράση της;</div>
+  <div class="a">Η Shigella dysenteriae τύπου 1 παράγει την Shiga–τοξίνη, η οποία έχει εντεροτοξική και νευροτοξική δράση.</div>
+</div>
+
+<div class="block">
+  <div class="q">17) Πόσο μικρός είναι ο λοιμογόνος αριθμός της Shigella;</div>
+  <div class="a">Περίπου 10–100 μικροοργανισμοί επαρκούν για να προκαλέσουν λοίμωξη, γεγονός που την καθιστά εξαιρετικά μολυσματική.</div>
+</div>
+
+<h3>🔴 Κλινικά σενάρια (L−)</h3>
+
+<div class="block">
+  <div class="q">18) Ασθενής με εγκαύματα εμφανίζει πράσινο πύον, άρωμα γιασεμιού και βακτήριο που αναπτύσσεται στους 42°C. Ποιο μικρόβιο υποψιάζεσαι;</div>
+  <div class="a">Pseudomonas aeruginosa.</div>
+</div>
+
+<div class="block">
+  <div class="q">19) Παιδί με αιματηρή διάρροια, βλέννη και πυρετό, εμφανίζει μικροβιακή δυσεντερία περίπου 48 ώρες μετά τη μόλυνση. Ποιο μικρόβιο υποψιάζεσαι;</div>
+  <div class="a">Shigella, ιδιαίτερα Shigella dysenteriae.</div>
+</div>
+
+<div class="block">
+  <div class="q">20) Εξετάζεις καλλιέργεια ούρων και βλέπεις χαρακτηριστικό “swarming” στην επιφάνεια του άγαρ. Ποιο βακτήριο απομονώθηκε πιθανότατα;</div>
+  <div class="a">Proteus.</div>
+</div>
+
+</div> <!-- /.page -->
+
+<script>
+  // Όλες οι ερωτήσεις με κλάση .q γίνονται click-to-toggle για την απάντηση .a
+  document.addEventListener('DOMContentLoaded', function () {
+    const questionElements = document.querySelectorAll('.block .q');
+
+    questionElements.forEach(function (qEl) {
+      qEl.addEventListener('click', function () {
+        const block = qEl.closest('.block');
+        if (!block) return;
+        block.classList.toggle('open');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

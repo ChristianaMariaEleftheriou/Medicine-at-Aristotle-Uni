@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Μικροβιολογία – 5ο Εργαστήριο (Εντεροβακτηριοειδή L+)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 0;
+      color: #555;
+    }
+
+    .question {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+    }
+
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-btn {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      background-color: #f9f9f9;
+      text-align: left;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .option-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .option-btn.correct {
+      background-color: #c8f7c5;   /* πράσινο */
+      border-color: #4caf50;
+    }
+
+    .option-btn.incorrect {
+      background-color: #f8caca;   /* κόκκινο/ροζ */
+      border-color: #f44336;
+    }
+
+    .option-btn.disabled {
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .footer-note {
+      margin-top: 25px;
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h1>5ο Εργαστήριο Μικροβιολογίας Ι</h1>
+<h2>Εντεροβακτηριοειδή L(+), IMViC – “Ανάποδες” ερωτήσεις</h2>
+
+<div id="quiz-container"></div>
+
+<div class="footer-note">
+  Κάθε refresh ανακατεύει τις ερωτήσεις και τις απαντήσεις.
+</div>
+
+<script>
+  // Λίστα ερωτήσεων – τύπου "ποιο από τα παρακάτω..."
+  const questions = [
+    {
+      question: "Ποιο από τα παρακάτω γένη εντεροβακτηριοειδών έχει προφίλ IMViC ++-- ;",
+      options: [
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Escherichia coli"
+    },
+    {
+      question: "Ποιο βακτήριο είναι λακτόζη+, MR+ και ινδόλη+ αλλά αρνητικό στη δοκιμασία κιτρικών (citrate-) ;",
+      options: [
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Escherichia coli"
+    },
+    {
+      question: "Ποιο από τα παρακάτω είναι λακτόζη+ αλλά ακίνητο (μη κινητό) ;",
+      options: [
+        "Klebsiella pneumoniae",
+        "Escherichia coli",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Klebsiella pneumoniae"
+    },
+    {
+      question: "Ποιο γένος είναι λακτόζη+ και ταυτόχρονα κινητό (κινούμενο) και H₂S+ ;",
+      options: [
+        "Citrobacter freundii",
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Enterobacter cloacae"
+      ],
+      correct: "Citrobacter freundii"
+    },
+    {
+      question: "Ποιο γένος έχει προφίλ IMViC --++ και αποτελεί συχνό ενδονοσοκομειακό παθογόνο από περιβαλλοντικές πηγές (χώμα, νερό) ;",
+      options: [
+        "Enterobacter cloacae",
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Citrobacter freundii"
+      ],
+      correct: "Enterobacter cloacae"
+    },
+    {
+      question: "Ποιο βακτήριο λακτόζη+ προκαλεί περίπου το 80% των οξέων λοιμώξεων του ουροποιητικού ;",
+      options: [
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Escherichia coli"
+    },
+    {
+      question: "Ποιο από τα παρακάτω είναι κιτρικά- (δεν αναπτύσσεται όταν το κιτρικό νάτριο είναι η μόνη πηγή άνθρακα) ;",
+      options: [
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Escherichia coli"
+    },
+    {
+      question: "Σε ποιο από τα παρακάτω γένη παρατηρούμε χαρακτηριστικά βλεννώδεις αποικίες λόγω παχύ ελύτρου πολυσακχαρίτη ;",
+      options: [
+        "Klebsiella pneumoniae",
+        "Escherichia coli",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Klebsiella pneumoniae"
+    },
+    {
+      question: "Η ανεύρεση ποίου μικροοργανισμού στο πόσιμο νερό χρησιμοποιείται ως δείκτης κοπρανώδους ρύπανσης ;",
+      options: [
+        "Escherichia coli",
+        "Klebsiella pneumoniae",
+        "Enterobacter cloacae",
+        "Citrobacter freundii"
+      ],
+      correct: "Escherichia coli"
+    },
+    {
+      question: "Σε ποια από τις παρακάτω δοκιμασίες χρησιμοποιούμε το αντιδραστήριο Kovac’s, το οποίο δίνει ερυθρό δακτύλιο στην επιφάνεια αν η δοκιμασία είναι θετική ;",
+      options: [
+        "Δοκιμασία παραγωγής ινδόλης",
+        "Δοκιμασία ερυθρού του μεθυλίου (MR)",
+        "Δοκιμασία Voges–Proskauer (VP)",
+        "Δοκιμασία κιτρικών"
+      ],
+      correct: "Δοκιμασία παραγωγής ινδόλης"
+    },
+    {
+      question: "Σε ποια δοκιμασία παρατηρούμε ερυθρό χρώμα σε pH ≤ 4,5 ως ένδειξη παραγωγής οξέων από ζύμωση γλυκόζης ;",
+      options: [
+        "Δοκιμασία ερυθρού του μεθυλίου (MR)",
+        "Δοκιμασία Voges–Proskauer (VP)",
+        "Δοκιμασία κιτρικών",
+        "Δοκιμασία ουρεάσης"
+      ],
+      correct: "Δοκιμασία ερυθρού του μεθυλίου (MR)"
+    }
+  ];
+
+  // Fisher–Yates shuffle
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function renderQuiz() {
+    const container = document.getElementById("quiz-container");
+    container.innerHTML = "";
+
+    // ανακάτεμα ερωτήσεων
+    const shuffledQuestions = [...questions];
+    shuffle(shuffledQuestions);
+
+    shuffledQuestions.forEach((q, qIndex) => {
+      // ανακάτεμα απαντήσεων
+      const optionsShuffled = [...q.options];
+      shuffle(optionsShuffled);
+
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+
+      const title = document.createElement("div");
+      title.className = "question-title";
+      title.textContent = (qIndex + 1) + ". " + q.question;
+      qDiv.appendChild(title);
+
+      const optsDiv = document.createElement("div");
+      optsDiv.className = "options";
+
+      optionsShuffled.forEach(optText => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = optText;
+        btn.dataset.correct = (optText === q.correct) ? "true" : "false";
+
+        btn.addEventListener("click", function () {
+          handleOptionClick(btn);
+        });
+
+        optsDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(optsDiv);
+      container.appendChild(qDiv);
+    });
+  }
+
+  function handleOptionClick(clickedBtn) {
+    const isCorrect = clickedBtn.dataset.correct === "true";
+    const parent = clickedBtn.closest(".question");
+    const allButtons = parent.querySelectorAll(".option-btn");
+
+    // αν ήδη απαντήθηκε, μη κάνεις τίποτα
+    if ([...allButtons].some(b => b.classList.contains("correct"))) {
+      return;
+    }
+
+    if (isCorrect) {
+      clickedBtn.classList.add("correct");
+    } else {
+      clickedBtn.classList.add("incorrect");
+      // δείξε και τη σωστή
+      allButtons.forEach(btn => {
+        if (btn.dataset.correct === "true") {
+          btn.classList.add("correct");
+        }
+      });
+    }
+
+    // κλείδωσε τις επιλογές αυτής της ερώτησης
+    allButtons.forEach(btn => btn.classList.add("disabled"));
+  }
+
+  window.onload = renderQuiz;
+</script>
+
+</body>
+</html>

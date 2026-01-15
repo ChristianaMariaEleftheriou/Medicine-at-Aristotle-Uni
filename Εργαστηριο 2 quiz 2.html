@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Quiz – Gram(+) κόκκοι</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5fb;
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #3949ab, #1e88e5);
+      color: white;
+      padding: 14px 18px;
+    }
+
+    header h1 {
+      margin: 0 0 4px 0;
+      font-size: 20px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 16px auto 40px auto;
+      padding: 0 12px;
+    }
+
+    .info {
+      background: #e8eaf6;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #303f9f;
+      margin-bottom: 14px;
+    }
+
+    .quiz-question {
+      background: white;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      border: 1px solid #e0e0f0;
+    }
+
+    .quiz-question h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #1a237e;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #c5cae9;
+      background: #fafafa;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s, transform 0.05s;
+    }
+
+    .answers button:hover {
+      transform: translateY(-1px);
+    }
+
+    .answers button.correct {
+      background: #c8e6c9;
+      border-color: #2e7d32;
+    }
+
+    .answers button.wrong {
+      background: #ffcdd2;
+      border-color: #c62828;
+    }
+
+    .answers button:disabled {
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Random Quiz – Gram(+) κόκκοι</h1>
+  <p>Οι ερωτήσεις και οι απαντήσεις ανακατεύονται κάθε φορά</p>
+</header>
+
+<main>
+  <div class="info">
+    ➤ Κάθε refresh φέρνει <strong>καινούρια σειρά</strong> ερωτήσεων και επιλογών.  
+    Πάτα μια απάντηση για να δεις αμέσως σωστό/λάθος.
+  </div>
+
+  <div id="quiz-container"></div>
+</main>
+
+<script>
+  // Helper: τυχαία ανακατάταξη πίνακα (Fisher–Yates)
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // ΤΡΑΠΕΖΑ ΕΡΩΤΗΣΕΩΝ – τύπου "ποιο βακτήριο...;"
+  // Μπορείς να προσθέτεις όσα θέλεις ακόμα, απλώς αντέγραψε ένα αντικείμενο.
+  const questions = [
+    {
+      text: "Ποιο βακτήριο δίνει ΘΕΤΙΚΗ τη δοκιμασία καταλάσης;",
+      options: [
+        { text: "Στρεπτόκοκκος", correct: false },
+        { text: "Εντερόκοκκος", correct: false },
+        { text: "Πνευμονιόκοκκος", correct: false },
+        { text: "Σταφυλόκοκκος", correct: true }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο είναι πηκτασενεργό (coagulase θετικό);",
+      options: [
+        { text: "Staphylococcus aureus", correct: true },
+        { text: "Staphylococcus epidermidis", correct: false },
+        { text: "Staphylococcus saprophyticus", correct: false },
+        { text: "Streptococcus pyogenes", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο δίνει θετική τη δοκιμασία CAMP;",
+      options: [
+        { text: "Streptococcus agalactiae (ομάδα Β)", correct: true },
+        { text: "Streptococcus pyogenes (ομάδα Α)", correct: false },
+        { text: "Εντερόκοκκος", correct: false },
+        { text: "Staphylococcus aureus", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο είναι ευαίσθητο στην οπτοκίνη;",
+      options: [
+        { text: "Πνευμονιόκοκκος (Streptococcus pneumoniae)", correct: true },
+        { text: "Πρασινίζων στρεπτόκοκκος (Viridans)", correct: false },
+        { text: "Εντερόκοκκος", correct: false },
+        { text: "Streptococcus pyogenes", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο είναι θετικό στη χολή / εσκουλίνη;",
+      options: [
+        { text: "Εντερόκοκκος", correct: true },
+        { text: "Streptococcus pyogenes", correct: false },
+        { text: "Staphylococcus aureus", correct: false },
+        { text: "Streptococcus pneumoniae", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο είναι ανθεκτικό στη νοβοβιοκίνη;",
+      options: [
+        { text: "Staphylococcus saprophyticus", correct: true },
+        { text: "Staphylococcus epidermidis", correct: false },
+        { text: "Staphylococcus aureus", correct: false },
+        { text: "Streptococcus pneumoniae", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο είναι κλασικά Gram(+) διπλόκοκκος λογχοειδής με έλυτρο;",
+      options: [
+        { text: "Streptococcus pneumoniae", correct: true },
+        { text: "Streptococcus pyogenes", correct: false },
+        { text: "Neisseria meningitidis", correct: false },
+        { text: "Staphylococcus aureus", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο από τα παρακάτω είναι Gram(+) κόκκος σε συστάδες (\"τσαμπί σταφυλιού\");",
+      options: [
+        { text: "Staphylococcus aureus", correct: true },
+        { text: "Streptococcus pyogenes", correct: false },
+        { text: "Streptococcus pneumoniae", correct: false },
+        { text: "Enterococcus faecalis", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο συνδέεται κλασικά με ουρολοιμώξεις σε νέες γυναίκες;",
+      options: [
+        { text: "Staphylococcus saprophyticus", correct: true },
+        { text: "Staphylococcus epidermidis", correct: false },
+        { text: "Streptococcus pyogenes", correct: false },
+        { text: "Enterococcus faecalis", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο είναι τυπικά β-αιμολυτικό, ομάδα Α κατά Lancefield και προκαλεί οστρακιά;",
+      options: [
+        { text: "Streptococcus pyogenes", correct: true },
+        { text: "Streptococcus agalactiae", correct: false },
+        { text: "Staphylococcus aureus", correct: false },
+        { text: "Enterococcus faecalis", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο σχετίζεται περισσότερο με ενδοκαρδίτιδα σε τεχνητές βαλβίδες λόγω βιοφίλμ;",
+      options: [
+        { text: "Staphylococcus epidermidis", correct: true },
+        { text: "Streptococcus pyogenes", correct: false },
+        { text: "Streptococcus pneumoniae", correct: false },
+        { text: "Staphylococcus saprophyticus", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο βακτήριο είναι κλασικός εντερικός Gram(+) κόκκος με αντοχή σε πολλά αντιβιοτικά (νοσοκομειακό παθογόνο);",
+      options: [
+        { text: "Εντερόκοκκος (Enterococcus faecalis/faecium)", correct: true },
+        { text: "Streptococcus pyogenes", correct: false },
+        { text: "Staphylococcus aureus", correct: false },
+        { text: "Streptococcus agalactiae", correct: false }
+      ]
+    },
+  {
+    text: "Ποιο βακτήριο είναι καταλάση ΑΡΝΗΤΙΚΟ;",
+    options: [
+      { text: "Στρεπτόκοκκος", correct: true },
+      { text: "Σταφυλόκοκκος", correct: false },
+      { text: "Εντερόκοκκος", correct: false },
+      { text: "Staphylococcus aureus", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο είναι κλασικός εκπρόσωπος β-αιμολυτικού στρεπτοκόκκου ομάδας Α;",
+    options: [
+      { text: "Streptococcus pyogenes", correct: true },
+      { text: "Streptococcus agalactiae", correct: false },
+      { text: "Streptococcus pneumoniae", correct: false },
+      { text: "Enterococcus faecalis", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο είναι κλασικός εκπρόσωπος β-αιμολυτικού στρεπτοκόκκου ομάδας Β;",
+    options: [
+      { text: "Streptococcus agalactiae", correct: true },
+      { text: "Streptococcus pyogenes", correct: false },
+      { text: "Streptococcus pneumoniae", correct: false },
+      { text: "Staphylococcus aureus", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο δίνει ευαισθησία στη βακιτρακίνη (δίσκος Α);",
+    options: [
+      { text: "Streptococcus pyogenes (ομάδα Α)", correct: true },
+      { text: "Streptococcus agalactiae (ομάδα Β)", correct: false },
+      { text: "Εντερόκοκκος", correct: false },
+      { text: "Streptococcus pneumoniae", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο συνδέεται κλασικά με νεογνική σηψαιμία και μηνιγγίτιδα;",
+    options: [
+      { text: "Streptococcus agalactiae (ομάδα Β)", correct: true },
+      { text: "Streptococcus pyogenes", correct: false },
+      { text: "Staphylococcus aureus", correct: false },
+      { text: "Enterococcus faecalis", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο ευθύνεται για ρευματικό πυρετό και οξεία μεταστρεπτοκοκκική σπειραματονεφρίτιδα;",
+    options: [
+      { text: "Streptococcus pyogenes", correct: true },
+      { text: "Streptococcus agalactiae", correct: false },
+      { text: "Staphylococcus aureus", correct: false },
+      { text: "Enterococcus faecalis", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο σχηματίζει βιοφίλμ σε προθέσεις και ενδοφλέβιους καθετήρες και προκαλεί ενδοκαρδίτιδα σε τεχνητές βαλβίδες;",
+    options: [
+      { text: "Staphylococcus epidermidis", correct: true },
+      { text: "Staphylococcus aureus", correct: false },
+      { text: "Staphylococcus saprophyticus", correct: false },
+      { text: "Streptococcus pneumoniae", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο Gram(+) βακτήριο είναι τυπικά ανθεκτικό στη βανκομυκίνη (VRE);",
+    options: [
+      { text: "Εντερόκοκκος (Enterococcus faecium/faecalis)", correct: true },
+      { text: "Staphylococcus aureus", correct: false },
+      { text: "Streptococcus pyogenes", correct: false },
+      { text: "Streptococcus pneumoniae", correct: false }
+    ]
+  },
+  {
+    text: "Ποια ομάδα βακτηρίων ευθύνεται κλασικά για τερηδόνα και ενδοκαρδίτιδα μετά από οδοντιατρικές πράξεις;",
+    options: [
+      { text: "Πρασινίζοντες στρεπτόκοκκοι (Viridans)", correct: true },
+      { text: "Streptococcus pyogenes", correct: false },
+      { text: "Streptococcus agalactiae", correct: false },
+      { text: "Staphylococcus epidermidis", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο είναι πολυσακχαριδικά καλυμμένος διπλόκοκκος που προκαλεί λοβιακή πνευμονία;",
+    options: [
+      { text: "Streptococcus pneumoniae", correct: true },
+      { text: "Staphylococcus aureus", correct: false },
+      { text: "Enterococcus faecalis", correct: false },
+      { text: "Streptococcus pyogenes", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο σχετίζεται κλασικά με ουρολοιμώξεις σε νέες σεξουαλικά ενεργές γυναίκες και είναι ανθεκτικό στη νοβοβιοκίνη;",
+    options: [
+      { text: "Staphylococcus saprophyticus", correct: true },
+      { text: "Staphylococcus epidermidis", correct: false },
+      { text: "Streptococcus agalactiae", correct: false },
+      { text: "Enterococcus faecalis", correct: false }
+    ]
+  },
+  {
+    text: "Ποιο βακτήριο είναι συχνό αίτιο οξείας, ταχείας ενδοκαρδίτιδας σε χρήστες ενδοφλέβιων ναρκωτικών;",
+    options: [
+      { text: "Staphylococcus aureus", correct: true },
+      { text: "Streptococcus pyogenes", correct: false },
+      { text: "Εντερόκοκκος", correct: false },
+      { text: "Viridans streptococci", correct: false }
+    ]
+  }
+
+  ];
+
+  // Ανακάτεμα ερωτήσεων
+  shuffle(questions);
+
+  const container = document.getElementById('quiz-container');
+
+  // Δημιουργία HTML για κάθε ερώτηση
+  questions.forEach((q, index) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-question';
+
+    const h4 = document.createElement('h4');
+    h4.textContent = (index + 1) + '. ' + q.text;
+    qDiv.appendChild(h4);
+
+    const answersDiv = document.createElement('div');
+    answersDiv.className = 'answers';
+
+    // Ανακάτεμα απαντήσεων
+    const shuffledOptions = shuffle([...q.options]);
+
+    shuffledOptions.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.textContent = opt.text;
+      btn.dataset.correct = opt.correct ? 'true' : 'false';
+      answersDiv.appendChild(btn);
+    });
+
+    qDiv.appendChild(answersDiv);
+    container.appendChild(qDiv);
+  });
+
+  // Event delegation για click στα κουμπιά των απαντήσεων
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.answers button');
+    if (!btn) return;
+
+    const group = btn.parentElement.querySelectorAll('button');
+
+    // Αν ήδη έχει απαντηθεί, μην ξανα-χρωματίζεις
+    const alreadyAnswered = Array.from(group).some(b =>
+      b.classList.contains('correct') || b.classList.contains('wrong')
+    );
+    if (alreadyAnswered) return;
+
+    group.forEach(b => {
+      const isCorrect = b.dataset.correct === 'true';
+      b.classList.add(isCorrect ? 'correct' : 'wrong');
+      b.disabled = true;
+    });
+  });
+</script>
+
+</body>
+</html>

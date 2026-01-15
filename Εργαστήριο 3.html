@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Εργαστήριο 3 – Gram(-) κόκκοι (Ναϊσσέρια)</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5fb;
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #b71c1c, #e53935);
+      color: white;
+      padding: 14px 18px;
+    }
+
+    header h1 {
+      margin: 0 0 4px 0;
+      font-size: 20px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 16px auto 40px auto;
+      padding: 0 12px;
+    }
+
+    .info {
+      background: #ffebee;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #b71c1c;
+      margin-bottom: 14px;
+    }
+
+    .quiz-question {
+      background: white;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      border: 1px solid #e0e0f0;
+    }
+
+    .quiz-question h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #b71c1c;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ffcdd2;
+      background: #fffafa;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s, transform 0.05s;
+    }
+
+    .answers button:hover {
+      transform: translateY(-1px);
+    }
+
+    .answers button.correct {
+      background: #c8e6c9;
+      border-color: #2e7d32;
+    }
+
+    .answers button.wrong {
+      background: #ffcdd2;
+      border-color: #c62828;
+    }
+
+    .answers button:disabled {
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>3ο Εργαστήριο Μικροβιολογίας Ι – Gram(-) κόκκοι</h1>
+  <p>Ναϊσσέριες, γονόκοκκος, μηνιγγιτιδόκοκκος</p>
+</header>
+
+<main>
+  <div class="info">
+    ✔ Οι ερωτήσεις και οι απαντήσεις ανακατεύονται σε κάθε <strong>refresh</strong>  
+    ✔ Πάτα μια επιλογή για να δεις αμέσως σωστό (πράσινο) / λάθος (κόκκινο)
+  </div>
+
+  <div id="quiz-container"></div>
+</main>
+
+<script>
+  // Τυχαία ανακατάταξη πίνακα (Fisher–Yates)
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Τράπεζα ερωτήσεων για Εργαστήριο 3 (Gram- κόκκοι, Ναϊσσέριες)
+  const questions = [
+    {
+      text: "Ποια από τις παρακάτω ομάδες μικροβίων ανήκει στους Gram(-) κόκκους;",
+      options: [
+        { text: "Ναϊσσέριες και Moraxella", correct: true },
+        { text: "Σταφυλόκοκκοι και στρεπτόκοκκοι", correct: false },
+        { text: "Σαλμονέλλες και Σιγγέλες", correct: false },
+        { text: "Κλωστηρίδια και Βάκιλοι του άνθρακα", correct: false }
+      ]
+    },
+    {
+      text: "Ποια μορφολογική εικόνα είναι τυπική για τις παθογόνες Ναϊσσέριες;",
+      options: [
+        { text: "Καφεοειδείς Gram(-) διπλόκοκκοι, συχνά ενδοκυττάριοι", correct: true },
+        { text: "Gram(+) κόκκοι σε αλυσίδες", correct: false },
+        { text: "Μεγάλα Gram(+) ραβδία με σπόρους", correct: false },
+        { text: "Ελικοειδή σπειροχαίτες", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο από τα παρακάτω ΙΣΧΥΕΙ για τις Ναϊσσέριες σύμφωνα με το εργαστήριο;",
+      options: [
+        { text: "Είναι οξειδάση θετικές και υποχρεωτικά αερόβιες", correct: true },
+        { text: "Είναι οξειδάση αρνητικές και υποχρεωτικά αναερόβιες", correct: false },
+        { text: "Έχουν βλεφαρίδες και σχηματίζουν σπόρους", correct: false },
+        { text: "Αναπτύσσονται καλύτερα χωρίς CO₂", correct: false }
+      ]
+    },
+    {
+      text: "Τι δείχνει η θετική δοκιμασία οξειδάσης με 1% υδροχλωρική τετραμεθυλ-παρα-φαινυλενο-διαμίνη;",
+      options: [
+        { text: "Την παρουσία κυτοχρώματος c στην αναπνευστική αλυσίδα", correct: true },
+        { text: "Την ικανότητα παραγωγής εντεροτοξίνης", correct: false },
+        { text: "Την παραγωγή β-λακταμάσης", correct: false },
+        { text: "Την ύπαρξη πολυσακχαριδικού ελύτρου", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο από τα παρακάτω μικρόβια είναι κλασικά οξειδάση θετικό σύμφωνα με τη διαφάνεια;",
+      options: [
+        { text: "Ναϊσσέριες", correct: true },
+        { text: "Σταφυλόκοκκοι", correct: false },
+        { text: "Στρεπτόκοκκοι", correct: false },
+        { text: "Εντερόκοκκοι", correct: false }
+      ]
+    },
+    {
+      text: "Σε ποιο είδος δείγματος οι γονόκοκκοι εμφανίζονται συνήθως ενδοκυττάριοι μέσα σε πολυμορφοπύρηνα;",
+      options: [
+        { text: "Στο πύο της βλεννόρροιας (ουρηθρικό έκκριμα)", correct: true },
+        { text: "Στο εγκεφαλονωτιαίο υγρό ασθενούς με μηνιγγίτιδα", correct: false },
+        { text: "Στα κόπρανα σε διάρροια", correct: false },
+        { text: "Στο πτύελο πνευμονιοκοκκικής πνευμονίας", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο θρεπτικό υλικό είναι χαρακτηριστικό για την καλλιέργεια του γονοκόκκου;",
+      options: [
+        { text: "Σοκολατόχρουν άγαρ τύπου Thayer–Martin", correct: true },
+        { text: "Κοινό θρεπτικό άγαρ χωρίς εμπλουτισμό", correct: false },
+        { text: "MacConkey άγαρ", correct: false },
+        { text: "Άγαρ αίματος χωρίς CO₂", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο από τα παρακάτω στοιχεία ΔΕΝ αναφέρεται ως αντιγονικό συστατικό του γονοκόκκου στο μάθημα;",
+      options: [
+        { text: "Εξωτοξίνη τύπου A–B", correct: true },
+        { text: "Φίμπριες (pili)", correct: false },
+        { text: "Πρωτεΐνη Ι (Por) της εξωτερικής μεμβράνης", correct: false },
+        { text: "Λιποολιγοσακχαρίτης (LOS)", correct: false }
+      ]
+    },
+    {
+      text: "Ποιος είναι ο ρόλος των ινιδίων (φιμπριών) του γονοκόκκου;",
+      options: [
+        { text: "Προσκόλληση στα κύτταρα του ξενιστή και προστασία από φαγοκυττάρωση", correct: true },
+        { text: "Παραγωγή εντεροτοξίνης στο έντερο", correct: false },
+        { text: "Σχηματισμός σπόρων σε δυσμενείς συνθήκες", correct: false },
+        { text: "Παραγωγή β-λακταμάσης", correct: false }
+      ]
+    },
+    {
+      text: "Ποια από τις παρακάτω κλινικές εκδηλώσεις αντιστοιχεί στη γονοκοκκική λοίμωξη σύμφωνα με το εργαστήριο;",
+      options: [
+        { text: "Ουρηθρίτιδα με παραγωγή πυκνόρρευστου πύου", correct: true },
+        { text: "Λοβιακή πνευμονία με παραγωγή σκουριασμένων πτυέλων", correct: false },
+        { text: "Χρόνια φυματιώδης βρογχίτιδα", correct: false },
+        { text: "Ψευδομεμβρανώδης κολίτιδα", correct: false }
+      ]
+    },
+    {
+      text: "Ποια σοβαρή επιπλοκή στις γυναίκες αναφέρεται ότι μπορεί να προκληθεί από άνοδο της γονοκοκκικής λοίμωξης;",
+      options: [
+        { text: "Στείρωση λόγω φλεγμονής σε σάλπιγγες και ωοθήκες", correct: true },
+        { text: "Κίρρωση ήπατος", correct: false },
+        { text: "Σακχαρώδης διαβήτης τύπου 1", correct: false },
+        { text: "Πνευμονική εμβολή", correct: false }
+      ]
+    },
+    {
+      text: "Ποια είναι η κλασική εκδήλωση γονοκοκκικής λοίμωξης στα νεογνά;",
+      options: [
+        { text: "Γονοκοκκική οφθαλμία", correct: true },
+        { text: "Συγγενής ιλαρά", correct: false },
+        { text: "Ερπητική εγκεφαλίτιδα", correct: false },
+        { text: "Εντεροκολίτιδα από C. difficile", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο είναι βασικό μήνυμα της διαφάνειας για τη θεραπεία γονοκοκκικής λοίμωξης;",
+      options: [
+        { text: "Σήμερα προτιμάται κεφαλοσπορίνη γ΄ γενιάς, λόγω αντοχής σε πενικιλλίνη/τετρακυκλίνη", correct: true },
+        { text: "Χορηγείται μόνο πενικιλλίνη G, γιατί δεν αναπτύσσεται αντοχή", correct: false },
+        { text: "Χορηγούνται μόνο μακρολίδες σε μονοθεραπεία", correct: false },
+        { text: "Δεν απαιτείται αντιβιοτική θεραπεία", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο στοιχείο χαρακτηρίζει τον μηνιγγιτιδόκοκκο (Neisseria meningitidis) σύμφωνα με το εργαστήριο;",
+      options: [
+        { text: "Διαθέτει πολυσακχαριδικό έλυτρο με πολλούς οροτύπους", correct: true },
+        { text: "Είναι υποχρεωτικά ενδοκυττάριο αναερόβιο", correct: false },
+        { text: "Δεν φέρει ποτέ έλυτρο", correct: false },
+        { text: "Είναι Gram(+) διπλόκοκκος", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο τμήμα του οργανισμού αναφέρεται ως θέση φυσιολογικής μικροβιοφορίας του μηνιγγιτιδόκοκκου;",
+      options: [
+        { text: "Ρινοφάρυγγας", correct: true },
+        { text: "Παχύ έντερο", correct: false },
+        { text: "Δέρμα", correct: false },
+        { text: "Ουρήθρα", correct: false }
+      ]
+    },
+    {
+      text: "Ποια είναι τα κλασικά ευρήματα στο εγκεφαλονωτιαίο υγρό (ΕΝΥ) σε μηνιγγίτιδα από μηνιγγιτιδόκοκκο;",
+      options: [
+        { text: "Θολερό ΕΝΥ με πολλά πολυμορφοπύρηνα και παρουσία μηνιγγιτιδοκόκκων", correct: true },
+        { text: "Διαυγές ΕΝΥ χωρίς κύτταρα", correct: false },
+        { text: "ΕΝΥ με πολλά λεμφοκύτταρα χωρίς μικρόβια (ιογενής εικόνα)", correct: false },
+        { text: "ΕΝΥ με άφθονα ερυθρά χωρίς λευκά", correct: false }
+      ]
+    },
+    {
+      text: "Ποια μορφή μηνιγγίτιδας ονομάζεται «επιδημική» στο μάθημα;",
+      options: [
+        { text: "Η βακτηριακή μηνιγγίτιδα από μηνιγγιτιδόκοκκο", correct: true },
+        { text: "Η άσηπτη (ιογενής) μηνιγγίτιδα", correct: false },
+        { text: "Η φυματιώδης μηνιγγίτιδα", correct: false },
+        { text: "Η μυκητιασική μηνιγγίτιδα", correct: false }
+      ]
+    },
+    {
+      text: "Ποια είναι η βασική άμεση θεραπευτική προσέγγιση όταν τεθεί υποψία μηνιγγιτιδοκοκκικής μηνιγγίτιδας;",
+      options: [
+        { text: "Άμεση χορήγηση πενικιλλίνης G ή κεφαλοσπορίνης γ΄ γενιάς ενδοφλέβια", correct: true },
+        { text: "Αναμονή των καλλιεργειών πριν από οποιαδήποτε θεραπεία", correct: false },
+        { text: "Χορήγηση μόνο αντιπυρετικών και υγρών", correct: false },
+        { text: "Χορήγηση μόνο ριφαμπικίνης από το στόμα", correct: false }
+      ]
+    },
+    {
+      text: "Ποιο φάρμακο χρησιμοποιείται για την εξάλειψη της μικροβιοφορίας του μηνιγγιτιδόκοκκου και για προφύλαξη των στενών επαφών;",
+      options: [
+        { text: "Ριφαμπικίνη", correct: true },
+        { text: "Αμοξυκιλλίνη", correct: false },
+        { text: "Μετρονιδαζόλη", correct: false },
+        { text: "Βανκομυκίνη", correct: false }
+      ]
+    },
+    {
+      text: "Τι είδους αντιγόνο περιέχει το κλασικό διδύναμο εμβόλιο έναντι των ομάδων A και C του μηνιγγιτιδόκοκκου;",
+      options: [
+        { text: "Κεκαθαρμένο πολυσακχαρίτη του ελύτρου του μικροβίου", correct: true },
+        { text: "Ζωντανά εξασθενημένα μηνιγγιτιδοκοκκικά κύτταρα", correct: false },
+        { text: "Μόνο πρωτεϊνικά αντιγόνα των φιμπριών", correct: false },
+        { text: "Αδρανοποιημένη εντεροτοξίνη", correct: false }
+      ]
+    }
+  ];
+
+  // Ανακάτεμα ερωτήσεων
+  shuffle(questions);
+
+  const container = document.getElementById('quiz-container');
+
+  // Δημιουργία DOM για κάθε ερώτηση
+  questions.forEach((q, index) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-question';
+
+    const h4 = document.createElement('h4');
+    h4.textContent = (index + 1) + '. ' + q.text;
+    qDiv.appendChild(h4);
+
+    const answersDiv = document.createElement('div');
+    answersDiv.className = 'answers';
+
+    const shuffledOptions = shuffle([...q.options]);
+
+    shuffledOptions.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.textContent = opt.text;
+      btn.dataset.correct = opt.correct ? 'true' : 'false';
+      answersDiv.appendChild(btn);
+    });
+
+    qDiv.appendChild(answersDiv);
+    container.appendChild(qDiv);
+  });
+
+  // Event delegation για το κλικ στις απαντήσεις
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.answers button');
+    if (!btn) return;
+
+    const group = btn.parentElement.querySelectorAll('button');
+
+    // Αν έχει ήδη απαντηθεί, δεν ξαναχρωματίζουμε
+    const alreadyAnswered = Array.from(group).some(b =>
+      b.classList.contains('correct') || b.classList.contains('wrong')
+    );
+    if (alreadyAnswered) return;
+
+    group.forEach(b => {
+      const isCorrect = b.dataset.correct === 'true';
+      b.classList.add(isCorrect ? 'correct' : 'wrong');
+      b.disabled = true;
+    });
+  });
+</script>
+
+</body>
+</html>

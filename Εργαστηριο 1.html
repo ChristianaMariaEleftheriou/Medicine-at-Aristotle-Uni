@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Study / Notes & Quiz</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f6fc;
+    }
+
+    /* Navigation tabs */
+    nav {
+      display: flex;
+      background: #e8eaf6;
+      border-bottom: 1px solid #c5cae9;
+    }
+    nav button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      background: #e8eaf6;
+      font-weight: 600;
+      font-size: 14px;
+      color: #283593;
+    }
+    nav button.active {
+      background: #3949ab;
+      color: white;
+    }
+
+    section {
+      display: none;
+      padding: 15px;
+      max-width: 950px;
+      margin: auto;
+    }
+    section.active {
+      display: block;
+    }
+
+    /* NOTES PAGE DESIGN */
+    .note-info {
+      background: #e3f2fd;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #1a237e;
+      margin-bottom: 15px;
+    }
+
+    .topic {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      border: 1px solid #e0e0f0;
+      overflow: hidden;
+    }
+    .topic-header {
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      background: #f0f1ff;
+    }
+    .topic-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a237e;
+    }
+    .topic-toggle {
+      font-size: 18px;
+      color: #3949ab;
+    }
+    .topic-content {
+      display: none;
+      padding: 10px 14px 12px 14px;
+      font-size: 14px;
+    }
+    .topic-content ol {
+      padding-left: 18px;
+    }
+
+    .questions-toggle-btn {
+      margin-top: 8px;
+      background: #3949ab;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .questions-box {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #ede7f6;
+      border: 1px solid #b39ddb;
+      display: none;
+      font-size: 13px;
+    }
+
+    /* QUIZ PAGE DESIGN */
+
+    .quiz-question {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      border: 1px solid #e0e0f0;
+    }
+
+    .quiz-question h4 {
+      margin-top: 0;
+      font-size: 14px;
+      color: #1a237e;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #c5cae9;
+      background: #fafafa;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s;
+    }
+
+    .answers button.correct {
+      background: #c8e6c9;
+      border-color: #2e7d32;
+    }
+
+    .answers button.wrong {
+      background: #ffcdd2;
+      border-color: #c62828;
+    }
+
+    .answers button:disabled {
+      cursor: default;
+    }
+
+    /* Explanation reveal question styles */
+    .explain-block {
+      background: #eef2ff;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #c5cae9;
+    }
+    .explain-block textarea {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 8px;
+      border: 1px solid #b6c2e8;
+      padding: 8px;
+      font-size: 14px;
+      resize: vertical;
+    }
+    .reveal-btn {
+      margin-top: 6px;
+      background: #3949ab;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .answer-box {
+      margin-top: 8px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b6c2e8;
+      display: none;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <button class="tab-btn active" data-target="notes">📌 Σημειώσεις</button>
+  <button class="tab-btn" data-target="quiz">🧠 Quiz</button>
+</nav>
+
+<!-- NOTES PAGE -->
+<section id="notes" class="active">
+  <div class="note-info">
+    ✨ Κάνε κλικ σε κάθε θέμα για να ανοίξουν οι σημειώσεις και οι πιθανές εξεταστικές ερωτήσεις.
+  </div>
+
+  <div id="notes-container">
+     <!-- ΘΕΜΑ 1: Μικρόβια – ορισμός & κατηγορίες (σελίδα: Μικρόβια) -->
+<div class="topic">
+  <div class="topic-header">
+    <div class="topic-title">Μικρόβια – ορισμός & κατηγορίες</div>
+    <div class="topic-toggle">+</div>
+  </div>
+  <div class="topic-content">
+    <div class="sub-title">:</div>
+    <ol>
+      <li>Μικρόβια = <strong>απλοί μονοκύτταροι μικροοργανισμοί</strong>.</li>
+      <li>Συνήθως είναι <strong>προκαρυωτικοί</strong> (βακτήρια) ή κατώτερα πρωτόζωα.</li>
+      <li>Κατηγορίες με βάση τη σχέση με τον ξενιστή:
+        <ul>
+          <li><strong>Παθογόνα</strong> → προκαλούν νόσο.</li>
+          <li><strong>Δυνητικά παθογόνα</strong> → συνήθως αθώα, αλλά μπορούν να προκαλέσουν νόσο αν αλλάξουν οι συνθήκες.</li>
+          <li><strong>Σαπροφυτικά</strong> → ζουν σε οργανικό υλικό/επιφάνειες χωρίς να προκαλούν νόσο.</li>
+        </ul>
+      </li>
+      <li>Πολλά μικρόβια ανήκουν στη <strong>φυσιολογική μικροβιακή χλωρίδα</strong> και είναι απαραίτητα για την ισορροπία του οργανισμού.</li>
+    </ol>
+
+    <button class="questions-toggle-btn">Εμφάνιση πιθανών ερωτήσεων</button>
+    <div class="questions-box">
+      <ul>
+        <li>Ποιος είναι ο βασικός ορισμός του “μικροβίου”;</li>
+        <li>Ποια η διαφορά παθογόνων, δυνητικά παθογόνων και σαπροφυτικών μικροβίων;</li>
+        <li>Δώσε ένα παράδειγμα κατάστασης όπου ένα δυνητικά παθογόνο γίνεται παθογόνο.</li>
+        <li>Γιατί δεν είναι όλα τα μικρόβια “κακά” για τον άνθρωπο;</li>
+        <li>Ποια κατηγορία μικροβίων περιμένεις να βρεις στη φυσιολογική μικροβιακή χλωρίδα;</li>
+      </ul>
+    </div>
+    
+    <!-- ΘΕΜΑ: Χαρακτηριστικά για την ταυτοποίηση μικροβίων -->
+<div class="topic">
+  <div class="topic-header">
+    <div class="topic-title">Χαρακτηριστικά που χρησιμοποιούνται στην ταυτοποίηση μικροβίων</div>
+    <div class="topic-toggle">+</div>
+  </div>
+
+  <div class="topic-content">
+    <div class="sub-title">“Χάρτης” στο μυαλό:</div>
+    <ol>
+      <li><strong>Ταυτοποίηση</strong> = εφαρμογή κριτηρίων ταξινόμησης για
+        διάκριση ενός μικροοργανισμού από άλλους.</li>
+
+      <li><strong>Ταξινόμηση</strong> = κατάταξη μικροβίων σε ομάδες· το πιο
+        σημαντικό επίπεδο είναι:
+        <ul>
+          <li><strong>Γένος (genus)</strong></li>
+          <li><strong>Είδος (species)</strong> π.χ. Salmonella enterica</li>
+        </ul>
+      </li>
+
+      <li><strong>Καλλιεργητικά χαρακτηριστικά:</strong>
+        απαιτήσεις σε θρεπτικά υλικά, συνθήκες επώασης, μορφολογία αποικιών
+        (μέγεθος, σχήμα, χρώμα κ.ά.).
+      </li>
+
+      <li><strong>Μορφολογικά χαρακτηριστικά:</strong>
+        σχήμα, μέγεθος, διάταξη, χρώση Gram, σπορογονία, κινητικότητα.
+      </li>
+
+      <li><strong>Βιοχημικά χαρακτηριστικά:</strong>
+        μεταβολικές ιδιότητες, ενζυματικές δοκιμασίες (καταλάση/οξειδάση),
+        παραγωγή αερίων/ H₂S κ.λπ.
+      </li>
+    </ol>
+
+    <button class="questions-toggle-btn">Εμφάνιση πιθανών ερωτήσεων</button>
+    <div class="questions-box">
+      <ul>
+        <li>Τι διαφορά έχει η ταυτοποίηση από την ταξινόμηση;</li>
+        <li>Ποιο είναι το πιο σημαντικό επίπεδο ταξινόμησης μικροβίων;</li>
+        <li>Δώσε 3 παραδείγματα καλλιεργητικών χαρακτηριστικών.</li>
+        <li>Πότε μας ενδιαφέρει η χρώση Gram στην ταυτοποίηση;</li>
+        <li>Τι είδους πληροφορίες παρέχουν οι βιοχημικές δοκιμασίες;</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="topic">
+  <div class="topic-header">
+    <div class="topic-title">Ειδικά θρεπτικά υποστρώματα – Τι ρωτάνε στις εξετάσεις</div>
+    <div class="topic-toggle">+</div>
+  </div>
+
+  <div class="topic-content">
+
+    <div class="sub-title">“Χάρτης” στο μυαλό:</div>
+    <ol>
+      <li><strong>Εμπλουτισμένα μέσα</strong> → για <em>απαιτητικά μικρόβια</em>  
+        π.χ. <strong>αιματούχο</strong>, <strong>σοκολατόχρουν</strong>.
+      </li>
+
+      <li><strong>Εκλεκτικά μέσα</strong> → ενισχύουν την ανάπτυξη ενός  
+        συγκεκριμένου μικροβίου (και αναστέλλουν άλλα).  
+        Παράδειγμα: <strong>Löffler</strong> για κοκκινοβακτηρίδιο διφθερίτιδας.
+      </li>
+
+      <li><strong>Διαφοροποιητικά μέσα</strong> → διαχωρίζουν μικρόβια  
+        ίδιας οικογένειας βάσει ιδιοτήτων (διάσπαση/παραγωγή ουσιών).  
+        Παραδείγματα: <strong>MacConkey</strong>, άγαρ μανιτόλης, <strong>SS agar</strong>.
+      </li>
+
+      <li><strong>Ανασταλτικά μέσα</strong> → αναστέλλουν κοινά μικρόβια  
+        ➜ επιτρέπουν την ανάπτυξη ειδικών παθογόνων.  
+        Παράδειγμα: <strong>Lowenstein–Jensen</strong> (για μυκοβακτηρίδια).
+      </li>
+    </ol>
+
+    <button class="questions-toggle-btn">Εμφάνιση πιθανών εξεταστικών ερωτήσεων</button>
+    <div class="questions-box">
+      <ul>
+        <li>Τι σημαίνει “εμπλουτισμένο” θρεπτικό μέσο και πότε χρησιμοποιείται;</li>
+        <li>Ποιο υπόστρωμα προτιμάται για διφθερίτιδα;</li>
+        <li>Ποια μέσα είναι διαφοροποιητικά και τι ελέγχουν (π.χ. MacConkey);</li>
+        <li>Ποιο υπόστρωμα είναι ανασταλτικό και για ποια μικρόβια χρησιμοποιείται;</li>
+        <li>Ποια είναι η βασική ιδέα πίσω από τα εκλεκτικά μέσα;</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+<!-- ΘΕΜΑ 2: Φυσιολογική μικροβιακή χλωρίδα & δομή βακτηριακού κυττάρου -->
+<div class="topic">
+  <div class="topic-header">
+    <div class="topic-title">Φυσιολογική μικροβιακή χλωρίδα & δομή βακτηριακού κυττάρου</div>
+    <div class="topic-toggle">+</div>
+  </div>
+  <div class="topic-content">
+    <div class="sub-title">Φυσιολογική μικροβιακή χλωρίδα:</div>
+    <ol>
+      <li>Μικροοργανισμοί που <strong>ανευρίσκονται στο σώμα του υγιούς ατόμου</strong>.</li>
+      <li>Βρίσκονται σε κάθε σημείο που <strong>έρχεται σε επαφή ή επικοινωνεί με το περιβάλλον</strong> (δέρμα, βλεννογόνοι κ.ά.).</li>
+      <li>Σε φυσιολογικές συνθήκες ΔΕΝ προκαλούν νόσο· αντίθετα, συχνά προστατεύουν από παθογόνα.</li>
+    </ol>
+
+    <div class="sub-title" style="margin-top:8px;">Δομή βακτηριακού κυττάρου (βασική εικόνα):</div>
+    <ol>
+      <li>Είναι <strong>πολύ μικρότερο</strong> από ευκαρυωτικό κύτταρο.</li>
+      <li>Δεν έχει <strong>πυρήνα με πυρηνική μεμβράνη</strong> – το γενετικό υλικό είναι στο χρωμόσωμα μέσα στο κυτταρόπλασμα.</li>
+      <li>Κύρια στοιχεία:
+        <ul>
+          <li>Κυτταρικό τοίχωμα & κυτταρική μεμβράνη.</li>
+          <li>Χρωμόσωμα, ριβοσώματα, κυτταρόπλασμα.</li>
+          <li>Προαιρετικά: ζελατινώδης κάψουλα, μαστίγιο, ίνες πρόσφυσης κ.λπ.</li>
+        </ul>
+      </li>
+      <li>Η κάψουλα και το τοίχωμα παίζουν ρόλο στη <strong>δίοδο φαρμάκων</strong> και στην <strong>αντοχή</strong> του μικροβίου.</li>
+    </ol>
+
+    <button class="questions-toggle-btn">Εμφάνιση πιθανών ερωτήσεων</button>
+    <div class="questions-box">
+      <ul>
+        <li>Πώς ορίζεται η φυσιολογική μικροβιακή χλωρίδα;</li>
+        <li>Σε ποια σημεία του σώματος συναντάται κυρίως η φυσιολογική χλωρίδα;</li>
+        <li>Ποιο δομικό στοιχείο ΔΕΝ υπάρχει στο βακτηριακό κύτταρο αλλά υπάρχει στα ανθρώπινα;</li>
+        <li>Ποιος είναι ο ρόλος της κάψουλας και του κυτταρικού τοιχώματος;</li>
+        <li>Γιατί έχει κλινική σημασία η γνώση της δομής του βακτηριακού κυττάρου (π.χ. σε σχέση με τα αντιβιοτικά);</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="topic">
+  <div class="topic-header">
+    <div class="topic-title">Gram(+) vs Gram(-) — Τι πρέπει να ξέρω στις εξετάσεις</div>
+    <div class="topic-toggle">+</div>
+  </div>
+
+  <div class="topic-content">
+
+    <div class="sub-title">Μηχανισμός διαφοράς χρώσης (εξεταστικό):</div>
+    <ol>
+      <li><strong>Gram(+)</strong> = παχύ <u>πέπτιδογλυκάνη</u> → συγκρατεί τη βασική χρωστική → φαίνεται <strong>κυανό/σκούρο</strong>.</li>
+      <li><strong>Gram(-)</strong> = λεπτό πέπτιδογλυκανικό στρώμα + <u>εξωτερική μεμβράνη με λιποπολυσακχαρίτες</u> → αποχρωματίζεται → βάφεται <strong>κόκκινο</strong>.</li>
+    </ol>
+
+    <div class="sub-title" style="margin-top:10px;">Δομικές διαφορές (simple exam bullets):</div>
+    <ol>
+      <li><strong>Gram(+):</strong>
+        <ul>
+          <li>παχύ πέπτιδογλυκανικό στρώμα</li>
+          <li>αιχμές <em>τεϊχοϊκού οξέος</em></li>
+          <li><em>χωρίς</em> εξωτερική μεμβράνη</li>
+        </ul>
+      </li>
+      <li><strong>Gram(-):</strong>
+        <ul>
+          <li>λεπτή πέπτιδογλυκάνη</li>
+          <li><em>εξωτερική μεμβράνη με LPS (ενδοτοξίνη!)</em></li>
+          <li>πορίνες</li>
+        </ul>
+      </li>
+      <li>➡️ Γι' αυτό τα Gram(-) έχουν <u>αντοχή</u> σε ορισμένα αντιβιοτικά.</li>
+    </ol>
+
+    <div class="sub-title" style="margin-top:10px;">Κλασικά παραδείγματα (ερωτάται συχνά):</div>
+    <ol>
+      <li><strong>Gram(+)</strong>:
+        Staphylococcus, Streptococcus, Pneumococcus, Bacillus anthracis, Corynebacterium diphtheriae, Clostridium spp., Mycobacterium (acid-fast αλλά ανήκει εδώ), Actinomyces.
+      </li>
+
+      <li><strong>Gram(-)</strong>:
+        Neisseria, Meningococcus, Brucella, Salmonella, Shigella, Proteus, E. coli, Klebsiella, Pseudomonas, Vibrio cholerae, Yersinia pestis.
+      </li>
+    </ol>
+
+    <button class="questions-toggle-btn">Εμφάνιση πιθανών εξεταστικών ερωτήσεων</button>
+    <div class="questions-box">
+      <ul>
+        <li>Ποιο χαρακτηριστικό διαφοροποιεί Gram(+) από Gram(-);</li>
+        <li>Ποιος τύπος έχει LPS;</li>
+        <li>Γιατί η βασική χρωστική συγκρατείται στα Gram(+);</li>
+        <li>Δώσε 3 παραδείγματα Gram(+).</li>
+        <li>Δώσε 3 παραδείγματα Gram(-).</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<!-- QUIZ PAGE -->
+<section id="quiz">
+  <div id="quiz-container">
+
+   <div class="quiz-question">
+  <h4>1. Ποιος είναι ο πιο σωστός ορισμός για τα “μικρόβια” στη μικροβιολογία;</h4>
+  <div class="answers">
+    <button data-correct="true">α) Απλοί μονοκύτταροι μικροοργανισμοί, κυρίως προκαρυωτικοί</button>
+    <button data-correct="false">β) Όλοι οι πολυκύτταροι οργανισμοί</button>
+    <button data-correct="false">γ) Μόνο ιοί</button>
+    <button data-correct="false">δ) Μόνο παράσιτα</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>2. Φυσιολογική μικροβιακή χλωρίδα ονομάζουμε:</h4>
+  <div class="answers">
+    <button data-correct="true">α) Μικροοργανισμούς που βρίσκονται φυσιολογικά στο σώμα υγιούς ατόμου σε σημεία που επικοινωνούν με το περιβάλλον</button>
+    <button data-correct="false">β) Όλους τους μικροοργανισμούς που προκαλούν νόσο</button>
+    <button data-correct="false">γ) Μόνο τα παθογόνα βακτήρια του αίματος</button>
+    <button data-correct="false">δ) Μικροοργανισμούς που υπάρχουν μόνο στο ήπαρ</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>3. Ποιο από τα παρακάτω ΔΕΝ είναι παράδειγμα θέσης όπου φυσιολογικά υπάρχει μικροβιακή χλωρίδα;</h4>
+  <div class="answers">
+    <button data-correct="false">α) Δέρμα</button>
+    <button data-correct="false">β) Βλεννογόνος στόματος</button>
+    <button data-correct="false">γ) Γαστρεντερικός σωλήνας</button>
+    <button data-correct="true">δ) Φυσιολογικά στείρο ΕΝΥ</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>4. Ποια από τις παρακάτω δομές ΔΕΝ υπάρχει σε ένα τυπικό βακτηριακό κύτταρο;</h4>
+  <div class="answers">
+    <button data-correct="false">α) Κυτταρικό τοίχωμα</button>
+    <button data-correct="false">β) Ριβοσώματα</button>
+    <button data-correct="false">γ) Χρωμόσωμα</button>
+    <button data-correct="true">δ) Πυρήνας με πυρηνική μεμβράνη</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>5. Ποιος είναι ένας βασικός ρόλος του κυτταρικού τοιχώματος στα βακτήρια;</h4>
+  <div class="answers">
+    <button data-correct="true">α) Διατήρηση σχήματος και προστασία από την ωσμωτική πίεση</button>
+    <button data-correct="false">β) Παραγωγή αντισωμάτων</button>
+    <button data-correct="false">γ) Σύνθεση ορμονών</button>
+    <button data-correct="false">δ) Μεταφορά οξυγόνου στο αίμα</button>
+  </div>
+</div>
+<div class="quiz-question">
+  <h4>1. Ποιο είναι το σημαντικότερο επίπεδο ταξινόμησης για την αναγνώριση μικροβίων;</h4>
+  <div class="answers">
+    <button data-correct="false">α) Βασίλειο</button>
+    <button data-correct="false">β) Οικογένεια</button>
+    <button data-correct="true">γ) Γένος και Είδος</button>
+    <button data-correct="false">δ) Τάξη</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>2. Ποια από τα παρακάτω ΔΕΝ αποτελεί καλλιεργητικό χαρακτηριστικό μικροβίων;</h4>
+  <div class="answers">
+    <button data-correct="false">α) Θρεπτικές απαιτήσεις</button>
+    <button data-correct="false">β) Συνθήκες επώασης</button>
+    <button data-correct="false">γ) Μορφολογία αποικιών</button>
+    <button data-correct="true">δ) Παραγωγή ενζύμων</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>3. Ποιο από τα παρακάτω περιγράφει ΜΟΡΦΟΛΟΓΙΚΑ χαρακτηριστικά μικροβίων;</h4>
+  <div class="answers">
+    <button data-correct="true">α) Σχήμα, χρώση Gram, κινητικότητα</button>
+    <button data-correct="false">β) Συνθήκες επώασης και θρεπτικές απαιτήσεις</button>
+    <button data-correct="false">γ) Ανάγκη CO₂ για ανάπτυξη</button>
+    <button data-correct="false">δ) Παραγωγή τοξινών</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>4. Βιοχημικά χαρακτηριστικά μικροβίων περιλαμβάνουν:</h4>
+  <div class="answers">
+    <button data-correct="true">α) Μεταβολικές ιδιότητες και ενζυματικές δοκιμασίες</button>
+    <button data-correct="false">β) Σχήμα και σπορογονία</button>
+    <button data-correct="false">γ) Χρώση Gram</button>
+    <button data-correct="false">δ) Θερμοκρασία επώασης μόνο</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>5. Η χρώση Gram χρησιμοποιείται κυρίως για:</h4>
+  <div class="answers">
+    <button data-correct="true">α) Διαχωρισμό βακτηρίων σε Gram θετικά και Gram αρνητικά</button>
+    <button data-correct="false">β) Μέτρηση παραγωγής H₂S</button>
+    <button data-correct="false">γ) Έλεγχο οξειδάσης</button>
+    <button data-correct="false">δ) Έλεγχο κινητικότητας</button>
+  </div>
+</div>
+
+  <div class="quiz-question">
+  <h4>1. Ποιο είδος θρεπτικού μέσου χρειάζεται ένα απαιτητικό μικρόβιο;</h4>
+  <div class="answers">
+    <button data-correct="false">α) Διαφοροποιητικό</button>
+    <button data-correct="true">β) Εμπλουτισμένο</button>
+    <button data-correct="false">γ) Ανασταλτικό</button>
+    <button data-correct="false">δ) Βασικό άγαρ</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>2. Το Löffler είναι παράδειγμα:</h4>
+  <div class="answers">
+    <button data-correct="true">α) Εκλεκτικού υποστρώματος</button>
+    <button data-correct="false">β) Εμπλουτισμένου υποστρώματος</button>
+    <button data-correct="false">γ) Ανασταλτικού υποστρώματος</button>
+    <button data-correct="false">δ) Διαφοροποιητικού υποστρώματος</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>3. Ποιο από τα παρακάτω είναι κλασικό διαφοροποιητικό μέσο;</h4>
+  <div class="answers">
+    <button data-correct="false">α) Αιματούχο</button>
+    <button data-correct="true">β) MacConkey</button>
+    <button data-correct="false">γ) Lowenstein–Jensen</button>
+    <button data-correct="false">δ) Löffler</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>4. Τα ανασταλτικά μέσα έχουν τον σκοπό:</h4>
+  <div class="answers">
+    <button data-correct="false">α) Να επιταχύνουν την ανάπτυξη όλων των μικροβίων</button>
+    <button data-correct="true">β) Να αναστέλλουν κοινά μικρόβια και να επιτρέπουν ανάπτυξη άλλων</button>
+    <button data-correct="false">γ) Να αναγνωρίζουν Gram θετικά</button>
+    <button data-correct="false">δ) Να ταυτοποιούν ιούς</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>5. Το Lowenstein–Jensen medium χρησιμοποιείται κυρίως για:</h4>
+  <div class="answers">
+    <button data-correct="true">α) Μυκοβακτηρίδια (π.χ. φυματίωση)</button>
+    <button data-correct="false">β) Streptococcus pyogenes</button>
+    <button data-correct="false">γ) Σταφυλόκοκκο</button>
+    <button data-correct="false">δ) Neisseria gonorrhoeae</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>1. Τι κάνει τα Gram(+) να συγκρατούν τη βασική χρωστική;</h4>
+  <div class="answers">
+    <button data-correct="true">α) Το παχύ πέπτιδογλυκανικό στρώμα</button>
+    <button data-correct="false">β) Η εξωτερική μεμβράνη με LPS</button>
+    <button data-correct="false">γ) Η παρουσία πορινών</button>
+    <button data-correct="false">δ) Το χαμηλό pH</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>2. Τα Gram(-) βακτήρια χαρακτηρίζονται από την παρουσία:</h4>
+  <div class="answers">
+    <button data-correct="false">α) Τεϊχοϊκών οξέων</button>
+    <button data-correct="true">β) Εξωτερικής μεμβράνης με LPS</button>
+    <button data-correct="false">γ) Μόνο παχιάς πέπτιδογλυκάνης</button>
+    <button data-correct="false">δ) Αποκλειστικά σπόρων</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>3. Ποιο από τα παρακάτω είναι Gram(+);</h4>
+  <div class="answers">
+    <button data-correct="true">α) Streptococcus</button>
+    <button data-correct="false">β) Salmonella</button>
+    <button data-correct="false">γ) Klebsiella</button>
+    <button data-correct="false">δ) Shigella</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>4. Ποιο από τα παρακάτω είναι Gram(-);</h4>
+  <div class="answers">
+    <button data-correct="false">α) Bacillus anthracis</button>
+    <button data-correct="false">β) Corynebacterium diphtheriae</button>
+    <button data-correct="true">γ) Neisseria</button>
+    <button data-correct="false">δ) Clostridium tetani</button>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <h4>5. Ποιο από τα παρακάτω είναι δομικό χαρακτηριστικό των Gram(-) βακτηρίων;</h4>
+  <div class="answers">
+    <button data-correct="true">α) Εξωτερική μεμβράνη με ενδοτοξίνη (LPS)</button>
+    <button data-correct="false">β) Τεϊχοϊκό οξύ</button>
+    <button data-correct="false">γ) Μόνο παχύ τοίχωμα</button>
+    <button data-correct="false">δ) Δεν έχουν πεπτιδογλυκάνη</button>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<script>
+  /* Tab switching */
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      let target = btn.dataset.target;
+      document.querySelectorAll("section").forEach(sec =>
+        sec.classList.toggle("active", sec.id === target)
+      );
+    });
+  });
+
+  /* Notes expand/collapse */
+  document.addEventListener("click", e => {
+    if (e.target.closest(".topic-header")) {
+      let header = e.target.closest(".topic-header");
+      let topic = header.parentElement;
+      let content = topic.querySelector(".topic-content");
+      let toggle = topic.querySelector(".topic-toggle");
+
+      let open = content.style.display === "block";
+      content.style.display = open ? "none" : "block";
+      toggle.textContent = open ? "+" : "–";
+    }
+  });
+
+  /* Toggle question reveal under note blocks */
+  document.addEventListener("click", e => {
+    if (e.target.classList.contains("questions-toggle-btn")) {
+      let box = e.target.nextElementSibling;
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+  });
+
+  /* Quiz logic */
+  document.addEventListener("click", e => {
+    if (e.target.closest(".answers button")) {
+      let btn = e.target.closest("button");
+      let group = btn.parentElement.querySelectorAll("button");
+
+      if ([...group].some(b => b.classList.contains("correct") || b.classList.contains("wrong")))
+        return;
+
+      group.forEach(b => {
+        b.classList.add(b.dataset.correct === "true" ? "correct" : "wrong");
+        b.disabled = true;
+      });
+    }
+  });
+
+  /* Explanation reveal */
+  document.addEventListener("click", e => {
+    if (e.target.classList.contains("reveal-btn")) {
+      let ans = e.target.nextElementSibling;
+      ans.style.display = ans.style.display === "block" ? "none" : "block";
+    }
+  });
+</script>
+
+</body>
+</html>
