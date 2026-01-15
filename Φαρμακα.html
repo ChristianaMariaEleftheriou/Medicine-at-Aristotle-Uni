@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <title>Αναζήτηση Φαρμάκων</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      padding: 24px;
+      margin: 24px;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-top: 0.2rem;
+      color: #555;
+    }
+
+    .file-row,
+    .search-row {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input[type="file"] {
+      font-size: 0.9rem;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+    }
+
+    button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #5a5ee6;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 6px;
+      font-size: 0.88rem;
+      color: #666;
+    }
+
+    .results {
+      margin-top: 20px;
+      max-height: 500px;
+      overflow-y: auto;
+      border-radius: 12px;
+      border: 1px solid #e2e2f0;
+      padding: 12px;
+      background: #fafafe;
+      white-space: pre-wrap; /* για multiline text */
+      font-family: "Cascadia Code", "Fira Code", monospace;
+      font-size: 0.9rem;
+    }
+
+    .result-block {
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid #e0e0ff;
+    }
+
+    .result-block:nth-child(odd) {
+      background: #f9f9ff;
+    }
+
+    .divider {
+      margin: 8px 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ddd, transparent);
+    }
+
+    .no-results {
+      color: #aa3344;
+      font-weight: 600;
+    }
+
+    mark {
+      background: #fff59d;
+      padding: 0 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔎 Αναζήτηση σε ΦΑΡΜΑΚΑ.txt</h1>
+    <p>
+      1️⃣ Κάνε <strong>Upload</strong> το αρχείο <code>ΦΑΡΜΑΚΑ.txt</code> (UTF-8)<br />
+      2️⃣ Γράψε όνομα φαρμάκου ή τμήμα του (π.χ. "διγοξ", "σαλβουταμ")<br />
+      3️⃣ Πάτησε <strong>Αναζήτηση</strong>
+    </p>
+
+    <div class="file-row">
+      <label for="fileInput">📂 Αρχείο:</label>
+      <input type="file" id="fileInput" accept=".txt" />
+    </div>
+    <div class="status" id="status">⚠️ Δεν έχει φορτωθεί ακόμη αρχείο.</div>
+
+    <div class="search-row">
+      <input type="text" id="queryInput" placeholder="Π.χ. Διγοξίνη, Σαλβουταμόλη, Πενικιλλίνη..." />
+      <button id="searchBtn" disabled>Αναζήτηση</button>
+    </div>
+
+    <div class="results" id="results">
+      🔁 Τα αποτελέσματα της αναζήτησης θα εμφανιστούν εδώ.
+    </div>
+  </div>
+
+  <script>
+    let lines = [];
+    const contextLines = 3; // πόσες γραμμές πριν/μετά δείχνουμε
+
+    const fileInput = document.getElementById("fileInput");
+    const statusEl = document.getElementById("status");
+    const queryInput = document.getElementById("queryInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const resultsEl = document.getElementById("results");
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      if (!file) {
+        statusEl.textContent = "⚠️ Δεν επιλέχθηκε αρχείο.";
+        lines = [];
+        searchBtn.disabled = true;
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const text = e.target.result;
+        // Διαχωρισμός σε γραμμές
+        lines = text.split(/\r?\n/);
+        statusEl.textContent = `✅ Φορτώθηκε το αρχείο: ${file.name} — Σύνολο γραμμών: ${lines.length}`;
+        searchBtn.disabled = false;
+      };
+      reader.onerror = function () {
+        statusEl.textContent = "❌ Σφάλμα κατά την ανάγνωση του αρχείου.";
+        lines = [];
+        searchBtn.disabled = true;
+      };
+
+      reader.readAsText(file, "UTF-8");
+    });
+
+    function highlight(text, query) {
+      if (!query) return text;
+      const q = query.toLowerCase();
+      // Απλό case-insensitive highlight
+      return text.replace(new RegExp(q, "gi"), (match) => `<mark>${match}</mark>`);
+    }
+
+    function doSearch() {
+      const query = queryInput.value.trim();
+      if (!query) {
+        resultsEl.innerHTML = "⚠️ Γράψε πρώτα κάποια λέξη για αναζήτηση.";
+        return;
+      }
+      if (!lines.length) {
+        resultsEl.innerHTML = "⚠️ Δεν έχει φορτωθεί αρχείο κειμένου.";
+        return;
+      }
+
+      const qLower = query.toLowerCase();
+      const n = lines.length;
+      const blocks = [];
+
+      for (let i = 0; i < n; i++) {
+        if (lines[i].toLowerCase().includes(qLower)) {
+          const start = Math.max(0, i - contextLines);
+          const end = Math.min(n, i + contextLines + 1);
+          const snippetLines = lines.slice(start, end);
+          let blockText = snippetLines.join("\n").trim();
+          blockText = highlight(blockText, query);
+          blocks.push(blockText);
+        }
+      }
+
+      if (!blocks.length) {
+        resultsEl.innerHTML = '<span class="no-results">❗ Δεν βρέθηκαν αποτελέσματα για: "' + query + '"</span>';
+        return;
+      }
+
+      resultsEl.innerHTML = "";
+      blocks.forEach((block, idx) => {
+        const div = document.createElement("div");
+        div.className = "result-block";
+        div.innerHTML = block;
+        resultsEl.appendChild(div);
+        if (idx < blocks.length - 1) {
+          const d = document.createElement("div");
+          d.className = "divider";
+          resultsEl.appendChild(d);
+        }
+      });
+    }
+
+    searchBtn.addEventListener("click", doSearch);
+
+    queryInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        doSearch();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz – Χολινεργικός Νευρώνας & Αγωνιστές</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b1b3a;
+      color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ffe066;
+    }
+    .quiz-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #10224a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    .question {
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #172c5c;
+    }
+    .question h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .option {
+      margin: 4px 0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #1f366b;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.2s, transform 0.1s, border 0.2s;
+      font-size: 14px;
+    }
+    .option:hover {
+      background: #26427f;
+      transform: translateY(-1px);
+    }
+    .option.correct {
+      background: #1f7a3a;
+      border-color: #8fffae;
+      color: #f9fff9;
+    }
+    .option.incorrect {
+      background: #7a1f1f;
+      border-color: #ff8f8f;
+      color: #fff6f6;
+    }
+    .question.answered .option {
+      cursor: default;
+      pointer-events: none;
+    }
+    .feedback {
+      margin-top: 4px;
+      font-size: 13px;
+      font-style: italic;
+    }
+    .feedback.correct-text {
+      color: #8fffae;
+    }
+    .feedback.incorrect-text {
+      color: #ffb3b3;
+    }
+    .score-box {
+      text-align: center;
+      margin: 16px 0 8px;
+      font-size: 16px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 4px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: #ff9f1c;
+      color: #202020;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn:hover {
+      background: #ffbf69;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz – Χολινεργικός Νευρώνας &amp; Αγωνιστές</h1>
+    <h2>50 ερωτήσεις πολλαπλής επιλογής</h2>
+
+    <div class="score-box">
+      Σωστές απαντήσεις: <span id="score">0</span> / <span id="totalQuestions">0</span>
+      <br />
+      <button class="btn" id="resetBtn">Επαναφορά Quiz</button>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question" data-question-id="1">
+      <h3>1. Ποιο τμήμα του νευρικού συστήματος περιλαμβάνει το αυτόνομο και το σωματικό;</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">Κεντρικό νευρικό σύστημα</li>
+        <li class="option" data-correct="true">Περιφερικό νευρικό σύστημα</li>
+        <li class="option" data-correct="false">Εγκεφαλικό στέλεχος</li>
+        <li class="option" data-correct="false">Νωτιαίος μυελός</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question" data-question-id="2">
+      <h3>2. Ποιο σύστημα αντιδρά κυρίως σε καταστάσεις stress (ψύχους, φόβου, άσκησης);</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Συμπαθητικό σύστημα</li>
+        <li class="option" data-correct="false">Παρασυμπαθητικό σύστημα</li>
+        <li class="option" data-correct="false">Σωματικό κινητικό σύστημα</li>
+        <li class="option" data-correct="false">Αισθητικό σύστημα</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question" data-question-id="3">
+      <h3>3. Από ποιες μοίρες του νωτιαίου μυελού εκπορεύονται οι προγαγγλιακοί νευρώνες του συμπαθητικού;</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">Αυχενική και ιερή</li>
+        <li class="option" data-correct="true">Θωρακική και οσφυϊκή</li>
+        <li class="option" data-correct="false">Κρανιακή και ιερή</li>
+        <li class="option" data-correct="false">Μόνο θωρακική</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question" data-question-id="4">
+      <h3>4. Από πού προέρχονται οι προγαγγλιακοί νευρώνες του παρασυμπαθητικού;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Κρανιακή και ιερή μοίρα του ΝΜ</li>
+        <li class="option" data-correct="false">Θωρακική και οσφυϊκή μοίρα</li>
+        <li class="option" data-correct="false">Μόνο από τον προμήκη μυελό</li>
+        <li class="option" data-correct="false">Μόνο από τον νωτιαίο μυελό</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question" data-question-id="5">
+      <h3>5. Κύρια λειτουργία του παρασυμπαθητικού είναι να:</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">Ενεργοποιεί την αντίδραση «fight or flight»</li>
+        <li class="option" data-correct="true">Συντηρεί λειτουργίες πέψης και ανάπαυσης</li>
+        <li class="option" data-correct="false">Ρυθμίζει μόνο την αναπνοή</li>
+        <li class="option" data-correct="false">Ελέγχει τη θερμοκρασία σώματος</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question" data-question-id="6">
+      <h3>6. Ποια από τα παρακάτω όργανα έχουν αποκλειστικά συμπαθητική νεύρωση;</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">Καρδιά και πνεύμονες</li>
+        <li class="option" data-correct="true">Μυελός επινεφριδίων, νεφρός, ανελκτήρες τριχών, ιδρωτοποιοί αδένες</li>
+        <li class="option" data-correct="false">Σιελογόνοι αδένες</li>
+        <li class="option" data-correct="false">Ήπαρ και πάγκρεας</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question" data-question-id="7">
+      <h3>7. Πώς χαρακτηρίζεται ένας νευρώνας του ΑΝΣ όταν ο νευροδιαβιβαστής του είναι ακετυλοχολίνη;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Χολινεργικός</li>
+        <li class="option" data-correct="false">Αδρενεργικός</li>
+        <li class="option" data-correct="false">Ντοπαμινεργικός</li>
+        <li class="option" data-correct="false">Σεροτονινεργικός</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question" data-question-id="8">
+      <h3>8. Ποιοι νευρώνες (συμπαθητικοί/παρασυμπαθητικοί) απελευθερώνουν ακετυλοχολίνη στις προγαγγλιακές συνάψεις;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Και οι δύο τύποι προγαγγλιακών νευρώνων</li>
+        <li class="option" data-correct="false">Μόνο οι συμπαθητικοί</li>
+        <li class="option" data-correct="false">Μόνο οι παρασυμπαθητικοί</li>
+        <li class="option" data-correct="false">Κανένας, μόνο νορεπινεφρίνη</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question" data-question-id="9">
+      <h3>9. Ποιον νευροδιαβιβαστή απελευθερώνουν συνήθως οι μεταγαγγλιακοί συμπαθητικοί νευρώνες στις τελικές απολήξεις;</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">Ακετυλοχολίνη</li>
+        <li class="option" data-correct="true">Νορεπινεφρίνη</li>
+        <li class="option" data-correct="false">Σεροτονίνη</li>
+        <li class="option" data-correct="false">GABA</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question" data-question-id="10">
+      <h3>10. Ποιοι υποδοχείς δέχονται την ακετυλοχολίνη στα εκτελεστικά όργανα του παρασυμπαθητικού;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Μουσκαρινικοί υποδοχείς</li>
+        <li class="option" data-correct="false">Νικοτινικοί υποδοχείς</li>
+        <li class="option" data-correct="false">Αδρενεργικοί α</li>
+        <li class="option" data-correct="false">Αδρενεργικοί β</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question" data-question-id="11">
+      <h3>11. Πού χρησιμοποιείται κύρια η ακετυλοχολίνη ως νευροδιαβιβαστής εκτός του ΑΝΣ;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Στη νευρομυϊκή σύναψη των σκελετικών μυών</li>
+        <li class="option" data-correct="false">Στις συνάψεις του εγκεφαλικού φλοιού μόνο</li>
+        <li class="option" data-correct="false">Στις συνάψεις του νωτιαίου μυελού μόνο</li>
+        <li class="option" data-correct="false">Δεν λειτουργεί εκτός ΑΝΣ</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question" data-question-id="12">
+      <h3>12. Σε μικρές και μεσαίες δόσεις η ακετυλοχολίνη προκαλεί κυρίως:</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Πτώση αρτηριακής πίεσης και βραδυκαρδία</li>
+        <li class="option" data-correct="false">Αύξηση ΑΠ και ταχυκαρδία</li>
+        <li class="option" data-correct="false">Μυδρίαση και βρογχοδιαστολή</li>
+        <li class="option" data-correct="false">Καμία αιμοδυναμική μεταβολή</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question" data-question-id="13">
+      <h3>13. Σε μεγάλες δόσεις η ακετυλοχολίνη διεγείρει κυρίως:</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">Μόνο μουσκαρινικούς υποδοχείς</li>
+        <li class="option" data-correct="true">Νικοτινικούς υποδοχείς και συμπαθητικά γάγγλια</li>
+        <li class="option" data-correct="false">Μόνο ΚΝΣ υποδοχείς</li>
+        <li class="option" data-correct="false">Μόνο υποδοχείς στον μυελό των οστών</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question" data-question-id="14">
+      <h3>14. Η γενικευμένη αγγειοχάλαση που προκαλεί η ακετυλοχολίνη οφείλεται κυρίως σε:</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Έμμεση δράση μέσω απελευθέρωσης ΝΟ από ενδοθήλιο</li>
+        <li class="option" data-correct="false">Άμεση δράση σε β-αδρενεργικούς υποδοχείς</li>
+        <li class="option" data-correct="false">Αναστολή της ρενίνης</li>
+        <li class="option" data-correct="false">Αναστολή της αγγειοτενσίνης ΙΙ</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question" data-question-id="15">
+      <h3>15. Ποιο από τα παρακάτω είναι παράδειγμα χολινεργικής ίνας του συμπαθητικού συστήματος;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Ίνες προς τους ιδρωτοποιούς αδένες</li>
+        <li class="option" data-correct="false">Ίνες προς την καρδιά</li>
+        <li class="option" data-correct="false">Ίνες προς τα βρογχιόλια</li>
+        <li class="option" data-correct="false">Ίνες προς τα νεφρικά αγγεία</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question" data-question-id="16">
+      <h3>16. Ποιο φάρμακο αναστέλλει την πρόσληψη χολίνης και άρα τη σύνθεση ακετυλοχολίνης;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Ημιχολίνιο</li>
+        <li class="option" data-correct="false">Πραλιδοξίμη</li>
+        <li class="option" data-correct="false">Ατροπίνη</li>
+        <li class="option" data-correct="false">Νεοστιγμίνη</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question" data-question-id="17">
+      <h3>17. Ποια τοξίνη αναστέλλει την απελευθέρωση ακετυλοχολίνης από τα συναπτικά κυστίδια;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Τοξίνη αλλαντίασης (botulinum toxin)</li>
+        <li class="option" data-correct="false">Τοξίνη τετάνου</li>
+        <li class="option" data-correct="false">Διφθεριτική τοξίνη</li>
+        <li class="option" data-correct="false">Εντεροτοξίνη σταφυλόκοκκου</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question" data-question-id="18">
+      <h3>18. Ποιο δηλητήριο προκαλεί εκκένωση όλης της ακετυλοχολίνης από τα συναπτικά κυστίδια;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Δηλητήριο μαύρης αράχνης</li>
+        <li class="option" data-correct="false">Σαρίνη</li>
+        <li class="option" data-correct="false">Παραθείο</li>
+        <li class="option" data-correct="false">Ισοφλουράτη</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question" data-question-id="19">
+      <h3>19. Ποιες είναι οι δύο κύριες οικογένειες χολινεργικών υποδοχέων;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Μουσκαρινικοί και νικοτινικοί</li>
+        <li class="option" data-correct="false">Αδρενεργικοί και ντοπαμινεργικοί</li>
+        <li class="option" data-correct="false">Ισταμινικοί και σεροτονινεργικοί</li>
+        <li class="option" data-correct="false">GABA-εργικοί και γλυκινεργικοί</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question" data-question-id="20">
+      <h3>20. Ποιο αλκαλοειδές, εκτός από την ακετυλοχολίνη, αναγνωρίζουν οι μουσκαρινικοί υποδοχείς;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Μουσκαρίνη</li>
+        <li class="option" data-correct="false">Νικοτίνη</li>
+        <li class="option" data-correct="false">Ατροπίνη</li>
+        <li class="option" data-correct="false">Μορφίνη</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="question" data-question-id="21">
+      <h3>21. Ποιοι μουσκαρινικοί υποδοχείς συνδέονται με Gq-πρωτεΐνη και ενεργοποιούν την οδό της φωσφορικής ινοσιτόλης;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">M1, M3, M5</li>
+        <li class="option" data-correct="false">M2, M4</li>
+        <li class="option" data-correct="false">Όλοι οι μουσκαρινικοί</li>
+        <li class="option" data-correct="false">Κανένας</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q22 -->
+    <div class="question" data-question-id="22">
+      <h3>22. Ποιοι μουσκαρινικοί υποδοχείς μέσω Gi αναστέλλουν την αδενυλική κυκλάση και μειώνουν το cAMP;</h3>
+      <ul class="options">
+        <li class="option" data-correct="false">M1, M3, M5</li>
+        <li class="option" data-correct="true">M2, M4</li>
+        <li class="option" data-correct="false">Μόνο M3</li>
+        <li class="option" data-correct="false">Μόνο M5</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="question" data-question-id="23">
+      <h3>23. Ποια από τα παρακάτω είναι σωστό για τους μουσκαρινικούς υποδοχείς;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Είναι μεταβοτροπικοί υποδοχείς συνδεδεμένοι με G-πρωτεΐνες</li>
+        <li class="option" data-correct="false">Είναι ιονοτροπικοί διαύλοι Na⁺</li>
+        <li class="option" data-correct="false">Βρίσκονται μόνο στους σκελετικούς μύες</li>
+        <li class="option" data-correct="false">Δεν υπάρχουν στον εγκέφαλο</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="question" data-question-id="24">
+      <h3>24. Ποιες είναι οι τρεις κατηγορίες νικοτινικών υποδοχέων;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Μυών, γαγγλίων, ΚΝΣ</li>
+        <li class="option" data-correct="false">Μόνο μυών</li>
+        <li class="option" data-correct="false">Μόνο γαγγλίων και ΚΝΣ</li>
+        <li class="option" data-correct="false">Καρδιακών, ηπατικών, εγκεφαλικών</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="question" data-question-id="25">
+      <h3>25. Ποιο από τα παρακάτω είναι σωστό για τη νικοτίνη στους νικοτινικούς υποδοχείς;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Αρχικά τους διεγείρει και στη συνέχεια τους αποκλείει</li>
+        <li class="option" data-correct="false">Τους μπλοκάρει άμεσα χωρίς φάση διέγερσης</li>
+        <li class="option" data-correct="false">Δρα μόνο στους μουσκαρινικούς υποδοχείς</li>
+        <li class="option" data-correct="false">Δεν έχει καμία δράση σε υποδοχείς του ΚΝΣ</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q26 -->
+    <div class="question" data-question-id="26">
+      <h3>26. Ποια νόσος συνδέεται με αυτοαντισώματα έναντι των νικοτινικών υποδοχέων της νευρομυϊκής σύναψης;</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Μυασθένεια gravis</li>
+        <li class="option" data-correct="false">Νόσος Alzheimer</li>
+        <li class="option" data-correct="false">Πάρκινσον</li>
+        <li class="option" data-correct="false">Πολλαπλή σκλήρυνση</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q27 -->
+    <div class="question" data-question-id="27">
+      <h3>27. Στη νόσο Alzheimer, σύμφωνα με την παρουσίαση, υπάρχει:</h3>
+      <ul class="options">
+        <li class="option" data-correct="true">Μειωμένη παραγωγή ακετυλοχολίνης και καταστροφή</li>
+        <li class="option" data-correct="false">Αυξημένη παραγωγή ακετυλοχολίνης</li>
+        <li class="option" data-correct="false">Καμία αλλαγή στο χολινεργικό σύστημα</li>
+        <li class="option" data-correct="false">Μόνο αλλαγές σε νοραδρενεργικούς νευρώνες</li>
+      </ul>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="question" data-question-id="28">
+  <h3>28. Ποια από τις παρακάτω είναι κύρια δράση των χολινεργικών αγωνιστών στην καρδιά;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Μείωση καρδιακού ρυθμού</li>
+    <li class="option" data-correct="false">Αύξηση καρδιακής παροχής</li>
+    <li class="option" data-correct="false">Αύξηση αρτηριακής πίεσης</li>
+    <li class="option" data-correct="false">Βρογχοδιαστολή</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="29">
+  <h3>29. Ποιοι λείοι μύες ΔΕΝ συστέλλονται μετά από χολινεργική διέγερση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Γαστρεντερικοί μύες</li>
+    <li class="option" data-correct="false">Εξωκρινείς αδένες</li>
+    <li class="option" data-correct="true">Αγγειακοί λείοι μύες</li>
+    <li class="option" data-correct="false">Μύες ουροδόχου κύστης</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="30">
+  <h3>30. Ποια είναι βασική χολινεργική δράση στο γαστρεντερικό;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αύξηση περισταλτικότητας</li>
+    <li class="option" data-correct="false">Μείωση κινητικότητας</li>
+    <li class="option" data-correct="false">Αναστολή έκκρισης</li>
+    <li class="option" data-correct="false">Αναστολή κολικού</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="31">
+  <h3>31. Ποιο είναι αποτέλεσμα χολινεργικής διέγερσης στο αναπνευστικό;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Βρογχοδιαστολή</li>
+    <li class="option" data-correct="true">Βρογχόσπασμος</li>
+    <li class="option" data-correct="false">Μείωση εκκρίσεων</li>
+    <li class="option" data-correct="false">Ξηρότητα βλεννογόνου</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="32">
+  <h3>32. Ποια δομή του οφθαλμού επηρεάζει τη ρύθμιση της ενδοφθάλμιας πίεσης;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Αμφιβληστροειδής</li>
+    <li class="option" data-correct="true">Σφιγκτήρας μύς της κόρης</li>
+    <li class="option" data-correct="false">Βλεφαρομυϊκό σύστημα</li>
+    <li class="option" data-correct="false">Οπτικό νεύρο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+<div class="question" data-question-id="33">
+  <h3>33. Ποιο από τα παρακάτω ΔΕΝ είναι άμεσα δρών χολινεργικό αγωνιστικό;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Καρβαχόλη</li>
+    <li class="option" data-correct="false">Βητανεχόλη</li>
+    <li class="option" data-correct="false">Πιλοκαρπίνη</li>
+    <li class="option" data-correct="true">Νεοστιγμίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="34">
+  <h3>34. Ποιο φάρμακο έχει ΜΟΝΟ μουσκαρινική δράση χωρίς νικοτινική δράση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Βητανεχόλη</li>
+    <li class="option" data-correct="false">Καρβαχόλη</li>
+    <li class="option" data-correct="false">Πιλοκαρπίνη</li>
+    <li class="option" data-correct="false">Ακετυλοχολίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="35">
+  <h3>35. Ποια από τις παρακάτω έχει και μουσκαρινική ΚΑΙ νικοτινική δράση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Καρβαχόλη</li>
+    <li class="option" data-correct="false">Βητανεχόλη</li>
+    <li class="option" data-correct="false">Πιλοκαρπίνη</li>
+    <li class="option" data-correct="false">Φυσοστιγμίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="36">
+  <h3>36. Κύρια ένδειξη της βητανεχόλης είναι:</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ατονία της ουροδόχου κύστεως</li>
+    <li class="option" data-correct="false">Χρόνια θεραπεία βαρείας μυασθένειας</li>
+    <li class="option" data-correct="false">Οξύ γλαύκωμα</li>
+    <li class="option" data-correct="false">Ατονία εξωκρινών αδένων σιέλου</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="37">
+  <h3>37. Ποια από τις παρακάτω ΔΥΟ χρησιμοποιούνται κυρίως στην οφθαλμολογία ως αντιγλαυκωματικά;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Βητανεχόλη και Πιλοκαρπίνη</li>
+    <li class="option" data-correct="true">Καρβαχόλη και Πιλοκαρπίνη</li>
+    <li class="option" data-correct="false">Βητανεχόλη και Καρβαχόλη</li>
+    <li class="option" data-correct="false">Ακετυλοχολίνη και Πιλοκαρπίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="38">
+  <h3>38. Ποια από τις παρακάτω ΔΕΝ είναι τυπική ανεπιθύμητη ενέργεια των χολινεργικών αγωνιστών;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Σιελόρροια</li>
+    <li class="option" data-correct="false">Διάρροια και κολικός</li>
+    <li class="option" data-correct="false">Βρογχόσπασμος</li>
+    <li class="option" data-correct="true">Ταχυκαρδία με ξηροστομία</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="39">
+  <h3>39. Ποια από τα παρακάτω αντιχολινεστερασικά χρησιμοποιείται κυρίως για βαρεία μυασθένεια σε ΧΡΟΝΙΑ βάση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Εδροφώνιο</li>
+    <li class="option" data-correct="false">Νεοστιγμίνη</li>
+    <li class="option" data-correct="true">Πυριδοστιγμίνη</li>
+    <li class="option" data-correct="false">Φυσοστιγμίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="40">
+  <h3>40. Ποιο αντιχολινεστερασικό χρησιμοποιείται κυρίως διαγνωστικά στη δοκιμασία για βαρεία μυασθένεια (Tensilon test);</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Εδροφώνιο</li>
+    <li class="option" data-correct="false">Νεοστιγμίνη</li>
+    <li class="option" data-correct="false">Πυριδοστιγμίνη</li>
+    <li class="option" data-correct="false">Φυσοστιγμίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="41">
+  <h3>41. Ποιο από τα παρακάτω αντιχολινεστερασικά διαπερνά τον αιματοεγκεφαλικό φραγμό και μπορεί να χρησιμοποιηθεί σε αντιμουσκαρινική δηλητηρίαση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Φυσοστιγμίνη</li>
+    <li class="option" data-correct="false">Νεοστιγμίνη</li>
+    <li class="option" data-correct="false">Πυριδοστιγμίνη</li>
+    <li class="option" data-correct="false">Εδροφώνιο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="42">
+  <h3>42. Ποιος είναι ο κύριος μηχανισμός δράσης των αντιχολινεστερασικών με αναστρέψιμη δράση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αναστέλλουν αναστρέψιμα την ακετυλοχολινεστεράση και παρατείνουν τη δράση της Ach</li>
+    <li class="option" data-correct="false">Συνδέονται μη αναστρέψιμα με τους μουσκαρινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Ενεργοποιούν τους νικοτινικούς υποδοχείς απευθείας</li>
+    <li class="option" data-correct="false">Αναστέλλουν την απελευθέρωση Ach από το νευρικό άκρο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="43">
+  <h3>43. Ποια από τις παρακάτω ΔΕΝ είναι τυπική ανεπιθύμητη ενέργεια των αναστρέψιμων αντιχολινεστερασικών;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Σιελόρροια</li>
+    <li class="option" data-correct="false">Μειωμένη αρτηριακή πίεση</li>
+    <li class="option" data-correct="false">Βρογχόσπασμος</li>
+    <li class="option" data-correct="true">Σημαντική ξηροστομία και μυδρίαση</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="44">
+  <h3>44. Ποια από τις παρακάτω φράσεις περιγράφει καλύτερα τα αντιχολινεστερασικά χωρίς αναστρέψιμη δράση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Σχηματίζουν ομοιοπολικό δεσμό με την ακετυλοχολινεστεράση</li>
+    <li class="option" data-correct="false">Αναστέλλουν παροδικά την AchE μέσω ιοντικών δεσμών</li>
+    <li class="option" data-correct="false">Δρουν μόνο στη νευρομυϊκή σύναψη</li>
+    <li class="option" data-correct="false">Χρησιμοποιούνται ευρέως ως ασφαλή μυοχαλαρωτικά</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="45">
+  <h3>45. Τι σημαίνει «γήρανση» (aging) του συμπλόκου ενζύμου–φαρμάκου στην οργανοφωσφορική δηλητηρίαση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Απώλεια αλκυλομάδας που καθιστά τον δεσμό ενζύμου–φαρμάκου μη αναστρέψιμο</li>
+    <li class="option" data-correct="false">Σταδιακή μείωση της συγκέντρωσης του φαρμάκου στο αίμα</li>
+    <li class="option" data-correct="false">Αναστολή της AchE μόνο στο ΚΝΣ</li>
+    <li class="option" data-correct="false">Ανταγωνισμό με τους μουσκαρινικούς υποδοχείς</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="46">
+  <h3>46. Πότε η πραλιδοξίμη μπορεί να επανενεργοποιήσει την ακετυλοχολινεστεράση σε οργανοφωσφορική δηλητηρίαση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Όταν χορηγηθεί πριν ολοκληρωθεί η γήρανση του συμπλόκου ενζύμου–φαρμάκου</li>
+    <li class="option" data-correct="false">Όταν χορηγηθεί πολλές ώρες μετά τη γήρανση</li>
+    <li class="option" data-correct="false">Μόνο όταν δοθεί μαζί με βητανεχόλη</li>
+    <li class="option" data-correct="false">Όταν προηγηθεί πλήρης αναστολή της AchE από νεοστιγμίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="47">
+  <h3>47. Γιατί οι επανεργοποιητές όπως η πραλιδοξίμη ΔΕΝ μπορούν να επαναφέρουν το ένζυμο μετά τη γήρανση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Γιατί ο ομοιοπολικός δεσμός έχει σταθεροποιηθεί και δεν μπορεί να διασπαστεί</li>
+    <li class="option" data-correct="false">Γιατί η πραλιδοξίμη μετατρέπεται σε ανενεργό μεταβολίτη στο ήπαρ</li>
+    <li class="option" data-correct="false">Γιατί η AchE δεν βρίσκεται πλέον στη συναπτική σχισμή</li>
+    <li class="option" data-correct="false">Γιατί οι οργανοφωσφορικές ενώσεις απομακρύνονται πολύ γρήγορα από το αίμα</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="48">
+  <h3>48. Ποια από τις παρακάτω είναι οργανοφωσφορική ένωση που χρησιμοποιείται στη ΧΡΟΝΙΑ αγωγή του γλαυκώματος;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ισοφλουράτη</li>
+    <li class="option" data-correct="false">Πιλοκαρπίνη</li>
+    <li class="option" data-correct="false">Νεοστιγμίνη</li>
+    <li class="option" data-correct="false">Φυσοστιγμίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="49">
+  <h3>49. Ποια από τις παρακάτω ομάδες περιέχει ΜΟΝΟ παραδείγματα εξαιρετικά τοξικών οργανοφωσφορικών;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αέρια νεύρων, παραθείο, εντομοκτόνα</li>
+    <li class="option" data-correct="false">Βητανεχόλη, πιλοκαρπίνη, καρβαχόλη</li>
+    <li class="option" data-correct="false">Φυσοστιγμίνη, νεοστιγμίνη, πυριδοστιγμίνη</li>
+    <li class="option" data-correct="false">Ατροπίνη, σκοπολαμίνη, ιπρατρόπιο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="50">
+  <h3>50. Ποια από τις παρακάτω προτάσεις είναι ΣΩΣΤΗ για τα αντιχολινεστερασικά χωρίς αναστρέψιμη δράση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Έχουν μικρή τοξικότητα και χρησιμοποιούνται ευρέως σε χρόνια θεραπεία</li>
+    <li class="option" data-correct="true">Όσο ταχύτερα γηράσκει το σύμπλοκο ενζύμου–φαρμάκου, τόσο δυσκολότερη είναι η επαναφορά της AchE</li>
+    <li class="option" data-correct="false">Δρουν αποκλειστικά στο ΚΝΣ</li>
+    <li class="option" data-correct="false">Αναστέλλουν τους μουσκαρινικούς υποδοχείς ανεξάρτητα από την AchE</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+<div class="question" data-question-id="51">
+  <h3>51. Ποια από τις παρακάτω ομάδες φαρμάκων αντιστοιχεί στους «χολινεργικούς ανταγωνιστές» όπως παρουσιάζονται στη διαφάνεια;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ανταγωνιστές που μπλοκάρουν μουσκαρινικούς, γαγγλιακούς νικοτινικούς ή νευρομυϊκούς νικοτινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Φάρμακα που ενεργοποιούν επιλεκτικά τους μουσκαρινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Φάρμακα που αυξάνουν τη σύνθεση της ακετυλοχολίνης</li>
+    <li class="option" data-correct="false">Φάρμακα που αναστέλλουν την απελευθέρωση νοραδρεναλίνης</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="52">
+  <h3>52. Ποιο από τα παρακάτω περιγράφει καλύτερα τους «εκλεκτικούς αποκλειστές των μουσκαρινικών συνάψεων του παρασυμπαθητικού»;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αντιμουσκαρινικά που μπλοκάρουν τις τελικές παρασυμπαθητικές συνάψεις σε όργανα-στόχους</li>
+    <li class="option" data-correct="false">Γαγγλιοπληγικά που αποκλείουν όλα τα αυτόνομα γάγγλια</li>
+    <li class="option" data-correct="false">Μυοπληγικά που παραλύουν τους σκελετικούς μύες</li>
+    <li class="option" data-correct="false">Φάρμακα που αναστέλλουν την AchE στην συναπτική σχισμή</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="53">
+  <h3>53. Τα «γαγγλιοπληγικά» φάρμακα, όπως ορίζονται στη διαφάνεια, μπλοκάρουν:</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Μόνο τους μουσκαρινικούς υποδοχείς στα όργανα-στόχους</li>
+    <li class="option" data-correct="true">Τους νικοτινικούς υποδοχείς των γαγγλίων τόσο του συμπαθητικού όσο και του παρασυμπαθητικού</li>
+    <li class="option" data-correct="false">Τους νικοτινικούς υποδοχείς μόνο της νευρομυϊκής σύναψης</li>
+    <li class="option" data-correct="false">Μόνο τους β-αδρενεργικούς υποδοχείς στην καρδιά</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="54">
+  <h3>54. Ποια είναι η πιο σωστή συνέπεια της χορήγησης γαγγλιοπληγικού φαρμάκου;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αναστολή και συμπαθητικής και παρασυμπαθητικής δραστηριότητας στα όργανα-στόχους</li>
+    <li class="option" data-correct="false">Εκλεκτική αναστολή μόνο της παρασυμπαθητικής δραστηριότητας</li>
+    <li class="option" data-correct="false">Εκλεκτική αναστολή μόνο της συμπαθητικής δραστηριότητας</li>
+    <li class="option" data-correct="false">Ενεργοποίηση των μουσκαρινικών υποδοχέων του παρασυμπαθητικού</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="55">
+  <h3>55. Τα «μυοπληγικά» φάρμακα της διαφάνειας παρεμποδίζουν κυρίως:</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Τη διαβίβαση των ώσεων από τα κινητικά νεύρα προς τους σκελετικούς μύες</li>
+    <li class="option" data-correct="false">Τη σύναψη μεταξύ προγαγγλιακών και μεταγαγγλιακών νευρώνων στο συμπαθητικό</li>
+    <li class="option" data-correct="false">Τη μετάδοση ερεθισμάτων στον αμφιβληστροειδή</li>
+    <li class="option" data-correct="false">Τη δράση της αδρεναλίνης στους β-υποδοχείς</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="56">
+  <h3>56. Ποιος συνδυασμός είναι ΣΩΣΤΟΣ ως προς το είδος χολινεργικού ανταγωνιστή και το σημείο δράσης του;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Μυοπληγικά – νικοτινικοί υποδοχείς στη νευρομυϊκή σύναψη</li>
+    <li class="option" data-correct="false">Γαγγλιοπληγικά – μουσκαρινικοί υποδοχείς σε όργανα-στόχους</li>
+    <li class="option" data-correct="false">Αντιμουσκαρινικά – νικοτινικοί υποδοχείς στα γάγγλια</li>
+    <li class="option" data-correct="false">Μυοπληγικά – μουσκαρινικοί υποδοχείς του παρασυμπαθητικού</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="57">
+  <h3>57. Ποιο από τα παρακάτω μπλοκάρουν οι αντιμουσκαρινικές ουσίες;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Μουσκαρινικούς υποδοχείς σε όργανα-στόχους</li>
+    <li class="option" data-correct="false">Νικοτινικούς υποδοχείς των γαγγλίων</li>
+    <li class="option" data-correct="false">Νικοτινικούς υποδοχείς της νευρομυϊκής σύναψης</li>
+    <li class="option" data-correct="false">Αδρενεργικούς β-υποδοχείς</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="58">
+  <h3>58. Γιατί οι αντιμουσκαρινικές ουσίες επηρεάζουν την εφίδρωση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Επειδή οι ιδρωτοποιοί αδένες δέχονται χολινεργική συμπαθητική νεύρωση</li>
+    <li class="option" data-correct="false">Επειδή οι ιδρωτοποιοί αδένες δέχονται μόνο παρασυμπαθητική νεύρωση</li>
+    <li class="option" data-correct="false">Επειδή μπλοκάρουν τους νικοτινικούς υποδοχείς των αδένων</li>
+    <li class="option" data-correct="false">Επειδή διεγείρουν τους αδρενεργικούς α2-υποδοχείς</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="59">
+  <h3>59. Ποιο από τα παρακάτω ΔΕΝ επηρεάζεται από αντιμουσκαρινικές ουσίες;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Καρδιακός ρυθμός</li>
+    <li class="option" data-correct="false">Έκκριση σάλιου</li>
+    <li class="option" data-correct="true">Νικοτινικά γαγγλιακά ερεθίσματα</li>
+    <li class="option" data-correct="false">Κινητικότητα εντέρου</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="60">
+  <h3>60. Ποιο από τα παρακάτω ζεύγη είναι ΣΩΣΤΟ για τις αντιμουσκαρινικές ουσίες;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ατροπίνη – αποκλεισμός μουσκαρινικών υποδοχέων</li>
+    <li class="option" data-correct="false">Σκοπολαμίνη – αποκλεισμός νικοτινικών υποδοχέων</li>
+    <li class="option" data-correct="false">Ατροπίνη – παράλυση σκελετικών μυών</li>
+    <li class="option" data-correct="false">Σκοπολαμίνη – αποκλεισμός συμπαθητικών γαγγλίων</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="61">
+  <h3>61. Τι σημαίνει ότι η ατροπίνη προσδένεται «συναγωνιστικά» στους μουσκαρινικούς υποδοχείς;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ανταγωνίζεται την ACh για την ίδια θέση πρόσδεσης στον υποδοχέα</li>
+    <li class="option" data-correct="false">Ενεργοποιεί τον υποδοχέα σε χαμηλές δόσεις</li>
+    <li class="option" data-correct="false">Αναστέλλει μη αναστρέψιμα τον υποδοχέα</li>
+    <li class="option" data-correct="false">Δεσμεύεται μόνο σε διαφορετικό αλλοστερικό σημείο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="62">
+  <h3>62. Ποιo από τα παρακάτω είναι αληθές για τη συναγωνιστική αναστολή;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Μπορεί να ξεπεραστεί αυξάνοντας τη συγκέντρωση του αγωνιστή</li>
+    <li class="option" data-correct="false">Μειώνει το μέγιστο αποτέλεσμα του αγωνιστή (Emax)</li>
+    <li class="option" data-correct="false">Δεν επηρεάζει την KD ή την EC50</li>
+    <li class="option" data-correct="false">Ο ανταγωνιστής δεν μπορεί να εκτοπιστεί</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="63">
+  <h3>63. Ποιο είναι το ΚΥΡΙΟ κλινικό αποτέλεσμα της ατροπίνης στην καρδιά;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αύξηση του καρδιακού ρυθμού μέσω αποκλεισμού των Μ2 υποδοχέων</li>
+    <li class="option" data-correct="false">Μείωση καρδιακού ρυθμού μέσω αύξησης του vagal tone</li>
+    <li class="option" data-correct="false">Απευθείας ενεργοποίηση β1-υποδοχέων</li>
+    <li class="option" data-correct="false">Αύξηση της αρτηριακής πίεσης μέσω αγγειοσύσπασης</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="64">
+  <h3>64. Ποια από τις παρακάτω δράσεις της ατροπίνης είναι ΛΑΝΘΑΣΜΕΝΗ;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Μυδρίαση</li>
+    <li class="option" data-correct="false">Βρογχοδιαστολή</li>
+    <li class="option" data-correct="false">Ξηροστομία</li>
+    <li class="option" data-correct="true">Αύξηση εφίδρωσης</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="65">
+  <h3>65. Γιατί η ατροπίνη μπορεί να προκαλέσει υπερθερμία;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Γιατί μπλοκάρει τους μουσκαρινικούς υποδοχείς των ιδρωτοποιών αδένων</li>
+    <li class="option" data-correct="false">Γιατί ενεργοποιεί το συμπαθητικό σύστημα</li>
+    <li class="option" data-correct="false">Γιατί αυξάνει τη θερμογένεση στους σκελετικούς μύες</li>
+    <li class="option" data-correct="false">Γιατί αυξάνει την παραγωγή φλεγμονωδών κυττοκινών</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="66">
+  <h3>66. Ποιο από τα παρακάτω είναι ΣΩΣΤΟ σχετικά με τη φαρμακολογική κατηγορία της ατροπίνης;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Είναι ανταγωνιστής των μουσκαρινικών υποδοχέων</li>
+    <li class="option" data-correct="false">Είναι φάρμακο που αναστέλλει την AchE</li>
+    <li class="option" data-correct="false">Είναι άμεσος νικοτινικός αγωνιστής</li>
+    <li class="option" data-correct="false">Δρα αποκλειστικά στο ΚΝΣ</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="67">
+  <h3>67. Ποιο φάρμακο μπορεί να χρησιμοποιηθεί ως αντίδοτο στην υπερδοσολογία ατροπίνης;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Φυσοστιγμίνη</li>
+    <li class="option" data-correct="false">Πραλιδοξίμη</li>
+    <li class="option" data-correct="false">Νεοστιγμίνη</li>
+    <li class="option" data-correct="false">Ιπρατρόπιο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="68">
+  <h3>68. Γιατί η φυσοστιγμίνη είναι το κατάλληλο αντίδοτο σε δηλητηρίαση από ατροπίνη;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Γιατί περνάει τον αιματοεγκεφαλικό φραγμό</li>
+    <li class="option" data-correct="false">Γιατί μπλοκάρει τους νικοτινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Γιατί δρα μόνο στην περιφέρεια</li>
+    <li class="option" data-correct="false">Γιατί ανταγωνίζει την ατροπίνη στους β-υποδοχείς</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="69">
+  <h3>69. Ποιo από τα παρακάτω είναι ΣΩΣΤΟ για τη συγγένεια της ατροπίνης στους υποδοχείς;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Έχει υψηλή συγγένεια για όλους τους μουσκαρινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Έχει υψηλή συγγένεια μόνο για τους Μ2 υποδοχείς</li>
+    <li class="option" data-correct="false">Δεν έχει συγγένεια για Μ1 υποδοχείς</li>
+    <li class="option" data-correct="false">Μπλοκάρει εκλεκτικά μόνο τους Μ3</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="70">
+  <h3>70. Ποια από τις παρακάτω δηλώσεις περιγράφει καλύτερα τη φαρμακοδυναμική της ατροπίνης;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ανταγωνιστικά εμποδίζει την πρόσδεση της Ach στους μουσκαρινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Αναστέλλει μη αναστρέψιμα τους Μ υποδοχείς</li>
+    <li class="option" data-correct="false">Ενεργοποιεί τους νικοτινικούς υποδοχείς του συμπαθητικού</li>
+    <li class="option" data-correct="false">Επαυξάνει την απελευθέρωση Ach από το νευρικό άκρο</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="71">
+  <h3>71. Ποια από τις παρακάτω δράσεις της ατροπίνης οφείλεται στο ότι περνά τον αιματοεγκεφαλικό φραγμό;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Κεντρική διέγερση και πιθανή σύγχυση σε υψηλές δόσεις</li>
+    <li class="option" data-correct="false">Βρογχοδιαστολή</li>
+    <li class="option" data-correct="false">Ξηροστομία</li>
+    <li class="option" data-correct="false">Μείωση της εφίδρωσης</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="72">
+  <h3>72. Ποια είναι η μέση διάρκεια δράσης της ατροπίνης μετά από συστηματική χορήγηση;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Περίπου 4 ώρες</li>
+    <li class="option" data-correct="false">20–30 λεπτά</li>
+    <li class="option" data-correct="false">12–24 ώρες</li>
+    <li class="option" data-correct="false">3–5 ημέρες</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="73">
+  <h3>73. Γιατί η ενστάλαξη ατροπίνης στον οφθαλμό μπορεί να έχει δράση που διαρκεί ημέρες;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Γιατί παρατεταμένα μπλοκάρει την προσαρμογή της ίριδας</li>
+    <li class="option" data-correct="false">Γιατί μεταβολίζεται πολύ γρήγορα στον οφθαλμό</li>
+    <li class="option" data-correct="false">Γιατί δρα μόνο σε νικοτινικούς υποδοχείς</li>
+    <li class="option" data-correct="false">Γιατί αυξάνει την παραγωγή υδατοειδούς υγρού</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="74">
+  <h3>74. Ποια από τις παρακάτω είναι σωστή συνέπεια της οφθαλμικής χορήγησης ατροπίνης;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Κίνδυνος αύξησης ενδοφθάλμιας πίεσης σε κλειστής γωνίας γλαύκωμα</li>
+    <li class="option" data-correct="false">Μείωση της ενδοφθάλμιας πίεσης σε οξύ γλαύκωμα</li>
+    <li class="option" data-correct="false">Σύσπαση της κόρης</li>
+    <li class="option" data-correct="false">Βελτίωση της προσαρμογής για κοντινή όραση</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="75">
+  <h3>75. Ποια δράση της ατροπίνης παρατηρείται περισσότερο στους βρόγχους;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Βρογχοδιαστολή και μείωση των εκκρίσεων</li>
+    <li class="option" data-correct="false">Ενίσχυση του βρογχόσπασμου</li>
+    <li class="option" data-correct="false">Αύξηση παραγωγής σάλιου</li>
+    <li class="option" data-correct="false">Αύξηση αντανακλαστικού βήχα</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="76">
+  <h3>76. Ποιος από τους παρακάτω μηχανισμούς εξηγεί την ξηροστομία που προκαλεί η ατροπίνη;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αποκλεισμός Μ3 υποδοχέων στους σιελογόνους αδένες</li>
+    <li class="option" data-correct="false">Αποκλεισμός νικοτινικών υποδοχέων στους αδένες</li>
+    <li class="option" data-correct="false">Αύξηση της έκκρισης Ach</li>
+    <li class="option" data-correct="false">Ενεργοποίηση α2-αδρενεργικών υποδοχέων</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="77">
+  <h3>77. Ποιο από τα παρακάτω θα αναμέναμε ΣΙΓΟΥΡΑ σε υπερδοσολογία ατροπίνης;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ξηροστομία και μυδρίαση</li>
+    <li class="option" data-correct="false">Σιελόρροια και μύση</li>
+    <li class="option" data-correct="false">Βραδυκαρδία</li>
+    <li class="option" data-correct="false">Αυξημένη εφίδρωση</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="78">
+  <h3>78. Ποια από τις παρακάτω είναι συχνότερη κεντρική εκδήλωση αντιμουσκαρινικής δηλητηρίασης από ατροπίνη;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Σύγχυση, παραλήρημα, ψευδαισθήσεις</li>
+    <li class="option" data-correct="false">Υπνηλία και καταστολή</li>
+    <li class="option" data-correct="false">Επιληπτικές κρίσεις λόγω υπερπαρασυμπαθητικού τόνου</li>
+    <li class="option" data-correct="false">Απόλυτη απουσία κεντρικών συμπτωμάτων</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="79">
+  <h3>79. Ποιος είναι ο κύριος μηχανισμός δράσης των μη εκπολωτικών (συναγωνιστικών) μυοπληγικών όπως το ροκουρόνιο;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Συναγωνίζονται με την ακετυλοχολίνη στους νικοτινικούς υποδοχείς χωρίς να τους διεγείρουν</li>
+    <li class="option" data-correct="false">Αναστέλλουν την ακετυλοχολινεστεράση στην τελική κινητική πλάκα</li>
+    <li class="option" data-correct="false">Αυξάνουν την απελευθέρωση ακετυλοχολίνης από το κινητικό νεύρο</li>
+    <li class="option" data-correct="false">Διεγείρουν άμεσα τα κανάλια Na<sup>+</sup> της μυϊκής ίνας</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="80">
+  <h3>80. Ποιο από τα παρακάτω είναι παράγωγο του κουραρίου που χρησιμοποιείται σήμερα ως μη εκπολωτικό μυοπληγικό;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ροκουρόνιο</li>
+    <li class="option" data-correct="false">Σουξαμεθόνιο</li>
+    <li class="option" data-correct="false">Νικοτίνη</li>
+    <li class="option" data-correct="false">Πιλοκαρπίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="81">
+  <h3>81. Ποιο από τα παρακάτω χαρακτηρίζει τα μη εκπολωτικά μυοπληγικά στην κλινική πράξη;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Προκαλούν αρχικές δεσμιδώσεις (fasciculations)</li>
+    <li class="option" data-correct="true">Προκαλούν προοδευτική χαλάρωση των σκελετικών μυών χωρίς αρχική σύσπαση</li>
+    <li class="option" data-correct="false">Αυξάνουν τον παρασυμπαθητικό τόνο στην καρδιά</li>
+    <li class="option" data-correct="false">Χρησιμοποιούνται κυρίως για τη θεραπεία του άσθματος</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="82">
+  <h3>82. Πώς μπορεί να αναστραφεί ο αποκλεισμός που προκαλούν τα μη εκπολωτικά μυοπληγικά στην τελική κινητική πλάκα;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Με χορήγηση αντιχολινεστερασικών όπως η νεοστιγμίνη</li>
+    <li class="option" data-correct="false">Με χορήγηση επιπλέον μη εκπολωτικού μυοπληγικού</li>
+    <li class="option" data-correct="false">Με χορήγηση ατροπίνης μόνο</li>
+    <li class="option" data-correct="false">Δεν είναι δυνατή καμία φαρμακολογική αναστροφή</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="83">
+  <h3>83. Τι μπορεί να συμβεί σε πολύ υψηλές δόσεις μη εκπολωτικών μυοπληγικών;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Αποκλείουν τους διαύλους ιόντων στην τελική κινητική πλάκα και ο αποκλεισμός γίνεται δύσκολα αναστρέψιμος</li>
+    <li class="option" data-correct="false">Μετατρέπονται λειτουργικά σε εκπολωτικά μυοπληγικά</li>
+    <li class="option" data-correct="false">Προκαλούν έντονη διέγερση των σκελετικών μυών</li>
+    <li class="option" data-correct="false">Αυξάνουν την απελευθέρωση κατεχολαμινών από τα επινεφρίδια</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="84">
+  <h3>84. Ποια είναι η κύρια χρήση των παραγώγων κουραρίου (μη εκπολωτικών μυοπληγικών) στην αναισθησία;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Αντιμετώπιση οξέος βρογχόσπασμου</li>
+    <li class="option" data-correct="true">Πρόκληση μυϊκής χάλασης κατά τη διάρκεια χειρουργικών επεμβάσεων</li>
+    <li class="option" data-correct="false">Αναλγησία σε μετεγχειρητικό πόνο</li>
+    <li class="option" data-correct="false">Καταστολή του ΚΝΣ</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="85">
+  <h3>85. Ποιο από τα παρακάτω ισχύει για τα μη εκπολωτικά μυοπληγικά ως προς το ΚΝΣ;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Δεν διασχίζουν τον αιματοεγκεφαλικό φραγμό</li>
+    <li class="option" data-correct="false">Προκαλούν έντονη καταστολή</li>
+    <li class="option" data-correct="false">Προκαλούν ευφορία και εξάρτηση</li>
+    <li class="option" data-correct="false">Χρησιμοποιούνται ως αναισθητικά μονοθεραπεία</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="86">
+  <h3>86. Η σουξαμεθόνιο (σουκινυλοχολίνη) ταξινομείται φαρμακολογικά ως:</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Εκπολωτικό μυοπληγικό</li>
+    <li class="option" data-correct="false">Μη εκπολωτικό μυοπληγικό</li>
+    <li class="option" data-correct="false">Γαγγλιοπληγικό</li>
+    <li class="option" data-correct="false">Αντιμουσκαρινικό</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="87">
+  <h3>87. Ποιο είναι το τυπικό αρχικό κλινικό φαινόμενο μετά τη χορήγηση σουξαμεθονίου;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Παροδικές μυϊκές δεσμιδώσεις (fasciculations)</li>
+    <li class="option" data-correct="false">Άμεση βαθιά χαλάρωση χωρίς καμία κίνηση</li>
+    <li class="option" data-correct="false">Γενικευμένοι τονικοκλωνικοί σπασμοί</li>
+    <li class="option" data-correct="false">Απότομη αύξηση της αρτηριακής πίεσης</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="88">
+  <h3>88. Τι χαρακτηρίζει τη Φάση I (depolarizing block) του αποκλεισμού από σουξαμεθόνιο;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Η μεμβράνη της μυϊκής ίνας παραμένει σε κατάσταση εκπόλωσης και δεν μπορεί να επαναπολωθεί φυσιολογικά</li>
+    <li class="option" data-correct="false">Η μεμβράνη είναι πλήρως επαναπολωμένη αλλά οι υποδοχείς είναι ανενεργοί</li>
+    <li class="option" data-correct="false">Η ακετυλοχολίνη απουσιάζει εντελώς από τη σύναψη</li>
+    <li class="option" data-correct="false">Η σύσπαση του μυός γίνεται εντονότερη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="89">
+  <h3>89. Στη Φάση II του αποκλεισμού από σουξαμεθόνιο:</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Η μεμβράνη επαναπολώνεται αλλά ο υποδοχέας είναι απευαισθητοποιημένος στην ακετυλοχολίνη</li>
+    <li class="option" data-correct="false">Η μεμβράνη παραμένει συνεχώς σε εκπόλωση</li>
+    <li class="option" data-correct="false">Ο υποδοχέας επανέρχεται πλήρως και αυξάνεται η συσταλτικότητα</li>
+    <li class="option" data-correct="false">Η δράση της σουξαμεθονίου έχει ήδη πλήρως λήξει</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="90">
+  <h3>90. Γιατί η χορήγηση αντιχολινεστερασικών στην αρχική Φάση I του αποκλεισμού από σουξαμεθόνιο δεν είναι επιθυμητή;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Γιατί αυξάνουν την ακετυλοχολίνη και παρατείνουν τον εκπολωτικό αποκλεισμό</li>
+    <li class="option" data-correct="false">Γιατί αναστρέφουν πλήρως τον αποκλεισμό και προκαλούν σπασμούς</li>
+    <li class="option" data-correct="false">Γιατί δεν επηρεάζουν καθόλου τη συγκέντρωση της ακετυλοχολίνης</li>
+    <li class="option" data-correct="false">Γιατί προκαλούν άμεση αποδόμηση της σουξαμεθονίου</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="91">
+  <h3>91. Ποια από τις παρακάτω αποτελεί σημαντική ανεπιθύμητη ενέργεια της σουξαμεθονίου;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Υπερκαλιαιμία</li>
+    <li class="option" data-correct="false">Υποκαλιαιμία</li>
+    <li class="option" data-correct="false">Σοβαρή υπεργλυκαιμία</li>
+    <li class="option" data-correct="false">Οξεία ηπατική ανεπάρκεια</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="92">
+  <h3>92. Η σουξαμεθόνιο μπορεί να συμβάλει στην εμφάνιση κακοήθους υπερθερμίας, ιδίως όταν συνδυάζεται με:</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Εισπνεόμενα γενικά αναισθητικά</li>
+    <li class="option" data-correct="false">Τοπικά αναισθητικά</li>
+    <li class="option" data-correct="false">Αντιισταμινικά</li>
+    <li class="option" data-correct="false">Μη στεροειδή αντιφλεγμονώδη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="93">
+  <h3>93. Τι μπορεί να συμβεί σε άτομο με γενετική ανεπάρκεια ψευδοχολινεστεράσης μετά από χορήγηση σουξαμεθονίου;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Παρατεταμένη άπνοια λόγω παρατεταμένου νευρομυϊκού αποκλεισμού</li>
+    <li class="option" data-correct="false">Βραχεία και πιο ήπια δράση του φαρμάκου</li>
+    <li class="option" data-correct="false">Πλήρης αντοχή στη δράση της σουξαμεθονίου</li>
+    <li class="option" data-correct="false">Άμεση αλλεργική αντίδραση τύπου Ι</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="94">
+  <h3>94. Ποια είναι μία από τις σημαντικότερες κλινικές χρήσεις της σουξαμεθονίου;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Ταχεία ενδοτραχειακή διασωλήνωση</li>
+    <li class="option" data-correct="false">Μακροχρόνια μυϊκή χάλαση σε ΜΕΘ για ημέρες</li>
+    <li class="option" data-correct="false">Χρόνια θεραπεία σπαστικότητας</li>
+    <li class="option" data-correct="false">Αντιμετώπιση παρκινσονισμού</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="95">
+  <h3>95. Σε ποια από τις παρακάτω καταστάσεις η χρήση σουξαμεθονίου αντενδείκνυται λόγω κινδύνου σοβαρής υπερκαλιαιμίας;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Σε εκτεταμένα εγκαύματα ή βαριές μυοπάθειες</li>
+    <li class="option" data-correct="false">Σε ήπια υπέρταση</li>
+    <li class="option" data-correct="false">Σε ανεπίπλεκτη στηθάγχη</li>
+    <li class="option" data-correct="false">Σε ελάσσονες δερματολογικές επεμβάσεις</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="79">
+  <h3>79. Ποιο είναι το ένζυμο που μετατρέπει την τυροσίνη σε DOPA;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">Τυροσινοϋδροξυλάση</li>
+    <li class="option" data-correct="false">DOPA-δεκαρβοξυλάση</li>
+    <li class="option" data-correct="false">ΜΑΟ</li>
+    <li class="option" data-correct="false">COMT</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="80">
+  <h3>80. Ποιο μόριο προκύπτει από την αποκαρβοξυλίωση της DOPA;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Νοραδρεναλίνη</li>
+    <li class="option" data-correct="false">Αδρεναλίνη</li>
+    <li class="option" data-correct="true">Ντοπαμίνη</li>
+    <li class="option" data-correct="false">Ομοβανιλικό οξύ</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="81">
+  <h3>81. Ποιο ένζυμο απαιτείται για τη σύνθεση νοραδρεναλίνης από ντοπαμίνη;</h3>
+  <ul class="options">
+    <li class="option" data-correct="true">β-Υδροξυλάση ντοπαμίνης</li>
+    <li class="option" data-correct="false">Τυροσινοϋδροξυλάση</li>
+    <li class="option" data-correct="false">Ν-μεθυλοτρανσφεράση φαινυλαιθανολαμίνης</li>
+    <li class="option" data-correct="false">COMT</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+<div class="question" data-question-id="82">
+  <h3>82. Ποια από τις παρακάτω μετατροπές συμβαίνει στο μυελό των επινεφριδίων;</h3>
+  <ul class="options">
+    <li class="option" data-correct="false">Τυροσίνη → DOPA</li>
+    <li class="option" data-correct="false">DOPA → Ντοπαμίνη</li>
+    <li class="option" data-correct="false">Ντοπαμίνη → Νοραδρεναλίνη</li>
+    <li class="option" data-correct="true">Νοραδρεναλίνη → Αδρεναλίνη</li>
+  </ul>
+  <div class="feedback"></div>
+</div>
+
+
+  </div>
+
+  <script>
+    const questions = Array.from(document.querySelectorAll('.question'));
+    const scoreSpan = document.getElementById('score');
+    const totalSpan = document.getElementById('totalQuestions');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let score = 0;
+    const totalQuestions = questions.length;
+    totalSpan.textContent = totalQuestions;
+
+    const updateScore = () => {
+      scoreSpan.textContent = score;
+    };
+
+    const addFeedbackText = (feedbackEl, isCorrect) => {
+      feedbackEl.textContent = isCorrect ? 'Σωστή απάντηση!' : 'Λάθος απάντηση. Δείτε την σωστή επιλογή.';
+      feedbackEl.classList.remove('correct-text', 'incorrect-text');
+      feedbackEl.classList.add(isCorrect ? 'correct-text' : 'incorrect-text');
+    };
+
+    const handleOptionClick = (event) => {
+      const option = event.currentTarget;
+      const question = option.closest('.question');
+
+      if (question.classList.contains('answered')) {
+        return;
+      }
+
+      const isCorrect = option.dataset.correct === 'true';
+      const feedbackEl = question.querySelector('.feedback');
+
+      question.classList.add('answered');
+      option.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+      if (!isCorrect) {
+        const correctOption = question.querySelector('.option[data-correct="true"]');
+        if (correctOption) {
+          correctOption.classList.add('correct');
+        }
+      } else {
+        score += 1;
+        updateScore();
+      }
+
+      addFeedbackText(feedbackEl, isCorrect);
+    };
+
+    const resetQuiz = () => {
+      score = 0;
+      updateScore();
+
+      questions.forEach((question) => {
+        question.classList.remove('answered');
+        const feedbackEl = question.querySelector('.feedback');
+        feedbackEl.textContent = '';
+        feedbackEl.classList.remove('correct-text', 'incorrect-text');
+
+        question.querySelectorAll('.option').forEach((option) => {
+          option.classList.remove('correct', 'incorrect');
+        });
+      });
+    };
+
+    questions.forEach((question) => {
+      question.querySelectorAll('.option').forEach((option) => {
+        option.addEventListener('click', handleOptionClick);
+      });
+    });
+
+    resetBtn.addEventListener('click', resetQuiz);
+  </script>
+</body>
+</html>
