@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ΚΝΣ – Ενδοκράνια Νεοπλάσματα (Notes)</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
+    --card:#f8fafc;
+    --card2:#ffffff;
+    --border:#e5e7eb;
+    --shadow:0 6px 20px rgba(17,24,39,.06);
+    --accent:#1d4ed8;
+    --sos:#dc2626;
+    --info:#0ea5e9;
+    --ok:#16a34a;
+    --warn:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Sticky toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .toolbar-inner{max-width:1200px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 14px;flex-wrap:wrap}
+  .hl-group{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{border:1px solid var(--border);background:var(--card2);padding:8px 10px;border-radius:10px;cursor:pointer;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .btn:hover{border-color:#cbd5e1}
+  .btn.small{padding:6px 9px;border-radius:10px;font-size:13px}
+  .chip{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+  .search{display:flex;gap:8px;align-items:center}
+  .search input{width:min(420px,70vw);border:1px solid var(--border);border-radius:10px;padding:8px 10px;outline:none}
+  .search input:focus{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(147,197,253,.35)}
+
+  /* Page layout */
+  main{max-width:1200px;margin:0 auto;padding:82px 14px 34px;}
+  header.page{
+    background:linear-gradient(180deg,#ffffff, #f8fafc);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:16px 16px;
+  }
+  h1{font-size:22px;margin:0 0 6px;letter-spacing:.1px}
+  .sub{color:var(--muted);margin:0}
+
+  .nav{
+    margin-top:12px;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .nav a{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:#fff;padding:7px 10px;border-radius:999px;font-size:13px}
+
+  /* Grid cards */
+  .section{margin-top:18px}
+  .section-title{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+  .section-title h2{font-size:18px;margin:0}
+  .section-title .meta{color:var(--muted);font-size:12px}
+
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+  .card{
+    grid-column:span 6;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:12px 12px;
+    overflow:hidden;
+  }
+  .card.white{background:#fff}
+  .card.span-12{grid-column:span 12}
+  .card.span-8{grid-column:span 8}
+  .card.span-4{grid-column:span 4}
+  .card h3{margin:0 0 6px;font-size:15.5px}
+  .card .hint{color:var(--muted);font-size:12.5px;margin-top:6px}
+  ul{margin:8px 0 0 18px;padding:0}
+  li{margin:4px 0}
+
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--muted)}
+  .tag.sos{border-color:rgba(220,38,38,.35);color:var(--sos);background:rgba(220,38,38,.06)}
+  .tag.info{border-color:rgba(14,165,233,.35);color:#0369a1;background:rgba(14,165,233,.06)}
+  .tag.ok{border-color:rgba(22,163,74,.35);color:var(--ok);background:rgba(22,163,74,.06)}
+
+  /* Image slots */
+  .img-slot{
+    margin-top:10px;
+    border:1px dashed #cbd5e1;
+    border-radius:14px;
+    padding:10px;
+    background:#fff;
+  }
+  .img-slot .row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .img-slot label{font-weight:600;font-size:13px}
+  .img-slot input{max-width:280px}
+  .img-slot img{display:none;max-width:100%;border-radius:12px;margin-top:10px;border:1px solid var(--border)}
+
+  /* Highlighter marks */
+  mark.hl{padding:0 .15em;border-radius:.35em}
+  mark.hl-yellow{background:rgba(253,230,138,.9)}
+  mark.hl-green{background:rgba(134,239,172,.9)}
+  mark.hl-red{background:rgba(252,165,165,.95)}
+
+  /* Footer / quiz */
+  .footer{margin-top:22px;display:flex;justify-content:center}
+  .quiz-btn{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;box-shadow:0 10px 24px rgba(29,78,216,.18)}
+  .quiz-btn:hover{filter:brightness(0.97)}
+
+  /* Responsive */
+  @media (max-width: 900px){
+    .card{grid-column:span 12}
+  }
+
+  /* Print */
+  @media print{
+    .toolbar{display:none}
+    main{padding-top:14px}
+    .card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar" role="banner">
+  <div class="toolbar-inner">
+    <div class="hl-group">
+      <span class="chip"><strong>Highlighter:</strong> επίλεξε κείμενο → πάτα χρώμα</span>
+      <button class="btn small" data-hl="yellow" title="Highlight κίτρινο">🟨</button>
+      <button class="btn small" data-hl="green" title="Highlight πράσινο">🟩</button>
+      <button class="btn small" data-hl="red" title="Highlight κόκκινο">🟥</button>
+      <button class="btn small" id="erase" title="Αφαίρεση highlight από επιλογή">🧽 Σβήσιμο</button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="search" aria-label="Search">
+      <input id="q" type="search" placeholder="Αναζήτηση μέσα στις σημειώσεις (π.χ. glioblastoma, μηνιγγίωμα, lymphoma)" />
+      <button class="btn" id="find">Find</button>
+      <button class="btn" id="clear">Clear</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <header class="page">
+    <h1>ΚΝΣ: Ενδοκράνια Νεοπλάσματα (και Σπονδυλική Στήλη) — Notes σε Grid</h1>
+    <p class="sub">Light theme • κουτάκια • placeholders εικόνων (με σελίδες) • sticky highlighter • κουμπί Quiz στο τέλος</p>
+
+    <div class="nav">
+      <a href="#approach">Προσέγγιση / DDX</a>
+      <a href="#neuroepithelial">Νευροεπιθηλιακοί (Gliomas)</a>
+      <a href="#embryonal">Εμβρυϊκοί / PNET</a>
+      <a href="#pineal">Επίφυση / Γερμινικοί</a>
+      <a href="#nerves">Κρανιακά/Νωτιαία νεύρα</a>
+      <a href="#meninges">Μηνιγγικοί</a>
+      <a href="#lymphoma">Λέμφωμα</a>
+      <a href="#sellar">Εφίππιο / Υπόφυση</a>
+      <a href="#mets">Μεταστάσεις</a>
+      <a href="#spine">Σπονδυλική Στήλη</a>
+      <a href="#mimics">Μιμητές</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </header>
+
+  <!-- APPROACH -->
+  <section class="section" id="approach">
+    <div class="section-title"><h2>Προσέγγιση όγκου (πρακτικό DDX)</h2><span class="meta">Slides: σελ. 6–8</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>1) Ένδο- vs Έξω-παρεγχυματικός</h3>
+        <span class="tag info">SOS για περιγραφή MRI/CT</span>
+        <ul>
+          <li><strong>Ένδο-παρεγχυματικός</strong>: διευρύνει φλοιό + υποκείμενη λευκή ουσία, <strong>εξαλείφει</strong> τον υπαραχνοειδή χώρο, η μήνιγγα/αγγεία φαίνονται πιο περιφερικά.</li>
+          <li><strong>Έξω-παρεγχυματικός</strong>: <strong>πιέζει</strong> φλοιό/λευκή ουσία, διευρύνει υπαραχνοειδή χώρο (<em>σημείο μηνίσκου</em>), μπορεί να προκαλέσει <strong>οστική αντίδραση</strong>.</li>
+        </ul>
+        <div class="img-slot" data-page="6">
+          <div class="row">
+            <label>Εικόνα από σελ. 6 (σχήμα: ενδο- vs έξω-παρεγχυματικός)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>2) Υπερ- vs Υποσκηνίδιος + Ηλικία</h3>
+        <span class="tag">Κλασικό “filter” της Δ/Δ</span>
+        <ul>
+          <li>Πάντα γράφω: <strong>εντόπιση</strong> (λοβός/παρεγκεφαλίδα/κοιλίες), <strong>υπερ/υποσκηνίδιος</strong>, <strong>ηλικία</strong>.</li>
+          <li>Σε παιδιά: πιο συχνά όγκοι οπίσθιου βόθρου/PNETs/επενδυματικοί. Σε ενήλικες: υπερσκηνίδιες γλοιακές βλάβες + μεταστάσεις.</li>
+        </ul>
+        <div class="img-slot" data-page="7">
+          <div class="row">
+            <label>Εικόνα από σελ. 7 (παράδειγμα εντόπισης)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+
+      <div class="card span-12 white">
+        <h3>WHO ταξινόμηση (ιδέα)</h3>
+        <span class="tag info">Slides: σελ. 2–5</span>
+        <ul>
+          <li>Κατηγορίες: <strong>νευροεπιθηλιακοί</strong>, <strong>κρανιακών/νωτιαίων νεύρων</strong>, <strong>μηνιγγικοί</strong>, <strong>λεμφώματα/αιμοποιητικοί</strong>, <strong>γερμινικοί</strong>, <strong>εφιππίου</strong>, <strong>μεταστάσεις</strong>.</li>
+          <li>Πρωτοπαθείς όγκοι: <strong>Grade I–IV</strong> (low grade I–II, high grade III–IV).</li>
+          <li>Νεότερες ταξινομήσεις: ενσωμάτωση μοριακών δεικτών (π.χ. <strong>IDH mutant vs wildtype</strong> στα diffuse astrocytic/oligodendroglial).</li>
+        </ul>
+        <div class="img-slot" data-page="5">
+          <div class="row">
+            <label>Εικόνα από σελ. 5 (IDH mutant/wildtype πίνακας)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEUROEPITHELIAL -->
+  <section class="section" id="neuroepithelial">
+    <div class="section-title"><h2>Νευροεπιθηλιακοί όγκοι (Gliomas κ.ά.)</h2><span class="meta">Slides: ~σελ. 9–39</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Αστροκυττώματα — Γενικά (Grade I–IV)</h3>
+        <span class="tag">Slides: σελ. 11</span>
+        <ul>
+          <li><strong>Grade I</strong>: Pilocytic astrocytoma, Subependymal giant cell astrocytoma, Desmoplastic infantile astrocytoma/ganglioma</li>
+          <li><strong>Grade II</strong>: Diffuse astrocytoma (fibrillary / protoplasmic / gemistocytic)</li>
+          <li><strong>Grade III</strong>: Anaplastic astrocytoma</li>
+          <li><strong>Grade IV</strong>: Glioblastoma</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Πιλοκυτταρικό αστροκύττωμα (Grade I)</h3>
+        <span class="tag ok">Καλοήθες / παιδική ηλικία</span>
+        <span class="tag">Slides: σελ. 12–14</span>
+        <ul>
+          <li>Παιδιά (≈ 1/3 όλων των όγκων), <strong>οπίσθιος κρανιακός βόθρος</strong> 80–85%.</li>
+          <li>Καλά όρια, συχνά <strong>κυστική αλλοίωση + τοιχωματικός όζος</strong>.</li>
+          <li>Συνήθως <strong>έντονη ενίσχυση</strong> του όζου/συμπαγούς τμήματος.</li>
+          <li class="hint"><strong>Extra κλινικό:</strong> στα παιδιά → υδροκεφαλία/αταξία αν οπίσθιος βόθρος.</li>
+        </ul>
+        <div class="img-slot" data-page="13">
+          <div class="row">
+            <label>Εικόνες από σελ. 13–14 (MRI παραδείγματα)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Low-grade διάχυτο αστροκύττωμα (Grade II)</h3>
+        <span class="tag">Slides: σελ. 15–19</span>
+        <ul>
+          <li>Νεαροί ενήλικες (30–40).</li>
+          <li><strong>Διηθητικό</strong> → δύσκολη πλήρης εξαίρεση.</li>
+          <li>Τάση <strong>μετατροπής</strong> σε υψηλότερης κακοήθειας όγκους.</li>
+          <li>Συμπτώματα: <strong>επιληψία ≈ 80%</strong>, εστιακά ≈ 30%, διαταραχές συνείδησης 10–30%, ↑ΕΚΠ ≈ 10%.</li>
+          <li class="hint"><strong>Απεικονιστικό tip:</strong> συχνά μη-ενισχυόμενο, αλλά αυτό <em>δεν</em> αποκλείει grade III.</li>
+        </ul>
+        <div class="img-slot" data-page="19">
+          <div class="row">
+            <label>Εικόνα από σελ. 19 (διάχυτο διηθητικό αστροκύττωμα)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>High-grade αστροκυττώματα (Grade III–IV)</h3>
+        <span class="tag sos">SOS: νέκρωση = κλειδί</span>
+        <span class="tag">Slides: σελ. 16, 20–22</span>
+        <ul>
+          <li><strong>Αναπλαστικό (Grade III)</strong>: δυσχερής διάκριση από grade II, <strong>εξ ορισμού: απουσία νέκρωσης</strong>.</li>
+          <li>Grade III: καλά περιγεγραμμένο/ανομοιογενές, περιεστιακό οίδημα, μέτρια–έντονη ενίσχυση, <strong>όχι νέκρωση</strong>.</li>
+          <li><strong>Γλοιοβλάστωμα (Grade IV)</strong>: μεγάλος όγκος σε σχέση με διάρκεια συμπτωμάτων, επίκεντρο στη λευκή ουσία, ασαφή όρια, <strong>κεντρική νέκρωση</strong> (μακροσκοπικές κύστεις).</li>
+          <li class="hint"><strong>Extra παθολογία:</strong> το GBM κάνει νέκρωση λόγω ταχύτατης ανάπτυξης → υποξία → νέκρωση, “ring enhancement”.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Ολιγοδενδρογλοίωμα (Grade II–III)</h3>
+        <span class="tag">Slides: σελ. 28–31</span>
+        <ul>
+          <li>Βραδέως αναπτυσσόμενος όγκος (Grade II).</li>
+          <li>Ασαφή όρια, «ερυθρόφαιοι ζελατινώδεις».</li>
+          <li><strong>Συχνές αιμορραγίες → επασβεστώσεις</strong>.</li>
+          <li>Συχνά κοντά στο φλοιό → <strong>επιληπτικές κρίσεις</strong> ως πρώτη εκδήλωση.</li>
+          <li><strong>Αναπλαστικό (Grade III)</strong>: κυτταροβρίθεια/πλειομορφισμός, πιθανή λεπτομηνιγγική–υπαραχνοειδής επέκταση.</li>
+        </ul>
+        <div class="img-slot" data-page="30">
+          <div class="row">
+            <label>Εικόνες από σελ. 29–31 (ολιγοδενδρογλοίωμα/αναπλαστικό)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Επενδύμωμα (κυρίως ενδοκοιλιακό)</h3>
+        <span class="tag">Slides: σελ. 32–34</span>
+        <ul>
+          <li>Grade II. Ξεκινά από το επένδυμα → επέκταση ενδοκοιλιακά ή ενδοπαρεγχυματικά.</li>
+          <li>Παιδιά: συχνά <strong>4η κοιλία</strong>. Μεγαλύτερες ηλικίες: μπορεί παντού.</li>
+          <li>Καλά περιγεγραμμένος, συχνά <strong>κύστεις + αποτιτανώσεις</strong>.</li>
+          <li>Μπορεί να επεκταθεί από τρήματα <strong>Luschka/Magendie</strong> ή να διασπαρθεί μέσω ΕΝΥ.</li>
+          <li class="hint"><strong>Extra:</strong> η διασπορά στο ΕΝΥ είναι λόγος που ζητάμε MRI νευράξονα σε ύποπτα περιστατικά.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Γαγγλιογλοίωμα / Γαγγλιοκύττωμα / Νευροκύττωμα</h3>
+        <span class="tag ok">Σχετικά καλοήθεις</span>
+        <span class="tag">Slides: σελ. 35</span>
+        <ul>
+          <li>Όγκοι υψηλής διαφοροποίησης → σχετικά καλοήθεις.</li>
+          <li><strong>Γαγγλιογλοίωμα</strong>: συχνότερο, νέα ηλικία, <strong>κροταφικός λοβός → κροταφική επιληψία</strong>.</li>
+          <li>Δεσμποπλαστικό γαγγλιογλοίωμα (DIG), Νευροκύττωμα.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>DNET (Dysembryoplastic neuroepithelial tumor)</h3>
+        <span class="tag">Slides: σελ. 36–37</span>
+        <ul>
+          <li>Δυσεμβρυονικός νευροεπιθηλιακός όγκος, συχνά σε νέους.</li>
+          <li class="hint"><strong>Extra κλινικό:</strong> κλασική συσχέτιση με χρόνια φαρμακοανθεκτική εστιακή επιληψία, συνήθως φλοιϊκά.</li>
+        </ul>
+        <div class="img-slot" data-page="37">
+          <div class="row">
+            <label>Εικόνα από σελ. 37 (DNETs)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EMBRYONAL -->
+  <section class="section" id="embryonal">
+    <div class="section-title"><h2>Εμβρυϊκοί όγκοι / PNET</h2><span class="meta">Slides: σελ. 36–39</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>PNETs – γενικά</h3>
+        <ul>
+          <li>Προέρχονται από αρχέγονα κύτταρα (νευροεπιθηλιακοί).</li>
+          <li>Κατηγορίες (όπως αναφέρονται): medulloepithelioma, neuroblastoma, ganglioneuroblastoma, ependymoblastoma, <strong>medulloblastoma</strong> (+ υπότυποι).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Μυελοβλάστωμα (Medulloblastoma)</h3>
+        <span class="tag sos">SOS: διασπορά ΕΝΥ</span>
+        <ul>
+          <li>Ο πιο συχνός <strong>υποσκηνίδιος</strong> όγκος παιδικής ηλικίας, Grade IV.</li>
+          <li>Συχνότερη εντόπιση: <strong>σκώληκας</strong> (midline).</li>
+          <li>Καλά αφοριζόμενος, συμπαγής με πιθανές μικροκύστεις/αιμορραγίες, μέτριος εμπλουτισμός.</li>
+          <li>Μπορεί να διέρχεται από τρήματα L & Μ.</li>
+          <li><strong>Συχνή μηνιγγική μετάσταση</strong> λόγω διασποράς στο ΕΝΥ → “drop metastases”.</li>
+        </ul>
+        <div class="img-slot" data-page="38">
+          <div class="row">
+            <label>Εικόνα από σελ. 38 (μυελοβλάστωμα)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PINEAL / GERM -->
+  <section class="section" id="pineal">
+    <div class="section-title"><h2>Όγκοι επίφυσης / Γερμινικοί όγκοι</h2><span class="meta">Slides: σελ. 40–43</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Όγκοι επίφυσης — κλινικά & tips</h3>
+        <ul>
+          <li>~1% ενδοκράνιων όγκων, συχνότερα σε παιδιά.</li>
+          <li>Φυσιολογική αποτιτάνωση επίφυσης (~40% μέχρι 40 ετών) → μην την “βαφτίσεις” παθολογία.</li>
+          <li>Κλινικά: ↑ΕΚΠ, <strong>σύνδρομο Parinaud</strong>, παρεγκεφαλιδικά σύνδρομα, ενδοκρινικές διαταραχές.</li>
+          <li class="hint"><strong>Extra:</strong> Parinaud = διαταραχή κάθετης βλέψης από πίεση τετραδυμίας περιοχής.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Παραδείγματα: επιφυσιοκύτωμα / τεράτωμα</h3>
+        <span class="tag">Slides: σελ. 41–42</span>
+        <div class="img-slot" data-page="41">
+          <div class="row">
+            <label>Εικόνα από σελ. 41 (Επιφυσιοκύτωμα)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+        <div class="img-slot" data-page="42">
+          <div class="row">
+            <label>Εικόνα από σελ. 42 (Τεράτωμα)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NERVES -->
+  <section class="section" id="nerves">
+    <div class="section-title"><h2>Όγκοι κρανιακών & νωτιαίων νεύρων (κυρίως σβανώματα)</h2><span class="meta">Slides: σελ. 45–49</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Γενικά (Schwannoma / Neurofibroma)</h3>
+        <ul>
+          <li>Εντόπιση: ενδοκράνια (π.χ. αιθουσαίο, τρίδυμο), νωτιαίος μυελός (ριζικά σβανώματα).</li>
+          <li>Μπορεί να σχετίζονται με <strong>νευροϊνωμάτωση</strong>.</li>
+          <li>Στρογγυλές/λοβώδεις βλάβες με σαφές ινώδες περίβλημα, συνήθως καλοήθεις.</li>
+          <li>Στο νωτιαίο μυελό: χαρακτηριστική διαμόρφωση <strong>«κλεψύδρας»</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Extra παθολογία: διαφορά νευρινώματος vs σβανώματος (σπονδυλικά)</h3>
+        <span class="tag">Χρήσιμο για ερμηνεία imaging</span>
+        <ul>
+          <li><strong>Νευροίνωμα</strong>: πιο κεντρική εντόπιση, μίξη με νευράξονες.</li>
+          <li><strong>Σβάνωμα</strong>: έκκεντρη εντόπιση, πιο “διαχωρίσιμο” από τον νευράξονα.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENINGES -->
+  <section class="section" id="meninges">
+    <div class="section-title"><h2>Μηνιγγικοί όγκοι</h2><span class="meta">Slides: σελ. 50–59</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Μηνιγγίωμα — βασικά</h3>
+        <span class="tag sos">Πολύ συχνό</span>
+        <ul>
+          <li>Συχνότερος μη-νευροεπιθηλιακός όγκος, 15–20% ενδοκράνιων.</li>
+          <li>Κλινικά: συχνά ασυμπτωματικό, συμπτώματα ανάλογα με εντόπιση.</li>
+          <li>Απεικονιστικά: στρογγύλοι/λοβωτοί/επίπεδοι όγκοι με <strong>σημαντική ενίσχυση</strong> μετά σκιαγραφικό.</li>
+          <li class="hint"><strong>Extra:</strong> τυπικά extra-axial σημεία: dural tail, hyperostosis (ανάλογα περίπτωση).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Αιμαγγειοβλάστωμα (Hemangioblastoma)</h3>
+        <span class="tag">Slides: σελ. 57–59</span>
+        <ul>
+          <li>Καλοήθης όγκος ενηλίκων (≈20% σε μικρότερη ηλικία).</li>
+          <li>Τυπικά οπίσθιος κρανιακός βόθρος.</li>
+          <li>Απεικονιστικά: κυστικός όγκος με <strong>τοιχωματικό όζο</strong> ≈60% ή συμπαγής/κυστικός.</li>
+          <li>Έντονη σκιαγράφιση συμπαγούς στοιχείου, όχι του τοιχώματος του κυστικού.</li>
+          <li class="hint"><strong>Extra:</strong> συσχέτιση με VHL (ιδίως πολλαπλές βλάβες).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LYMPHOMA -->
+  <section class="section" id="lymphoma">
+    <div class="section-title"><h2>Λέμφωμα ΚΝΣ</h2><span class="meta">Slides: σελ. 61–62</span></div>
+
+    <div class="grid">
+      <div class="card span-12">
+        <h3>Λέμφωμα — τι να γράφεις</h3>
+        <span class="tag sos">SOS imaging pattern</span>
+        <ul>
+          <li>Πρωτοπαθές vs δευτεροπαθές. Πρωτοπαθές: ενδοπαρεγχυματικό, συνήθως non-Hodgkin, περικοιλιακά/μεσολόβιο/βασικά γάγγλια.</li>
+          <li>Δευτεροπαθές: μηνιγγική εντόπιση.</li>
+          <li>Απεικονιστικά: υπέρπυκνες εστίες (CT) με σημαντική ενίσχυση. T1 ενδιάμεσο, T2 χαμηλό/ενδιάμεσο + οίδημα.</li>
+          <li class="hint"><strong>Extra παθολογία:</strong> υψηλή κυτταροβρίθεια → T2 σχετικά χαμηλό και diffusion restriction (κλασικό).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELLAR -->
+  <section class="section" id="sellar">
+    <div class="section-title"><h2>Εφίππιο / Υπόφυση</h2><span class="meta">Slides: σελ. 68–71</span></div>
+
+    <div class="grid">
+      <div class="card span-12">
+        <h3>Αδενώματα υπόφυσης — κλασικά</h3>
+        <ul>
+          <li>3ος συχνότερος όγκος ΚΝΣ (4–17%).</li>
+          <li>Κλινικά: ανάλογα με μέγεθος/επέκταση/ορμονική διαταραχή (συχνότερα <strong>προλακτινώματα</strong>).</li>
+          <li>Ταξινόμηση: <strong>μίκρο</strong> vs <strong>μάκρο</strong>-αδενώματα.</li>
+          <li>ΜΤ μέθοδος εκλογής.</li>
+          <li>Μικροαδενώματα: μη εμπλουτιζόμενες εστίες, πιθανή απόκλιση μίσχου/κύρτωση παρυφής.</li>
+          <li>Μακροαδενώματα: διεύρυνση, διάβρωση οστικών δομών.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- METASTASES -->
+  <section class="section" id="mets">
+    <div class="section-title"><h2>Εγκεφαλικές μεταστάσεις</h2><span class="meta">Slides: σελ. 73–75</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Γενικά</h3>
+        <span class="tag sos">Πολύ συχνές</span>
+        <ul>
+          <li>40–50% των παρεγχυματικών όγκων.</li>
+          <li>50% μονήρεις, 50% πολλαπλές (20% δύο εστίες).</li>
+          <li>Πρωτοπαθείς: πνεύμονας ~50%, μαστός ~15%, μελάνωμα ~11%.</li>
+          <li>Συχνά στα όρια φαιάς–λευκής ουσίας.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Απεικόνιση (CT)</h3>
+        <span class="tag">Slides: σελ. 74</span>
+        <ul>
+          <li>Υπόπυκνη/ες εστία/ες (εκτός αν αιμορραγία/αποτιτανώσεις/υψηλό πρωτεϊνικό περιεχόμενο).</li>
+          <li>Σημαντικό περιεστιακό οίδημα — μερικές φορές το μόνο έμμεσο εύρημα.</li>
+          <li>Συχνά περιφερικός εμπλουτισμός.</li>
+          <li class="hint"><strong>Extra:</strong> αιμορραγικές μεταστάσεις: μελάνωμα, RCC, χοριοκαρκίνωμα κ.ά.</li>
+        </ul>
+      </div>
+
+      <div class="card span-12">
+        <h3>Συνοπτικός “χάρτης” υπερ/υποσκηνιδίων (όπως στο τέλος της παρουσίασης)</h3>
+        <span class="tag">Slides: σελ. 83–86</span>
+        <ul>
+          <li><strong>Υπερσκηνίδιοι (Ενήλικες)</strong>: αστροκυτταρικοί (αστροκυττώματα–GBM), μεταστάσεις, ενδοκοιλιακοί (επενδύμωμα/κεντρικό νευροκύττωμα), ολιγοδενδρογλοιώματα, λέμφωμα.</li>
+          <li><strong>Υπερσκηνίδιοι (Παιδιά)</strong>: πλειόμορφο ξανθοαστροκύττωμα, PNETs (μυελοβλάστωμα), γαγγλιογλοίωμα/γαγγλιοκύττωμα/DIG, DNET.</li>
+          <li><strong>Υποσκηνίδιοι (Ενήλικες)</strong>: αναπλαστικό–GBM, PNETs, επενδυματικοί, αιμαγγειοβλάστωμα, μεταστάσεις.</li>
+          <li><strong>Υποσκηνίδιοι (Παιδιά)</strong>: πιλοκυτταρικό, PNETs-μυελοβλάστωμα, επενδύμωμα.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPINE -->
+  <section class="section" id="spine">
+    <div class="section-title"><h2>Όγκοι Σπονδυλικής Στήλης / Νωτιαίου Μυελού</h2><span class="meta">Slides: σελ. 93–131 (περίπου)</span></div>
+
+    <div class="grid">
+      <div class="card span-12">
+        <h3>Ταξινόμηση εντόπισης (το 1/2 της διάγνωσης)</h3>
+        <span class="tag sos">SOS: εντόπιση</span>
+        <ul>
+          <li><strong>Εξωμυελικοί – εξωμηνιγγικοί</strong>: όγκοι νευρικών ελύτρων.</li>
+          <li><strong>Εξωμυελικοί – ενδομηνιγγικοί</strong>: μηνιγγιώματα, όγκοι νευρικών ελύτρων, <strong>drop metastases</strong>.</li>
+          <li><strong>Ενδομυελικοί</strong>: αστροκύττωμα, επενδύμωμα, αιμαγγειοβλάστωμα, μεταστάσεις.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Ρόλος απεικόνισης (τι κοιτάμε)</h3>
+        <ul>
+          <li>Ακριβές ύψος (ανώτερα/κατώτερα όρια) — να περιλαμβάνεται ΑΜΣΣ ή ΟΜΣΣ.</li>
+          <li>Ενίσχυση: βοηθά Δ/Δ και βαθμό κακοήθειας.</li>
+          <li>Εγκάρσιες τομές: θέση του όγκου εντός του μυελού.</li>
+          <li>Διάκριση συμπαγούς τμήματος–κύστεων.</li>
+          <li>Να σκέφτομαι συμπληρωματικά: <strong>VHL</strong>, <strong>NF2</strong> όταν ταιριάζει.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Επενδύμωμα (νωτιαίου)</h3>
+        <span class="tag">Slides: σελ. 106–110</span>
+        <ul>
+          <li>Συχνότερος όγκος Ν.Μ σε >30 ετών (&gt;50%), 2ος συχνότερος σε παιδιά.</li>
+          <li>Χαμηλής κακοήθειας, μέση γραμμή (επένδυμα μυελικού σωλήνα).</li>
+          <li>ΜΤ: ανομοιογένεια Τ2 (μη ειδική), σχετικά ομοιογενής ενίσχυση συμπαγών στοιχείων.</li>
+          <li><strong>Μυξο-θηλωματώδες επενδύμωμα</strong>: Grade I, κώνος/ιππουρίδα, αλλαντοειδής μορφή, μπορεί Τ1 ↑ (μυξωματώδης εκφύλιση).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Αστροκύττωμα (νωτιαίου)</h3>
+        <span class="tag">Slides: σελ. 111–113</span>
+        <ul>
+          <li>Συχνότερος στα παιδιά (~60%), στους ενήλικες ~25–30%.</li>
+          <li>ΘΜΣΣ/ΑΜΣΣ (ιδίως παιδιά).</li>
+          <li>Α/Α: διεύρυνση εύρους σπ. σωλήνα, σκολίωση. ΜΤ: διόγκωση ΝΜ, ενδιάμεσο σήμα, οίδημα, ενίσχυση, πιθανή σύριγγα.</li>
+        </ul>
+      </div>
+
+      <div class="card span-12">
+        <h3>Αιμαγγειοβλάστωμα (νωτιαίου)</h3>
+        <span class="tag">Slides: σελ. 114–118</span>
+        <ul>
+          <li>2–4% των όγκων Ν.Μ. Στο 1/3 συνδυάζεται με <strong>Von Hippel–Lindau</strong>.</li>
+          <li>90% σε ΑΜΣΣ+ΘΜΣΣ, τυπικά οπίσθιες δέσμες.</li>
+          <li>Υπεραγγειούμενος όζος, 2/3 έχουν κυστικό στοιχείο, 60% συριγγοϋδρομυελικές κοιλότητες.</li>
+          <li>Συχνά συνδυάζεται με βλάβες παρεγκεφαλίδας.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Μεταστάσεις (νωτιαίου)</h3>
+        <span class="tag">Slides: σελ. 119–123</span>
+        <ul>
+          <li>Παρεγχυματικές, ή διήθηση από παρακείμενες οστικές μεταστάσεις.</li>
+          <li>Διασπορά στο ΕΝΥ: <strong>drop metastases</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIMICS -->
+  <section class="section" id="mimics">
+    <div class="section-title"><h2>Μιμητές όγκων (πολύ σημαντικοί)</h2><span class="meta">Slides: σελ. 124–130</span></div>
+
+    <div class="grid">
+      <div class="card span-12">
+        <h3>Μην “βαφτίζεις” όγκο αυτό που είναι φλεγμονή/ισχαιμία/κύστη</h3>
+        <span class="tag sos">SOS</span>
+        <ul>
+          <li>Μυελίτιδα / απομυελίνωση (συχνά αλλάζει σε follow-up).</li>
+          <li>Έμφρακτο μυελού (κλινικο-απεικονιστική συσχέτιση, DWI όπου υπάρχει).</li>
+          <li>Αραχνοειδής κύστη.</li>
+          <li>Περιμυελικές κύστεις (Tarlov).</li>
+        </ul>
+        <div class="img-slot" data-page="126">
+          <div class="row">
+            <label>Εικόνα από σελ. 126–129 (μυελίτιδα/έμφρακτο/αραχνοειδής κύστη/Tarlov)</label>
+            <input type="file" accept="image/*" class="img-input" />
+          </div>
+          <img class="preview" alt="preview" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="section" id="quiz">
+    <div class="section-title"><h2>Quiz</h2><span class="meta">placeholder (θα το προσθέσουμε μετά)</span></div>
+    <div class="grid">
+      <div class="card span-12 white">
+        <h3>Εδώ θα μπει το quiz 🧠</h3>
+        <p class="hint">Όταν μου πεις “βάλε quiz”, θα στο φτιάξω με πολλαπλής επιλογής, άμεσο πράσινο/κόκκινο feedback και τυχαία σειρά.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="quiz-btn" onclick="alert('Quiz: θα προστεθεί εδώ όταν μου το ζητήσεις 🙂');">Quiz</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* -------- Image slot preview (local only) -------- */
+for (const slot of document.querySelectorAll('.img-slot')){
+  const input = slot.querySelector('.img-input');
+  const img = slot.querySelector('img.preview');
+  input?.addEventListener('change', (e)=>{
+    const f = e.target.files && e.target.files[0];
+    if(!f){ img.style.display='none'; img.removeAttribute('src'); return; }
+    const url = URL.createObjectURL(f);
+    img.src = url;
+    img.style.display='block';
+  });
+}
+
+/* -------- Highlighter -------- */
+function wrapSelection(className){
+  const sel = window.getSelection();
+  if(!sel || sel.rangeCount===0) return;
+  const range = sel.getRangeAt(0);
+  if(range.collapsed) return;
+  // Create mark
+  const mark = document.createElement('mark');
+  mark.className = className;
+  try{
+    range.surroundContents(mark);
+    sel.removeAllRanges();
+  }catch(err){
+    // fallback: extract and insert
+    const frag = range.extractContents();
+    mark.appendChild(frag);
+    range.insertNode(mark);
+    sel.removeAllRanges();
+  }
+}
+
+function unwrapHighlights(){
+  const sel = window.getSelection();
+  if(!sel || sel.rangeCount===0) return;
+  const range = sel.getRangeAt(0);
+  if(range.collapsed) return;
+
+  // Find all mark elements intersecting selection and unwrap them
+  const container = range.commonAncestorContainer.nodeType === 1 ? range.commonAncestorContainer : range.commonAncestorContainer.parentElement;
+  if(!container) return;
+
+  const marks = Array.from(container.querySelectorAll('mark.hl'));
+  for(const m of marks){
+    const mRange = document.createRange();
+    mRange.selectNodeContents(m);
+    const intersects = range.compareBoundaryPoints(Range.END_TO_START, mRange) < 0 && range.compareBoundaryPoints(Range.START_TO_END, mRange) > 0;
+    if(intersects){
+      const parent = m.parentNode;
+      while(m.firstChild) parent.insertBefore(m.firstChild, m);
+      parent.removeChild(m);
+      parent.normalize();
+    }
+  }
+  sel.removeAllRanges();
+}
+
+document.querySelectorAll('[data-hl]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const c = btn.getAttribute('data-hl');
+    const map = {yellow:'hl hl-yellow', green:'hl hl-green', red:'hl hl-red'};
+    wrapSelection(map[c] || 'hl hl-yellow');
+  });
+});
+
+document.getElementById('erase')?.addEventListener('click', unwrapHighlights);
+
+/* -------- Simple search -------- */
+const input = document.getElementById('q');
+const btnFind = document.getElementById('find');
+const btnClear = document.getElementById('clear');
+
+let lastMark = [];
+function clearSearchMarks(){
+  lastMark.forEach(m=>{
+    const parent = m.parentNode;
+    while(m.firstChild) parent.insertBefore(m.firstChild, m);
+    parent.removeChild(m);
+    parent.normalize();
+  });
+  lastMark = [];
+}
+
+function findText(){
+  clearSearchMarks();
+  const q = (input.value||'').trim();
+  if(!q) return;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if(!node.nodeValue) return NodeFilter.FILTER_REJECT;
+      if(node.parentElement && (node.parentElement.closest('.toolbar') || node.parentElement.tagName==='SCRIPT' || node.parentElement.tagName==='STYLE')) return NodeFilter.FILTER_REJECT;
+      return node.nodeValue.toLowerCase().includes(q.toLowerCase()) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+
+  const hits=[];
+  while(walker.nextNode()) hits.push(walker.currentNode);
+
+  for(const tnode of hits.slice(0,200)){
+    const idx = tnode.nodeValue.toLowerCase().indexOf(q.toLowerCase());
+    if(idx<0) continue;
+    const range = document.createRange();
+    range.setStart(tnode, idx);
+    range.setEnd(tnode, idx + q.length);
+    const m = document.createElement('mark');
+    m.style.background='rgba(59,130,246,.22)';
+    m.style.borderRadius='.35em';
+    m.style.padding='0 .12em';
+    range.surroundContents(m);
+    lastMark.push(m);
+  }
+  if(lastMark[0]) lastMark[0].scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+btnFind?.addEventListener('click', findText);
+btnClear?.addEventListener('click', ()=>{ input.value=''; clearSearchMarks(); });
+input?.addEventListener('keydown', (e)=>{ if(e.key==='Enter') findText(); });
+</script>
+</body>
+</html>
