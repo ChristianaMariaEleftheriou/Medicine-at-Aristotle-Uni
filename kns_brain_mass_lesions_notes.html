@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Χωροκατακτητικές Εξεργασίες Εγκεφάλου (Notes)</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
+    --card:#f8fafc;
+    --card2:#ffffff;
+    --border:#e5e7eb;
+    --shadow:0 6px 20px rgba(17,24,39,.06);
+    --accent:#1d4ed8;
+    --sos:#dc2626;
+    --info:#0ea5e9;
+    --ok:#16a34a;
+    --warn:#f59e0b;
+    --hl-yellow: #fff3b0;
+    --hl-green: #bbf7d0;
+    --hl-red: #fecaca;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Sticky toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .toolbar-inner{max-width:1200px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 14px;flex-wrap:wrap}
+  .hl-group{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{border:1px solid var(--border);background:var(--card2);padding:8px 10px;border-radius:10px;cursor:pointer;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .btn:hover{border-color:#cbd5e1}
+  .btn.small{padding:6px 9px;border-radius:10px;font-size:13px}
+  .chip{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+  .search{display:flex;gap:8px;align-items:center}
+  .search input{width:min(420px,70vw);border:1px solid var(--border);border-radius:10px;padding:8px 10px;outline:none}
+  .search input:focus{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(147,197,253,.35)}
+
+  main{max-width:1200px;margin:0 auto;padding:82px 14px 34px;}
+  header.page{
+    background:linear-gradient(180deg,#ffffff, #f8fafc);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:16px 16px;
+  }
+  h1{font-size:22px;margin:0 0 6px;letter-spacing:.1px}
+  .sub{color:var(--muted);margin:0}
+
+  .nav{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+  .nav a{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:#fff;padding:7px 10px;border-radius:999px;font-size:13px}
+
+  .section{margin-top:18px}
+  .section-title{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+  .section-title h2{font-size:18px;margin:0}
+  .section-title .meta{color:var(--muted);font-size:12px}
+
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+  .card{grid-column:span 6;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:12px 12px;overflow:hidden;}
+  .card.white{background:#fff}
+  .card.span-12{grid-column:span 12}
+  .card.span-4{grid-column:span 4}
+  .card.span-8{grid-column:span 8}
+  .card h3{margin:0 0 6px;font-size:15px}
+  .card p{margin:6px 0;color:var(--text)}
+  .muted{color:var(--muted)}
+  ul{margin:8px 0 0 18px}
+  li{margin:4px 0}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border);background:#fff;color:var(--muted)}
+  .badge.sos{border-color:#fecaca;color:#b91c1c;background:#fff5f5}
+  .badge.info{border-color:#bae6fd;color:#0369a1;background:#f0f9ff}
+  .badge.ok{border-color:#bbf7d0;color:#166534;background:#f0fdf4}
+
+  .callout{border-left:4px solid var(--info);background:#f0f9ff;border-radius:12px;padding:10px 10px;margin-top:10px}
+  .callout.sos{border-left-color:var(--sos);background:#fff5f5}
+  .callout.warn{border-left-color:var(--warn);background:#fffbeb}
+
+  /* Image placeholders */
+  .imgbox{margin-top:10px;border:1px dashed #cbd5e1;border-radius:12px;padding:10px;background:#fff}
+  .imgbox label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+  .imgbox input{width:100%}
+  .imgpreview{margin-top:10px;display:none}
+  .imgpreview img{max-width:100%;border-radius:10px;border:1px solid var(--border)}
+
+  /* Highlights */
+  mark.hl-yellow{background:var(--hl-yellow);padding:0 .15em;border-radius:.25em}
+  mark.hl-green{background:var(--hl-green);padding:0 .15em;border-radius:.25em}
+  mark.hl-red{background:var(--hl-red);padding:0 .15em;border-radius:.25em}
+
+  /* Responsive */
+  @media (max-width: 980px){
+    .card{grid-column:span 12}
+    .card.span-4,.card.span-8{grid-column:span 12}
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <div class="hl-group">
+        <span class="chip"><strong>Highlighter:</strong> επίλεξε κείμενο → διάλεξε χρώμα</span>
+        <button class="btn small" data-hl="hl-yellow">🟨</button>
+        <button class="btn small" data-hl="hl-green">🟩</button>
+        <button class="btn small" data-hl="hl-red">🟥</button>
+        <button class="btn small" id="clearHl">Σβήσιμο</button>
+      </div>
+      <div class="spacer"></div>
+      <div class="search">
+        <span class="chip">Αναζήτηση</span>
+        <input id="q" type="search" placeholder="π.χ. γλοιοβλάστωμα, NPH, μηνιγγίωμα…"/>
+        <button class="btn small" id="findBtn">Find</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <header class="page">
+      <h1>Χωροκατακτητικές Εξεργασίες Εγκεφάλου (Notes)</h1>
+      <p class="sub">Σημειώσεις σε light grid μορφή • με placeholders εικόνων (σελ.) • και sticky highlighter toolbar.</p>
+      <div class="nav">
+        <a href="#sec-overview">Overview</a>
+        <a href="#sec-gliomas">Νευροεπιθηλιακοί / Γλοιώματα</a>
+        <a href="#sec-advanced">Προχωρημένες MR τεχνικές</a>
+        <a href="#sec-other">Άλλες κατηγορίες όγκων</a>
+        <a href="#sec-hydro">Υδροκεφαλία</a>
+        <a href="#sec-phakomatoses">Νευροδερματικά</a>
+        <a href="#sec-quiz">Quiz</a>
+      </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <section class="section" id="sec-overview">
+      <div class="section-title"><h2>Overview</h2><span class="meta">Ταξινόμηση + “πώς το σκέφτομαι” στην πράξη</span></div>
+      <div class="grid">
+        <div class="card span-12 white">
+          <h3>Κατηγορίες όγκων εγκεφάλου (σύνοψη)</h3>
+          <ul>
+            <li><b>Όγκοι από νευροεπιθηλιακούς ιστούς</b> (η μεγαλύτερη ομάδα) → κυρίως <b>γλοιώματα</b>.</li>
+            <li><b>Όγκοι κρανιακών νεύρων</b> (π.χ. νευριλείμωμα/σβάννωμα).</li>
+            <li><b>Όγκοι μηνίγγων</b> (π.χ. μηνιγγίωμα).</li>
+            <li><b>Λεμφώματα & νεοπλάσματα αιμοποιητικού</b> (π.χ. πρωτοπαθές ΚΝΣ λέμφωμα).</li>
+            <li><b>Όγκοι από γεννητικά κύτταρα</b>.</li>
+            <li><b>Όγκοι εφιππίου</b> (π.χ. κρανιοφαρυγγίωμα, αδένωμα υπόφυσης).</li>
+            <li><b>Μεταστατικοί όγκοι</b>.</li>
+          </ul>
+          <div class="callout">
+            <b>Διαγνωστικό mindset (γρήγορο):</b>
+            <ul>
+              <li>Πρώτα ρωτάω: <b>ενδοπαρεγχυματικός</b> vs <b>εξωπαρεγχυματικός</b> (dural-based/κρανιακά νεύρα/επίφυση/εφίππιο).</li>
+              <li>Μετά: <b>βαθμός κακοήθειας</b> (οίδημα/νέκρωση/αιμορραγία/περιορισμός διάχυσης/αγγείωση).</li>
+              <li>Και τέλος: <b>πολλαπλές εστίες;</b> → πάντα σκέφτομαι <b>μεταστάσεις</b>, <b>λέμφωμα</b>, πολυεστιακό γλοίωμα.</li>
+            </ul>
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 2–4.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLIOMAS -->
+    <section class="section" id="sec-gliomas">
+      <div class="section-title"><h2>Νευροεπιθηλιακοί όγκοι (Γλοιώματα)</h2><span class="meta">grading = κλειδί πρόγνωσης/θεραπείας</span></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Γλοιώματα – βασικά</h3>
+          <p>Τα γλοιώματα αποτελούν περίπου <b>~50%</b> των ενδοκρανιακών νεοπλασμάτων. Στα γλοιώματα ανήκουν:</p>
+          <ul>
+            <li><b>Αστροκυτώματα</b> (~75% των γλοιωμάτων)</li>
+            <li><b>Ολιγοδενδρογλοιώματα</b></li>
+            <li><b>Επενδυμώματα</b></li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 4.</p>
+        </div>
+
+        <div class="card">
+          <h3>Grading (Grade I–IV) – γιατί είναι τόσο σημαντικό</h3>
+          <p>Η διαβάθμιση (grading), ειδικά στα γλοιώματα, είναι το <b>κλειδί</b> για:</p>
+          <ul>
+            <li>βιολογική συμπεριφορά</li>
+            <li>πρόγνωση</li>
+            <li>θεραπευτική στρατηγική</li>
+          </ul>
+          <div class="callout warn">
+            <b>Extra σημείωση:</b> “grade” ≠ μόνο μέγεθος. Σκέψου: <b>κυτταρικότητα</b>, <b>μιτώσεις</b>, <b>νεκρώσεις</b>, <b>νεοαγγείωση</b> (όσο ανεβαίνει ο βαθμός, τόσο αυξάνονται).</n          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 5.</p>
+        </div>
+
+        <div class="card span-12 white">
+          <h3>Αστροκυτταρικοί όγκοι – λίστα που πρέπει να ξέρεις</h3>
+          <div class="grid">
+            <div class="card span-4">
+              <span class="badge ok">Grade I</span>
+              <h3>Πιλοκυτταρικό αστροκύτωμα</h3>
+              <ul>
+                <li>Συχνά <b>παιδιά/νεαροί</b></li>
+                <li>Κλασικά: <b>κυστικό</b> μόρφωμα με <b>τοιχωματικό όζο</b></li>
+              </ul>
+              <div class="imgbox">
+                <label>Εικόνα από σελ. 12 (πιλοκυτταρικό) – πρόσθεσε screenshot από PDF</label>
+                <input type="file" accept="image/*" data-preview="img_p12" />
+                <div class="imgpreview" id="img_p12"><img alt="Preview"/></div>
+              </div>
+            </div>
+            <div class="card span-4">
+              <span class="badge info">Grade II</span>
+              <h3>Διάχυτο αστροκύτωμα</h3>
+              <ul>
+                <li>Συνήθως <b>μη ενισχυόμενο</b> ή ελάχιστα ενισχυόμενο</li>
+                <li>Διηθητικό → δύσκολα “καθαρά όρια”</li>
+              </ul>
+              <div class="imgbox">
+                <label>Εικόνα από σελ. 13 (διάχυτο) – πρόσθεσε screenshot</label>
+                <input type="file" accept="image/*" data-preview="img_p13" />
+                <div class="imgpreview" id="img_p13"><img alt="Preview"/></div>
+              </div>
+            </div>
+            <div class="card span-4">
+              <span class="badge sos">Grade III–IV</span>
+              <h3>Αναπλαστικό / Γλοιοβλάστωμα</h3>
+              <ul>
+                <li><b>Grade III</b>: αυξημένη κυτταρικότητα/αγγείωση</li>
+                <li><b>Grade IV</b>: νέκρωση + έντονη νεοαγγείωση</li>
+                <li>Συχνά: <b>δακτυλιοειδής ενίσχυση</b> + <b>εκτεταμένο οίδημα</b></li>
+              </ul>
+              <div class="imgbox">
+                <label>Εικόνα από σελ. 14 (αναπλαστικό) ή 15–17 (γλοιοβλάστωμα) – πρόσθεσε screenshot</label>
+                <input type="file" accept="image/*" data-preview="img_p15" />
+                <div class="imgpreview" id="img_p15"><img alt="Preview"/></div>
+              </div>
+            </div>
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 11–17.</p>
+        </div>
+
+        <div class="card">
+          <h3>Ολιγοδενδρογλοίωμα</h3>
+          <ul>
+            <li>Κλασικά: φλοιϊκή/υποφλοιϊκή εντόπιση, μπορεί να έχει <b>ασβεστώσεις</b> (ιδίως σε CT).</li>
+            <li>Διαβάθμιση: ολιγοδενδρογλοίωμα vs αναπλαστικό ολιγοδενδρογλοίωμα.</li>
+          </ul>
+          <div class="imgbox">
+            <label>Εικόνα από σελ. 19 (ολιγοδενδρογλοίωμα) – πρόσθεσε screenshot</label>
+            <input type="file" accept="image/*" data-preview="img_p19" />
+            <div class="imgpreview" id="img_p19"><img alt="Preview"/></div>
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 18–19.</p>
+        </div>
+
+        <div class="card">
+          <h3>Επενδύμωμα</h3>
+          <ul>
+            <li>Όγκοι από επενδυματικά κύτταρα (± αναπλαστικό επενδύμωμα).</li>
+            <li>Συχνά συσχετίζονται με κοιλιακό σύστημα (ανάλογα με εντόπιση).</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 20–21.</p>
+        </div>
+
+        <div class="card">
+          <h3>Χοριοειδές πλέγμα</h3>
+          <ul>
+            <li><b>Θήλωμα</b> χοριοειδούς πλέγματος</li>
+            <li><b>Καρκίνωμα</b> χοριοειδούς πλέγματος</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 22.</p>
+        </div>
+
+        <div class="card">
+          <h3>Εμβρυϊκοί όγκοι – Μυελοβλάστωμα</h3>
+          <div class="callout warn">
+            <b>Extra (κλινικό):</b> Στα παιδιά, οπίσθιος βόθρος/παρεγκεφαλίδα, συχνά υψηλή κυτταρικότητα → μπορεί να δείχνει <b>περιορισμό διάχυσης</b>.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 23.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ADVANCED MRI -->
+    <section class="section" id="sec-advanced">
+      <div class="section-title"><h2>Προχωρημένες MR τεχνικές (για grading/λειτουργικότητα)</h2><span class="meta">DWI/DTI/Perfusion/MRS/fMRI</span></div>
+      <div class="grid">
+        <div class="card span-12 white">
+          <h3>Γιατί τις χρησιμοποιούμε;</h3>
+          <ul>
+            <li><b>Διάχυση (DWI/ADC)</b>: έμμεσος δείκτης κυτταρικότητας.</li>
+            <li><b>DTI/δεσμιδογραφία</b>: σχέση όγκου με δεμάτια λευκής ουσίας (χειρουργικός σχεδιασμός).</li>
+            <li><b>Perfusion</b>: αγγείωση/νεοαγγείωση → βοηθά στο grading.</li>
+            <li><b>Φασματοσκοπία (MRS)</b>: μεταβολικά πρότυπα (π.χ. ↑Ch, ↓NAA).</li>
+            <li><b>fMRI</b>: λειτουργικοί φλοιοί (λόγος/κινητικός κτλ.) πριν από επέμβαση.</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 6–10.</p>
+        </div>
+
+        <div class="card span-4">
+          <h3>DWI / ADC</h3>
+          <p>Χρήσιμο για εκτίμηση κυτταρικότητας (συχνά υψηλού grade).</p>
+          <div class="imgbox">
+            <label>Εικόνα από σελ. 6 (διάχυση) – πρόσθεσε screenshot</label>
+            <input type="file" accept="image/*" data-preview="img_p6" />
+            <div class="imgpreview" id="img_p6"><img alt="Preview"/></div>
+          </div>
+        </div>
+
+        <div class="card span-4">
+          <h3>DTI / Δεσμιδογραφία</h3>
+          <p>Δείχνει πορεία δεματίων και αν ο όγκος τα διηθεί/απωθεί.</p>
+          <div class="imgbox">
+            <label>Εικόνα από σελ. 7 (DTI) – πρόσθεσε screenshot</label>
+            <input type="file" accept="image/*" data-preview="img_p7" />
+            <div class="imgpreview" id="img_p7"><img alt="Preview"/></div>
+          </div>
+        </div>
+
+        <div class="card span-4">
+          <h3>MR Perfusion</h3>
+          <p>Αγγείωση/νεοαγγείωση → συνήθως αυξημένη σε υψηλότερου grade όγκους.</p>
+          <div class="imgbox">
+            <label>Εικόνα από σελ. 8 (perfusion) – πρόσθεσε screenshot</label>
+            <input type="file" accept="image/*" data-preview="img_p8" />
+            <div class="imgpreview" id="img_p8"><img alt="Preview"/></div>
+          </div>
+        </div>
+
+        <div class="card span-6">
+          <h3>MR Spectroscopy (MRS)</h3>
+          <ul>
+            <li><b>Choline (Ch)</b> ↑ → αυξημένος κυτταρικός κύκλος/μεμβράνες</li>
+            <li><b>NAA</b> ↓ → απώλεια/δυσλειτουργία νευρώνων</li>
+            <li><b>Cr</b> ως “baseline”</li>
+            <li>± <b>Lactate/Lipids</b> σε νέκρωση/υποξία</li>
+          </ul>
+          <div class="imgbox">
+            <label>Εικόνα από σελ. 9 (MRS) – πρόσθεσε screenshot</label>
+            <input type="file" accept="image/*" data-preview="img_p9" />
+            <div class="imgpreview" id="img_p9"><img alt="Preview"/></div>
+          </div>
+        </div>
+
+        <div class="card span-6">
+          <h3>Functional MRI (fMRI)</h3>
+          <p>Χαρτογράφηση “eloquent cortex” πριν από επέμβαση (λόγος/κινητικός/αισθητικός).</p>
+          <div class="imgbox">
+            <label>Εικόνα από σελ. 10 (fMRI) – πρόσθεσε screenshot</label>
+            <input type="file" accept="image/*" data-preview="img_p10" />
+            <div class="imgpreview" id="img_p10"><img alt="Preview"/></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OTHER TUMORS -->
+    <section class="section" id="sec-other">
+      <div class="section-title"><h2>Άλλες κατηγορίες όγκων</h2><span class="meta">κρανιακά νεύρα • μηνίγγες • λέμφωμα • εφίππιο • μεταστάσεις</span></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Όγκοι κρανιακών νεύρων – Νευριλείμωμα (Schwannoma)</h3>
+          <div class="callout">
+            <b>Extra:</b> Τα σβαννώματα είναι συνήθως <b>εξωπαρεγχυματικά</b>, συχνά στην περιοχή γεφυροπαρεγκεφαλιδικής γωνίας (VIII) και ενισχύονται.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 25.</p>
+        </div>
+
+        <div class="card">
+          <h3>Όγκοι μηνίγγων – Μηνιγγίωμα</h3>
+          <ul>
+            <li>Dural-based μάζα</li>
+            <li>Συχνά έντονη ομοιογενής ενίσχυση</li>
+            <li>± “dural tail”</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 27.</p>
+        </div>
+
+        <div class="card">
+          <h3>Λεμφώματα (ΚΝΣ)</h3>
+          <div class="callout warn">
+            <b>Extra εξεταστικό:</b> Το πρωτοπαθές ΚΝΣ λέμφωμα συχνά έχει <b>περιορισμό διάχυσης</b> (υψηλή κυτταρικότητα) και μπορεί να ενισχύεται έντονα.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 29.</p>
+        </div>
+
+        <div class="card">
+          <h3>Όγκοι από γεννητικά κύτταρα</h3>
+          <p class="muted">Βάση παρουσίασης: σελ. 31.</p>
+        </div>
+
+        <div class="card">
+          <h3>Όγκοι εφιππίου – Κρανιοφαρυγγίωμα</h3>
+          <div class="callout">
+            <b>Extra:</b> Συχνά κυστικό-στερεό, μπορεί να έχει ασβεστώσεις (CT helpful). Προκαλεί συμπίεση οπτικού χιάσματος → διαταραχές οράσεως.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 33.</p>
+        </div>
+
+        <div class="card">
+          <h3>Όγκοι εφιππίου – Αδένωμα υπόφυσης</h3>
+          <div class="callout">
+            <b>Extra (κλινικό):</b> Μικρο-/μακροαδένωμα. Συμπτώματα είτε από <b>ορμονική υπερέκκριση</b> είτε από <b>mass effect</b>.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 34.</p>
+        </div>
+
+        <div class="card span-12">
+          <h3><span class="badge sos">SOS</span> Μεταστατικοί όγκοι</h3>
+          <ul>
+            <li>Συχνά <b>πολλαπλές</b> βλάβες, στη συμβολή φαιάς–λευκής ουσίας</li>
+            <li>Έντονο <b>περιεστιακό οίδημα</b></li>
+            <li>Μπορεί να αιμορραγούν (π.χ. μελάνωμα, RCC, χοριοκαρκίνωμα) – ως γενική κλινική γνώση</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 36.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HYDROCEPHALUS -->
+    <section class="section" id="sec-hydro">
+      <div class="section-title"><h2>Υδροκεφαλία</h2><span class="meta">αποφρακτική vs φυσιολογικής πίεσης</span></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Τύποι</h3>
+          <ul>
+            <li><b>Αποφρακτική υδροκεφαλία</b></li>
+            <li><b>Υδροκεφαλία με φυσιολογική πίεση (NPH)</b></li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 37.</p>
+        </div>
+
+        <div class="card">
+          <h3>Αποφρακτική υδροκεφαλία – μετρήσεις</h3>
+          <ul>
+            <li><b>B/A &gt; 4</b> = φυσιολογικό (όπως αναφέρεται στη διαφάνεια)</li>
+            <li>Εύρος <b>μετωπιαίου κέρατος</b> πλάγιας κοιλίας:
+              <ul>
+                <li>Ηλικία &lt; 40: &lt; 12 mm</li>
+                <li>Ηλικία &gt; 40: &lt; 15 mm</li>
+              </ul>
+            </li>
+            <li>Εύρος <b>3ης κοιλίας</b>:
+              <ul>
+                <li>&lt; 5 mm σε παιδιά</li>
+                <li>&lt; 7 mm σε ενήλικες &lt; 60</li>
+                <li>&lt; 9 mm σε ενήλικες &gt; 60</li>
+              </ul>
+            </li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 38.</p>
+        </div>
+
+        <div class="card span-12">
+          <h3>Υδροκεφαλία φυσιολογικής πίεσης (NPH) – τι να θυμάμαι</h3>
+          <div class="callout warn">
+            <b>Extra κλινικό (high yield):</b> Κλασική τριάδα: <b>διαταραχή βάδισης</b> + <b>άνοια</b> + <b>ακράτεια</b>. Απεικονιστικά: δυσανάλογη κοιλιομεγαλία.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 39.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHACOMATOSES -->
+    <section class="section" id="sec-phakomatoses">
+      <div class="section-title"><h2>Νευροδερματικά σύνδρομα</h2><span class="meta">NF1/NF2/TSC/Sturge-Weber/VHL</span></div>
+      <div class="grid">
+        <div class="card span-12 white">
+          <h3>Λίστα</h3>
+          <ul>
+            <li>Νευροϊνωμάτωση <b>NF I</b> και <b>NF II</b></li>
+            <li><b>Οζώδης σκλήρυνση</b> (Bourneville)</li>
+            <li><b>Sturge-Weber</b></li>
+            <li><b>Von Hippel-Lindau (VHL)</b></li>
+            <li><b>Αιμαγγειοβλάστωμα</b></li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 40.</p>
+        </div>
+
+        <div class="card">
+          <h3>NF1 (chr17) – neurofibromin</h3>
+          <p>Αυτοσωμικό επικρατές. Μετάλλαξη στο <b>χρωμόσωμα 17</b> → <b>neurofibromin</b> (tumor suppressor).</p>
+          <div class="callout">
+            <b>Extra:</b> Συνδέεται με νευροδερματικές εκδηλώσεις (café-au-lait κ.ά.) και αυξημένο κίνδυνο για διάφορους όγκους.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 42.</p>
+        </div>
+
+        <div class="card">
+          <h3>NF2 (chr22) – schwannomin</h3>
+          <p>Αυτοσωμικό επικρατές. Μετάλλαξη στο <b>χρωμόσωμα 22</b> → <b>schwannomin</b> (tumor suppressor).</p>
+          <ul>
+            <li>Νευριλειμώματα (schwannomas)</li>
+            <li>Μηνιγγιώματα</li>
+            <li>Επενδυμώματα</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 43.</p>
+        </div>
+
+        <div class="card">
+          <h3>Οζώδης σκλήρυνση (TSC1/TSC2)</h3>
+          <p>Μετάλλαξη <b>TSC1</b> (chr9 → hamartin) και/ή <b>TSC2</b> (chr16 → tuberin).</p>
+          <ul>
+            <li>Νοητική υστέρηση, επιληψία, δερματικές βλάβες</li>
+            <li>Ακτινολογικά: υποεπενδυματικά οζίδια, φλοιϊκά οζίδια, βλάβες λευκής ουσίας</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 44.</p>
+        </div>
+
+        <div class="card">
+          <h3>Sturge–Weber</h3>
+          <p>Μηνιγγοπροσωπική αγγειομάτωση (συνήθως σποραδικό).</p>
+          <div class="callout">
+            <b>Extra:</b> Αγγειακός σπίλος στο ένα ημιμόριο προσώπου (port-wine stain). Μπορεί να συνυπάρχουν επιληπτικές κρίσεις.
+          </div>
+          <p class="muted">Βάση παρουσίασης: σελ. 45.</p>
+        </div>
+
+        <div class="card span-12">
+          <h3>Von Hippel–Lindau (VHL)</h3>
+          <ul>
+            <li>Κληρονομική νόσος</li>
+            <li>Παρουσία <b>αιμαγγειοβλαστωμάτων</b> (και άλλων νεοπλασιών/κύστεων)</li>
+          </ul>
+          <p class="muted">Βάση παρουσίασης: σελ. 46.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="section" id="sec-quiz">
+      <div class="section-title"><h2>Quiz</h2><span class="meta">placeholder – θα το προσθέσουμε μετά</span></div>
+      <div class="grid">
+        <div class="card span-12 white">
+          <p class="muted">Πάτα το κουμπί όταν θέλεις να προσθέσουμε quiz (MCQ, random σειρά, άμεσο feedback πράσινο/κόκκινο).</p>
+          <button class="btn" id="quizBtn">Quiz</button>
+          <div id="quizPlaceholder" style="margin-top:12px;display:none">
+            <div class="callout">
+              <b>Quiz section:</b> εδώ θα μπει το quiz στην επόμενη φάση.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<script>
+  // Highlighter (wrap selection in <mark class="hl-...">)
+  function wrapSelection(className){
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    if(range.collapsed) return;
+
+    // Prevent highlighting inside inputs
+    const common = range.commonAncestorContainer;
+    if(common && common.nodeType === 1){
+      const el = common;
+      if(el.closest && el.closest('input, textarea, button, select')) return;
+    }
+
+    const mark = document.createElement('mark');
+    mark.className = className;
+    try{
+      range.surroundContents(mark);
+      sel.removeAllRanges();
+    }catch(e){
+      // Fallback: extract and append
+      const frag = range.extractContents();
+      mark.appendChild(frag);
+      range.insertNode(mark);
+      sel.removeAllRanges();
+    }
+  }
+
+  document.querySelectorAll('[data-hl]').forEach(btn=>{
+    btn.addEventListener('click', ()=> wrapSelection(btn.dataset.hl));
+  });
+
+  // Remove highlight: if selection intersects a <mark>, unwrap it
+  document.getElementById('clearHl').addEventListener('click', ()=>{
+    const sel = window.getSelection();
+    if(!sel || sel.rangeCount===0) return;
+    const range = sel.getRangeAt(0);
+    let node = range.commonAncestorContainer;
+    if(node.nodeType === 3) node = node.parentNode;
+    const mark = node && node.closest ? node.closest('mark') : null;
+    if(!mark) return;
+    const parent = mark.parentNode;
+    while(mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+    parent.removeChild(mark);
+    sel.removeAllRanges();
+  });
+
+  // Search
+  function findText(){
+    const q = document.getElementById('q').value.trim();
+    if(!q) return;
+    const bodyText = document.body.innerText.toLowerCase();
+    const idx = bodyText.indexOf(q.toLowerCase());
+    if(idx < 0){
+      alert('Δεν βρέθηκε.');
+      return;
+    }
+    // naive scroll to first matching element containing query
+    const walker = document.createTreeWalker(document.querySelector('main'), NodeFilter.SHOW_ELEMENT);
+    let found = null;
+    while(walker.nextNode()){
+      const el = walker.currentNode;
+      if(el.children.length === 0 && el.textContent && el.textContent.toLowerCase().includes(q.toLowerCase())){found = el; break;}
+    }
+    if(found) found.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  document.getElementById('findBtn').addEventListener('click', findText);
+  document.getElementById('q').addEventListener('keydown', (e)=>{ if(e.key==='Enter') findText(); });
+
+  // Image previews
+  document.querySelectorAll('input[type=file][data-preview]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      const file = e.target.files && e.target.files[0];
+      const id = e.target.dataset.preview;
+      const box = document.getElementById(id);
+      if(!file || !box) return;
+      const img = box.querySelector('img');
+      const url = URL.createObjectURL(file);
+      img.src = url;
+      box.style.display = 'block';
+    });
+  });
+
+  // Quiz placeholder toggle
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    const qp = document.getElementById('quizPlaceholder');
+    qp.style.display = (qp.style.display === 'none') ? 'block' : 'none';
+  });
+</script>
+</body>
+</html>
