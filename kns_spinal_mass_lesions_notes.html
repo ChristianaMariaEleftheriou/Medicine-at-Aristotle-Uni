@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ογκώμορφες Εξεργασίες Νωτιαίου Μυελού (Notes)</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
+    --card:#f8fafc;
+    --card2:#ffffff;
+    --border:#e5e7eb;
+    --shadow:0 6px 20px rgba(17,24,39,.06);
+    --accent:#1d4ed8;
+    --sos:#dc2626;
+    --info:#0ea5e9;
+    --ok:#16a34a;
+    --warn:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Sticky toolbar */
+  .toolbar{
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .toolbar-inner{max-width:1200px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 14px;flex-wrap:wrap}
+  .hl-group{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{border:1px solid var(--border);background:var(--card2);padding:8px 10px;border-radius:10px;cursor:pointer;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .btn:hover{border-color:#cbd5e1}
+  .btn.small{padding:6px 9px;border-radius:10px;font-size:13px}
+  .chip{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+  .search{display:flex;gap:8px;align-items:center}
+  .search input{width:min(420px,70vw);border:1px solid var(--border);border-radius:10px;padding:8px 10px;outline:none}
+  .search input:focus{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(147,197,253,.35)}
+
+  /* Page layout */
+  main{max-width:1200px;margin:0 auto;padding:82px 14px 34px;}
+  header.page{
+    background:linear-gradient(180deg,#ffffff, #f8fafc);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:16px 16px;
+  }
+  h1{font-size:22px;margin:0 0 6px;letter-spacing:.1px}
+  .sub{color:var(--muted);margin:0}
+
+  .nav{
+    margin-top:12px;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .nav a{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:#fff;padding:7px 10px;border-radius:999px;font-size:13px}
+
+  /* Grid cards */
+  .section{margin-top:18px}
+  .section-title{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+  .section-title h2{font-size:18px;margin:0}
+  .section-title .meta{color:var(--muted);font-size:12px}
+
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+  .card{
+    grid-column:span 6;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:12px 12px;
+    overflow:hidden;
+  }
+  .card.white{background:#fff}
+  .card.span-12{grid-column:span 12}
+  .card.span-8{grid-column:span 8}
+  .card.span-4{grid-column:span 4}
+  .card h3{margin:0 0 6px;font-size:15.5px}
+  .card .hint{color:var(--muted);font-size:12.5px;margin-top:6px}
+  ul{margin:8px 0 0 18px;padding:0}
+  li{margin:4px 0}
+
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--muted)}
+  .tag.sos{border-color:rgba(220,38,38,.35);color:var(--sos);background:rgba(220,38,38,.06)}
+  .tag.info{border-color:rgba(14,165,233,.35);color:#0369a1;background:rgba(14,165,233,.06)}
+  .tag.ok{border-color:rgba(22,163,74,.35);color:var(--ok);background:rgba(22,163,74,.06)}
+
+  /* Image slots */
+  .img-slot{
+    margin-top:10px;
+    border:1px dashed #cbd5e1;
+    border-radius:14px;
+    padding:10px;
+    background:#fff;
+  }
+  .img-slot .row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .img-slot label{font-weight:600;font-size:13px}
+  .img-slot input{max-width:280px}
+  .img-slot img{display:none;max-width:100%;border-radius:12px;margin-top:10px;border:1px solid var(--border)}
+
+  /* Highlighter marks */
+  mark.hl{padding:0 .15em;border-radius:.35em}
+  mark.hl-yellow{background:rgba(253,230,138,.9)}
+  mark.hl-green{background:rgba(134,239,172,.9)}
+  mark.hl-red{background:rgba(252,165,165,.95)}
+
+  /* Footer / quiz */
+  .footer{margin-top:22px;display:flex;justify-content:center}
+  .quiz-btn{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;box-shadow:0 10px 24px rgba(29,78,216,.18)}
+  .quiz-btn:hover{filter:brightness(0.97)}
+
+  /* Responsive */
+  @media (max-width: 900px){
+    .card{grid-column:span 12}
+  }
+
+  /* Print */
+  @media print{
+    .toolbar{display:none}
+    main{padding-top:14px}
+    .card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar" role="banner">
+  <div class="toolbar-inner">
+    <div class="hl-group">
+      <span class="chip"><strong>Highlighter:</strong> επίλεξε κείμενο → πάτα χρώμα</span>
+      <button class="btn small" data-hl="yellow" title="Highlight κίτρινο">🟨</button>
+      <button class="btn small" data-hl="green" title="Highlight πράσινο">🟩</button>
+      <button class="btn small" data-hl="red" title="Highlight κόκκινο">🟥</button>
+      <button class="btn small" id="erase" title="Αφαίρεση highlight από επιλογή">🧽 Σβήσιμο</button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="search" aria-label="Search">
+      <input id="q" type="search" placeholder="Αναζήτηση μέσα στις σημειώσεις (π.χ. glioblastoma, μηνιγγίωμα, lymphoma)" />
+      <button class="btn" id="find">Find</button>
+      <button class="btn" id="clear">Clear</button>
+    </div>
+  </div>
+</div>
+
+
+<main>
+  <header class="page-header">
+    <div class="kicker">Ακτινολογία • Νωτιαίος Μυελός / Σπονδυλική Στήλη</div>
+    <h1>Ογκώμορφες / Χωροκατακτητικές Εξεργασίες Νωτιαίου Μυελού</h1>
+    <p class="subtitle">Σημειώσεις σε grid με κουτάκια + placeholders εικόνων ανά σελίδα + sticky highlighter.</p>
+    <div class="meta">Πηγή: «Φοινίτσης Στέφανος — Χωροκατακτητικές Εξεργασίες Νωτιαίου Μυελού» (24 σελίδες).</div>
+  </header>
+
+  <section class="grid">
+
+    <article class="card">
+      <h2>Αρτηριοφλεβώδης δυσπλασία σκληράς μήνιγγας (Dural AVF) <span class="tag info">σελ. 2</span></h2>
+      <ul>
+        <li><b>Τυπικό προφίλ:</b> άνδρες, μέσης ηλικίας.</li>
+        <li><b>Εντόπιση:</b> συχνά Θωρακική μοίρα (ΘΟΜΣΣ).</li>
+        <li><b>MR clues:</b> <b>οιδηματώδης μυελός</b> (Τ2 υψηλό) + <b>πολλαπλά διατεταμένα φλεβικά στελέχη</b> (flow voids) στην επιφάνεια.</li>
+      </ul>
+      <div class="note"><b>Κλινική λογική:</b> φλεβική υπέρταση → προοδευτική μυελοπάθεια (βάδισμα, αδυναμία, αισθητικά). Είναι “θεραπεύσιμο” αν αναγνωριστεί (εμβολισμός/χειρουργείο), άρα SOS ως διάγνωση.</div>
+      <div class="imgbox">
+        <div class="imgtitle">Βάλε εικόνα από σελ. 2</div>
+        <input type="file" accept="image/*" class="imginput" />
+        <img class="preview" alt="preview" />
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Σηραγγώδες αιμαγγείωμα νωτιαίου μυελού (Cavernoma) <span class="tag info">σελ. 3</span></h2>
+      <ul>
+        <li><b>Κύριο εύρημα:</b> <b>περιφερικός δακτύλιος χαμηλού σήματος</b>, ιδίως σε <b>T2*</b> (αιμοσιδηρίνη).</li>
+        <li>Μπορεί να συνυπάρχει αιμορραγία/υποξεία αιματώματα → ποικιλία σημάτων (“popcorn”).</li>
+      </ul>
+      <div class="note"><b>Γιατί T2*;</b> Η ευαισθησία σε αιμοσιδηρίνη/μικροαιμορραγίες κάνει το cavernoma να “σκοτεινιάζει” περιφερικά.</div>
+      <div class="imgbox"><div class="imgtitle">Βάλε εικόνα από σελ. 3</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Αιμαγγείωμα σπονδυλικού σώματος (Vertebral hemangioma) <span class="tag info">σελ. 4–6</span></h2>
+      <ul>
+        <li><b>Μέση ηλικία</b>. <b>Συχνότερος όγκος ΣΣ</b>. Συνήθως <b>ασυμπτωματικό</b>.</li>
+        <li>~<b>30%</b> πολλαπλά.</li>
+        <li><b>CT:</b> παχυμένες οστικές δοκίδες (τυπική “polka-dot” εικόνα στον αξονικό).</li>
+        <li><b>MR τυπικό:</b> <b>T1 υψηλό</b> + <b>T2 υψηλό</b> (λίπος/αγγειακά διαστήματα).</li>
+        <li><b>Άτυπο:</b> <b>T1 χαμηλό</b>, <b>T2 υψηλό</b> (πιο “αγγειακό”, λιγότερο λίπος) → μπορεί να μπερδεύει με μετάσταση.</li>
+      </ul>
+      <div class="note"><b>Tip ΔΔ:</b> Άτυπο αιμαγγείωμα vs μετάσταση: κοίτα για παχυμένες δοκίδες/τυπική αρχιτεκτονική, οίδημα, επέκταση, κλινικό ιστορικό.</div>
+      <div class="imggrid">
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 4</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 5</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 6</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Ηωσινόφιλο κοκκίωμα (Langerhans cell histiocytosis) <span class="tag info">σελ. 7</span></h2>
+      <ul>
+        <li><b>Ηλικία:</b> παιδιά/νεαροί ενήλικες.</li>
+        <li><b>Σπάνιο</b> (~1% πρωτοπαθών όγκων).</li>
+        <li><b>Κλινικά:</b> πόνος ± πυρετός.</li>
+        <li><b>Οστά:</b> κρανίο, γνάθος, πλευρές — και ΣΣ.</li>
+        <li><b>Vertebra plana:</b> κατάρρευση σώματος σπονδύλου ("πεπλατυσμένος" σπόνδυλος).</li>
+        <li><b>ΔΔ:</b> μετάσταση, πολλαπλούν μυέλωμα, οστεομυελίτιδα.</li>
+      </ul>
+      <div class="note"><b>Μνήμη:</b> "παιδί + vertebra plana" → σκέψου LCH/ηωσινόφιλο κοκκίωμα μέχρι αποδείξεως του εναντίου.</div>
+      <div class="imgbox"><div class="imgtitle">Βάλε εικόνα από σελ. 7</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Μεταστάσεις στη Σπονδυλική Στήλη <span class="tag info">σελ. 8–10</span></h2>
+      <ul>
+        <li>Συχνότερος κακοήθης "όγκος" στα οστά. Πρωτοπαθείς: προστάτης, μαστός, νεφρός, πνεύμονας κ.ά.</li>
+        <li><b>~80%</b> των οστικών μεταστάσεων εντοπίζονται στη ΣΣ.</li>
+        <li><b>Οστεοσκληρυντικές:</b> κλασικά <b>προστάτης</b>.</li>
+        <li><b>Οστεολυτικές:</b> κλασικά <b>μαστός</b> (και άλλα).</li>
+      </ul>
+      <div class="note"><b>Κλινικά σημαντικό:</b> αναζήτησε παθολογικό κάταγμα/επισκληρίδια επέκταση → κίνδυνος συμπίεσης ΝΜ.</div>
+      <div class="imggrid">
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 8</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 9</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 10</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Φυσιολογικός οστικός μυελός (baseline για MR) <span class="tag info">σελ. 11–12</span></h2>
+      <ul>
+        <li><b>Με την ηλικία:</b> αλλαγή κατανομής ερυθρού ↔ λιπώδους μυελού (αντικατάσταση).</li>
+        <li><b>Ερυθρός μυελός:</b> T1 σήμα περίπου όπως οι μύες (χαμηλότερο).</li>
+        <li><b>Λιπώδης μυελός:</b> T1 υψηλό σήμα.</li>
+      </ul>
+      <div class="note"><b>Γιατί μπαίνει στη διάλεξη;</b> Για να ξεχωρίζεις φυσιολογικές μεταβολές/ανακατανομή μυελού από διήθηση (μεταστάσεις, μυέλωμα, λέμφωμα).</div>
+      <div class="imggrid">
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 11</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 12</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Πολλαπλούν μυέλωμα (MM) <span class="tag info">σελ. 13–14</span></h2>
+      <ul>
+        <li><b>Άνδρες</b> μέσης ηλικίας και άνω.</li>
+        <li>~<b>44%</b> των πρωτοπαθών κακοήθων οστικών όγκων.</li>
+        <li><b>Οστεολυτικές</b> βλάβες, μπορεί να υπάρχει οστεοπώρωση (~20%).</li>
+        <li><b>MR:</b> <b>εστιακή ή διάχυτη διήθηση</b> μυελού.</li>
+        <li><b>ΔΔ:</b> μεταστάσεις, λέμφωμα.</li>
+      </ul>
+      <div class="note"><b>Ερμηνεία MR:</b> όταν ο μυελός χάνει το “λιπώδες” T1 υψηλό και γίνεται χαμηλότερος/ετερογενής, σκέψου διήθηση.</div>
+      <div class="imggrid">
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 13</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 14</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Πλασμοκύτωμα (μονήρης εντόπιση) <span class="tag info">σελ. 15</span></h2>
+      <ul>
+        <li><b>Μονήρης εντόπιση</b> (σε αντίθεση με διάχυτο/πολλαπλό μυέλωμα).</li>
+        <li>Συχνά παρόμοια απεικονιστικά χαρακτηριστικά διήθησης/μαλακών μορίων τοπικά.</li>
+      </ul>
+      <div class="note"><b>Κλινικό νόημα:</b> μπορεί να είναι το "πρώτο" εύρημα πριν εξελιχθεί σε πολλαπλούν μυέλωμα → χρειάζεται έλεγχος.</div>
+      <div class="imgbox"><div class="imgtitle">Βάλε εικόνα από σελ. 15</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Λέμφωμα (διήθηση μυελού) <span class="tag info">σελ. 16–17</span></h2>
+      <ul>
+        <li>Διήθηση μυελού: 10–15% Hodgkin, 25–40% Non-Hodgkin.</li>
+        <li><b>Συνήθως διάχυτη</b> διήθηση μυελού.</li>
+        <li>Μπορεί να υπάρχει <b>παρασπονδυλική μάζα</b>.</li>
+        <li><b>ΔΔ:</b> μεταστάσεις, πολλαπλούν μυέλωμα.</li>
+      </ul>
+      <div class="note"><b>Tip:</b> σε λέμφωμα μπορεί να δεις μεγάλη μαλακή μάζα με σχετικά "ήπια" οστική καταστροφή σε σύγκριση με μεταστάσεις.</div>
+      <div class="imggrid">
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 16</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 17</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Μηνιγγίωμα σπονδυλικού σωλήνα <span class="tag info">σελ. 18</span></h2>
+      <ul>
+        <li><b>Μέση ηλικία</b>.</li>
+        <li>Συχνά <b>ενδοσκληρίδιο-εξωμυελικό</b> (intradural extramedullary) με πίεση ΝΜ.</li>
+        <li><b>ΔΔ:</b> όγκοι νευρικού ελύτρου, αραχνοειδής κύστη.</li>
+      </ul>
+      <div class="note"><b>MR εικόνα (γενικά):</b> καλά περιγεγραμμένο, συχνά ισο-Τ1/ισο-Τ2, ενισχύεται έντονα με σκιαγραφικό. (Το slide δίνει κυρίως ΔΔ.)</div>
+      <div class="imgbox"><div class="imgtitle">Βάλε εικόνα από σελ. 18</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Καλοήθεις όγκοι νευρικού ελύτρου: Νευροΐνωμα vs Σβάννωμα <span class="tag info">σελ. 19–20</span></h2>
+      <ul>
+        <li><b>Νευροΐνωμα:</b> &gt;30 ετών, κύτταρα Schwann, <b>δεν</b> διαχωρίζεται εύκολα από το νεύρο, συσχέτιση με <b>NF1</b>.</li>
+        <li><b>Σβάννωμα:</b> &gt;30 ετών, ατρακτοειδή κύτταρα, <b>διαχωρίζεται</b> από το νεύρο, συσχέτιση με <b>NF2</b>.</li>
+      </ul>
+      <div class="note"><b>Πρακτικό:</b> και τα δύο είναι συχνά ενδοσκληρίδια-εξωμυελικά, καλά οριοθετημένα. Αν υπάρχει πολλαπλότητα/διπλευρικότητα → σκέψου NF.</div>
+      <div class="imggrid">
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 19</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+        <div class="imgbox"><div class="imgtitle">Εικόνα από σελ. 20</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Ενδομυελικοί όγκοι ΝΜ — Αστροκύτωμα <span class="tag info">σελ. 21</span></h2>
+      <ul>
+        <li><b>3η–4η δεκαετία</b>. Συχνότερος ενδομυελικός όγκος σε <b>παιδιά</b>.</li>
+        <li><b>ΘΜΣΣ</b> (θωρακική μοίρα), συνήθως WHO I ή II.</li>
+        <li>Συχνά <b>διόγκωση μυελού</b> + <b>σύριγγα</b>.</li>
+        <li><b>ΔΔ:</b> επενδύμωμα, αιμαγγειοβλάστωμα, απομυελίνωση.</li>
+      </ul>
+      <div class="note"><b>Clue:</b> αστροκύτωμα μπορεί να είναι πιο "εκκεντρικό" και διηθητικό· επενδύμωμα πιο "κεντρικό" (βλ. επόμενο).</div>
+      <div class="imgbox"><div class="imgtitle">(Πρόσθεσε εικόνα από σελ. 21)</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Ενδομυελικοί όγκοι ΝΜ — Επενδύμωμα <span class="tag info">σελ. 22</span></h2>
+      <ul>
+        <li><b>Νεαροί ενήλικες</b>.</li>
+        <li><b>Διόγκωση ΝΜ</b> με <b>κεντρική θέση</b>.</li>
+        <li>Συχνά <b>αιμορραγικά στοιχεία</b> + <b>κύστεις στα άκρα</b> + <b>συριγγοϋδρομυελία</b>.</li>
+        <li><b>ΔΔ:</b> αστροκύτωμα, αιμαγγειοβλάστωμα, απομυελίνωση.</li>
+      </ul>
+      <div class="note"><b>Tip:</b> το “central + hemorrhage/cysts at poles” είναι κλασικό hint για επενδύμωμα.</div>
+      <div class="imgbox"><div class="imgtitle">(Πρόσθεσε εικόνα από σελ. 22)</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Αραχνοειδής κύστη (σπονδυλικού σωλήνα) <span class="tag info">σελ. 23</span></h2>
+      <ul>
+        <li><b>Οπίσθια</b> συχνά στην ΘΜΣΣ.</li>
+        <li><b>Σήμα ΕΝΥ:</b> τυπικό ΕΝΥ σε T1 και T2 (δηλ. όπως το CSF).</li>
+      </ul>
+      <div class="note"><b>Διαγνωστικό κλειδί:</b> αν είναι πραγματικά αραχνοειδής κύστη, ακολουθεί ακριβώς το CSF σε όλες τις ακολουθίες και δεν ενισχύεται.</div>
+      <div class="imgbox"><div class="imgtitle">(Πρόσθεσε εικόνα από σελ. 23)</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+    <article class="card">
+      <h2>Συνοβιακή κύστη (facet synovial cyst) <span class="tag info">σελ. 24</span></h2>
+      <ul>
+        <li><b>Συνήθως οσφυοϊερά μοίρα</b>.</li>
+        <li>Συχνά <b>ασυμπτωματική</b> (ή σχετίζεται με εκφυλιστική νόσο/πόνο).</li>
+        <li><b>ΔΔ:</b> (περι)αραχνοειδείς κύστεις / άλλες κυστικές βλάβες.</li>
+      </ul>
+      <div class="note"><b>Σχέση με αρθρώσεις:</b> προέρχεται από τις αρθρώσεις των σπονδυλικών αποφύσεων (facet) και μπορεί να πιέσει ρίζες.</div>
+      <div class="imgbox"><div class="imgtitle">(Πρόσθεσε εικόνα από σελ. 24)</div><input type="file" accept="image/*" class="imginput" /><img class="preview" alt="preview" /></div>
+    </article>
+
+  </section>
+
+  <section class="card" id="quiz">
+    <h2>Quiz</h2>
+    <p class="subtitle">Πάτα το κουμπί πιο κάτω — εδώ θα προσθέσουμε το quiz αργότερα (multiple choice, random σειρά, πράσινο/κόκκινο feedback).</p>
+    <button class="btn" onclick="alert('Quiz placeholder: θα το προσθέσουμε στο επόμενο βήμα!')">Άνοιγμα Quiz</button>
+  </section>
+
+  <footer class="footer">Light theme • Sticky highlighter • Placeholders εικόνων • Έτοιμο για προσθήκη quiz</footer>
+</main>
+</main>
+
+<script>
+/* -------- Image slot preview (local only) -------- */
+for (const slot of document.querySelectorAll('.img-slot')){
+  const input = slot.querySelector('.img-input');
+  const img = slot.querySelector('img.preview');
+  input?.addEventListener('change', (e)=>{
+    const f = e.target.files && e.target.files[0];
+    if(!f){ img.style.display='none'; img.removeAttribute('src'); return; }
+    const url = URL.createObjectURL(f);
+    img.src = url;
+    img.style.display='block';
+  });
+}
+
+/* -------- Highlighter -------- */
+function wrapSelection(className){
+  const sel = window.getSelection();
+  if(!sel || sel.rangeCount===0) return;
+  const range = sel.getRangeAt(0);
+  if(range.collapsed) return;
+  // Create mark
+  const mark = document.createElement('mark');
+  mark.className = className;
+  try{
+    range.surroundContents(mark);
+    sel.removeAllRanges();
+  }catch(err){
+    // fallback: extract and insert
+    const frag = range.extractContents();
+    mark.appendChild(frag);
+    range.insertNode(mark);
+    sel.removeAllRanges();
+  }
+}
+
+function unwrapHighlights(){
+  const sel = window.getSelection();
+  if(!sel || sel.rangeCount===0) return;
+  const range = sel.getRangeAt(0);
+  if(range.collapsed) return;
+
+  // Find all mark elements intersecting selection and unwrap them
+  const container = range.commonAncestorContainer.nodeType === 1 ? range.commonAncestorContainer : range.commonAncestorContainer.parentElement;
+  if(!container) return;
+
+  const marks = Array.from(container.querySelectorAll('mark.hl'));
+  for(const m of marks){
+    const mRange = document.createRange();
+    mRange.selectNodeContents(m);
+    const intersects = range.compareBoundaryPoints(Range.END_TO_START, mRange) < 0 && range.compareBoundaryPoints(Range.START_TO_END, mRange) > 0;
+    if(intersects){
+      const parent = m.parentNode;
+      while(m.firstChild) parent.insertBefore(m.firstChild, m);
+      parent.removeChild(m);
+      parent.normalize();
+    }
+  }
+  sel.removeAllRanges();
+}
+
+document.querySelectorAll('[data-hl]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const c = btn.getAttribute('data-hl');
+    const map = {yellow:'hl hl-yellow', green:'hl hl-green', red:'hl hl-red'};
+    wrapSelection(map[c] || 'hl hl-yellow');
+  });
+});
+
+document.getElementById('erase')?.addEventListener('click', unwrapHighlights);
+
+/* -------- Simple search -------- */
+const input = document.getElementById('q');
+const btnFind = document.getElementById('find');
+const btnClear = document.getElementById('clear');
+
+let lastMark = [];
+function clearSearchMarks(){
+  lastMark.forEach(m=>{
+    const parent = m.parentNode;
+    while(m.firstChild) parent.insertBefore(m.firstChild, m);
+    parent.removeChild(m);
+    parent.normalize();
+  });
+  lastMark = [];
+}
+
+function findText(){
+  clearSearchMarks();
+  const q = (input.value||'').trim();
+  if(!q) return;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if(!node.nodeValue) return NodeFilter.FILTER_REJECT;
+      if(node.parentElement && (node.parentElement.closest('.toolbar') || node.parentElement.tagName==='SCRIPT' || node.parentElement.tagName==='STYLE')) return NodeFilter.FILTER_REJECT;
+      return node.nodeValue.toLowerCase().includes(q.toLowerCase()) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+
+  const hits=[];
+  while(walker.nextNode()) hits.push(walker.currentNode);
+
+  for(const tnode of hits.slice(0,200)){
+    const idx = tnode.nodeValue.toLowerCase().indexOf(q.toLowerCase());
+    if(idx<0) continue;
+    const range = document.createRange();
+    range.setStart(tnode, idx);
+    range.setEnd(tnode, idx + q.length);
+    const m = document.createElement('mark');
+    m.style.background='rgba(59,130,246,.22)';
+    m.style.borderRadius='.35em';
+    m.style.padding='0 .12em';
+    range.surroundContents(m);
+    lastMark.push(m);
+  }
+  if(lastMark[0]) lastMark[0].scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+btnFind?.addEventListener('click', findText);
+btnClear?.addEventListener('click', ()=>{ input.value=''; clearSearchMarks(); });
+input?.addEventListener('keydown', (e)=>{ if(e.key==='Enter') findText(); });
+</script>
+</body>
+</html>
