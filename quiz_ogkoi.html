@@ -874,6 +874,180 @@
 
   restartBtn.addEventListener("click", render);
   render();
+  /* =========================
+   PARANEOPLASTIC MATCHING (dropdown)
+   Paste this BELOW your existing script (or anywhere after #quiz exists).
+   It will append a new “Matching” section at the top of the quiz container.
+   ========================= */
+
+(function addParaneoplasticMatchingSection() {
+  // --- 1) DATA (matching) ---
+  // Left = tumor/source, Right = paraneoplastic syndrome/manifestation
+  // (based on the same concepts you already used: ectopic ACTH, hypercalcemia, neuro, clubbing/HOA)
+  const MATCH_PAIRS = [
+    {
+      left: "Μικροκυτταρικό καρκίνωμα πνεύμονα (SCLC)",
+      right: "Εκτοπη παραγωγή ACTH → Cushing (παρανεοπλασματικό)"
+    },
+    {
+      left: "Πλακώδες (βρογχογενές) καρκίνωμα πνεύμονα",
+      right: "Υπερασβεστιαιμία μέσω PTHrP-like (μη οστικές μεταστάσεις)"
+    },
+    {
+      left: "Καρκίνος πνεύμονα (γενικά, ιδίως SCLC)",
+      right: "Παρανεοπλασματικές νευροπάθειες / παρεγκεφαλιδική εκφύλιση"
+    },
+    {
+      left: "Καρκίνος πνεύμονα (ή χρόνια πνευμονική νόσος/κυανωτική καρδιοπάθεια)",
+      right: "Πληκτροδακτυλία ± υπερτροφική οστεοαρθροπάθεια"
+    }
+  ];
+
+  // --- 2) HELPERS ---
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // --- 3) TARGET: append to the existing quiz container ---
+  const quizContainer = document.getElementById("quiz");
+  if (!quizContainer) return;
+
+  // --- 4) Create section UI ---
+  const section = document.createElement("div");
+  section.className = "card";
+  section.style.borderStyle = "solid";
+
+  const title = document.createElement("div");
+  title.className = "qtext";
+  title.textContent = "Ενότητα Matching — Παρανεοπλασματικά (δύσκολο)";
+
+  const hint = document.createElement("div");
+  hint.className = "explain";
+  hint.style.display = "block";
+  hint.innerHTML =
+    "<strong>Οδηγίες:</strong> Για κάθε όγκο, διάλεξε τη σωστή παρανεοπλασματική εκδήλωση. " +
+    "Μόλις επιλέξεις, κλειδώνει (και δείχνει άμεσα σωστό/λάθος).";
+
+  const rowsWrap = document.createElement("div");
+  rowsWrap.style.display = "grid";
+  rowsWrap.style.gap = "10px";
+  rowsWrap.style.marginTop = "12px";
+
+  const footer = document.createElement("div");
+  footer.className = "footer";
+  footer.style.marginTop = "12px";
+
+  const scoreBox = document.createElement("div");
+  scoreBox.className = "scorebox";
+  scoreBox.innerHTML = `Matching σκορ: <span id="matchScore">0</span>/${MATCH_PAIRS.length} <span class="tiny">(σωστά)</span>`;
+
+  const resetBtn = document.createElement("button");
+  resetBtn.className = "btn";
+  resetBtn.textContent = "🔁 Reset matching";
+  resetBtn.type = "button";
+
+  footer.appendChild(scoreBox);
+  footer.appendChild(resetBtn);
+
+  section.appendChild(title);
+  section.appendChild(hint);
+  section.appendChild(rowsWrap);
+  section.appendChild(footer);
+
+  // Put the matching section at the TOP of the quiz
+  quizContainer.prepend(section);
+
+  // --- 5) Render function ---
+  let matchScore = 0;
+  const scoreEl = section.querySelector("#matchScore");
+
+  function renderMatching() {
+    rowsWrap.innerHTML = "";
+    matchScore = 0;
+    scoreEl.textContent = "0";
+
+    const rights = shuffle(MATCH_PAIRS.map(p => p.right)); // shuffled options list
+    const pairs = shuffle(MATCH_PAIRS);                    // shuffled rows
+
+    pairs.forEach((p, idx) => {
+      const row = document.createElement("div");
+      row.style.display = "grid";
+      row.style.gridTemplateColumns = "1fr";
+      row.style.gap = "8px";
+      row.style.padding = "12px";
+      row.style.border = "1px solid rgba(255,255,255,.10)";
+      row.style.borderRadius = "14px";
+      row.style.background = "rgba(255,255,255,.03)";
+
+      const left = document.createElement("div");
+      left.style.fontWeight = "800";
+      left.textContent = `${idx + 1}. ${p.left}`;
+
+      const select = document.createElement("select");
+      select.style.width = "100%";
+      select.style.padding = "10px 12px";
+      select.style.borderRadius = "12px";
+      select.style.border = "1px solid rgba(255,255,255,.10)";
+      select.style.background = "rgba(18,27,47,.75)";
+      select.style.color = "white";
+
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Διάλεξε εκδήλωση…";
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+
+      rights.forEach(r => {
+        const opt = document.createElement("option");
+        opt.value = r;
+        opt.textContent = r;
+        select.appendChild(opt);
+      });
+
+      const feedback = document.createElement("div");
+      feedback.className = "tiny";
+      feedback.style.marginTop = "2px";
+
+      select.addEventListener("change", () => {
+        // lock after 1 attempt
+        select.disabled = true;
+
+        const chosen = select.value;
+        const correct = chosen === p.right;
+
+        if (correct) {
+          matchScore += 1;
+          scoreEl.textContent = String(matchScore);
+          row.style.borderColor = "rgba(49,196,141,.55)";
+          row.style.background = "rgba(49,196,141,.10)";
+          feedback.textContent = "✅ Σωστό";
+          feedback.style.color = "rgba(49,196,141,1)";
+        } else {
+          row.style.borderColor = "rgba(255,92,122,.55)";
+          row.style.background = "rgba(255,92,122,.10)";
+          feedback.innerHTML =
+            `❌ Λάθος. <span style="color:rgba(255,255,255,.85)"><strong>Σωστό:</strong> ${p.right}</span>`;
+          feedback.style.color = "rgba(255,92,122,1)";
+        }
+      });
+
+      row.appendChild(left);
+      row.appendChild(select);
+      row.appendChild(feedback);
+      rowsWrap.appendChild(row);
+    });
+  }
+
+  resetBtn.addEventListener("click", renderMatching);
+  renderMatching();
+})();
+
 </script>
 </body>
 </html>
