@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz – Επιδημιολογία & Αιτιολογία Καρκίνου</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 10px;
+      line-height: 1.5;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .question {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .question h3 {
+      margin-top: 0;
+      font-size: 1rem;
+    }
+    .options {
+      margin-top: 8px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    button {
+      margin-top: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background: #f5f5f5;
+    }
+    .feedback {
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    .correct {
+      color: #0a7a1b;
+    }
+    .incorrect {
+      color: #b00020;
+    }
+    .correct-answer {
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz – Επιδημιολογία & Αιτιολογία του Καρκίνου</h1>
+  <h2>Έλεγχος γνώσεων (με λεπτομέρειες)</h2>
+  <p>
+    Επίλεξε απάντηση σε κάθε ερώτηση και πάτησε «Έλεγχος». 
+    Θα εμφανίζεται αν έχεις δίκιο και ποια είναι η σωστή απάντηση.
+  </p>
+
+  <!-- Q1 -->
+  <div class="question" data-correct="b">
+    <h3>1. Ποιο περίπου ποσοστό των θανάτων παγκοσμίως το 2019 οφειλόταν σε καρκίνο;</h3>
+    <div class="options">
+      <label><input type="radio" name="q1" value="a"> α) 8%</label>
+      <label><input type="radio" name="q1" value="b"> β) 18%</label>
+      <label><input type="radio" name="q1" value="c"> γ) 33%</label>
+      <label><input type="radio" name="q1" value="d"> δ) 50%</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question" data-correct="c">
+    <h3>2. Ποια είναι η συχνότερη αιτία θανάτου παγκοσμίως σύμφωνα με την παρουσίαση;</h3>
+    <div class="options">
+      <label><input type="radio" name="q2" value="a"> α) Λοιμώδη νοσήματα</label>
+      <label><input type="radio" name="q2" value="b"> β) Καρκίνος</label>
+      <label><input type="radio" name="q2" value="c"> γ) Καρδιαγγειακά νοσήματα</label>
+      <label><input type="radio" name="q2" value="d"> δ) Τραυματισμοί και ατυχήματα</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question" data-correct="d">
+    <h3>3. Ποιο από τα παρακάτω ισχύει για την ηλικία και τον καρκίνο;</h3>
+    <div class="options">
+      <label><input type="radio" name="q3" value="a"> α) Ο καρκίνος είναι κυρίως νόσος παιδικής ηλικίας</label>
+      <label><input type="radio" name="q3" value="b"> β) Η επίπτωση καρκίνου είναι ίδια σε όλες τις ηλικίες</label>
+      <label><input type="radio" name="q3" value="c"> γ) Ο καρκίνος εμφανίζεται μόνο μετά τα 50</label>
+      <label><input type="radio" name="q3" value="d"> δ) Ο καρκίνος είναι κυρίως νόσος των ηλικιωμένων (70+ ετών)</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question" data-correct="a">
+    <h3>4. Ποιος τύπος καρκίνου είναι ο συχνότερος στις γυναίκες σύμφωνα με τα δεδομένα των ΗΠΑ;</h3>
+    <div class="options">
+      <label><input type="radio" name="q4" value="a"> α) Καρκίνος μαστού</label>
+      <label><input type="radio" name="q4" value="b"> β) Καρκίνος πνεύμονα</label>
+      <label><input type="radio" name="q4" value="c"> γ) Καρκίνος παχέος εντέρου</label>
+      <label><input type="radio" name="q4" value="d"> δ) Καρκίνος ωοθηκών</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question" data-correct="c">
+    <h3>5. Ποιος τύπος καρκίνου είναι ο συχνότερος στους άνδρες σύμφωνα με τα δεδομένα των ΗΠΑ;</h3>
+    <div class="options">
+      <label><input type="radio" name="q5" value="a"> α) Καρκίνος πνεύμονα</label>
+      <label><input type="radio" name="q5" value="b"> β) Καρκίνος παχέος εντέρου</label>
+      <label><input type="radio" name="q5" value="c"> γ) Καρκίνος προστάτη</label>
+      <label><input type="radio" name="q5" value="d"> δ) Καρκίνος ουροδόχου κύστης</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question" data-correct="b">
+    <h3>6. Ποιος καρκίνος είναι ο πιο θανατηφόρος και στα δύο φύλα σύμφωνα με την παρουσίαση;</h3>
+    <div class="options">
+      <label><input type="radio" name="q6" value="a"> α) Καρκίνος μαστού</label>
+      <label><input type="radio" name="q6" value="b"> β) Καρκίνος πνεύμονα</label>
+      <label><input type="radio" name="q6" value="c"> γ) Καρκίνος παγκρέατος</label>
+      <label><input type="radio" name="q6" value="d"> δ) Καρκίνος ήπατος</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question" data-correct="d">
+    <h3>7. Ποιο από τα παρακάτω ΔΕΝ ανήκει στην απλοποιημένη ταξινόμηση αιτιών κακοήθων νεοπλασμάτων που δίνεται στην παρουσίαση;</h3>
+    <div class="options">
+      <label><input type="radio" name="q7" value="a"> α) Περιβαλλοντικά (χημικά, φυσικά, βιολογικά)</label>
+      <label><input type="radio" name="q7" value="b"> β) Σχετιζόμενα με την ανθρώπινη συμπεριφορά</label>
+      <label><input type="radio" name="q7" value="c"> γ) Γενετικά</label>
+      <label><input type="radio" name="q7" value="d"> δ) «Ψυχοσωματικά» ως κύρια κατηγορία αιτίων</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question" data-correct="c">
+    <h3>8. Ποιος είναι ο κοινός παρονομαστής όλων σχεδόν των αιτιών καρκίνου, όπως αναφέρεται στην παρουσίαση;</h3>
+    <div class="options">
+      <label><input type="radio" name="q8" value="a"> α) Φλεγμονή χαμηλού βαθμού</label>
+      <label><input type="radio" name="q8" value="b"> β) Ορμονικές διαταραχές</label>
+      <label><input type="radio" name="q8" value="c"> γ) Αλλαγές στο DNA (γονοτοξικότητα)</label>
+      <label><input type="radio" name="q8" value="d"> δ) Διαταραχές του ανοσοποιητικού</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question" data-correct="b">
+    <h3>9. Ποιο από τα παρακάτω ισχύει για τη β-ναφθυλαμίνη, παράγωγο της ανιλίνης;</h3>
+    <div class="options">
+      <label><input type="radio" name="q9" value="a"> α) Είναι μη καρκινογόνος, όπως και η ανιλίνη</label>
+      <label><input type="radio" name="q9" value="b"> β) Είναι καρκινογόνος και σχετίζεται με καρκίνο ουροδόχου κύστης</label>
+      <label><input type="radio" name="q9" value="c"> γ) Σχετίζεται αποκλειστικά με καρκίνο πνεύμονα</label>
+      <label><input type="radio" name="q9" value="d"> δ) Δεν αντιδρά με το DNA</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question" data-correct="a">
+    <h3>10. Ποιο από τα παρακάτω είναι σωστό για τους πολυκυκλικούς υδρογονάνθρακες (π.χ. 3,4-βενζοπυρένιο);</h3>
+    <div class="options">
+      <label><input type="radio" name="q10" value="a"> α) Περιέχονται στην πίσσα και αντιδρούν με το DNA μέσω ασταθών δεσμών</label>
+      <label><input type="radio" name="q10" value="b"> β) Είναι υδατοδιαλυτές ουσίες χωρίς δράση στο DNA</label>
+      <label><input type="radio" name="q10" value="c"> γ) Δεν έχουν τεκμηριωθεί σε πειραματικά μοντέλα</label>
+      <label><input type="radio" name="q10" value="d"> δ) Σχετίζονται μόνο με λευχαιμίες</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question" data-correct="d">
+    <h3>11. Ποιο από τα παρακάτω ΔΕΝ είναι χαρακτηριστικό της «δυτικού τύπου δίαιτας» όπως περιγράφεται στην παρουσίαση;</h3>
+    <div class="options">
+      <label><input type="radio" name="q11" value="a"> α) Υψηλή θερμιδική πρόσληψη</label>
+      <label><input type="radio" name="q11" value="b"> β) Υψηλή κατανάλωση επεξεργασμένων τροφών</label>
+      <label><input type="radio" name="q11" value="c"> γ) Χαμηλή περιεκτικότητα σε φυτικές ίνες</label>
+      <label><input type="radio" name="q11" value="d"> δ) Υψηλή κατανάλωση ωμών λαχανικών και οσπρίων</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question" data-correct="c">
+    <h3>12. Ποια από τις παρακάτω καταστάσεις σχετίζεται με αυξημένο κίνδυνο ηπατοκυτταρικού καρκινώματος, όπως αναφέρεται στην παρουσίαση;</h3>
+    <div class="options">
+      <label><input type="radio" name="q12" value="a"> α) Βραχυχρόνια χρήση αντιβιοτικών</label>
+      <label><input type="radio" name="q12" value="b"> β) Οξεία ιογενής γαστρεντερίτιδα</label>
+      <label><input type="radio" name="q12" value="c"> γ) Κίρρωση ήπατος λόγω χρόνιας χρήσης αιθανόλης ή έκθεσης σε αφλατοξίνη Β1</label>
+      <label><input type="radio" name="q12" value="d"> δ) Μόνο έλλειψη βιταμίνης C</label>
+    </div>
+    <button onclick="checkQuestion(this)">Έλεγχος</button>
+    <div class="feedback"></div>
+    <div class="correct-answer"></div>
+  </div>
+
+  <script>
+    function checkQuestion(button) {
+      const container = button.closest('.question');
+      const correct = container.getAttribute('data-correct');
+      const name = container.querySelector('input[type="radio"]').name;
+      const selected = container.querySelector('input[type="radio"]:checked');
+      const feedback = container.querySelector('.feedback');
+      const correctAnswerBox = container.querySelector('.correct-answer');
+
+      if (!selected) {
+        feedback.textContent = 'Επίλεξε πρώτα μία απάντηση.';
+        feedback.className = 'feedback incorrect';
+        correctAnswerBox.textContent = '';
+        return;
+      }
+
+      if (selected.value === correct) {
+        feedback.textContent = 'Σωστά!';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = 'Λάθος.';
+        feedback.className = 'feedback incorrect';
+      }
+
+      // Εμφάνιση σωστής απάντησης με βάση το γράμμα
+      const labels = container.querySelectorAll('label');
+      let correctText = '';
+      labels.forEach(label => {
+        const input = label.querySelector('input');
+        if (input && input.value === correct) {
+          correctText = label.textContent.trim();
+        }
+      });
+      correctAnswerBox.textContent = 'Σωστή απάντηση: ' + correctText;
+    }
+  </script>
+</body>
+</html>
